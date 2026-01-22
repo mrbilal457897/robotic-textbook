@@ -19,7 +19,7 @@ export default function CourseModules(): JSX.Element {
       title: 'The Robotic Nervous System (ROS 2)',
       description:
         'Master the Robot Operating System 2 (ROS 2) - the industry-standard middleware for building intelligent robots. Learn nodes, topics, services, and how to control humanoid robots with Python.',
-      link: '/docs/modules/01-ros2/index',
+      link: '/docs/module-1-ros2/',
       icon: (
         <svg
           viewBox="0 0 64 64"
@@ -40,7 +40,7 @@ export default function CourseModules(): JSX.Element {
       title: 'Digital Twin & Physics Simulation',
       description:
         'Build realistic virtual replicas of humanoid robots using Gazebo and Unity. Learn physics engines, sensor simulation, and how to test behaviors safely before real-world deployment.',
-      link: '/docs/modules/02-digital-twin/index',
+      link: '/docs/module-2-digital-twin/',
       icon: (
         <svg
           viewBox="0 0 64 64"
@@ -60,7 +60,7 @@ export default function CourseModules(): JSX.Element {
       title: 'NVIDIA Isaac Platform',
       description:
         'Harness GPU-accelerated robotics simulation with NVIDIA Isaac Sim. Explore photorealistic rendering, AI model training, and advanced navigation planning for autonomous humanoid systems.',
-      link: '/docs/modules/03-isaac/index',
+      link: '/docs/module-3-isaac/',
       icon: (
         <svg
           viewBox="0 0 64 64"
@@ -80,7 +80,15 @@ export default function CourseModules(): JSX.Element {
             strokeWidth="2"
             fill="none"
           />
-          <rect x="4" y="20" width="56" height="28" stroke="currentColor" strokeWidth="2" fill="none" />
+          <rect
+            x="4"
+            y="20"
+            width="56"
+            height="28"
+            stroke="currentColor"
+            strokeWidth="2"
+            fill="none"
+          />
         </svg>
       ),
     },
@@ -89,7 +97,7 @@ export default function CourseModules(): JSX.Element {
       title: 'Vision-Language-Action (VLA) Models',
       description:
         'Integrate cutting-edge AI with robotics. Connect voice commands to physical actions, leverage LLMs for cognitive planning, and build a complete humanoid robot capstone project.',
-      link: '/docs/modules/04-vla/index',
+      link: '/docs/module-4-vla/',
       icon: (
         <svg
           viewBox="0 0 64 64"
@@ -119,7 +127,8 @@ export default function CourseModules(): JSX.Element {
             <span className="gradient-text">Four Foundational Modules</span>
           </h2>
           <p className={styles.sectionDescription}>
-            Master the complete Physical AI stack through hands-on learning with simulation-first approach
+            Master the complete Physical AI stack through hands-on learning with simulation-first
+            approach
           </p>
         </div>
 

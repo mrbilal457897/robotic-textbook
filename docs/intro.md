@@ -9,15 +9,19 @@ This comprehensive interactive textbook provides a deep dive into Physical AI an
 ## What You'll Learn
 
 ### 🤖 Module 1: The Robotic Nervous System (ROS 2)
+
 Learn the fundamentals of ROS 2, the middleware that powers modern robotics systems.
 
 ### 🔄 Module 2: Digital Twin
+
 Master simulation environments including Gazebo physics and Unity visualization.
 
 ### 🚀 Module 3: NVIDIA Isaac
+
 Explore NVIDIA's powerful Isaac Sim platform and ROS integration.
 
 ### 🧠 Module 4: Vision-Language-Action (VLA) Models
+
 Understand how LLMs and voice commands control physical robots.
 
 ## How to Use This Textbook
@@ -35,8 +39,8 @@ Understand how LLMs and voice commands control physical robots.
 
 ## Get Started
 
-Ready to begin? Start with [Module 1: The Robotic Nervous System](/docs/modules/01-ros2/).
+Ready to begin? Start with [Module 1: The Robotic Nervous System](/docs/module-1-ros2/).
 
 ---
 
-*Built with ❤️ using Docusaurus*
+_Built with ❤️ using Docusaurus_
