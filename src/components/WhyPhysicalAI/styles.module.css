@@ -1,0 +1,234 @@
+/**
+ * Why Physical AI Styles
+ * Two-column layout with responsive stacking
+ */
+
+.whyPhysicalAI {
+  padding: var(--space-4xl) var(--space-lg);
+  background-color: var(--bg-card);
+}
+
+.whyPhysicalAIInner {
+  max-width: 1440px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 60% 40%;
+  gap: var(--space-3xl);
+  align-items: center;
+}
+
+/* Content Section */
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xl);
+}
+
+.sectionHeader {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.sectionLabel {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.sectionTitle {
+  font-family: var(--font-display);
+  font-size: var(--font-size-5xl);
+  font-weight: var(--font-weight-bold);
+  margin: 0;
+  line-height: var(--line-height-tight);
+}
+
+/* Key Points */
+.keyPoints {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.keyPoint {
+  display: flex;
+  gap: var(--space-md);
+  align-items: flex-start;
+}
+
+.pointIcon {
+  font-size: 32px;
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pointContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.pointTitle {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.pointDescription {
+  font-family: var(--font-body);
+  font-size: var(--font-size-base);
+  color: var(--text-secondary);
+  line-height: var(--line-height-relaxed);
+  margin: 0;
+}
+
+/* Visualization Section */
+.visualization {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+}
+
+.robotIllustration {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+}
+
+.robotSvg {
+  width: 100%;
+  height: auto;
+  color: var(--primary);
+}
+
+.robotPart {
+  animation: float 3s ease-in-out infinite;
+}
+
+.robotEye {
+  animation: glowPulse var(--duration-slower) ease-in-out infinite;
+}
+
+.neuralNetwork {
+  animation: rotate 20s linear infinite;
+  transform-origin: center;
+}
+
+/* Floating Labels */
+.floatingLabel {
+  position: absolute;
+  font-family: var(--font-heading);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  background-color: rgba(0, 240, 255, 0.1);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  backdrop-filter: blur(10px);
+  animation: float 4s ease-in-out infinite;
+}
+
+.label1 {
+  top: 20%;
+  left: 10%;
+  animation-delay: 0s;
+}
+
+.label2 {
+  top: 50%;
+  right: 10%;
+  animation-delay: 1s;
+}
+
+.label3 {
+  bottom: 20%;
+  left: 20%;
+  animation-delay: 2s;
+}
+
+/* Responsive Breakpoints */
+@media screen and (max-width: 1024px) {
+  .whyPhysicalAIInner {
+    grid-template-columns: 1fr;
+    gap: var(--space-2xl);
+  }
+
+  .visualization {
+    order: -1;
+    min-height: 300px;
+  }
+
+  .sectionTitle {
+    font-size: var(--font-size-4xl);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .whyPhysicalAI {
+    padding: var(--space-3xl) var(--space-md);
+  }
+
+  .sectionTitle {
+    font-size: var(--font-size-3xl);
+  }
+
+  .pointIcon {
+    font-size: 24px;
+    width: 40px;
+    height: 40px;
+  }
+
+  .pointTitle {
+    font-size: var(--font-size-lg);
+  }
+
+  .pointDescription {
+    font-size: var(--font-size-sm);
+  }
+
+  .visualization {
+    min-height: 250px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .whyPhysicalAI {
+    padding: var(--space-2xl) var(--space-sm);
+  }
+
+  .sectionTitle {
+    font-size: var(--font-size-2xl);
+  }
+
+  .keyPoints {
+    gap: var(--space-md);
+  }
+
+  .keyPoint {
+    gap: var(--space-sm);
+  }
+}
+
+/* Accessibility: Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .robotPart,
+  .robotEye,
+  .neuralNetwork,
+  .floatingLabel {
+    animation: none !important;
+  }
+}

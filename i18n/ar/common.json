@@ -1,0 +1,75 @@
+{
+  "navigation": {
+    "home": "الرئيسية",
+    "modules": "الوحدات",
+    "resources": "الموارد",
+    "about": "حول",
+    "search": "بحث"
+  },
+  "buttons": {
+    "startReading": "ابدأ القراءة",
+    "loginGitHub": "تسجيل الدخول باستخدام GitHub",
+    "logout": "تسجيل الخروج",
+    "signOut": "تسجيل الخروج",
+    "exploreModule": "استكشف الوحدة",
+    "viewProfile": "عرض ملف GitHub الشخصي"
+  },
+  "quiz": {
+    "startQuiz": "ابدأ الاختبار",
+    "next": "التالي",
+    "previous": "السابق",
+    "submit": "إرسال",
+    "retakeQuiz": "إعادة الاختبار",
+    "backToModule": "العودة إلى الوحدة",
+    "questionCounter": "السؤال {{current}}/{{total}}",
+    "questionsLabel": "أسئلة",
+    "passingScore": "درجة النجاح",
+    "estimatedTime": "الوقت المقدر",
+    "minutes": "دقيقة",
+    "correct": "صحيح",
+    "incorrect": "خاطئ",
+    "skipped": "تم التخطي",
+    "passed": "نجح",
+    "failed": "يحتاج إلى تحسين",
+    "quizComplete": "اكتمل الاختبار!"
+  },
+  "cookies": {
+    "acceptAll": "قبول الكل",
+    "rejectNonEssential": "رفض غير الضرورية",
+    "customize": "تخصيص",
+    "cookieSettings": "إعدادات ملفات تعريف الارتباط",
+    "cookiePreferences": "تفضيلات ملفات تعريف الارتباط",
+    "essential": "ملفات تعريف الارتباط الأساسية",
+    "analytics": "ملفات تعريف الارتباط التحليلية",
+    "preferences": "ملفات تعريف الارتباط التفضيلية",
+    "save": "حفظ التفضيلات",
+    "cancel": "إلغاء"
+  },
+  "languages": {
+    "english": "English",
+    "urdu": "اردو",
+    "arabic": "العربية",
+    "chinese": "中文",
+    "spanish": "Español"
+  },
+  "auth": {
+    "authenticating": "جارٍ المصادقة...",
+    "authFailed": "فشلت المصادقة",
+    "returnHome": "العودة إلى الصفحة الرئيسية",
+    "success": "نجح!"
+  },
+  "search": {
+    "placeholder": "البحث في الوثائق...",
+    "noResults": "لم يتم العثور على نتائج",
+    "tryDifferent": "جرب تعديل استعلام البحث أو تصفح حسب الوحدة.",
+    "recentSearches": "عمليات البحث الأخيرة"
+  },
+  "common": {
+    "loading": "جار التحميل...",
+    "error": "خطأ",
+    "retry": "إعادة المحاولة",
+    "close": "إغلاق",
+    "readMore": "اقرأ المزيد",
+    "readingTime": "{{minutes}} دقيقة قراءة"
+  }
+}

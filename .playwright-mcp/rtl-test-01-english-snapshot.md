@@ -1,0 +1,130 @@
+### Page state
+- Page URL: http://localhost:3000/
+- Page Title: Página No Encontrada | Physical AI & Humanoid Robotics
+- Page Snapshot:
+```yaml
+- generic [ref=e2]:
+  - region "Saltar al contenido principal":
+    - link "Saltar al contenido principal" [ref=e3] [cursor=pointer]:
+      - /url: "#__docusaurus_skipToContent_fallback"
+  - navigation "Main navigation" [ref=e4]:
+    - generic [ref=e5]:
+      - link "Home" [ref=e6] [cursor=pointer]:
+        - /url: /physical-ai-textbook/es/
+        - img [ref=e8]
+        - generic [ref=e11]: Physical AI & Humanoid Robotics
+      - generic [ref=e12]:
+        - link "Home" [ref=e13] [cursor=pointer]:
+          - /url: /physical-ai-textbook/es/
+        - link "Modules" [ref=e14] [cursor=pointer]:
+          - /url: /physical-ai-textbook/es/docs/intro
+        - link "Resources" [ref=e15] [cursor=pointer]:
+          - /url: /physical-ai-textbook/es/resources
+        - link "About" [ref=e16] [cursor=pointer]:
+          - /url: /physical-ai-textbook/es/about
+      - generic [ref=e17]:
+        - button "Search (Ctrl+K)" [ref=e18] [cursor=pointer]:
+          - img [ref=e19]
+        - button "Select language" [ref=e23] [cursor=pointer]:
+          - generic [ref=e24]: 🇬🇧
+          - generic [ref=e25]: English
+          - generic [ref=e26]: ▼
+        - button "Login with GitHub" [ref=e27] [cursor=pointer]:
+          - img [ref=e28]
+          - text: Login with GitHub
+  - dialog "Mobile navigation menu" [ref=e30]:
+    - generic [ref=e31]:
+      - generic [ref=e32]: Menu
+      - button "Close menu" [ref=e33] [cursor=pointer]:
+        - img [ref=e34]
+    - generic [ref=e36]:
+      - link "Home" [ref=e37] [cursor=pointer]:
+        - /url: /physical-ai-textbook/es/
+      - link "Modules" [ref=e38] [cursor=pointer]:
+        - /url: /physical-ai-textbook/es/docs/intro
+      - link "Resources" [ref=e39] [cursor=pointer]:
+        - /url: /physical-ai-textbook/es/resources
+      - link "About" [ref=e40] [cursor=pointer]:
+        - /url: /physical-ai-textbook/es/about
+    - button "Login with GitHub" [ref=e42] [cursor=pointer]:
+      - img [ref=e43]
+      - text: Login with GitHub
+  - main [ref=e46]:
+    - generic [ref=e48]:
+      - heading "Página No Encontrada" [level=1] [ref=e49]
+      - paragraph [ref=e50]: No pudimos encontrar lo que buscaba.
+      - paragraph [ref=e51]: Comuníquese con el dueño del sitio que le proporcionó la URL original y hágale saber que su vínculo está roto.
+  - contentinfo [ref=e52]:
+    - generic [ref=e53]:
+      - generic [ref=e54]:
+        - generic [ref=e55]:
+          - link "Home" [ref=e56] [cursor=pointer]:
+            - /url: /physical-ai-textbook/es/
+            - img [ref=e58]
+            - generic [ref=e61]: Physical AI & Humanoid Robotics
+          - paragraph [ref=e62]: Bridging the gap between digital minds and physical bodies
+        - generic [ref=e63]:
+          - heading "Quick Links" [level=3] [ref=e64]
+          - list [ref=e65]:
+            - listitem [ref=e66]:
+              - link "Home" [ref=e67] [cursor=pointer]:
+                - /url: /physical-ai-textbook/es/
+            - listitem [ref=e68]:
+              - link "Modules" [ref=e69] [cursor=pointer]:
+                - /url: /physical-ai-textbook/es/docs/intro
+            - listitem [ref=e70]:
+              - link "Resources" [ref=e71] [cursor=pointer]:
+                - /url: /physical-ai-textbook/es/resources
+            - listitem [ref=e72]:
+              - link "About" [ref=e73] [cursor=pointer]:
+                - /url: /physical-ai-textbook/es/about
+        - generic [ref=e74]:
+          - heading "Resources" [level=3] [ref=e75]
+          - list [ref=e76]:
+            - listitem [ref=e77]:
+              - link "Documentation" [ref=e78] [cursor=pointer]:
+                - /url: /physical-ai-textbook/es/docs/intro
+            - listitem [ref=e79]:
+              - link "Learning Resources" [ref=e80] [cursor=pointer]:
+                - /url: /physical-ai-textbook/es/resources
+            - listitem [ref=e81]:
+              - link "About the Project" [ref=e82] [cursor=pointer]:
+                - /url: /physical-ai-textbook/es/about
+        - generic [ref=e83]:
+          - heading "Legal" [level=3] [ref=e84]
+          - list [ref=e85]:
+            - listitem [ref=e86]:
+              - link "Privacy Policy" [ref=e87] [cursor=pointer]:
+                - /url: /physical-ai-textbook/es/privacy-policy
+            - listitem [ref=e88]:
+              - link "Cookie Settings" [ref=e89] [cursor=pointer]:
+                - /url: /physical-ai-textbook/es/cookie-settings
+            - listitem [ref=e90]:
+              - link "License" [ref=e91] [cursor=pointer]:
+                - /url: https://github.com
+      - generic [ref=e92]:
+        - generic [ref=e93]:
+          - link "GitHub" [ref=e94] [cursor=pointer]:
+            - /url: https://github.com
+            - img [ref=e95]
+          - link "LinkedIn" [ref=e97] [cursor=pointer]:
+            - /url: https://linkedin.com
+            - img [ref=e98]
+          - link "Twitter" [ref=e100] [cursor=pointer]:
+            - /url: https://twitter.com
+            - img [ref=e101]
+        - paragraph [ref=e103]:
+          - text: © 2026 Physical AI & Humanoid Robotics. Built with
+          - link "Docusaurus" [ref=e104] [cursor=pointer]:
+            - /url: https://docusaurus.io/
+          - text: .
+  - dialog "Cookie consent" [ref=e105]:
+    - generic [ref=e106]:
+      - generic [ref=e107]:
+        - heading "Cookie Preferences" [level=3] [ref=e108]
+        - paragraph [ref=e109]: We use cookies to enhance your experience, analyze site traffic, and personalize content. You can choose to accept all cookies or customize your preferences.
+      - generic [ref=e110]:
+        - button "Accept all cookies" [ref=e111] [cursor=pointer]: Accept All
+        - button "Reject non-essential cookies" [ref=e112] [cursor=pointer]: Reject Non-Essential
+        - button "Customize cookie preferences" [ref=e113] [cursor=pointer]: Customize
+```

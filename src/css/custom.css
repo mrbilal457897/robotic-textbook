@@ -1,0 +1,23 @@
+/**
+ * Neural Circuitry Futurism Design System - Main Entry Point
+ * Physical AI & Humanoid Robotics Interactive Textbook
+ *
+ * This file imports Tailwind CSS and the modular design system components.
+ * Design system is organized into three files:
+ * - variables.css: Design tokens (colors, typography, spacing, etc.)
+ * - animations.css: Animation keyframes and utility classes
+ * - global.css: Global base styles and component base styles
+ */
+
+/* Google Fonts - Neural Circuitry Futurism Typography */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Source+Code+Pro:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap');
+
+/* Tailwind CSS imports */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Import modular design system */
+@import './variables.css';
+@import './animations.css';
+@import './global.css';

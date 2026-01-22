@@ -1,0 +1,98 @@
+/**
+ * Reduced Motion Support
+ * Respects user's preference for reduced motion (prefers-reduced-motion)
+ * Disables or reduces animations for accessibility
+ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Disable specific animations */
+  .fadeIn,
+  .fadeOut,
+  .slideIn,
+  .slideOut,
+  .scaleIn,
+  .scaleOut,
+  .rotate,
+  .float,
+  .shimmer,
+  .glowPulse,
+  .gridPulse {
+    animation: none !important;
+  }
+
+  /* Reduce parallax effects */
+  [data-parallax] {
+    transform: none !important;
+  }
+
+  /* Disable hover scale effects */
+  .card:hover,
+  .button:hover,
+  .module-card:hover {
+    transform: none !important;
+  }
+
+  /* Keep essential transitions (very short) */
+  button,
+  a,
+  input,
+  select,
+  textarea {
+    transition-duration: 50ms !important;
+  }
+
+  /* Disable loading spinners rotation */
+  .spinner,
+  .loading-spinner {
+    animation: none !important;
+    opacity: 0.5;
+  }
+
+  /* Disable progress bar animations */
+  .progress-bar {
+    transition: none !important;
+  }
+
+  /* Disable modal entrance animations */
+  .modal,
+  .overlay,
+  .dropdown {
+    animation: none !important;
+  }
+
+  /* Keep focus indicators visible without animation */
+  :focus,
+  :focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+    transition: none !important;
+  }
+}
+
+/* Ensure animations are disabled for users with vestibular disorders */
+@media (prefers-reduced-motion: reduce) {
+  /* Disable auto-play videos */
+  video[autoplay] {
+    animation-play-state: paused !important;
+  }
+
+  /* Disable GIF animations (where supported) */
+  img[src$=".gif"] {
+    image-rendering: pixelated;
+  }
+
+  /* Disable background animations */
+  .animated-background {
+    background-attachment: scroll !important;
+    animation: none !important;
+  }
+}

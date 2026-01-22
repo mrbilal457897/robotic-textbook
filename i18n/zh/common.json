@@ -1,0 +1,75 @@
+{
+  "navigation": {
+    "home": "主页",
+    "modules": "模块",
+    "resources": "资源",
+    "about": "关于",
+    "search": "搜索"
+  },
+  "buttons": {
+    "startReading": "开始阅读",
+    "loginGitHub": "使用 GitHub 登录",
+    "logout": "登出",
+    "signOut": "退出登录",
+    "exploreModule": "探索模块",
+    "viewProfile": "查看 GitHub 个人资料"
+  },
+  "quiz": {
+    "startQuiz": "开始测验",
+    "next": "下一个",
+    "previous": "上一个",
+    "submit": "提交",
+    "retakeQuiz": "重新测验",
+    "backToModule": "返回模块",
+    "questionCounter": "问题 {{current}}/{{total}}",
+    "questionsLabel": "问题",
+    "passingScore": "及格分数",
+    "estimatedTime": "预计时间",
+    "minutes": "分钟",
+    "correct": "正确",
+    "incorrect": "错误",
+    "skipped": "跳过",
+    "passed": "通过",
+    "failed": "需要改进",
+    "quizComplete": "测验完成！"
+  },
+  "cookies": {
+    "acceptAll": "接受全部",
+    "rejectNonEssential": "拒绝非必要",
+    "customize": "自定义",
+    "cookieSettings": "Cookie 设置",
+    "cookiePreferences": "Cookie 偏好",
+    "essential": "必要 Cookie",
+    "analytics": "分析 Cookie",
+    "preferences": "偏好 Cookie",
+    "save": "保存偏好",
+    "cancel": "取消"
+  },
+  "languages": {
+    "english": "English",
+    "urdu": "اردو",
+    "arabic": "العربية",
+    "chinese": "中文",
+    "spanish": "Español"
+  },
+  "auth": {
+    "authenticating": "正在验证...",
+    "authFailed": "验证失败",
+    "returnHome": "返回主页",
+    "success": "成功！"
+  },
+  "search": {
+    "placeholder": "搜索文档...",
+    "noResults": "未找到结果",
+    "tryDifferent": "尝试调整搜索查询或按模块浏览。",
+    "recentSearches": "最近搜索"
+  },
+  "common": {
+    "loading": "加载中...",
+    "error": "错误",
+    "retry": "重试",
+    "close": "关闭",
+    "readMore": "阅读更多",
+    "readingTime": "{{minutes}} 分钟阅读"
+  }
+}

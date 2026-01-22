@@ -1,0 +1,350 @@
+/* Hardware Requirements Section */
+.hardware {
+  padding: 8rem 2rem;
+  background: linear-gradient(180deg, #0f1419 0%, var(--background-primary) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.hardwareInner {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+/* Section Header */
+.sectionHeader {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.sectionLabel {
+  display: inline-block;
+  padding: 0.5rem 1.5rem;
+  background: rgba(0, 240, 255, 0.1);
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  border-radius: 2rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--primary);
+  margin-bottom: 1.5rem;
+}
+
+.sectionTitle {
+  font-size: 3rem;
+  font-weight: 700;
+  margin: 0 0 1.5rem 0;
+  font-family: 'Orbitron', sans-serif;
+}
+
+.sectionDescription {
+  font-size: 1.25rem;
+  color: var(--text-secondary);
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Tab Bar */
+.tabBar {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 3rem;
+  flex-wrap: wrap;
+}
+
+.tabButton {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 2rem;
+  background: rgba(26, 34, 48, 0.6);
+  border: 2px solid rgba(0, 240, 255, 0.2);
+  border-radius: 2rem;
+  color: var(--text-secondary);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s var(--ease-default);
+  backdrop-filter: blur(10px);
+}
+
+.tabButton:hover {
+  background: rgba(26, 34, 48, 0.8);
+  border-color: rgba(0, 240, 255, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 240, 255, 0.15);
+}
+
+.tabButton:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 4px;
+}
+
+.tabButtonActive {
+  background: linear-gradient(135deg, rgba(0, 240, 255, 0.2), rgba(0, 240, 255, 0.1));
+  border-color: var(--primary);
+  color: var(--primary);
+  box-shadow: 0 8px 32px rgba(0, 240, 255, 0.25);
+}
+
+.tabIcon {
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tabLabel {
+  font-family: 'Rajdhani', sans-serif;
+  white-space: nowrap;
+}
+
+/* Tab Content */
+.tabContent {
+  animation: fadeIn 0.5s var(--ease-default);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Content Header */
+.contentHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding: 2rem;
+  background: rgba(26, 34, 48, 0.6);
+  border: 1px solid rgba(0, 240, 255, 0.2);
+  border-radius: 1rem;
+  backdrop-filter: blur(10px);
+  gap: 2rem;
+}
+
+.contentDescription {
+  font-size: 1.125rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0;
+  flex: 1;
+}
+
+.totalPrice {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.5rem;
+  padding-left: 2rem;
+  border-left: 2px solid rgba(0, 240, 255, 0.3);
+}
+
+.priceLabel {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+}
+
+.priceValue {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--accent);
+  font-family: 'Orbitron', sans-serif;
+}
+
+/* Table Container */
+.tableContainer {
+  overflow-x: auto;
+  border-radius: 1rem;
+  background: rgba(26, 34, 48, 0.6);
+  border: 1px solid rgba(0, 240, 255, 0.2);
+  backdrop-filter: blur(10px);
+}
+
+/* Specs Table */
+.specsTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1rem;
+}
+
+.specsTable thead {
+  background: rgba(0, 240, 255, 0.1);
+  border-bottom: 2px solid rgba(0, 240, 255, 0.3);
+}
+
+.specsTable th {
+  padding: 1.25rem 1.5rem;
+  text-align: left;
+  font-weight: 700;
+  color: var(--primary);
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1.125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.specsTable tbody tr {
+  border-bottom: 1px solid rgba(0, 240, 255, 0.1);
+  transition: background 0.2s var(--ease-default);
+}
+
+.specsTable tbody tr:hover {
+  background: rgba(0, 240, 255, 0.05);
+}
+
+.specsTable tbody tr:last-child {
+  border-bottom: none;
+}
+
+.specsTable td {
+  padding: 1.25rem 1.5rem;
+  color: var(--text-primary);
+}
+
+.componentCell {
+  font-weight: 600;
+  color: var(--text-primary);
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1.0625rem;
+  min-width: 150px;
+}
+
+.specCell {
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.priceColumn {
+  text-align: right;
+  min-width: 120px;
+}
+
+.priceCell {
+  font-weight: 700;
+  color: var(--accent);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.0625rem;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .contentHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .totalPrice {
+    padding-left: 0;
+    padding-top: 1.5rem;
+    border-left: none;
+    border-top: 2px solid rgba(0, 240, 255, 0.3);
+    align-items: flex-start;
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .hardware {
+    padding: 4rem 1.5rem;
+  }
+
+  .sectionTitle {
+    font-size: 2rem;
+  }
+
+  .sectionDescription {
+    font-size: 1rem;
+  }
+
+  .tabBar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .tabButton {
+    justify-content: center;
+    padding: 0.875rem 1.5rem;
+  }
+
+  .contentHeader {
+    padding: 1.5rem;
+  }
+
+  .tableContainer {
+    overflow-x: scroll;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .specsTable {
+    min-width: 600px;
+  }
+
+  .specsTable th,
+  .specsTable td {
+    padding: 1rem;
+    font-size: 0.9375rem;
+  }
+
+  .componentCell {
+    min-width: 120px;
+  }
+
+  .priceValue {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hardware {
+    padding: 3rem 1rem;
+  }
+
+  .sectionTitle {
+    font-size: 1.75rem;
+  }
+
+  .tabButton {
+    font-size: 0.875rem;
+    padding: 0.75rem 1.25rem;
+  }
+
+  .tabIcon {
+    font-size: 1.25rem;
+  }
+
+  .contentHeader {
+    padding: 1.25rem;
+  }
+
+  .contentDescription {
+    font-size: 1rem;
+  }
+
+  .specsTable th,
+  .specsTable td {
+    padding: 0.875rem;
+    font-size: 0.875rem;
+  }
+
+  .componentCell {
+    min-width: 100px;
+    font-size: 1rem;
+  }
+
+  .priceCell {
+    font-size: 1rem;
+  }
+}

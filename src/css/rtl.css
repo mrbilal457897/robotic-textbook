@@ -1,0 +1,353 @@
+/**
+ * RTL (Right-to-Left) Layout Support
+ * Applies to Arabic and Urdu languages
+ */
+
+/* Apply RTL direction to body when dir="rtl" */
+[dir="rtl"] {
+  direction: rtl;
+  text-align: start;
+}
+
+/* Use CSS Logical Properties for Better RTL Support */
+
+/* Convert margin-left to margin-inline-start */
+[dir="rtl"] .margin-left {
+  margin-inline-start: var(--spacing);
+  margin-left: unset;
+}
+
+/* Convert margin-right to margin-inline-end */
+[dir="rtl"] .margin-right {
+  margin-inline-end: var(--spacing);
+  margin-right: unset;
+}
+
+/* Convert padding-left to padding-inline-start */
+[dir="rtl"] .padding-left {
+  padding-inline-start: var(--spacing);
+  padding-left: unset;
+}
+
+/* Convert padding-right to padding-inline-end */
+[dir="rtl"] .padding-right {
+  padding-inline-end: var(--spacing);
+  padding-right: unset;
+}
+
+/* Text Alignment */
+[dir="rtl"] .text-left {
+  text-align: start;
+}
+
+[dir="rtl"] .text-right {
+  text-align: end;
+}
+
+/* Sidebar Layout - Move to Right Side */
+[dir="rtl"] .docSidebarContainer {
+  order: 2;
+}
+
+[dir="rtl"] .docMainContainer {
+  order: 1;
+}
+
+[dir="rtl"] aside.theme-doc-sidebar-container {
+  order: 2;
+  border-left: 1px solid var(--ifm-toc-border-color);
+  border-right: none;
+}
+
+/* Navigation Flex Direction */
+[dir="rtl"] nav,
+[dir="rtl"] .navbar {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .navbar__items {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .navbar__item {
+  margin-left: 0;
+  margin-right: 1rem;
+}
+
+/* Breadcrumbs */
+[dir="rtl"] .breadcrumbs {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .breadcrumbs__link::after {
+  content: "‹";
+  margin-left: 0;
+  margin-right: 0.5rem;
+}
+
+/* Flip Icons and Arrows */
+[dir="rtl"] .arrow-right,
+[dir="rtl"] .chevron-right,
+[dir="rtl"] .icon-right {
+  transform: scaleX(-1);
+}
+
+[dir="rtl"] .arrow-left,
+[dir="rtl"] .chevron-left,
+[dir="rtl"] .icon-left {
+  transform: scaleX(-1);
+}
+
+/* Pagination */
+[dir="rtl"] .pagination-nav__link--prev {
+  float: right;
+}
+
+[dir="rtl"] .pagination-nav__link--next {
+  float: left;
+}
+
+/* Code Blocks - Keep LTR */
+[dir="rtl"] pre,
+[dir="rtl"] code,
+[dir="rtl"] .codeBlockContainer,
+[dir="rtl"] .prism-code {
+  direction: ltr;
+  text-align: left;
+  unicode-bidi: embed;
+}
+
+[dir="rtl"] .codeBlockTitle {
+  direction: ltr;
+  text-align: left;
+}
+
+/* Tables - Keep LTR for Data */
+[dir="rtl"] table {
+  direction: ltr;
+}
+
+[dir="rtl"] th,
+[dir="rtl"] td {
+  text-align: left;
+}
+
+/* Dropdown Menus */
+[dir="rtl"] .dropdown__menu {
+  left: auto;
+  right: 0;
+}
+
+/* Modal Positioning */
+[dir="rtl"] .modal {
+  text-align: right;
+}
+
+/* Form Inputs */
+[dir="rtl"] input[type="text"],
+[dir="rtl"] input[type="email"],
+[dir="rtl"] input[type="search"],
+[dir="rtl"] textarea {
+  text-align: right;
+  padding-left: 0.75rem;
+  padding-right: 2.5rem; /* For icons */
+}
+
+/* Search Input */
+[dir="rtl"] .navbar__search-input {
+  padding-left: 1rem;
+  padding-right: 2.5rem;
+}
+
+[dir="rtl"] .search-icon {
+  left: auto;
+  right: 0.75rem;
+}
+
+/* Lists */
+[dir="rtl"] ul,
+[dir="rtl"] ol {
+  padding-left: 0;
+  padding-right: 2rem;
+}
+
+[dir="rtl"] li {
+  text-align: right;
+}
+
+/* Table of Contents */
+[dir="rtl"] .table-of-contents {
+  border-left: none;
+  border-right: 2px solid var(--ifm-toc-border-color);
+  padding-left: 0;
+  padding-right: 1rem;
+}
+
+/* Tooltips */
+[dir="rtl"] .tooltip {
+  text-align: right;
+}
+
+/* Buttons with Icons */
+[dir="rtl"] .button-with-icon {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .button-icon {
+  margin-left: 0.5rem;
+  margin-right: 0;
+}
+
+/* Cards */
+[dir="rtl"] .card {
+  text-align: right;
+}
+
+[dir="rtl"] .card-header {
+  text-align: right;
+}
+
+/* Animations - Flip Horizontal Animations */
+[dir="rtl"] .slide-in-left {
+  animation-name: slideInRight;
+}
+
+[dir="rtl"] .slide-in-right {
+  animation-name: slideInLeft;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Grid Layouts - Reverse Order for RTL */
+[dir="rtl"] .grid-container {
+  direction: rtl;
+}
+
+/* Flexbox Containers */
+[dir="rtl"] .flex-row {
+  flex-direction: row-reverse;
+}
+
+/* Footer */
+[dir="rtl"] footer {
+  text-align: right;
+}
+
+[dir="rtl"] .footer-links {
+  flex-direction: row-reverse;
+}
+
+/* Hero Section */
+[dir="rtl"] .hero {
+  text-align: right;
+}
+
+[dir="rtl"] .hero-buttons {
+  flex-direction: row-reverse;
+}
+
+/* Module Cards */
+[dir="rtl"] .module-card {
+  text-align: right;
+}
+
+/* Quiz Components */
+[dir="rtl"] .quiz-question {
+  text-align: right;
+}
+
+[dir="rtl"] .quiz-options {
+  padding-left: 0;
+  padding-right: 1.5rem;
+}
+
+[dir="rtl"] .quiz-option input[type="radio"],
+[dir="rtl"] .quiz-option input[type="checkbox"] {
+  margin-left: 1rem;
+  margin-right: 0;
+}
+
+/* Progress Bars */
+[dir="rtl"] .progress-bar {
+  transform: scaleX(-1);
+}
+
+[dir="rtl"] .progress-bar-inner {
+  transform: scaleX(-1);
+}
+
+/* Timeline */
+[dir="rtl"] .timeline {
+  border-left: none;
+  border-right: 2px solid var(--timeline-color);
+  padding-left: 0;
+  padding-right: 2rem;
+}
+
+[dir="rtl"] .timeline-item {
+  text-align: right;
+}
+
+/* Cookie Consent Banner */
+[dir="rtl"] .cookie-banner {
+  flex-direction: row-reverse;
+}
+
+/* Language Selector */
+[dir="rtl"] .language-selector {
+  direction: ltr; /* Keep flags and language names in their natural direction */
+}
+
+/* Ensure Numbers Stay LTR */
+[dir="rtl"] .number,
+[dir="rtl"] .date,
+[dir="rtl"] .time,
+[dir="rtl"] .percentage {
+  direction: ltr;
+  unicode-bidi: embed;
+}
+
+/* External Links Icons */
+[dir="rtl"] .external-link-icon {
+  margin-left: 0;
+  margin-right: 0.25rem;
+}
+
+/* Custom Scrollbar for RTL */
+[dir="rtl"] ::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+[dir="rtl"] ::-webkit-scrollbar-track {
+  background: rgba(0, 240, 255, 0.05);
+}
+
+[dir="rtl"] ::-webkit-scrollbar-thumb {
+  background: rgba(0, 240, 255, 0.2);
+  border-radius: 4px;
+}
+
+[dir="rtl"] ::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 240, 255, 0.3);
+}

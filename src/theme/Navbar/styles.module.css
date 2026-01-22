@@ -1,0 +1,486 @@
+/**
+ * Navbar Styles - Neural Circuitry Futurism
+ * Physical AI & Humanoid Robotics Interactive Textbook
+ *
+ * Features:
+ * - Sticky positioning on scroll
+ * - Backdrop blur effect
+ * - Compact mode on scroll
+ * - Responsive hamburger menu
+ * - Mobile menu slide-in animation
+ * - Hover and focus states
+ */
+
+/* ===========================
+   Navbar Base Styles
+   =========================== */
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-index-sticky);
+  background-color: rgba(10, 14, 20, 0.8);
+  border-bottom: 1px solid rgba(0, 240, 255, 0.1);
+  transition: all var(--transition-normal);
+  padding: var(--space-md) 0;
+}
+
+.navbarScrolled {
+  background-color: rgba(10, 14, 20, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: var(--space-sm) 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  border-bottom-color: rgba(0, 240, 255, 0.2);
+}
+
+.navbarInner {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-lg);
+}
+
+/* ===========================
+   Logo Styles
+   =========================== */
+
+.navbarLogo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  color: var(--text-primary);
+  text-decoration: none;
+  font-family: var(--font-heading);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-xl);
+  transition: all var(--transition-fast);
+}
+
+.navbarLogo:hover {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.logoIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  color: var(--primary);
+  transition: transform var(--transition-fast);
+}
+
+.navbarLogo:hover .logoIcon {
+  transform: rotate(90deg);
+}
+
+.logoText {
+  white-space: nowrap;
+}
+
+/* ===========================
+   Desktop Navigation Links
+   =========================== */
+
+.navbarLinks {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  flex: 1;
+  justify-content: center;
+}
+
+.navLink {
+  font-family: var(--font-heading);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-base);
+  color: var(--text-secondary);
+  text-decoration: none;
+  padding: var(--space-xs) var(--space-md);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+  position: relative;
+}
+
+.navLink:hover {
+  color: var(--primary);
+  background-color: rgba(0, 240, 255, 0.05);
+  text-decoration: none;
+}
+
+.navLink:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+.navLinkActive {
+  color: var(--primary);
+  font-weight: var(--font-weight-semibold);
+}
+
+.navLinkActive::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: var(--space-md);
+  right: var(--space-md);
+  height: 2px;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  border-radius: var(--radius-full);
+}
+
+/* ===========================
+   Desktop Actions
+   =========================== */
+
+.navbarActions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.searchButton,
+.languageButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: none;
+  background-color: transparent;
+  color: var(--text-secondary);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.searchButton:hover,
+.languageButton:hover {
+  background-color: rgba(0, 240, 255, 0.1);
+  color: var(--primary);
+}
+
+.searchButton:focus-visible,
+.languageButton:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.searchButton:disabled,
+.languageButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.languageButton {
+  gap: var(--space-xs);
+  width: auto;
+  padding: 0 var(--space-sm);
+}
+
+.languageLabel {
+  font-size: var(--font-size-sm);
+  font-family: var(--font-heading);
+  font-weight: var(--font-weight-medium);
+}
+
+.loginButton {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-sm) var(--space-md);
+  font-size: var(--font-size-sm);
+}
+
+.loginButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ===========================
+   Mobile Hamburger Menu
+   =========================== */
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 28px;
+  height: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: calc(var(--z-index-modal) + 10);
+  position: relative;
+}
+
+.hamburgerLine {
+  width: 100%;
+  height: 2px;
+  background-color: var(--text-primary);
+  border-radius: var(--radius-full);
+  transition: all var(--transition-normal);
+}
+
+.hamburger:hover .hamburgerLine {
+  background-color: var(--primary);
+}
+
+.hamburger:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 4px;
+  border-radius: var(--radius-sm);
+}
+
+/* ===========================
+   Mobile Menu Overlay
+   =========================== */
+
+.mobileOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: var(--z-index-modal-backdrop);
+  animation: fadeIn var(--duration-fast) var(--ease-default);
+}
+
+/* ===========================
+   Mobile Menu Panel
+   =========================== */
+
+.mobileMenu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 280px;
+  max-width: 80vw;
+  background-color: var(--bg-card);
+  border-right: 1px solid rgba(0, 240, 255, 0.2);
+  z-index: var(--z-index-modal);
+  display: flex;
+  flex-direction: column;
+  transform: translateX(-100%);
+  transition: transform var(--duration-normal) var(--ease-default);
+  overflow-y: auto;
+}
+
+.mobileMenuOpen {
+  transform: translateX(0);
+}
+
+.mobileMenuHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-lg);
+  border-bottom: 1px solid rgba(0, 240, 255, 0.1);
+}
+
+.mobileMenuTitle {
+  font-family: var(--font-heading);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-lg);
+  color: var(--text-primary);
+}
+
+.mobileMenuClose {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: none;
+  background-color: transparent;
+  color: var(--text-secondary);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.mobileMenuClose:hover {
+  background-color: rgba(0, 240, 255, 0.1);
+  color: var(--primary);
+}
+
+.mobileMenuClose:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.mobileMenuLinks {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-md);
+  gap: var(--space-xs);
+  flex: 1;
+}
+
+.mobileNavLink {
+  font-family: var(--font-heading);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-lg);
+  color: var(--text-secondary);
+  text-decoration: none;
+  padding: var(--space-md);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+}
+
+.mobileNavLink:hover {
+  color: var(--primary);
+  background-color: rgba(0, 240, 255, 0.1);
+  text-decoration: none;
+}
+
+.mobileNavLinkActive {
+  color: var(--primary);
+  background-color: rgba(0, 240, 255, 0.1);
+  font-weight: var(--font-weight-semibold);
+}
+
+.mobileMenuActions {
+  padding: var(--space-lg);
+  border-top: 1px solid rgba(0, 240, 255, 0.1);
+}
+
+.mobileActionButton {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  padding: var(--space-md);
+  font-size: var(--font-size-base);
+}
+
+/* ===========================
+   Loading Spinner
+   =========================== */
+
+.loadingSpinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+}
+
+.spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ===========================
+   Mobile User Section
+   =========================== */
+
+.mobileUserSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.mobileUserInfo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  background-color: rgba(0, 240, 255, 0.05);
+  border-radius: var(--radius-md);
+}
+
+.mobileAvatar {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-full);
+  border: 2px solid var(--primary);
+}
+
+.mobileUsername {
+  font-family: var(--font-heading);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-base);
+  color: var(--text-primary);
+}
+
+.mobileEmail {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  margin-top: var(--space-xs);
+}
+
+/* ===========================
+   Responsive Breakpoints
+   =========================== */
+
+@media screen and (max-width: 768px) {
+  .navbarLinks,
+  .navbarActions {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .navbarInner {
+    padding: 0 var(--space-md);
+  }
+
+  .logoText {
+    font-size: var(--font-size-base);
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .navbarInner {
+    padding: 0 var(--space-sm);
+  }
+
+  .navbar {
+    padding: var(--space-sm) 0;
+  }
+
+  .navbarScrolled {
+    padding: var(--space-xs) 0;
+  }
+}
+
+/* ===========================
+   Accessibility: Reduced Motion
+   =========================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .navbar,
+  .navLink,
+  .navbarLogo,
+  .logoIcon,
+  .searchButton,
+  .languageButton,
+  .hamburgerLine,
+  .mobileMenu,
+  .mobileOverlay {
+    transition-duration: 0.01ms !important;
+  }
+}

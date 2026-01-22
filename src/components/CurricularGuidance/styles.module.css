@@ -1,0 +1,224 @@
+/* Curricular Guidance Section */
+.guidance {
+  padding: 8rem 2rem;
+  background: linear-gradient(180deg, var(--background-primary) 0%, #0f1419 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.guidanceInner {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+/* Section Header */
+.sectionHeader {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.sectionLabel {
+  display: inline-block;
+  padding: 0.5rem 1.5rem;
+  background: rgba(0, 240, 255, 0.1);
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  border-radius: 2rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--primary);
+  margin-bottom: 1.5rem;
+}
+
+.sectionTitle {
+  font-size: 3rem;
+  font-weight: 700;
+  margin: 0 0 1.5rem 0;
+  font-family: 'Orbitron', sans-serif;
+}
+
+.sectionDescription {
+  font-size: 1.25rem;
+  color: var(--text-secondary);
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Tab Bar */
+.tabBar {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 3rem;
+  flex-wrap: wrap;
+}
+
+.tabButton {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 2rem;
+  background: rgba(26, 34, 48, 0.6);
+  border: 2px solid rgba(0, 240, 255, 0.2);
+  border-radius: 2rem;
+  color: var(--text-secondary);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s var(--ease-default);
+  backdrop-filter: blur(10px);
+}
+
+.tabButton:hover {
+  background: rgba(26, 34, 48, 0.8);
+  border-color: rgba(0, 240, 255, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 240, 255, 0.15);
+}
+
+.tabButton:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 4px;
+}
+
+.tabButtonActive {
+  background: linear-gradient(135deg, rgba(0, 240, 255, 0.2), rgba(0, 240, 255, 0.1));
+  border-color: var(--primary);
+  color: var(--primary);
+  box-shadow: 0 8px 32px rgba(0, 240, 255, 0.25);
+}
+
+.tabIcon {
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tabLabel {
+  font-family: 'Rajdhani', sans-serif;
+  white-space: nowrap;
+}
+
+/* Tab Content */
+.tabContent {
+  animation: fadeIn 0.5s var(--ease-default);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Content Grid */
+.contentGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+/* Content Cards */
+.contentCard {
+  padding: 2rem;
+  background: rgba(26, 34, 48, 0.6);
+  border: 1px solid rgba(0, 240, 255, 0.2);
+  border-radius: 1rem;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s var(--ease-default);
+}
+
+.contentCard:hover {
+  background: rgba(26, 34, 48, 0.8);
+  border-color: rgba(0, 240, 255, 0.4);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 240, 255, 0.2);
+}
+
+.cardIcon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.cardTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 1rem 0;
+  font-family: 'Rajdhani', sans-serif;
+}
+
+.cardDescription {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .guidance {
+    padding: 4rem 1.5rem;
+  }
+
+  .sectionTitle {
+    font-size: 2rem;
+  }
+
+  .sectionDescription {
+    font-size: 1rem;
+  }
+
+  .tabBar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .tabButton {
+    justify-content: center;
+    padding: 0.875rem 1.5rem;
+  }
+
+  .contentGrid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .contentCard {
+    padding: 1.5rem;
+  }
+
+  .cardTitle {
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .guidance {
+    padding: 3rem 1rem;
+  }
+
+  .sectionTitle {
+    font-size: 1.75rem;
+  }
+
+  .tabButton {
+    font-size: 0.875rem;
+    padding: 0.75rem 1.25rem;
+  }
+
+  .tabIcon {
+    font-size: 1.25rem;
+  }
+}

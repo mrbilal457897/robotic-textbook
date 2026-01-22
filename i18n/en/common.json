@@ -1,0 +1,75 @@
+{
+  "navigation": {
+    "home": "Home",
+    "modules": "Modules",
+    "resources": "Resources",
+    "about": "About",
+    "search": "Search"
+  },
+  "buttons": {
+    "startReading": "Start Reading",
+    "loginGitHub": "Login with GitHub",
+    "logout": "Logout",
+    "signOut": "Sign Out",
+    "exploreModule": "Explore Module",
+    "viewProfile": "View GitHub Profile"
+  },
+  "quiz": {
+    "startQuiz": "Start Quiz",
+    "next": "Next",
+    "previous": "Previous",
+    "submit": "Submit",
+    "retakeQuiz": "Retake Quiz",
+    "backToModule": "Back to Module",
+    "questionCounter": "Question {{current}}/{{total}}",
+    "questionsLabel": "Questions",
+    "passingScore": "Pass Score",
+    "estimatedTime": "Est. Time",
+    "minutes": "min",
+    "correct": "Correct",
+    "incorrect": "Incorrect",
+    "skipped": "Skipped",
+    "passed": "PASSED",
+    "failed": "NEEDS IMPROVEMENT",
+    "quizComplete": "Quiz Complete!"
+  },
+  "cookies": {
+    "acceptAll": "Accept All",
+    "rejectNonEssential": "Reject Non-Essential",
+    "customize": "Customize",
+    "cookieSettings": "Cookie Settings",
+    "cookiePreferences": "Cookie Preferences",
+    "essential": "Essential Cookies",
+    "analytics": "Analytics Cookies",
+    "preferences": "Preference Cookies",
+    "save": "Save Preferences",
+    "cancel": "Cancel"
+  },
+  "languages": {
+    "english": "English",
+    "urdu": "اردو",
+    "arabic": "العربية",
+    "chinese": "中文",
+    "spanish": "Español"
+  },
+  "auth": {
+    "authenticating": "Authenticating...",
+    "authFailed": "Authentication Failed",
+    "returnHome": "Return to Homepage",
+    "success": "Success!"
+  },
+  "search": {
+    "placeholder": "Search documentation...",
+    "noResults": "No results found",
+    "tryDifferent": "Try adjusting your search query or browse by module.",
+    "recentSearches": "Recent Searches"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "retry": "Retry",
+    "close": "Close",
+    "readMore": "Read More",
+    "readingTime": "{{minutes}} min read"
+  }
+}

@@ -1,0 +1,183 @@
+/* Language Selector Component Styles */
+
+.languageSelector {
+  position: relative;
+}
+
+.selectorButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: rgba(0, 240, 255, 0.1);
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  border-radius: 8px;
+  color: #00f0ff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.selectorButton:hover {
+  background: rgba(0, 240, 255, 0.2);
+  border-color: #00f0ff;
+}
+
+.selectorButton:focus {
+  outline: 2px solid #00f0ff;
+  outline-offset: 2px;
+}
+
+.flag {
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.languageName {
+  white-space: nowrap;
+}
+
+.chevron {
+  font-size: 0.75rem;
+  transition: transform 0.3s ease;
+}
+
+.chevron.open {
+  transform: rotate(180deg);
+}
+
+.dropdown {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  min-width: 200px;
+  background: linear-gradient(135deg, #1a2230 0%, #0a0e14 100%);
+  border: 1px solid rgba(0, 240, 255, 0.2);
+  border-radius: 8px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  animation: slideDown 0.2s ease-out;
+  overflow: hidden;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dropdownList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.languageOption {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  color: #b8c4ce;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  background: transparent;
+  width: 100%;
+  text-align: left;
+  font-size: 0.95rem;
+}
+
+.languageOption:hover {
+  background: rgba(0, 240, 255, 0.1);
+  color: #00f0ff;
+}
+
+.languageOption.current {
+  background: rgba(0, 240, 255, 0.15);
+  color: #00f0ff;
+  font-weight: 600;
+}
+
+.languageOption .flag {
+  font-size: 1.25rem;
+}
+
+.languageInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.languageInfo .name {
+  font-weight: 500;
+}
+
+.languageInfo .nativeName {
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
+
+.checkmark {
+  color: #00f0ff;
+  font-size: 1rem;
+}
+
+/* Mobile Responsive */
+
+@media (max-width: 768px) {
+  .selectorButton {
+    padding: 0.5rem 0.75rem;
+  }
+
+  .languageName {
+    display: none;
+  }
+
+  .dropdown {
+    right: auto;
+    left: 0;
+    min-width: 250px;
+  }
+}
+
+@media (max-width: 480px) {
+  .dropdown {
+    position: fixed;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-radius: 12px 12px 0 0;
+    animation: slideUp 0.2s ease-out;
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(100%);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+/* RTL Support */
+
+[dir="rtl"] .dropdown {
+  right: auto;
+  left: 0;
+}
+
+[dir="rtl"] .selectorButton,
+[dir="rtl"] .languageOption {
+  flex-direction: row-reverse;
+}

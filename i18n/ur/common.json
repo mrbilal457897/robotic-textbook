@@ -1,0 +1,75 @@
+{
+  "navigation": {
+    "home": "ہوم",
+    "modules": "ماڈیولز",
+    "resources": "وسائل",
+    "about": "تعارف",
+    "search": "تلاش"
+  },
+  "buttons": {
+    "startReading": "پڑھنا شروع کریں",
+    "loginGitHub": "GitHub کے ساتھ لاگ ان کریں",
+    "logout": "لاگ آؤٹ",
+    "signOut": "سائن آؤٹ",
+    "exploreModule": "ماڈیول دریافت کریں",
+    "viewProfile": "GitHub پروفائل دیکھیں"
+  },
+  "quiz": {
+    "startQuiz": "کوئز شروع کریں",
+    "next": "اگلا",
+    "previous": "پچھلا",
+    "submit": "جمع کرائیں",
+    "retakeQuiz": "دوبارہ کوئز لیں",
+    "backToModule": "ماڈیول پر واپس",
+    "questionCounter": "سوال {{current}}/{{total}}",
+    "questionsLabel": "سوالات",
+    "passingScore": "پاس کرنے کا نمبر",
+    "estimatedTime": "تخمینی وقت",
+    "minutes": "منٹ",
+    "correct": "صحیح",
+    "incorrect": "غلط",
+    "skipped": "چھوڑ دیا",
+    "passed": "کامیاب",
+    "failed": "بہتری کی ضرورت",
+    "quizComplete": "کوئز مکمل ہوا!"
+  },
+  "cookies": {
+    "acceptAll": "تمام قبول کریں",
+    "rejectNonEssential": "غیر ضروری مسترد کریں",
+    "customize": "حسب ضرورت بنائیں",
+    "cookieSettings": "کوکی کی ترتیبات",
+    "cookiePreferences": "کوکی کی ترجیحات",
+    "essential": "ضروری کوکیز",
+    "analytics": "تجزیاتی کوکیز",
+    "preferences": "ترجیحی کوکیز",
+    "save": "ترجیحات محفوظ کریں",
+    "cancel": "منسوخ کریں"
+  },
+  "languages": {
+    "english": "English",
+    "urdu": "اردو",
+    "arabic": "العربية",
+    "chinese": "中文",
+    "spanish": "Español"
+  },
+  "auth": {
+    "authenticating": "تصدیق ہو رہی ہے...",
+    "authFailed": "تصدیق ناکام",
+    "returnHome": "ہوم پیج پر واپس",
+    "success": "کامیابی!"
+  },
+  "search": {
+    "placeholder": "دستاویزات تلاش کریں...",
+    "noResults": "کوئی نتیجہ نہیں ملا",
+    "tryDifferent": "اپنی تلاش کو ایڈجسٹ کریں یا ماڈیول کے مطابق براؤز کریں۔",
+    "recentSearches": "حالیہ تلاشیں"
+  },
+  "common": {
+    "loading": "لوڈ ہو رہا ہے...",
+    "error": "خرابی",
+    "retry": "دوبارہ کوشش کریں",
+    "close": "بند کریں",
+    "readMore": "مزید پڑھیں",
+    "readingTime": "{{minutes}} منٹ پڑھنا"
+  }
+}

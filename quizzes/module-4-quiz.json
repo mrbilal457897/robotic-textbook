@@ -1,0 +1,132 @@
+{
+  "quizId": "module-4-quiz",
+  "moduleId": "module-4-vla",
+  "title": "Vision-Language-Action Models Quiz",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "multiple-choice",
+      "text": "What is a Vision-Language-Action (VLA) model?",
+      "options": [
+        "A model that only processes images",
+        "An AI model that understands visual input, natural language commands, and generates robot actions",
+        "A tool for video editing",
+        "A language translation service"
+      ],
+      "correctAnswer": 1,
+      "explanation": "VLA models are multimodal AI systems that integrate vision (image/video understanding), language (natural language processing), and action (robot control commands). They enable robots to follow natural language instructions.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "q2",
+      "type": "multiple-choice",
+      "text": "What is the primary advantage of using natural language for robot control?",
+      "options": [
+        "It makes robots faster",
+        "It allows non-technical users to instruct robots using human language",
+        "It reduces manufacturing costs",
+        "It eliminates the need for sensors"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Natural language interfaces make robots accessible to non-programmers. Instead of writing code, users can simply speak or type instructions like 'pick up the blue cube' which the VLA model translates to robot actions.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "q3",
+      "type": "multiple-choice",
+      "text": "In a VLA system, what is the role of the vision component?",
+      "options": [
+        "To display robot status on screens",
+        "To understand the current scene, objects, and environment from camera input",
+        "To generate images for training",
+        "To compress video for storage"
+      ],
+      "correctAnswer": 1,
+      "explanation": "The vision component processes camera input to extract semantic understanding of the scene, object locations, and spatial relationships. This information is crucial for generating contextually appropriate robot actions.",
+      "difficulty": "medium"
+    },
+    {
+      "id": "q4",
+      "type": "true-false",
+      "text": "Large Language Models (LLMs) like GPT can directly control a physical robot without additional processing.",
+      "options": ["True", "False"],
+      "correctAnswer": 1,
+      "explanation": "LLMs generate text, not robot control signals. A VLA model must add a planning layer and action executor to translate LLM outputs into actual robot control commands (joint angles, velocities, etc.).",
+      "difficulty": "medium"
+    },
+    {
+      "id": "q5",
+      "type": "multiple-choice",
+      "text": "What is the primary function of the cognitive planning layer in a VLA system?",
+      "options": [
+        "To beautify the robot's appearance",
+        "To translate natural language commands and scene understanding into actionable robot tasks",
+        "To make the robot move faster",
+        "To reduce power consumption"
+      ],
+      "correctAnswer": 1,
+      "explanation": "The cognitive planning layer acts as a bridge between high-level language instructions and low-level robot control. It decomposes tasks into executable steps considering robot capabilities and environmental constraints.",
+      "difficulty": "medium"
+    },
+    {
+      "id": "q6",
+      "type": "multiple-choice",
+      "text": "How does Whisper speech recognition contribute to VLA systems for humanoid robots?",
+      "options": [
+        "It records robot diagnostics",
+        "It converts human speech into text commands that the VLA model can process",
+        "It controls the robot's speakers",
+        "It measures ambient noise levels"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Whisper is OpenAI's speech-to-text model. In a VLA pipeline, it converts natural speech ('pick up that object') into text that the language understanding components can process, enabling voice-controlled robots.",
+      "difficulty": "medium"
+    },
+    {
+      "id": "q7",
+      "type": "multiple-choice",
+      "text": "What is a critical challenge in deploying VLA models on physical humanoid robots?",
+      "options": [
+        "VLA models are too small for robot use",
+        "Latency: translating speech-to-text-to-action must be fast enough for real-time interaction",
+        "Robots don't have cameras",
+        "Language understanding is perfect and error-free"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Real-time performance is essential. If speech recognition takes 5 seconds and action generation takes 3 seconds, the total 8-second latency makes interaction frustrating. Optimization is critical for usable systems.",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q8",
+      "type": "true-false",
+      "text": "A VLA model trained on video data of human demonstrations can directly replicate those behaviors on a physically different robot without any adaptation.",
+      "options": ["True", "False"],
+      "correctAnswer": 1,
+      "explanation": "This is a major challenge in robotics: sim-to-real and morphology transfer. A VLA model trained on one robot morphology may not transfer directly to a different robot with different kinematics and dynamics.",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q9",
+      "type": "multiple-choice",
+      "text": "In a voice-to-action system for a humanoid robot, what happens if the LLM generates an impossible action (e.g., 'bend arm 180 degrees' when the robot's arm only bends 120 degrees)?",
+      "options": [
+        "The action is sent to the robot, which will fail",
+        "The LLM output is validated against robot constraints before execution",
+        "The robot automatically adjusts its morphology",
+        "The system ignores the command entirely"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Robust VLA systems include a validation layer that checks proposed actions against robot kinematic/dynamic constraints. If an action is impossible, the system can either adjust it or request clarification.",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q10",
+      "type": "true-false",
+      "text": "Vision-Language-Action models are currently mature enough for deployment in all real-world robotic applications without limitations.",
+      "options": ["True", "False"],
+      "correctAnswer": 1,
+      "explanation": "While VLA research is advancing rapidly, current systems still have limitations in complex reasoning, real-world robustness, latency, safety guarantees, and handling ambiguous instructions. They require careful integration and validation.",
+      "difficulty": "hard"
+    }
+  ]
+}

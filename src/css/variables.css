@@ -1,0 +1,218 @@
+/**
+ * Design System Variables - Neural Circuitry Futurism
+ * Physical AI & Humanoid Robotics Interactive Textbook
+ *
+ * This file contains all design tokens (color palette, typography, spacing, etc.)
+ * following the Neural Circuitry Futurism theme specification.
+ */
+
+/* ===========================
+   Web Font Declarations
+   =========================== */
+
+/* NOTE: Fonts are imported via Google Fonts in custom.css
+   Local font files will be added in Phase 3 (T008)
+
+/* Orbitron - Display Titles */
+/* @font-face declarations commented out - using Google Fonts for Phase 2 */
+
+/* Rajdhani - Headings */
+/* @font-face declarations commented out - using Google Fonts for Phase 2 */
+
+/* Source Code Pro - Body Text */
+/* @font-face declarations commented out - using Google Fonts for Phase 2 */
+
+/* JetBrains Mono - Code Blocks */
+/* @font-face declarations commented out - using Google Fonts for Phase 2 */
+
+:root {
+  /* ===========================
+     Color Palette
+     =========================== */
+
+  /* Primary Colors */
+  --primary: #00F0FF;                    /* Electric Cyan */
+  --secondary: #B8C4CE;                  /* Titanium Silver */
+  --accent: #FF6B35;                     /* Plasma Orange */
+
+  /* Background Colors */
+  --bg-primary: #0A0E14;                 /* Deep Space Black */
+  --bg-card: #1A2230;                    /* Midnight Blue */
+  --bg-overlay: rgba(26, 34, 48, 0.95);  /* Card with transparency */
+
+  /* Text Colors */
+  --text-primary: #E8EDF3;               /* Light Gray */
+  --text-secondary: #9AABB8;             /* Muted Silver */
+  --text-tertiary: #6B7A8C;              /* Darker muted gray */
+
+  /* Semantic/Status Colors */
+  --success: #00E676;                    /* Neon Green */
+  --warning: #FFB300;                    /* Amber */
+  --error: #FF5252;                      /* Coral Red */
+  --info: #00B8D4;                       /* Info Blue */
+
+  /* ===========================
+     Typography
+     =========================== */
+
+  /* Font Families */
+  --font-display: 'Orbitron', sans-serif;           /* Display/Hero titles */
+  --font-heading: 'Rajdhani', sans-serif;           /* Section headings */
+  --font-body: 'Source Code Pro', monospace;        /* Body text */
+  --font-mono: 'JetBrains Mono', monospace;         /* Code blocks */
+
+  /* Font Sizes */
+  --font-size-xs: 0.75rem;               /* 12px */
+  --font-size-sm: 0.875rem;              /* 14px */
+  --font-size-base: 1rem;                /* 16px */
+  --font-size-lg: 1.125rem;              /* 18px */
+  --font-size-xl: 1.25rem;               /* 20px */
+  --font-size-2xl: 1.5rem;               /* 24px */
+  --font-size-3xl: 1.875rem;             /* 30px */
+  --font-size-4xl: 2.25rem;              /* 36px */
+  --font-size-5xl: 3rem;                 /* 48px */
+  --font-size-6xl: 3.75rem;              /* 60px */
+
+  /* Font Weights */
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+  --font-weight-black: 900;
+
+  /* Line Heights */
+  --line-height-tight: 1.25;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.75;
+  --line-height-loose: 2;
+
+  /* ===========================
+     Spacing Scale
+     =========================== */
+
+  --space-xs: 0.25rem;                   /* 4px */
+  --space-sm: 0.5rem;                    /* 8px */
+  --space-md: 1rem;                      /* 16px */
+  --space-lg: 1.5rem;                    /* 24px */
+  --space-xl: 2rem;                      /* 32px */
+  --space-2xl: 3rem;                     /* 48px */
+  --space-3xl: 4rem;                     /* 64px */
+  --space-4xl: 6rem;                     /* 96px */
+
+  /* ===========================
+     Border Radius Scale
+     =========================== */
+
+  --radius-none: 0;
+  --radius-sm: 0.25rem;                  /* 4px */
+  --radius-md: 0.5rem;                   /* 8px */
+  --radius-lg: 0.75rem;                  /* 12px */
+  --radius-xl: 1rem;                     /* 16px */
+  --radius-2xl: 1.5rem;                  /* 24px */
+  --radius-full: 9999px;                 /* Full circle */
+
+  /* ===========================
+     Shadow Definitions
+     =========================== */
+
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+
+  /* Glow Shadows (themed) */
+  --shadow-glow-primary: 0 0 20px rgba(0, 240, 255, 0.3);
+  --shadow-glow-primary-lg: 0 0 40px rgba(0, 240, 255, 0.6);
+  --shadow-glow-accent: 0 0 20px rgba(255, 107, 53, 0.3);
+  --shadow-glow-success: 0 0 20px rgba(0, 230, 118, 0.3);
+
+  /* ===========================
+     Z-Index Scale
+     =========================== */
+
+  --z-index-base: 1;
+  --z-index-dropdown: 100;
+  --z-index-sticky: 200;
+  --z-index-fixed: 300;
+  --z-index-modal-backdrop: 400;
+  --z-index-modal: 500;
+  --z-index-popover: 600;
+  --z-index-tooltip: 700;
+
+  /* ===========================
+     Transition Durations
+     =========================== */
+
+  --duration-fast: 150ms;
+  --duration-normal: 300ms;
+  --duration-slow: 500ms;
+  --duration-slower: 800ms;
+
+  /* ===========================
+     Easing Functions
+     =========================== */
+
+  --ease-default: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  --ease-elastic: cubic-bezier(0.68, -0.6, 0.32, 1.6);
+
+  /* Combined Transition Shortcuts */
+  --transition-fast: var(--duration-fast) var(--ease-default);
+  --transition-normal: var(--duration-normal) var(--ease-default);
+  --transition-slow: var(--duration-slow) var(--ease-default);
+
+  /* ===========================
+     Breakpoints (for reference in CSS)
+     =========================== */
+
+  --breakpoint-mobile: 375px;
+  --breakpoint-tablet: 768px;
+  --breakpoint-desktop: 1200px;
+  --breakpoint-wide: 1440px;
+  --breakpoint-ultrawide: 1920px;
+}
+
+/* ===========================
+   Dark Mode Color Overrides
+   (Default theme)
+   =========================== */
+
+[data-theme='dark'] {
+  /* Docusaurus theme variable overrides */
+  --ifm-color-primary: var(--primary);
+  --ifm-color-primary-dark: #00D1E0;
+  --ifm-color-primary-darker: #00BDD1;
+  --ifm-color-primary-darkest: #009BB3;
+  --ifm-color-primary-light: #1AFFFF;
+  --ifm-color-primary-lighter: #33FFFF;
+  --ifm-color-primary-lightest: #66FFFF;
+
+  --ifm-background-color: var(--bg-primary);
+  --ifm-background-surface-color: var(--bg-card);
+
+  --ifm-font-color-base: var(--text-primary);
+  --ifm-font-color-secondary: var(--text-secondary);
+
+  --ifm-code-background: var(--bg-card);
+  --ifm-code-color: var(--primary);
+
+  --ifm-link-color: var(--primary);
+  --ifm-link-hover-color: var(--ifm-color-primary-light);
+}
+
+/* ===========================
+   Light Mode (Optional)
+   =========================== */
+
+[data-theme='light'] {
+  --ifm-color-primary: #0088CC;
+  --ifm-background-color: #FFFFFF;
+  --ifm-font-color-base: #1C1E21;
+  --ifm-code-background: #F5F5F5;
+}

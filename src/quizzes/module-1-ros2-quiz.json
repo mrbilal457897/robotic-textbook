@@ -1,0 +1,141 @@
+{
+  "quizId": "module-1-quiz",
+  "moduleId": "module-1-ros2",
+  "title": "ROS 2: The Robotic Nervous System Quiz",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "multiple-choice",
+      "text": "What is the primary purpose of ROS 2 in robotics?",
+      "options": [
+        "To provide a communication middleware for distributed robotic systems",
+        "To replace all robot hardware components",
+        "To eliminate the need for programming in robotics",
+        "To provide only visualization tools for robots"
+      ],
+      "correctAnswer": 0,
+      "explanation": "ROS 2 is a flexible framework that provides a communication middleware enabling different software modules (nodes) to communicate with each other, making it the 'nervous system' of robotic systems. It doesn't replace hardware, programming, or visualization alone.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "q2",
+      "type": "multiple-choice",
+      "text": "In ROS 2, what is a Node?",
+      "options": [
+        "A single executable process that performs specific robotic functions",
+        "A physical robot component",
+        "A communication cable connecting robots",
+        "A type of sensor in the robot"
+      ],
+      "correctAnswer": 0,
+      "explanation": "A Node in ROS 2 is the basic computational unit - a single executable process that performs a specific function. Nodes communicate with each other through Topics and Services. They are software entities, not hardware components.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "q3",
+      "type": "multiple-choice",
+      "text": "What is a Topic in ROS 2?",
+      "options": [
+        "A named bus for one-way, asynchronous communication using the publish-subscribe pattern",
+        "A synchronous request-response communication mechanism",
+        "A type of robot joint",
+        "A configuration file for ROS 2 settings"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Topics enable one-way, asynchronous communication following the publish-subscribe pattern. Publishers send data to a topic, and subscribers receive it. This is different from Services, which are synchronous request-response mechanisms.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "q4",
+      "type": "true-false",
+      "text": "In ROS 2, Publishers and Subscribers communicate directly with each other.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Publishers and Subscribers do not communicate directly. Instead, they communicate through Topics. Publishers send messages to a topic, and Subscribers receive those messages from the topic - they are decoupled from each other.",
+      "difficulty": "medium"
+    },
+    {
+      "id": "q5",
+      "type": "multiple-choice",
+      "text": "What is the primary advantage of using Services in ROS 2 instead of Topics?",
+      "options": [
+        "Services provide synchronous, request-response communication with guaranteed delivery",
+        "Services are faster than Topics",
+        "Services work only with humanoid robots",
+        "Services require less computational power"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Services in ROS 2 provide synchronous, request-response communication patterns. When a client calls a service, it waits for a response, which is useful for operations that need immediate feedback or acknowledgment. This differs from the asynchronous nature of Topics.",
+      "difficulty": "medium"
+    },
+    {
+      "id": "q6",
+      "type": "multiple-choice",
+      "text": "Which of the following best describes a URDF file in the context of humanoid robots?",
+      "options": [
+        "An XML format that describes the robot structure including links, joints, masses, and inertia properties",
+        "A Python library for controlling robot motors",
+        "A file format for storing sensor calibration data",
+        "A communication protocol between ROS 2 nodes"
+      ],
+      "correctAnswer": 0,
+      "explanation": "URDF (Unified Robot Description Format) is an XML-based file format used to describe the complete structure of a robot, including its physical links (rigid bodies), joints (connections), mass properties, and inertia. It's essential for physics simulation and visualization of humanoid robots.",
+      "difficulty": "medium"
+    },
+    {
+      "id": "q7",
+      "type": "true-false",
+      "text": "rclpy is the C++ client library for ROS 2.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctAnswer": 1,
+      "explanation": "rclpy is actually the Python client library for ROS 2. rclcpp is the C++ client library. Both allow developers to create ROS 2 nodes and interact with the ROS 2 ecosystem in their respective programming languages.",
+      "difficulty": "medium"
+    },
+    {
+      "id": "q8",
+      "type": "multiple-choice",
+      "text": "In a humanoid robot system using ROS 2, how would you typically handle the communication between a motor control node and a joint state publisher?",
+      "options": [
+        "The motor control node would publish joint commands to a Topic, and the joint state publisher would subscribe to receive those commands",
+        "The joint state publisher would call the motor control node as a Service every millisecond",
+        "Both nodes would write directly to the same hardware file",
+        "The motor control node and joint state publisher would share memory directly"
+      ],
+      "correctAnswer": 0,
+      "explanation": "In ROS 2 architecture, asynchronous communication through Topics is the preferred method for continuous data streams like motor commands and joint states. Services are better suited for discrete, request-response interactions. This decouples the components and allows for flexible, scalable system design.",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q9",
+      "type": "true-false",
+      "text": "A single ROS 2 node can have multiple Publishers and Subscribers to different Topics.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Yes, a single ROS 2 node can have multiple Publishers and Subscribers to different Topics simultaneously. This is a common pattern in robotics where a node might need to publish to one Topic and subscribe to multiple others to coordinate different aspects of robot control.",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q10",
+      "type": "multiple-choice",
+      "text": "When designing a humanoid robot controller in ROS 2 with URDF-based modeling, what is the primary relationship between URDF and Topics?",
+      "options": [
+        "URDF defines the robot structure statically, while Topics transmit dynamic state and command data between nodes during runtime",
+        "URDF and Topics are completely independent and have no relationship",
+        "URDF is used to generate Topics automatically",
+        "Topics are used to create URDF files"
+      ],
+      "correctAnswer": 0,
+      "explanation": "URDF provides the static structural definition of the robot (joint configurations, link properties, mass distribution), while Topics enable real-time communication of dynamic data (joint angles, velocities, forces, commands) between ROS 2 nodes. Together, they form a complete system: URDF for simulation/visualization and Topics for runtime control.",
+      "difficulty": "hard"
+    }
+  ]
+}

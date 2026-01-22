@@ -1,0 +1,342 @@
+/**
+ * Footer Styles - Neural Circuitry Futurism
+ * Physical AI & Humanoid Robotics Interactive Textbook
+ *
+ * Features:
+ * - Responsive grid layout
+ * - Dark theme styling
+ * - Link hover effects
+ * - Footer separation from content
+ */
+
+/* ===========================
+   Footer Base Styles
+   =========================== */
+
+.footer {
+  background-color: var(--bg-card);
+  border-top: 1px solid rgba(0, 240, 255, 0.2);
+  margin-top: var(--space-4xl);
+  padding: var(--space-3xl) 0 var(--space-xl);
+}
+
+.footerInner {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
+}
+
+/* ===========================
+   Footer Top Section
+   =========================== */
+
+.footerTop {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: var(--space-2xl);
+  padding-bottom: var(--space-2xl);
+  border-bottom: 1px solid rgba(0, 240, 255, 0.1);
+}
+
+/* ===========================
+   Footer Brand
+   =========================== */
+
+.footerBrand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.footerLogo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  color: var(--text-primary);
+  text-decoration: none;
+  font-family: var(--font-heading);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-xl);
+  transition: all var(--transition-fast);
+  width: fit-content;
+}
+
+.footerLogo:hover {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.logoIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  color: var(--primary);
+  transition: transform var(--transition-fast);
+}
+
+.footerLogo:hover .logoIcon {
+  transform: rotate(90deg);
+}
+
+.logoText {
+  white-space: nowrap;
+}
+
+.footerTagline {
+  font-family: var(--font-body);
+  font-size: var(--font-size-base);
+  color: var(--text-secondary);
+  line-height: var(--line-height-relaxed);
+  margin: 0;
+  max-width: 400px;
+}
+
+/* ===========================
+   Footer Sections
+   =========================== */
+
+.footerSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.footerSectionTitle {
+  font-family: var(--font-heading);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-lg);
+  color: var(--text-primary);
+  margin: 0 0 var(--space-sm) 0;
+}
+
+.footerLinksList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footerLink {
+  font-family: var(--font-body);
+  font-size: var(--font-size-base);
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: all var(--transition-fast);
+  display: inline-block;
+  position: relative;
+}
+
+.footerLink::before {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: var(--primary);
+  transition: width var(--transition-fast);
+}
+
+.footerLink:hover {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.footerLink:hover::before {
+  width: 100%;
+}
+
+.footerLink:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* ===========================
+   Footer Bottom Section
+   =========================== */
+
+.footerBottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: var(--space-xl);
+  gap: var(--space-lg);
+}
+
+/* ===========================
+   Social Links
+   =========================== */
+
+.socialLinks {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.socialLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  background-color: transparent;
+  border: 1px solid rgba(0, 240, 255, 0.2);
+  text-decoration: none;
+  transition: all var(--transition-fast);
+}
+
+.socialLink:hover {
+  color: var(--primary);
+  background-color: rgba(0, 240, 255, 0.1);
+  border-color: var(--primary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 240, 255, 0.2);
+}
+
+.socialLink:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* ===========================
+   Copyright
+   =========================== */
+
+.copyright {
+  font-family: var(--font-body);
+  font-size: var(--font-size-sm);
+  color: var(--text-tertiary);
+  margin: 0;
+}
+
+.copyrightLink {
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.copyrightLink:hover {
+  color: var(--primary);
+  text-decoration: underline;
+}
+
+/* ===========================
+   Responsive Breakpoints
+   =========================== */
+
+@media screen and (max-width: 1024px) {
+  .footerTop {
+    grid-template-columns: 2fr 1fr 1fr;
+  }
+
+  .footerSection:last-child {
+    grid-column: 1 / -1;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .footerTop {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl);
+  }
+
+  .footerBrand {
+    grid-column: 1 / -1;
+  }
+
+  .footerBottom {
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    gap: var(--space-md);
+  }
+
+  .socialLinks {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .copyright {
+    text-align: center;
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .footer {
+    padding: var(--space-2xl) 0 var(--space-lg);
+    margin-top: var(--space-2xl);
+  }
+
+  .footerInner {
+    padding: 0 var(--space-md);
+  }
+
+  .footerTop {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  .footerBrand {
+    padding-bottom: var(--space-lg);
+    border-bottom: 1px solid rgba(0, 240, 255, 0.1);
+  }
+
+  .footerSection {
+    gap: var(--space-sm);
+  }
+
+  .footerSectionTitle {
+    font-size: var(--font-size-base);
+  }
+
+  .footerLinksList {
+    gap: var(--space-xs);
+  }
+
+  .footerLink {
+    font-size: var(--font-size-sm);
+  }
+
+  .footerBottom {
+    padding-top: var(--space-lg);
+  }
+
+  .socialLinks {
+    gap: var(--space-sm);
+  }
+
+  .socialLink {
+    width: 36px;
+    height: 36px;
+  }
+
+  .copyright {
+    font-size: var(--font-size-xs);
+  }
+}
+
+/* ===========================
+   Accessibility: Reduced Motion
+   =========================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .footerLink,
+  .socialLink,
+  .footerLogo,
+  .logoIcon,
+  .copyrightLink {
+    transition-duration: 0.01ms !important;
+  }
+
+  .footerLink::before {
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,37 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+build/
+dist/
+.docusaurus/
+.cache-loader/
+
+# Generated files
+*.d.ts
+.cache/
+
+# Test coverage
+coverage/
+
+# Docusaurus generated
+.docusaurus/
+build/
+
+# TypeScript build info
+*.tsbuildinfo
+
+# Logs
+*.log
+
+# IDE
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Minified files
+*.min.js
+*.min.css

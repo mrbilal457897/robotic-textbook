@@ -1,0 +1,106 @@
+/**
+ * Course Modules Section Styles
+ */
+
+.courseModules {
+  padding: var(--space-4xl) var(--space-lg);
+  background-color: var(--bg-primary);
+}
+
+.courseModulesInner {
+  max-width: 1440px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3xl);
+}
+
+/* Section Header */
+.sectionHeader {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  align-items: center;
+}
+
+.sectionLabel {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.sectionTitle {
+  font-family: var(--font-display);
+  font-size: var(--font-size-5xl);
+  font-weight: var(--font-weight-bold);
+  margin: 0;
+  line-height: var(--line-height-tight);
+}
+
+.sectionDescription {
+  font-family: var(--font-body);
+  font-size: var(--font-size-lg);
+  color: var(--text-secondary);
+  line-height: var(--line-height-relaxed);
+  margin: 0;
+  max-width: 700px;
+}
+
+/* Modules Grid */
+.modulesGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-xl);
+}
+
+.moduleCardWrapper {
+  animation-fill-mode: backwards;
+}
+
+/* Responsive Breakpoints */
+@media screen and (max-width: 1200px) {
+  .modulesGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .courseModules {
+    padding: var(--space-3xl) var(--space-md);
+  }
+
+  .courseModulesInner {
+    gap: var(--space-2xl);
+  }
+
+  .sectionTitle {
+    font-size: var(--font-size-4xl);
+  }
+
+  .sectionDescription {
+    font-size: var(--font-size-base);
+  }
+
+  .modulesGrid {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .courseModules {
+    padding: var(--space-2xl) var(--space-sm);
+  }
+
+  .sectionTitle {
+    font-size: var(--font-size-3xl);
+  }
+
+  .sectionDescription {
+    font-size: var(--font-size-sm);
+  }
+}

@@ -1,0 +1,139 @@
+/* Auth Components Styles */
+
+.loginButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, #00f0ff 0%, #00c4d9 100%);
+  color: #0a0e14;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.loginButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 240, 255, 0.3);
+}
+
+.loginButton:active {
+  transform: translateY(0);
+}
+
+.loginButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.loginButton svg {
+  width: 18px;
+  height: 18px;
+}
+
+.userProfile {
+  position: relative;
+}
+
+.profileButton {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem;
+  background: transparent;
+  border: 2px solid rgba(0, 240, 255, 0.3);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.profileButton:hover {
+  background: rgba(0, 240, 255, 0.1);
+  border-color: rgba(0, 240, 255, 0.6);
+}
+
+.profileAvatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #00f0ff;
+}
+
+.profileDropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 0.5rem;
+  background: linear-gradient(135deg, #1a2230 0%, #0a0e14 100%);
+  border: 1px solid rgba(0, 240, 255, 0.2);
+  border-radius: 8px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  min-width: 200px;
+  z-index: 1000;
+  animation: slideDown 0.2s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dropdownItem {
+  padding: 1rem;
+  border-bottom: 1px solid rgba(0, 240, 255, 0.1);
+  color: #b8c4ce;
+  text-align: left;
+}
+
+.dropdownItem:last-child {
+  border-bottom: none;
+}
+
+.username {
+  font-weight: 600;
+  color: #00f0ff;
+}
+
+.dropdownLink,
+.dropdownButton {
+  display: block;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: transparent;
+  border: none;
+  color: #b8c4ce;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: inherit;
+  font-size: 0.95rem;
+}
+
+.dropdownLink:hover,
+.dropdownButton:hover {
+  background: rgba(0, 240, 255, 0.1);
+  color: #00f0ff;
+}
+
+.dropdownLink {
+  text-decoration: none;
+}
+
+.logoutButton {
+  color: #ff6b35;
+}
+
+.logoutButton:hover {
+  background: rgba(255, 107, 53, 0.1);
+  color: #ff6b35;
+}

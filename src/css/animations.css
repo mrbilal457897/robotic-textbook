@@ -1,0 +1,435 @@
+/**
+ * Animation System - Neural Circuitry Futurism
+ * Physical AI & Humanoid Robotics Interactive Textbook
+ *
+ * This file contains all CSS keyframe animations and animation utility classes
+ * following the Neural Circuitry Futurism theme specification.
+ */
+
+/* ===========================
+   Keyframe Definitions
+   =========================== */
+
+/* Fade Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+/* Slide Animations */
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Scale Animations */
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes scaleOut {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+}
+
+/* Glow and Pulse Animations */
+@keyframes glowPulse {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(0, 240, 255, 0.6);
+  }
+}
+
+@keyframes shimmerSweep {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Grid Background Animation */
+@keyframes gridPulse {
+  0%, 100% {
+    opacity: 0.1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+/* Float Animation */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+/* Rotation Animations */
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotateSlow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Bounce Animation */
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+/* Shake Animation */
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  10%, 30%, 50%, 70%, 90% {
+    transform: translateX(-5px);
+  }
+  20%, 40%, 60%, 80% {
+    transform: translateX(5px);
+  }
+}
+
+/* Heartbeat Animation */
+@keyframes heartbeat {
+  0%, 100% {
+    transform: scale(1);
+  }
+  10%, 30% {
+    transform: scale(1.1);
+  }
+  20%, 40% {
+    transform: scale(1);
+  }
+}
+
+/* ===========================
+   Animation Utility Classes
+   =========================== */
+
+/* Fade Utilities */
+.animate-fadeIn {
+  animation: fadeIn var(--duration-normal) var(--ease-default);
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp var(--duration-normal) var(--ease-default);
+}
+
+.animate-fadeInDown {
+  animation: fadeInDown var(--duration-normal) var(--ease-default);
+}
+
+.animate-fadeOut {
+  animation: fadeOut var(--duration-normal) var(--ease-default);
+}
+
+/* Slide Utilities */
+.animate-slideInLeft {
+  animation: slideInLeft var(--duration-normal) var(--ease-default);
+}
+
+.animate-slideInRight {
+  animation: slideInRight var(--duration-normal) var(--ease-default);
+}
+
+/* Scale Utilities */
+.animate-scaleIn {
+  animation: scaleIn var(--duration-normal) var(--ease-default);
+}
+
+/* Glow Utilities */
+.animate-glow {
+  animation: glowPulse var(--duration-slower) ease-in-out infinite;
+}
+
+.animate-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.animate-shimmer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(0, 240, 255, 0.3),
+    transparent
+  );
+  animation: shimmer 2s infinite;
+}
+
+/* Float Utilities */
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-floatSlow {
+  animation: floatSlow 6s ease-in-out infinite;
+}
+
+/* Rotation Utilities */
+.animate-rotate {
+  animation: rotate 2s linear infinite;
+}
+
+.animate-rotateSlow {
+  animation: rotateSlow 20s linear infinite;
+}
+
+/* Bounce Utilities */
+.animate-bounce {
+  animation: bounce var(--duration-slow) ease-in-out infinite;
+}
+
+/* Shake Utilities */
+.animate-shake {
+  animation: shake var(--duration-slow) ease-in-out;
+}
+
+/* Heartbeat Utilities */
+.animate-heartbeat {
+  animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+/* ===========================
+   Scroll-Triggered Animations
+   =========================== */
+
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity var(--duration-slow) var(--ease-default),
+              transform var(--duration-slow) var(--ease-default);
+}
+
+.animate-on-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===========================
+   Stagger Animation Utilities
+   =========================== */
+
+.stagger-children > * {
+  opacity: 0;
+  animation: fadeInUp var(--duration-normal) var(--ease-default) forwards;
+}
+
+.stagger-children > *:nth-child(1) {
+  animation-delay: 0ms;
+}
+
+.stagger-children > *:nth-child(2) {
+  animation-delay: 100ms;
+}
+
+.stagger-children > *:nth-child(3) {
+  animation-delay: 200ms;
+}
+
+.stagger-children > *:nth-child(4) {
+  animation-delay: 300ms;
+}
+
+.stagger-children > *:nth-child(5) {
+  animation-delay: 400ms;
+}
+
+.stagger-children > *:nth-child(6) {
+  animation-delay: 500ms;
+}
+
+.stagger-children > *:nth-child(7) {
+  animation-delay: 600ms;
+}
+
+.stagger-children > *:nth-child(8) {
+  animation-delay: 700ms;
+}
+
+/* ===========================
+   Accessibility: Reduced Motion
+   =========================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Remove all animations for reduced motion */
+  .animate-fadeIn,
+  .animate-fadeInUp,
+  .animate-fadeInDown,
+  .animate-slideInLeft,
+  .animate-slideInRight,
+  .animate-scaleIn,
+  .animate-glow,
+  .animate-shimmer,
+  .animate-float,
+  .animate-floatSlow,
+  .animate-rotate,
+  .animate-rotateSlow,
+  .animate-bounce,
+  .animate-shake,
+  .animate-heartbeat {
+    animation: none !important;
+  }
+
+  .animate-on-scroll {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .stagger-children > * {
+    opacity: 1 !important;
+    animation: none !important;
+  }
+}
+
+/* ===========================
+   Performance Optimizations
+   =========================== */
+
+/* Use will-change for animated elements */
+.animate-glow,
+.animate-float,
+.animate-floatSlow,
+.animate-rotate,
+.animate-rotateSlow {
+  will-change: transform, box-shadow, opacity;
+}
+
+/* Remove will-change after animation completes to save resources */
+.animate-fadeInUp,
+.animate-fadeInDown,
+.animate-slideInLeft,
+.animate-slideInRight,
+.animate-scaleIn {
+  will-change: transform, opacity;
+}
+
+.animate-fadeInUp.completed,
+.animate-fadeInDown.completed,
+.animate-slideInLeft.completed,
+.animate-slideInRight.completed,
+.animate-scaleIn.completed {
+  will-change: auto;
+}

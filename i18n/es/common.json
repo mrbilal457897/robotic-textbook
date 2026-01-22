@@ -1,0 +1,75 @@
+{
+  "navigation": {
+    "home": "Inicio",
+    "modules": "Módulos",
+    "resources": "Recursos",
+    "about": "Acerca de",
+    "search": "Buscar"
+  },
+  "buttons": {
+    "startReading": "Comenzar a Leer",
+    "loginGitHub": "Iniciar sesión con GitHub",
+    "logout": "Cerrar sesión",
+    "signOut": "Desconectar",
+    "exploreModule": "Explorar Módulo",
+    "viewProfile": "Ver perfil de GitHub"
+  },
+  "quiz": {
+    "startQuiz": "Iniciar Cuestionario",
+    "next": "Siguiente",
+    "previous": "Anterior",
+    "submit": "Enviar",
+    "retakeQuiz": "Repetir Cuestionario",
+    "backToModule": "Volver al Módulo",
+    "questionCounter": "Pregunta {{current}}/{{total}}",
+    "questionsLabel": "Preguntas",
+    "passingScore": "Puntuación de Aprobación",
+    "estimatedTime": "Tiempo Estimado",
+    "minutes": "min",
+    "correct": "Correcto",
+    "incorrect": "Incorrecto",
+    "skipped": "Omitido",
+    "passed": "APROBADO",
+    "failed": "NECESITA MEJORAR",
+    "quizComplete": "¡Cuestionario Completado!"
+  },
+  "cookies": {
+    "acceptAll": "Aceptar Todas",
+    "rejectNonEssential": "Rechazar No Esenciales",
+    "customize": "Personalizar",
+    "cookieSettings": "Configuración de Cookies",
+    "cookiePreferences": "Preferencias de Cookies",
+    "essential": "Cookies Esenciales",
+    "analytics": "Cookies de Análisis",
+    "preferences": "Cookies de Preferencias",
+    "save": "Guardar Preferencias",
+    "cancel": "Cancelar"
+  },
+  "languages": {
+    "english": "English",
+    "urdu": "اردو",
+    "arabic": "العربية",
+    "chinese": "中文",
+    "spanish": "Español"
+  },
+  "auth": {
+    "authenticating": "Autenticando...",
+    "authFailed": "Autenticación Fallida",
+    "returnHome": "Volver a la Página de Inicio",
+    "success": "¡Éxito!"
+  },
+  "search": {
+    "placeholder": "Buscar documentación...",
+    "noResults": "No se encontraron resultados",
+    "tryDifferent": "Intenta ajustar tu consulta de búsqueda o navega por módulo.",
+    "recentSearches": "Búsquedas Recientes"
+  },
+  "common": {
+    "loading": "Cargando...",
+    "error": "Error",
+    "retry": "Reintentar",
+    "close": "Cerrar",
+    "readMore": "Leer Más",
+    "readingTime": "{{minutes}} min de lectura"
+  }
+}

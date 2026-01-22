@@ -1,0 +1,105 @@
+/**
+ * ModuleCard Styles - Glassmorphism Effect
+ */
+
+.moduleCard {
+  position: relative;
+  background: var(--bg-overlay);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: var(--radius-xl);
+  border: 1px solid rgba(0, 240, 255, 0.2);
+  padding: var(--space-xl);
+  transition: all var(--transition-normal);
+  overflow: hidden;
+}
+
+.moduleCard:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-glow-primary);
+  border-color: rgba(0, 240, 255, 0.4);
+}
+
+.moduleCardInner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.moduleNumber {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.moduleIcon {
+  font-size: 48px;
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  transition: transform var(--transition-normal);
+}
+
+.moduleCard:hover .moduleIcon {
+  transform: scale(1.1) rotate(5deg);
+}
+
+.moduleTitle {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.moduleDescription {
+  font-family: var(--font-body);
+  font-size: var(--font-size-base);
+  color: var(--text-secondary);
+  line-height: var(--line-height-relaxed);
+  margin: 0;
+  flex: 1;
+}
+
+.moduleButton {
+  align-self: flex-start;
+  margin-top: auto;
+}
+
+.shimmerOverlay {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(0, 240, 255, 0.1),
+    transparent
+  );
+  transition: left var(--duration-slow);
+}
+
+.moduleCard:hover .shimmerOverlay {
+  left: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .moduleCard,
+  .moduleIcon,
+  .shimmerOverlay {
+    transition-duration: 0.01ms !important;
+  }
+  .moduleCard:hover {
+    transform: none !important;
+  }
+}

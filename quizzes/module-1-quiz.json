@@ -1,0 +1,132 @@
+{
+  "quizId": "module-1-quiz",
+  "moduleId": "module-1-ros2",
+  "title": "ROS 2: The Robotic Nervous System Quiz",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "multiple-choice",
+      "text": "What does ROS stand for?",
+      "options": [
+        "Robotic Operating System",
+        "Real-time Operating Simulation",
+        "Robotics Object Server",
+        "Remote Operations System"
+      ],
+      "correctAnswer": 0,
+      "explanation": "ROS stands for Robot Operating System. It's a flexible framework for writing robot software as a collection of tools and libraries.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "q2",
+      "type": "multiple-choice",
+      "text": "In ROS 2, what is a Node?",
+      "options": [
+        "A physical robot component",
+        "A process that performs computation and communicates with other nodes",
+        "A data storage unit in the network",
+        "A configuration file for robot behavior"
+      ],
+      "correctAnswer": 1,
+      "explanation": "A Node is a process that executes computation. Nodes communicate with each other via Topics and Services to form a complete robot control system.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "q3",
+      "type": "multiple-choice",
+      "text": "What is the primary difference between Topics and Services in ROS 2?",
+      "options": [
+        "Topics are faster than Services",
+        "Topics use pub/sub (one-way streaming), Services use request/response (synchronous)",
+        "Services are only for real-time systems",
+        "Topics can only transmit small messages"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Topics implement a publish/subscribe pattern for continuous data streaming, while Services implement a request/response pattern for discrete operations. Services are synchronous while Topics are asynchronous.",
+      "difficulty": "medium"
+    },
+    {
+      "id": "q4",
+      "type": "true-false",
+      "text": "ROS 2 is backwards compatible with ROS 1 code without any modifications.",
+      "options": ["True", "False"],
+      "correctAnswer": 1,
+      "explanation": "ROS 2 introduced significant architectural changes and is not backwards compatible with ROS 1. Code must be migrated to use ROS 2 APIs.",
+      "difficulty": "medium"
+    },
+    {
+      "id": "q5",
+      "type": "multiple-choice",
+      "text": "What does rclpy stand for in ROS 2?",
+      "options": [
+        "Robot Client Library Python",
+        "Real-time Communication Library Python",
+        "Remote Control Library Python",
+        "Robotics Core Library Python"
+      ],
+      "correctAnswer": 0,
+      "explanation": "rclpy is the Robot Client Library for Python. It provides the Python API for creating ROS 2 nodes, publishers, subscribers, and services.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "q6",
+      "type": "multiple-choice",
+      "text": "Which of the following is NOT a key component of a URDF file for describing a robot?",
+      "options": [
+        "Links (rigid bodies)",
+        "Joints (connections between links)",
+        "Sensors (cameras, IMU, lidar)",
+        "Motor manufacturer specifications"
+      ],
+      "correctAnswer": 3,
+      "explanation": "URDF files describe the kinematic and dynamic structure of robots using links and joints. Motor manufacturer specifications are external documentation, not part of the URDF format.",
+      "difficulty": "medium"
+    },
+    {
+      "id": "q7",
+      "type": "multiple-choice",
+      "text": "In a humanoid robot URDF, how would you represent the connection between the torso and an arm?",
+      "options": [
+        "As a single rigid link",
+        "As a joint connecting the torso link to the arm link",
+        "As a separate node in the network",
+        "As a service call between components"
+      ],
+      "correctAnswer": 1,
+      "explanation": "The connection between body parts in a URDF is represented as a joint. A joint connects two links and defines the type of motion allowed (revolute, prismatic, fixed, etc.).",
+      "difficulty": "medium"
+    },
+    {
+      "id": "q8",
+      "type": "true-false",
+      "text": "In ROS 2, a Publisher node must know the identity of specific Subscriber nodes to send data.",
+      "options": ["True", "False"],
+      "correctAnswer": 1,
+      "explanation": "One advantage of the pub/sub pattern is loose coupling. Publishers don't need to know who subscribes to their topics - they just publish data, and any interested subscribers receive it.",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q9",
+      "type": "multiple-choice",
+      "text": "What is the primary advantage of using ROS 2 for humanoid robot control instead of custom code?",
+      "options": [
+        "It guarantees the robot will never fail",
+        "It provides a standardized framework for communication, reusable libraries, and community support",
+        "It automatically generates optimal robot movements",
+        "It eliminates the need for simulation"
+      ],
+      "correctAnswer": 1,
+      "explanation": "ROS 2 provides a comprehensive ecosystem with standardized communication protocols, well-tested libraries for common tasks, extensive documentation, and a large community. This accelerates development and improves reliability.",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q10",
+      "type": "true-false",
+      "text": "URDF files can directly specify the control parameters (PID gains) for joint motors in a humanoid robot.",
+      "options": ["True", "False"],
+      "correctAnswer": 1,
+      "explanation": "URDF files only describe the structural and kinematic properties of robots. Control parameters like PID gains are specified separately in configuration files or controller definitions, not in the URDF.",
+      "difficulty": "hard"
+    }
+  ]
+}
