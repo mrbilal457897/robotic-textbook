@@ -1,6 +1,6 @@
 ---
-title: "Sensor Simulation and Validation"
-sidebar_label: "Sensor Simulation"
+title: 'Sensor Simulation and Validation'
+sidebar_label: 'Sensor Simulation'
 sidebar_position: 3
 reading_time: 34
 ---
@@ -46,12 +46,12 @@ Sensor simulation serves three critical purposes:
 
 ### Gap Between Ideal and Real Sensors
 
-| Sensor Type | Ideal Simulation | Reality | Modeling Requirement |
-|-------------|------------------|---------|----------------------|
-| **Camera** | Perfect pinhole projection | Lens distortion, motion blur, rolling shutter, chromatic aberration | Optical model + temporal noise |
-| **Lidar** | Exact range measurements | Multi-path reflections, beam divergence, range-dependent noise | Beam physics + probabilistic returns |
-| **IMU** | Noise-free acceleration/gyro | Bias drift, temperature sensitivity, vibration coupling | Stochastic error models |
-| **Force/Torque** | Ground truth contact forces | Hysteresis, cross-talk, strain gauge nonlinearity | Sensor dynamics + calibration errors |
+| Sensor Type      | Ideal Simulation             | Reality                                                             | Modeling Requirement                 |
+| ---------------- | ---------------------------- | ------------------------------------------------------------------- | ------------------------------------ |
+| **Camera**       | Perfect pinhole projection   | Lens distortion, motion blur, rolling shutter, chromatic aberration | Optical model + temporal noise       |
+| **Lidar**        | Exact range measurements     | Multi-path reflections, beam divergence, range-dependent noise      | Beam physics + probabilistic returns |
+| **IMU**          | Noise-free acceleration/gyro | Bias drift, temperature sensitivity, vibration coupling             | Stochastic error models              |
+| **Force/Torque** | Ground truth contact forces  | Hysteresis, cross-talk, strain gauge nonlinearity                   | Sensor dynamics + calibration errors |
 
 **Sim-to-Real Gap Contributors**:
 
@@ -88,33 +88,33 @@ graph TD
 
 1. **Gaussian (Normal) Noise**: Most sensor errors (thermal noise, shot noise)
 
-\[
+$$
 x_{\text{noisy}} = x_{\text{true}} + \mathcal{N}(0, \sigma^2)
-\]
+$$
 
 where $\mathcal{N}(0, \sigma^2)$ is a normal distribution with mean 0 and variance $\sigma^2$.
 
 2. **Salt-and-Pepper Noise**: Random pixel corruption (dead pixels, cosmic rays)
 
-\[
+$$
 x_{\text{noisy}} = \begin{cases}
 0 & \text{with probability } p_{\text{salt}} \\
 255 & \text{with probability } p_{\text{pepper}} \\
 x_{\text{true}} & \text{otherwise}
 \end{cases}
-\]
+$$
 
 3. **Poisson Noise**: Photon counting statistics (low-light cameras)
 
-\[
+$$
 x_{\text{noisy}} \sim \text{Poisson}(\lambda = x_{\text{true}})
-\]
+$$
 
 4. **Uniform Noise**: Quantization errors
 
-\[
+$$
 x_{\text{noisy}} = x_{\text{true}} + \mathcal{U}(-0.5 \Delta, 0.5 \Delta)
-\]
+$$
 
 where $\Delta$ is the quantization step size.
 
@@ -234,12 +234,12 @@ Use **rasterization for development** (fast iteration), then validate critical p
 
 **Lens Distortion Model** (Brown-Conrady):
 
-\[
+$$
 \begin{aligned}
 x_{\text{distorted}} &= x (1 + k_1 r^2 + k_2 r^4 + k_3 r^6) + 2 p_1 x y + p_2 (r^2 + 2 x^2) \\
 y_{\text{distorted}} &= y (1 + k_1 r^2 + k_2 r^4 + k_3 r^6) + p_1 (r^2 + 2 y^2) + 2 p_2 x y
 \end{aligned}
-\]
+$$
 
 where $r^2 = x^2 + y^2$, $k_i$ are radial distortion coefficients, and $p_i$ are tangential distortion coefficients.
 
@@ -333,9 +333,9 @@ def add_rolling_shutter(image, velocity_x=10, row_delay=0.0001):
 
 **Depth Noise Model** (range-dependent):
 
-\[
+$$
 \sigma_{\text{depth}}(d) = \sigma_0 + k \cdot d^2
-\]
+$$
 
 where $\sigma_0$ is baseline noise and $k$ is range-dependent error coefficient.
 
@@ -530,12 +530,12 @@ def simulate_dual_return(ranges, intensities):
 
 **IMU Error Model**:
 
-\[
+$$
 \begin{aligned}
 \omega_{\text{measured}} &= \omega_{\text{true}} + b_\omega + n_\omega \\
 a_{\text{measured}} &= a_{\text{true}} + b_a + n_a
 \end{aligned}
-\]
+$$
 
 where:
 
@@ -696,11 +696,11 @@ def validate_sensor_fusion(imu_data, gps_data):
 
 **Quantitative Metrics**:
 
-| Metric | Formula | Interpretation |
-|--------|---------|----------------|
-| **RMSE (Root Mean Square Error)** | $\sqrt{\frac{1}{N} \sum (x_{\text{sim}} - x_{\text{real}})^2}$ | Average prediction error |
-| **MAE (Mean Absolute Error)** | $\frac{1}{N} \sum \|x_{\text{sim}} - x_{\text{real}}\|$ | Median-like metric (robust to outliers) |
-| **Correlation Coefficient** | $\frac{\text{cov}(X_{\text{sim}}, X_{\text{real}})}{\sigma_{\text{sim}} \sigma_{\text{real}}}$ | Linear relationship strength |
+| Metric                            | Formula                                                                                        | Interpretation                          |
+| --------------------------------- | ---------------------------------------------------------------------------------------------- | --------------------------------------- |
+| **RMSE (Root Mean Square Error)** | $\sqrt{\frac{1}{N} \sum (x_{\text{sim}} - x_{\text{real}})^2}$                                 | Average prediction error                |
+| **MAE (Mean Absolute Error)**     | $\frac{1}{N} \sum \|x_{\text{sim}} - x_{\text{real}}\|$                                        | Median-like metric (robust to outliers) |
+| **Correlation Coefficient**       | $\frac{\text{cov}(X_{\text{sim}}, X_{\text{real}})}{\sigma_{\text{sim}} \sigma_{\text{real}}}$ | Linear relationship strength            |
 
 **Python Validation**:
 

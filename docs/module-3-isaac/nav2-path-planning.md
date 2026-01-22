@@ -1,6 +1,6 @@
 ---
-title: "Navigation and Path Planning"
-sidebar_label: "Nav2 Path Planning"
+title: 'Navigation and Path Planning'
+sidebar_label: 'Nav2 Path Planning'
 sidebar_position: 3
 reading_time: 37
 ---
@@ -140,12 +140,12 @@ ros2 lifecycle set /controller_server activate
 
 **Sensor Inputs to Costmap**:
 
-| Sensor | Data Type | Costmap Layer | Purpose |
-|--------|-----------|---------------|---------|
-| **Lidar** | `sensor_msgs/LaserScan` | Obstacle Layer | Short-range obstacle detection (0.1-30 m) |
-| **Depth Camera** | `sensor_msgs/PointCloud2` | Voxel Layer | 3D obstacles (stairs, overhead) |
-| **Visual SLAM** | `nav_msgs/Odometry` | N/A (odometry source) | Robot pose estimation |
-| **IMU** | `sensor_msgs/Imu` | N/A (fusion with odometry) | Orientation, angular velocity |
+| Sensor           | Data Type                 | Costmap Layer              | Purpose                                   |
+| ---------------- | ------------------------- | -------------------------- | ----------------------------------------- |
+| **Lidar**        | `sensor_msgs/LaserScan`   | Obstacle Layer             | Short-range obstacle detection (0.1-30 m) |
+| **Depth Camera** | `sensor_msgs/PointCloud2` | Voxel Layer                | 3D obstacles (stairs, overhead)           |
+| **Visual SLAM**  | `nav_msgs/Odometry`       | N/A (odometry source)      | Robot pose estimation                     |
+| **IMU**          | `sensor_msgs/Imu`         | N/A (fusion with odometry) | Orientation, angular velocity             |
 
 ---
 
@@ -170,20 +170,20 @@ ros2 lifecycle set /controller_server activate
 ```yaml
 # costmap_common_params.yaml
 global_costmap:
-  update_frequency: 1.0  # Hz
+  update_frequency: 1.0 # Hz
   publish_frequency: 1.0
-  robot_radius: 0.3  # meters (humanoid footprint)
+  robot_radius: 0.3 # meters (humanoid footprint)
   plugins:
     - static_layer
     - obstacle_layer
     - inflation_layer
 
 local_costmap:
-  update_frequency: 5.0  # Hz (higher for real-time control)
+  update_frequency: 5.0 # Hz (higher for real-time control)
   publish_frequency: 2.0
   robot_radius: 0.3
   plugins:
-    - obstacle_layer  # No static layer (dynamic only)
+    - obstacle_layer # No static layer (dynamic only)
     - inflation_layer
 ```
 
@@ -199,12 +199,12 @@ obstacle_layer:
     topic: /scan
     sensor_frame: lidar_link
     data_type: LaserScan
-    marking: true    # Add obstacles to costmap
-    clearing: true   # Remove obstacles when no longer detected
+    marking: true # Add obstacles to costmap
+    clearing: true # Remove obstacles when no longer detected
     min_obstacle_height: 0.0
     max_obstacle_height: 2.0
-    obstacle_max_range: 25.0  # Ignore far obstacles
-    raytrace_max_range: 30.0  # Clear space up to this range
+    obstacle_max_range: 25.0 # Ignore far obstacles
+    raytrace_max_range: 30.0 # Clear space up to this range
 ```
 
 **Inflation Layer** (adds safety margin around obstacles):
@@ -212,15 +212,15 @@ obstacle_layer:
 ```yaml
 inflation_layer:
   plugin: nav2_costmap_2d::InflationLayer
-  inflation_radius: 0.7  # meters (2x robot radius)
-  cost_scaling_factor: 3.0  # Exponential decay rate
+  inflation_radius: 0.7 # meters (2x robot radius)
+  cost_scaling_factor: 3.0 # Exponential decay rate
 ```
 
 **Cost Function**:
 
-\[
+$$
 \text{cost}(d) = 253 \cdot e^{-\text{cost\_scaling\_factor} \cdot (d - \text{robot\_radius})}
-\]
+$$
 
 where $d$ is distance to obstacle.
 
@@ -246,11 +246,11 @@ where $d$ is distance to obstacle.
 ```yaml
 # Instead of circular `robot_radius`, define polygon footprint
 footprint: [
-  [0.2, 0.15],   # Front-right
-  [0.2, -0.15],  # Front-left
-  [-0.2, -0.15], # Back-left
-  [-0.2, 0.15]   # Back-right
-]  # Rectangular footprint (40 cm x 30 cm)
+    [0.2, 0.15], # Front-right
+    [0.2, -0.15], # Front-left
+    [-0.2, -0.15], # Back-left
+    [-0.2, 0.15], # Back-right
+  ] # Rectangular footprint (40 cm x 30 cm)
 ```
 
 **Clearance Costmap** (layer for preferred clearance):
@@ -258,8 +258,8 @@ footprint: [
 ```yaml
 clearance_layer:
   plugin: nav2_costmap_2d::InflationLayer
-  inflation_radius: 1.0  # Prefer 1m clearance
-  cost_scaling_factor: 5.0  # Aggressive penalty
+  inflation_radius: 1.0 # Prefer 1m clearance
+  cost_scaling_factor: 5.0 # Aggressive penalty
 ```
 
 ### Humanoid-Specific Considerations
@@ -274,16 +274,16 @@ clearance_layer:
 
 ```yaml
 global_costmap:
-  resolution: 0.1  # 10 cm cells (match footstep granularity)
-  robot_radius: 0.4  # Effective radius including stability margin
-  inflation_radius: 1.2  # 3x robot radius (vs 2x for wheeled robots)
+  resolution: 0.1 # 10 cm cells (match footstep granularity)
+  robot_radius: 0.4 # Effective radius including stability margin
+  inflation_radius: 1.2 # 3x robot radius (vs 2x for wheeled robots)
 
 local_costmap:
-  resolution: 0.05  # 5 cm (finer for precise foot placement)
-  width: 5.0  # meters
+  resolution: 0.05 # 5 cm (finer for precise foot placement)
+  width: 5.0 # meters
   height: 5.0
   robot_radius: 0.4
-  inflation_radius: 0.8  # Smaller (local maneuvering)
+  inflation_radius: 0.8 # Smaller (local maneuvering)
 ```
 
 ---
@@ -303,34 +303,34 @@ local_costmap:
 ```yaml
 planner_server:
   ros__parameters:
-    planner_plugins: ["GridBased"]
+    planner_plugins: ['GridBased']
     GridBased:
       plugin: nav2_navfn_planner/NavfnPlanner
-      tolerance: 0.5  # Goal tolerance (meters)
-      use_astar: false  # Dijkstra mode
-      allow_unknown: true  # Plan through unexplored space
+      tolerance: 0.5 # Goal tolerance (meters)
+      use_astar: false # Dijkstra mode
+      allow_unknown: true # Plan through unexplored space
 ```
 
-**A* Variant** (faster with heuristic):
+**A\* Variant** (faster with heuristic):
 
 ```yaml
 GridBased:
   plugin: nav2_navfn_planner/NavfnPlanner
-  use_astar: true  # Enable A* heuristic
+  use_astar: true # Enable A* heuristic
 ```
 
 ### RRT-Based Planners
 
-**RRT* (Rapidly-exploring Random Tree)**:
+**RRT\* (Rapidly-exploring Random Tree)**:
 
 - **Principle**: Probabilistic sampling in configuration space
 - **Advantages**: Handles complex obstacles, kinodynamic constraints
 - **Drawbacks**: Non-deterministic, slower than Dijkstra
 
-**SmacPlanner** (hybrid A* + RRT):
+**SmacPlanner** (hybrid A\* + RRT):
 
 ```yaml
-planner_plugins: ["SmacHybrid"]
+planner_plugins: ['SmacHybrid']
 SmacHybrid:
   plugin: nav2_smac_planner/SmacPlannerHybrid
   tolerance: 0.5
@@ -338,11 +338,11 @@ SmacHybrid:
   downsampling_factor: 1
   allow_unknown: true
   max_iterations: 1000000
-  max_planning_time: 5.0  # seconds
-  motion_model_for_search: "DUBIN"  # Car-like motion
-  angle_quantization_bins: 72  # 5° resolution
+  max_planning_time: 5.0 # seconds
+  motion_model_for_search: 'DUBIN' # Car-like motion
+  angle_quantization_bins: 72 # 5° resolution
   analytic_expansion_ratio: 3.5
-  minimum_turning_radius: 0.4  # Humanoid turn radius
+  minimum_turning_radius: 0.4 # Humanoid turn radius
   reverse_penalty: 2.0
   change_penalty: 0.0
   non_straight_penalty: 1.2
@@ -407,15 +407,15 @@ navigator.navigate_waypoints(waypoints)
 
 ```yaml
 # In SmacPlanner config
-max_planning_time: 5.0  # Abort if no plan found
-use_final_approach_orientation: true  # Enforce goal heading
+max_planning_time: 5.0 # Abort if no plan found
+use_final_approach_orientation: true # Enforce goal heading
 
 # Custom validator plugin
-planner_plugins: ["GridBased"]
+planner_plugins: ['GridBased']
 GridBased:
   plugin: nav2_navfn_planner/NavfnPlanner
   validator:
-    plugin: nav2_core::NoOpPathValidator  # Replace with custom
+    plugin: nav2_core::NoOpPathValidator # Replace with custom
 ```
 
 **Custom Validator** (check foot placement feasibility):
@@ -459,39 +459,40 @@ private:
 ```yaml
 controller_server:
   ros__parameters:
-    controller_plugins: ["FollowPath"]
+    controller_plugins: ['FollowPath']
     FollowPath:
       plugin: dwb_core::DWBLocalPlanner
-      min_vel_x: -0.3  # Backward walking (m/s)
-      max_vel_x: 0.8   # Forward walking
-      min_vel_y: 0.0   # No lateral movement (non-holonomic)
+      min_vel_x: -0.3 # Backward walking (m/s)
+      max_vel_x: 0.8 # Forward walking
+      min_vel_y: 0.0 # No lateral movement (non-holonomic)
       max_vel_y: 0.0
       min_speed_xy: 0.0
       max_speed_xy: 0.8
       min_speed_theta: 0.0
-      max_vel_theta: 1.0  # Turning speed (rad/s)
+      max_vel_theta: 1.0 # Turning speed (rad/s)
       min_vel_theta: -1.0
-      acc_lim_x: 2.5  # Acceleration limits (m/s²)
+      acc_lim_x: 2.5 # Acceleration limits (m/s²)
       acc_lim_y: 0.0
       acc_lim_theta: 3.2
       decel_lim_x: -2.5
       decel_lim_y: 0.0
       decel_lim_theta: -3.2
-      vx_samples: 20  # Velocity samples (forward)
-      vy_samples: 1   # No lateral samples
-      vtheta_samples: 40  # Angular samples
-      sim_time: 1.7  # Trajectory simulation horizon (seconds)
-      linear_granularity: 0.05  # Path discretization
+      vx_samples: 20 # Velocity samples (forward)
+      vy_samples: 1 # No lateral samples
+      vtheta_samples: 40 # Angular samples
+      sim_time: 1.7 # Trajectory simulation horizon (seconds)
+      linear_granularity: 0.05 # Path discretization
       angular_granularity: 0.025
-      critics: [
-        "RotateToGoal",
-        "Oscillation",
-        "BaseObstacle",
-        "GoalAlign",
-        "PathAlign",
-        "PathDist",
-        "GoalDist"
-      ]
+      critics:
+        [
+          'RotateToGoal',
+          'Oscillation',
+          'BaseObstacle',
+          'GoalAlign',
+          'PathAlign',
+          'PathDist',
+          'GoalDist',
+        ]
 ```
 
 ### Trajectory Generation
@@ -529,9 +530,9 @@ def generate_trajectories(current_vel, dt=0.05, sim_time=1.7):
 
 **Cost Function**:
 
-\[
+$$
 \text{cost} = w_1 \cdot \text{path\_dist} + w_2 \cdot \text{goal\_dist} + w_3 \cdot \text{obstacle\_cost} + w_4 \cdot \text{alignment}
-\]
+$$
 
 ### Obstacle Avoidance
 
@@ -540,8 +541,8 @@ def generate_trajectories(current_vel, dt=0.05, sim_time=1.7):
 ```yaml
 # In DWB config
 BaseObstacle:
-  scale: 0.02  # Weight in total cost
-  sum_scores: false  # Use max obstacle cost (vs sum)
+  scale: 0.02 # Weight in total cost
+  sum_scores: false # Use max obstacle cost (vs sum)
 ```
 
 **Emergency Stop**:
@@ -550,15 +551,15 @@ BaseObstacle:
 # Velocity Smoother (prevents sudden stops)
 velocity_smoother:
   plugin: nav2_velocity_smoother/VelocitySmoother
-  smoothing_frequency: 20.0  # Hz
+  smoothing_frequency: 20.0 # Hz
   scale_velocities: false
-  feedback: "OPEN_LOOP"
-  max_velocity: [0.8, 0.0, 1.0]  # [vx, vy, vtheta]
+  feedback: 'OPEN_LOOP'
+  max_velocity: [0.8, 0.0, 1.0] # [vx, vy, vtheta]
   min_velocity: [-0.3, 0.0, -1.0]
   max_accel: [2.5, 0.0, 3.2]
   max_decel: [-2.5, 0.0, -3.2]
   deadband_velocity: [0.0, 0.0, 0.0]
-  velocity_timeout: 1.0  # Stop if no command received
+  velocity_timeout: 1.0 # Stop if no command received
 ```
 
 ### Speed Regulation
@@ -568,17 +569,17 @@ velocity_smoother:
 ```yaml
 # In DWB config
 PathDist:
-  scale: 32.0  # High weight (follow path closely)
+  scale: 32.0 # High weight (follow path closely)
 
 GoalDist:
-  scale: 24.0  # Reduce speed near goal
+  scale: 24.0 # Reduce speed near goal
 
 # Explicit goal approach controller
 goal_checker:
   plugin: nav2_controller::SimpleGoalChecker
-  xy_goal_tolerance: 0.25  # meters
-  yaw_goal_tolerance: 0.25  # radians (~14°)
-  stateful: true  # Remember when goal reached
+  xy_goal_tolerance: 0.25 # meters
+  yaw_goal_tolerance: 0.25 # radians (~14°)
+  stateful: true # Remember when goal reached
 ```
 
 ---
@@ -596,12 +597,12 @@ goal_checker:
 
 **Key Parameters**:
 
-| Parameter | Effect | Tuning Direction |
-|-----------|--------|------------------|
-| `inflation_radius` | Safety margin | ↑ More clearance, ↓ Narrow passages |
-| `max_vel_x` | Speed | ↑ Faster, ↓ Safer turns |
-| `sim_time` | Look-ahead | ↑ Smoother paths, ↓ Reactive |
-| `cost_scaling_factor` | Obstacle avoidance | ↑ Wider berth, ↓ Aggressive |
+| Parameter             | Effect             | Tuning Direction                    |
+| --------------------- | ------------------ | ----------------------------------- |
+| `inflation_radius`    | Safety margin      | ↑ More clearance, ↓ Narrow passages |
+| `max_vel_x`           | Speed              | ↑ Faster, ↓ Safer turns             |
+| `sim_time`            | Look-ahead         | ↑ Smoother paths, ↓ Reactive        |
+| `cost_scaling_factor` | Obstacle avoidance | ↑ Wider berth, ↓ Aggressive         |
 
 ### Real-World Testing
 
@@ -648,10 +649,10 @@ rclpy.Subscriber('/behavior_tree_log', BehaviorTreeLog, bt_log_callback)
 
 **Performance Targets**:
 
-- **Global planning**: <500 ms for 100 m path
-- **Local control**: >10 Hz (100 ms loop)
-- **Costmap update**: >5 Hz (200 ms)
-- **Total latency**: <300 ms (sensor → action)
+- **Global planning**: &lt;500 ms for 100 m path
+- **Local control**: &gt;10 Hz (100 ms loop)
+- **Costmap update**: &gt;5 Hz (200 ms)
+- **Total latency**: &lt;300 ms (sensor → action)
 
 ### Multi-Robot Coordination
 
@@ -672,7 +673,7 @@ ros2 launch nav2_bringup bringup_launch.py namespace:=robot2
 map_server:
   ros__parameters:
     yaml_filename: /maps/warehouse.yaml
-    topic: /shared_map  # All robots subscribe
+    topic: /shared_map # All robots subscribe
 ```
 
 **Collision Avoidance**:
@@ -682,7 +683,7 @@ map_server:
 obstacle_layer:
   observation_sources: scan robot_detections
   robot_detections:
-    topic: /robot_poses  # Publish all robot poses
+    topic: /robot_poses # Publish all robot poses
     data_type: PoseArray
     marking: true
     clearing: true
@@ -696,7 +697,7 @@ This lesson explored autonomous navigation for humanoid robots using Nav2:
 
 - **Nav2 architecture**: Behavior tree-based coordination of planners, controllers, and recovery behaviors provides robust navigation
 - **Costmaps**: Multi-layer obstacle representation with inflation and clearance layers ensures safe navigation
-- **Global planning**: Dijkstra, A*, and RRT-based planners compute collision-free paths
+- **Global planning**: Dijkstra, A\*, and RRT-based planners compute collision-free paths
 - **Local control**: DWB planner generates real-time velocity commands with obstacle avoidance
 - **Deployment**: Tuning, real-world testing, and performance monitoring ensure production readiness
 

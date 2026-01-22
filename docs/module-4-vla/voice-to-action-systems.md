@@ -1,6 +1,6 @@
 ---
-title: "Voice-to-Action Systems"
-sidebar_label: "Voice-to-Action Systems"
+title: 'Voice-to-Action Systems'
+sidebar_label: 'Voice-to-Action Systems'
 sidebar_position: 1
 reading_time: 36
 ---
@@ -63,13 +63,13 @@ graph LR
 
 **Model Variants**:
 
-| Model | Parameters | English WER | Latency (CPU) | Latency (GPU) | Use Case |
-|-------|------------|-------------|---------------|---------------|----------|
-| **tiny** | 39 M | 8.0% | 5 s | 0.5 s | Edge devices (Jetson Nano) |
-| **base** | 74 M | 5.0% | 10 s | 1 s | Balanced (Jetson Xavier) |
-| **small** | 244 M | 3.5% | 30 s | 3 s | High accuracy (desktop) |
-| **medium** | 769 M | 2.8% | 90 s | 8 s | Best quality (RTX 3070+) |
-| **large-v2** | 1550 M | 2.3% | 300 s | 15 s | Research benchmark |
+| Model        | Parameters | English WER | Latency (CPU) | Latency (GPU) | Use Case                   |
+| ------------ | ---------- | ----------- | ------------- | ------------- | -------------------------- |
+| **tiny**     | 39 M       | 8.0%        | 5 s           | 0.5 s         | Edge devices (Jetson Nano) |
+| **base**     | 74 M       | 5.0%        | 10 s          | 1 s           | Balanced (Jetson Xavier)   |
+| **small**    | 244 M      | 3.5%        | 30 s          | 3 s           | High accuracy (desktop)    |
+| **medium**   | 769 M      | 2.8%        | 90 s          | 8 s           | Best quality (RTX 3070+)   |
+| **large-v2** | 1550 M     | 2.3%        | 300 s         | 15 s          | Research benchmark         |
 
 **Key Features**:
 

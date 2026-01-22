@@ -1,6 +1,6 @@
 ---
-title: "Isaac ROS and Visual SLAM"
-sidebar_label: "Isaac ROS & vSLAM"
+title: 'Isaac ROS and Visual SLAM'
+sidebar_label: 'Isaac ROS & vSLAM'
 sidebar_position: 2
 reading_time: 35
 ---
@@ -61,16 +61,16 @@ graph LR
 
 ### Visual vs Lidar SLAM
 
-| Aspect | Visual SLAM | Lidar SLAM |
-|--------|-------------|------------|
-| **Sensors** | Cameras (monocular, stereo, RGB-D) | 2D/3D lidar |
-| **Data Type** | Images (RGB), depth maps | Point clouds |
-| **Range** | 0.5-30 m (camera-dependent) | 0.1-100+ m |
-| **Lighting Sensitivity** | High (fails in dark/overexposed) | Low (active sensor) |
-| **Texture Dependence** | Requires visual features | Works on featureless surfaces |
-| **Computational Cost** | High (image processing) | Medium |
-| **Map Density** | Sparse (feature points) or dense (every pixel) | Sparse (2D) or dense (3D) |
-| **Use Case** | Indoor navigation, manipulation | Outdoor navigation, large spaces |
+| Aspect                   | Visual SLAM                                    | Lidar SLAM                       |
+| ------------------------ | ---------------------------------------------- | -------------------------------- |
+| **Sensors**              | Cameras (monocular, stereo, RGB-D)             | 2D/3D lidar                      |
+| **Data Type**            | Images (RGB), depth maps                       | Point clouds                     |
+| **Range**                | 0.5-30 m (camera-dependent)                    | 0.1-100+ m                       |
+| **Lighting Sensitivity** | High (fails in dark/overexposed)               | Low (active sensor)              |
+| **Texture Dependence**   | Requires visual features                       | Works on featureless surfaces    |
+| **Computational Cost**   | High (image processing)                        | Medium                           |
+| **Map Density**          | Sparse (feature points) or dense (every pixel) | Sparse (2D) or dense (3D)        |
+| **Use Case**             | Indoor navigation, manipulation                | Outdoor navigation, large spaces |
 
 **Recommendation for Humanoids**: Use **visual SLAM for manipulation tasks** (dense 3D reconstruction) and **lidar SLAM for locomotion** (fast obstacle avoidance). Sensor fusion combines both.
 
@@ -223,13 +223,13 @@ graph TD
 
 **Performance Comparison** (Intel i7-10700K + RTX 3070 vs CPU-only):
 
-| Operation | CPU (ORB-SLAM3) | GPU (Isaac ROS) | Speedup |
-|-----------|-----------------|-----------------|---------|
-| Feature detection (1000 features) | 15 ms | 2 ms | **7.5x** |
-| Descriptor extraction | 10 ms | 1 ms | **10x** |
-| Feature matching | 8 ms | 0.5 ms | **16x** |
-| PnP pose estimation | 5 ms | 1 ms | **5x** |
-| **Total Frame Time** | **38 ms (26 FPS)** | **4.5 ms (220 FPS)** | **8.4x** |
+| Operation                         | CPU (ORB-SLAM3)    | GPU (Isaac ROS)      | Speedup  |
+| --------------------------------- | ------------------ | -------------------- | -------- |
+| Feature detection (1000 features) | 15 ms              | 2 ms                 | **7.5x** |
+| Descriptor extraction             | 10 ms              | 1 ms                 | **10x**  |
+| Feature matching                  | 8 ms               | 0.5 ms               | **16x**  |
+| PnP pose estimation               | 5 ms               | 1 ms                 | **5x**   |
+| **Total Frame Time**              | **38 ms (26 FPS)** | **4.5 ms (220 FPS)** | **8.4x** |
 
 **Real-Time Capability**: Isaac ROS vSLAM achieves 60+ FPS on Jetson AGX Orin (embedded GPU), enabling low-latency control for dynamic tasks like humanoid balancing.
 
@@ -255,13 +255,13 @@ graph TD
 
 Camera intrinsics model the lens and sensor geometry:
 
-\[
+$$
 K = \begin{bmatrix}
 f_x & 0 & c_x \\
 0 & f_y & c_y \\
 0 & 0 & 1
 \end{bmatrix}
-\]
+$$
 
 where:
 
@@ -270,9 +270,9 @@ where:
 
 **Distortion Coefficients** (radial + tangential):
 
-\[
+$$
 \text{dist} = [k_1, k_2, p_1, p_2, k_3]
-\]
+$$
 
 **Calibration with OpenCV**:
 
@@ -355,12 +355,12 @@ projection_matrix:
 
 **Brown-Conrady Model** (most common):
 
-\[
+$$
 \begin{aligned}
 x_{\text{corrected}} &= x (1 + k_1 r^2 + k_2 r^4 + k_3 r^6) + 2 p_1 x y + p_2 (r^2 + 2 x^2) \\
 y_{\text{corrected}} &= y (1 + k_1 r^2 + k_2 r^4 + k_3 r^6) + p_1 (r^2 + 2 y^2) + 2 p_2 x y
 \end{aligned}
-\]
+$$
 
 **Fisheye Model** (for wide-angle cameras, >120° FOV):
 
@@ -649,12 +649,12 @@ sudo nvpmodel -m 0
 
 **Common Failure Modes**:
 
-| Failure | Cause | Recovery Strategy |
-|---------|-------|-------------------|
-| **Tracking Lost** | Low features, motion blur | Reset with known pose, reduce speed |
+| Failure                         | Cause                                 | Recovery Strategy                                    |
+| ------------------------------- | ------------------------------------- | ---------------------------------------------------- |
+| **Tracking Lost**               | Low features, motion blur             | Reset with known pose, reduce speed                  |
 | **Loop Closure False Positive** | Visual aliasing (repetitive textures) | Increase DBoW2 threshold, add geometric verification |
-| **Scale Drift** (monocular) | Lack of absolute scale | Fuse with IMU or depth sensor |
-| **Map Corruption** | Long-term drift | Periodic map reset, use global localization (AMCL) |
+| **Scale Drift** (monocular)     | Lack of absolute scale                | Fuse with IMU or depth sensor                        |
+| **Map Corruption**              | Long-term drift                       | Periodic map reset, use global localization (AMCL)   |
 
 **Automatic Recovery**:
 

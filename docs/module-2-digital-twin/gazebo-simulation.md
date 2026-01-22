@@ -1,6 +1,6 @@
 ---
-title: "Gazebo Physics Simulation"
-sidebar_label: "Gazebo Physics Simulation"
+title: 'Gazebo Physics Simulation'
+sidebar_label: 'Gazebo Physics Simulation'
 sidebar_position: 1
 reading_time: 35
 ---
@@ -53,11 +53,11 @@ Physics simulation is **deterministic** given identical initial conditions and t
 
 Gazebo supports multiple physics engines, each with distinct trade-offs:
 
-| Engine | Strengths | Weaknesses | Best Use Case |
-|--------|-----------|------------|---------------|
-| **ODE (Open Dynamics Engine)** | Fast contact resolution; well-tested with Gazebo | Less accurate for complex constraints; stability issues with high-mass ratios | General-purpose mobile robots; fast prototyping |
-| **Bullet** | Robust collision detection; good for deformable objects | Slower than ODE; limited solver options | Manipulation tasks; scenarios with many contacts |
-| **Dart (Dynamic Animation and Robotics Toolkit)** | High accuracy; excellent constraint handling; analytical gradients | Higher computational cost; steeper learning curve | Legged robots; bipedal locomotion; reinforcement learning |
+| Engine                                            | Strengths                                                          | Weaknesses                                                                    | Best Use Case                                             |
+| ------------------------------------------------- | ------------------------------------------------------------------ | ----------------------------------------------------------------------------- | --------------------------------------------------------- |
+| **ODE (Open Dynamics Engine)**                    | Fast contact resolution; well-tested with Gazebo                   | Less accurate for complex constraints; stability issues with high-mass ratios | General-purpose mobile robots; fast prototyping           |
+| **Bullet**                                        | Robust collision detection; good for deformable objects            | Slower than ODE; limited solver options                                       | Manipulation tasks; scenarios with many contacts          |
+| **Dart (Dynamic Animation and Robotics Toolkit)** | High accuracy; excellent constraint handling; analytical gradients | Higher computational cost; steeper learning curve                             | Legged robots; bipedal locomotion; reinforcement learning |
 
 **Recommendation for Humanoid Robots**: Start with **Dart** for locomotion research (superior joint constraint handling) or **ODE** for initial prototyping (faster iteration). Bullet is preferred when simulating grasping with many contact points.
 
@@ -101,9 +101,9 @@ Setting friction coefficients too low (e.g., $\mu < 0.5$) causes foot slippage d
 
 The **real-time factor (RTF)** measures performance:
 
-\[
+$$
 \text{RTF} = \frac{\text{Simulated Time Elapsed}}{\text{Wall-Clock Time Elapsed}}
-\]
+$$
 
 - RTF = 1.0: Perfect real-time performance
 - RTF < 1.0: Simulation slower than real-time (complexity exceeds computational capacity)
@@ -358,7 +358,7 @@ Add Gazebo plugins to the URDF for joint control:
 ```yaml
 controller_manager:
   ros__parameters:
-    update_rate: 1000  # Hz
+    update_rate: 1000 # Hz
 
     joint_state_broadcaster:
       type: joint_state_broadcaster/JointStateBroadcaster
@@ -547,11 +547,11 @@ ros2 run rviz2 rviz2 -d $(ros2 pkg prefix my_humanoid_description)/config/view_r
 
 **Common Discrepancies**:
 
-| Issue | Cause | Fix |
-|-------|-------|-----|
-| Robot model offset in RViz vs Gazebo | Incorrect `<origin>` in URDF joint | Verify `xyz` and `rpy` in joint definitions |
-| Missing sensor data in RViz | Plugin not publishing to correct topic | Check `<topic_name>` in Gazebo sensor plugin |
-| TF tree broken | Static transform publisher missing | Add `robot_state_publisher` node |
+| Issue                                | Cause                                  | Fix                                          |
+| ------------------------------------ | -------------------------------------- | -------------------------------------------- |
+| Robot model offset in RViz vs Gazebo | Incorrect `<origin>` in URDF joint     | Verify `xyz` and `rpy` in joint definitions  |
+| Missing sensor data in RViz          | Plugin not publishing to correct topic | Check `<topic_name>` in Gazebo sensor plugin |
+| TF tree broken                       | Static transform publisher missing     | Add `robot_state_publisher` node             |
 
 ### Performance Profiling
 
@@ -683,12 +683,12 @@ randomized_world = randomize_world_physics('humanoid_world.world')
 
 **Trade-Off Matrix**:
 
-| Configuration | RTF | Accuracy | Use Case |
-|---------------|-----|----------|----------|
+| Configuration                           | RTF | Accuracy  | Use Case             |
+| --------------------------------------- | --- | --------- | -------------------- |
 | `max_step_size=0.0001`, Dart, 200 iters | 0.2 | Very High | Algorithm validation |
-| `max_step_size=0.001`, Dart, 100 iters | 0.8 | High | Default development |
-| `max_step_size=0.002`, ODE, 50 iters | 1.5 | Medium | Real-time testing |
-| `max_step_size=0.005`, ODE, 20 iters | 5.0 | Low | Dataset generation |
+| `max_step_size=0.001`, Dart, 100 iters  | 0.8 | High      | Default development  |
+| `max_step_size=0.002`, ODE, 50 iters    | 1.5 | Medium    | Real-time testing    |
+| `max_step_size=0.005`, ODE, 20 iters    | 5.0 | Low       | Dataset generation   |
 
 **Adaptive Step Size** (pseudo-code):
 
