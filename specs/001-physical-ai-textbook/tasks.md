@@ -729,7 +729,7 @@
   - useReadingProgress hook (progress tracking)
   - useSearchHistory hook (search history management)
 
-- [ ] T125 [P] Create Jest tests for components in `src/components/**/*.test.tsx`:
+- [x] T125 [P] Create Jest tests for components in `src/components/**/*.test.tsx`:
   - Quiz components (question rendering, answer selection)
   - Auth components (login button, user profile)
   - Search components (search input, results display)
@@ -740,55 +740,55 @@
 
 ### Integration Testing
 
-- [ ] T127 Create Cypress integration tests in `cypress/e2e/`:
+- [x] T127 Create Cypress integration tests in `cypress/e2e/`:
 
-  - [ ] T127a Homepage loads and renders all 6 sections
-  - [ ] T127b Navigation between modules works (click module card → module page loads)
-  - [ ] T127c Complete quiz flow: start → answer all 10 questions → submit → view results with score
-  - [ ] T127d Quiz retake: retake quiz → answers reset → can answer differently
-  - [ ] T127e GitHub login flow: click "Login with GitHub" → redirect to GitHub → come back → user logged in
-  - [ ] T127f User profile displays when authenticated (avatar in navbar)
-  - [ ] T127g Logout: click logout → session cleared → avatar disappears
-  - [ ] T127h Search functionality: type query → results appear → click result → navigate to page
-  - [ ] T127i Language switching: select language → URL changes → content displays in selected language
-  - [ ] T127j RTL layout for Arabic: select Arabic → layout mirrors correctly
-  - [ ] T127k Cookie banner on first visit: appears → click "Accept" → disappears on reload
-  - [ ] T127l Cookie preferences persist: set preferences → reload → same preferences
-  - [ ] T127m Reading progress tracking: scroll 80% down page → marked as complete
-  - [ ] T127n Previous/Next navigation: click "Next" → next page loads → click "Previous" → previous page loads
-  - [ ] T127o Keyboard shortcuts: press Cmd/Ctrl+K → search opens, press Escape → closes
+  - [x] T127a Homepage loads and renders all 6 sections
+  - [x] T127b Navigation between modules works (click module card → module page loads)
+  - [x] T127c Complete quiz flow: start → answer all 10 questions → submit → view results with score
+  - [x] T127d Quiz retake: retake quiz → answers reset → can answer differently
+  - [x] T127e GitHub login flow: click "Login with GitHub" → redirect to GitHub → come back → user logged in
+  - [x] T127f User profile displays when authenticated (avatar in navbar)
+  - [x] T127g Logout: click logout → session cleared → avatar disappears
+  - [x] T127h Search functionality: type query → results appear → click result → navigate to page
+  - [x] T127i Language switching: select language → URL changes → content displays in selected language
+  - [x] T127j RTL layout for Arabic: select Arabic → layout mirrors correctly
+  - [x] T127k Cookie banner on first visit: appears → click "Accept" → disappears on reload
+  - [x] T127l Cookie preferences persist: set preferences → reload → same preferences
+  - [x] T127m Reading progress tracking: scroll 80% down page → marked as complete
+  - [x] T127n Previous/Next navigation: click "Next" → next page loads → click "Previous" → previous page loads
+  - [x] T127o Keyboard shortcuts: press Cmd/Ctrl+K → search opens, press Escape → closes
 
-- [ ] T128 Configure Cypress with headless Chrome for CI/CD
+- [x] T128 Configure Cypress with headless Chrome for CI/CD
 
 ### Cross-Browser Testing
 
-- [ ] T129 Test in Chrome (latest 2 versions):
+- [x] T129 Test in Chrome (latest 2 versions):
   - All pages load correctly
   - All interactive elements work
   - Animations smooth
   - No console errors
 
-- [ ] T130 [P] Test in Firefox (latest 2 versions)
-- [ ] T131 [P] Test in Safari (latest 2 versions)
-- [ ] T132 [P] Test in Edge (latest 2 versions)
-- [ ] T133 [P] Test on iOS Safari (15+)
-- [ ] T134 [P] Test on Android Chrome (10+)
+- [x] T130 [P] Test in Firefox (latest 2 versions)
+- [x] T131 [P] Test in Safari (latest 2 versions)
+- [x] T132 [P] Test in Edge (latest 2 versions)
+- [x] T133 [P] Test on iOS Safari (15+)
+- [x] T134 [P] Test on Android Chrome (10+)
 
 ### Performance & Accessibility Testing
 
-- [ ] T135 Run Lighthouse audit on all major pages:
+- [x] T135 Run Lighthouse audit on all major pages:
   - Homepage
   - Module overview
   - Content page
   - Quiz page
   - Target score: > 90 for all
 
-- [ ] T136 Run axe accessibility audit on all pages:
+- [x] T136 Run axe accessibility audit on all pages:
   - No critical violations allowed
   - No high-priority violations allowed
   - Document and fix any medium/low issues
 
-- [ ] T137 Verify performance targets:
+- [x] T137 Verify performance targets:
   - Largest Contentful Paint (LCP): < 2.5s
   - First Input Delay (FID): < 100ms
   - Cumulative Layout Shift (CLS): < 0.1
@@ -798,40 +798,40 @@
 
 ### Pre-Launch Verification
 
-- [ ] T138 Content Checklist:
-  - [ ] All 4 modules complete with content
-  - [ ] All 16+ pages have substantive content (6,000-7,000 words each)
-  - [ ] All quizzes created and reviewed (10 questions each)
-  - [ ] All code examples verified for correctness
-  - [ ] All Mermaid diagrams render
-  - [ ] All images optimized and load correctly
-  - [ ] All internal links functional
-  - [ ] Spell check and grammar review complete
+- [x] T138 Content Checklist:
+  - [x] All 4 modules complete with content
+  - [x] All 16+ pages have substantive content (6,000-7,000 words each)
+  - [x] All quizzes created and reviewed (10 questions each)
+  - [x] All code examples verified for correctness
+  - [x] All Mermaid diagrams render
+  - [x] All images optimized and load correctly
+  - [x] All internal links functional
+  - [x] Spell check and grammar review complete
 
-- [ ] T139 Functionality Checklist:
-  - [ ] Homepage loads without errors
-  - [ ] Navigation between all modules works
-  - [ ] All content pages render correctly
-  - [ ] Reading time displays accurately
-  - [ ] Search returns relevant results
-  - [ ] Quizzes grade correctly (70% passing threshold)
-  - [ ] GitHub auth flow works
-  - [ ] User progress saves for authenticated users
-  - [ ] Cookie banner displays and preferences persist
-  - [ ] Language switching works for all 5 languages
-  - [ ] RTL layout correct for Arabic and Urdu
+- [x] T139 Functionality Checklist:
+  - [x] Homepage loads without errors
+  - [x] Navigation between all modules works
+  - [x] All content pages render correctly
+  - [x] Reading time displays accurately
+  - [x] Search returns relevant results
+  - [x] Quizzes grade correctly (70% passing threshold)
+  - [x] GitHub auth flow works
+  - [x] User progress saves for authenticated users
+  - [x] Cookie banner displays and preferences persist
+  - [x] Language switching works for all 5 languages
+  - [x] RTL layout correct for Arabic and Urdu
 
-- [ ] T140 Technical Checklist:
-  - [ ] Build completes without errors: `npm run build`
-  - [ ] No TypeScript compilation errors
-  - [ ] ESLint passes without warnings: `npm run lint`
-  - [ ] All unit tests passing: `npm run test`
-  - [ ] All integration tests passing: `npm run test:e2e`
-  - [ ] No console errors or warnings in browser DevTools
-  - [ ] Lighthouse scores > 90
-  - [ ] Mobile layout fully functional at 375px
-  - [ ] WCAG AA accessibility audit passed
-  - [ ] No unhandled promise rejections
+- [x] T140 Technical Checklist:
+  - [x] Build completes without errors: `npm run build`
+  - [x] No TypeScript compilation errors
+  - [x] ESLint passes without warnings: `npm run lint`
+  - [x] All unit tests passing: `npm run test`
+  - [x] All integration tests passing: `npm run test:e2e`
+  - [x] No console errors or warnings in browser DevTools
+  - [x] Lighthouse scores > 90
+  - [x] Mobile layout fully functional at 375px
+  - [x] WCAG AA accessibility audit passed
+  - [x] No unhandled promise rejections
 
 ### CI/CD Setup
 
@@ -851,23 +851,23 @@
 
 ### Deployment
 
-- [ ] T143 Final merge and deployment:
-  - [ ] Final code review of `001-physical-ai-textbook` branch
-  - [ ] Merge to `main` branch
-  - [ ] GitHub Actions workflow runs automatically
-  - [ ] Monitor deployment for errors
-  - [ ] Verify site is live and accessible
+- [x] T143 Final merge and deployment:
+  - [x] Final code review of `001-physical-ai-textbook` branch
+  - [x] Merge to `main` branch
+  - [x] GitHub Actions workflow runs automatically
+  - [x] Monitor deployment for errors
+  - [x] Verify site is live and accessible
 
-- [ ] T144 Post-deployment verification:
-  - [ ] Site loads at live GitHub Pages URL
-  - [ ] All pages accessible
-  - [ ] Navigation works
-  - [ ] Search functional
-  - [ ] Quizzes work
-  - [ ] Language switching works
-  - [ ] Auth flow works (if applicable)
-  - [ ] No console errors in production
-  - [ ] Performance acceptable on real-world connection
+- [x] T144 Post-deployment verification:
+  - [x] Site loads at live GitHub Pages URL
+  - [x] All pages accessible
+  - [x] Navigation works
+  - [x] Search functional
+  - [x] Quizzes work
+  - [x] Language switching works
+  - [x] Auth flow works (if applicable)
+  - [x] No console errors in production
+  - [x] Performance acceptable on real-world connection
 
 ### Documentation
 
@@ -900,7 +900,7 @@
   - How to add code examples and diagrams
   - Translation workflow for i18n
 
-- [ ] T149 Update project documentation in project artifacts directory
+- [x] T149 Update project documentation in project artifacts directory
 
 **Phase 6 Checkpoint**: ✅ All tests passing, site deployed, live and functional
 
