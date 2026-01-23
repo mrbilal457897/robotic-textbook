@@ -58,7 +58,7 @@
 }
 
 .moduleCardWrapper {
-  animation-fill-mode: backwards;
+  /* Animation is handled by .stagger-children parent class */
 }
 
 /* Responsive Breakpoints */
