@@ -78,7 +78,7 @@ export default function Navbar(): JSX.Element {
   return (
     <>
       <nav
-        className={`${styles.navbar} ${isScrolled ? styles.navbarScrolled : ''}`}
+        className={`navbar ${styles.navbar} ${isScrolled ? styles.navbarScrolled : ''}`}
         role="navigation"
         aria-label="Main navigation"
       >
@@ -108,13 +108,11 @@ export default function Navbar(): JSX.Element {
 
           {/* Desktop Navigation Links */}
           <div className={styles.navbarLinks}>
-            {navLinks.map((link) => (
+            {navLinks.map(link => (
               <Link
                 key={link.to}
                 to={link.to}
-                className={`${styles.navLink} ${
-                  isActiveLink(link.to) ? styles.navLinkActive : ''
-                }`}
+                className={`${styles.navLink} ${isActiveLink(link.to) ? styles.navLinkActive : ''}`}
               >
                 {link.label}
               </Link>
@@ -203,19 +201,13 @@ export default function Navbar(): JSX.Element {
 
       {/* Mobile Menu Overlay */}
       {isMobileMenuOpen && (
-        <div
-          className={styles.mobileOverlay}
-          onClick={toggleMobileMenu}
-          aria-hidden="true"
-        />
+        <div className={styles.mobileOverlay} onClick={toggleMobileMenu} aria-hidden="true" />
       )}
 
       {/* Mobile Menu Panel */}
       <div
         id="mobile-menu"
-        className={`${styles.mobileMenu} ${
-          isMobileMenuOpen ? styles.mobileMenuOpen : ''
-        }`}
+        className={`${styles.mobileMenu} ${isMobileMenuOpen ? styles.mobileMenuOpen : ''}`}
         role="dialog"
         aria-modal="true"
         aria-label="Mobile navigation menu"
@@ -246,7 +238,7 @@ export default function Navbar(): JSX.Element {
         </div>
 
         <div className={styles.mobileMenuLinks}>
-          {navLinks.map((link) => (
+          {navLinks.map(link => (
             <Link
               key={link.to}
               to={link.to}
@@ -297,15 +289,10 @@ export default function Navbar(): JSX.Element {
                 />
                 <div>
                   <div className={styles.mobileUsername}>{user.username}</div>
-                  {user.email && (
-                    <div className={styles.mobileEmail}>{user.email}</div>
-                  )}
+                  {user.email && <div className={styles.mobileEmail}>{user.email}</div>}
                 </div>
               </div>
-              <button
-                onClick={logout}
-                className={`${styles.mobileActionButton} btn-danger`}
-              >
+              <button onClick={logout} className={`${styles.mobileActionButton} btn-danger`}>
                 Logout
               </button>
             </div>
