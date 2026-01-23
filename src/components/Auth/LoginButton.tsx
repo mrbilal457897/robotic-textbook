@@ -12,8 +12,8 @@ export function LoginButton({ onLogin, disabled = false }: LoginButtonProps) {
   const handleClick = async () => {
     if (disabled) return;
 
-    // Check if GitHub OAuth is configured
-    const clientId = process.env.GITHUB_OAUTH_CLIENT_ID;
+    // Check if GitHub OAuth is configured (only available in Node.js environment)
+    const clientId = typeof process !== 'undefined' && process.env?.GITHUB_OAUTH_CLIENT_ID;
 
     if (clientId && clientId !== 'your-client-id') {
       // Real GitHub OAuth flow (production)
