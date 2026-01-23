@@ -1,25 +1,36 @@
-import styles from "./styles.module.css";
+import { useAuth } from '../../hooks/useAuth';
+import styles from './styles.module.css';
 
 interface LoginButtonProps {
-  onLogin: () => void;
+  onLogin?: () => void;
   disabled?: boolean;
 }
 
-export function LoginButton({ onLogin: _onLogin, disabled = false }: LoginButtonProps) {
-  const handleClick = () => {
+export function LoginButton({ onLogin, disabled = false }: LoginButtonProps) {
+  const { login } = useAuth();
+
+  const handleClick = async () => {
     if (disabled) return;
 
-    // Redirect to GitHub OAuth authorization
-    // In production, this would use your GitHub OAuth App credentials
-    const clientId = process.env.GITHUB_OAUTH_CLIENT_ID || "your-client-id";
-    const redirectUri = encodeURIComponent(
-      `${window.location.origin}/oauth-callback`
-    );
-    const scope = encodeURIComponent("read:user user:email");
+    // Check if GitHub OAuth is configured
+    const clientId = process.env.GITHUB_OAUTH_CLIENT_ID;
 
-    const authUrl = `https://github.com/login/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}`;
-
-    window.location.href = authUrl;
+    if (clientId && clientId !== 'your-client-id') {
+      // Real GitHub OAuth flow (production)
+      const redirectUri = encodeURIComponent(`${window.location.origin}/oauth-callback`);
+      const scope = encodeURIComponent('read:user user:email');
+      const authUrl = `https://github.com/login/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}`;
+      window.location.href = authUrl;
+    } else {
+      // Demo mode: Simulate login without real OAuth
+      // This allows users to test the UI without configuring GitHub OAuth
+      try {
+        await login('demo-auth-code');
+        if (onLogin) onLogin();
+      } catch (error) {
+        console.error('Demo login failed:', error);
+      }
+    }
   };
 
   return (

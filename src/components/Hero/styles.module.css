@@ -146,6 +146,11 @@
   animation-fill-mode: backwards;
 }
 
+.heroUserProfile {
+  display: flex;
+  align-items: center;
+}
+
 .heroPrimaryButton,
 .heroSecondaryButton {
   display: flex;
