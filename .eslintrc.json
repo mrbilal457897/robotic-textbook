@@ -50,6 +50,8 @@
     "build/",
     ".docusaurus/",
     "dist/",
-    "coverage/"
+    "coverage/",
+    "frontend/",
+    "backend/"
   ]
 }
