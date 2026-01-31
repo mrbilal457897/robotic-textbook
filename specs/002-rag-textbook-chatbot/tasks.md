@@ -166,7 +166,7 @@
 - [x] T080 [US1] Implement API client in `frontend/src/services/api.ts`
 - [x] T081 [US1] Integrate ChatPanel into textbook layout in `frontend/src/app/(textbook)/layout.tsx`
 - [X] T082 [US1] Write component tests for ChatPanel in `frontend/tests/unit/ChatPanel.test.tsx`
-- [ ] T083 [US1] Write E2E test for basic question flow in `frontend/tests/e2e/book-only-mode.spec.ts`
+- [X] T083 [US1] Write E2E test for basic question flow in `frontend/tests/e2e/book-only-mode.spec.ts`
 
 ### Validation for User Story 1
 
