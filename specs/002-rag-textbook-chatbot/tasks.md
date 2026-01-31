@@ -151,7 +151,7 @@
 - [X] T078 [P] [US1] Create SourcePreview modal component in `frontend/src/components/chat/SourcePreview.tsx`
 - [X] T079 [US1] Implement useChat hook in `frontend/src/hooks/useChat.ts`
 - [X] T080 [US1] Implement API client in `frontend/src/services/api.ts`
-- [ ] T081 [US1] Integrate ChatPanel into textbook layout in `frontend/src/app/(textbook)/layout.tsx`
+- [X] T081 [US1] Integrate ChatPanel into textbook layout in `frontend/src/app/(textbook)/layout.tsx`
 - [ ] T082 [US1] Write component tests for ChatPanel in `frontend/tests/unit/ChatPanel.test.tsx`
 - [ ] T083 [US1] Write E2E test for basic question flow in `frontend/tests/e2e/book-only-mode.spec.ts`
 
