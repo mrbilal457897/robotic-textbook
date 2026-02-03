@@ -419,7 +419,7 @@
 
 ### Documentation
 
-- [ ] T188 [P] Update README with deployment instructions
+- [x] T188 [P] Update README with deployment instructions
 - [ ] T189 [P] Publish API documentation (Swagger UI from OpenAPI spec)
 - [ ] T190 [P] Create runbook for common issues in `docs/runbook.md`
 - [ ] T191 [P] Create user guide in `docs/user-guide/chatbot-usage.md`
