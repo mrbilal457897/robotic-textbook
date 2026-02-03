@@ -226,18 +226,18 @@
 
 ### Tone Control Implementation for User Story 3
 
-- [ ] T105 [US3] Implement tone parameter in Response Agent in `backend/src/agents/response.py`
-- [ ] T106 [US3] Implement Academic tone prompting in `backend/src/agents/response.py`
-- [ ] T107 [US3] Implement Beginner-friendly tone prompting in `backend/src/agents/response.py`
-- [ ] T108 [US3] Implement Concise tone prompting in `backend/src/agents/response.py`
-- [ ] T109 [US3] Write unit tests for all tones in `backend/tests/unit/test_tone_control.py`
+- [x] T105 [US3] Implement tone parameter in Response Agent in `backend/src/agents/response.py`
+- [x] T106 [US3] Implement Academic tone prompting in `backend/src/agents/response.py`
+- [x] T107 [US3] Implement Beginner-friendly tone prompting in `backend/src/agents/response.py`
+- [x] T108 [US3] Implement Concise tone prompting in `backend/src/agents/response.py`
+- [x] T109 [US3] Write unit tests for all tones in `backend/tests/unit/test_tone_control.py`
 
 ### Frontend Tone Selector for User Story 3
 
-- [ ] T110 [US3] Create ToneSelector component in `frontend/src/components/chat/ToneSelector.tsx`
-- [ ] T111 [US3] Implement tone persistence in localStorage in `frontend/src/hooks/useChat.ts`
-- [ ] T112 [US3] Integrate ToneSelector into ChatPanel in `frontend/src/components/chat/ChatPanel.tsx`
-- [ ] T113 [US3] Write component tests for ToneSelector in `frontend/tests/unit/ToneSelector.test.tsx`
+- [x] T110 [US3] Create ToneSelector component in `frontend/src/components/chat/ToneSelector.tsx`
+- [x] T111 [US3] Implement tone persistence in localStorage in `frontend/src/hooks/useChat.ts`
+- [x] T112 [US3] Integrate ToneSelector into ChatPanel in `frontend/src/components/chat/ChatPanel.tsx`
+- [x] T113 [US3] Write component tests for ToneSelector in `frontend/tests/unit/ToneSelector.test.tsx`
 
 ### Validation for User Story 3
 
