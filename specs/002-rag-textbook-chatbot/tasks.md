@@ -165,8 +165,8 @@
 - [x] T079 [US1] Implement useChat hook in `frontend/src/hooks/useChat.ts`
 - [x] T080 [US1] Implement API client in `frontend/src/services/api.ts`
 - [x] T081 [US1] Integrate ChatPanel into textbook layout in `frontend/src/app/(textbook)/layout.tsx`
-- [X] T082 [US1] Write component tests for ChatPanel in `frontend/tests/unit/ChatPanel.test.tsx`
-- [X] T083 [US1] Write E2E test for basic question flow in `frontend/tests/e2e/book-only-mode.spec.ts`
+- [x] T082 [US1] Write component tests for ChatPanel in `frontend/tests/unit/ChatPanel.test.tsx`
+- [x] T083 [US1] Write E2E test for basic question flow in `frontend/tests/e2e/book-only-mode.spec.ts`
 
 ### Validation for User Story 1
 
@@ -187,26 +187,26 @@
 
 ### Selected-Text Agent for User Story 2
 
-- [ ] T088 [US2] Implement Selected-Text Agent in `backend/src/agents/selected_text.py`
-- [ ] T089 [US2] Implement selection validation (50-4000 tokens) in `backend/src/agents/selected_text.py`
-- [ ] T090 [US2] Implement insufficient context detection in `backend/src/agents/selected_text.py`
-- [ ] T091 [US2] Write unit tests for Selected-Text Agent in `backend/tests/unit/test_selected_text.py`
-- [ ] T092 [US2] Verify zero vector searches triggered (unit test)
+- [x] T088 [US2] Implement Selected-Text Agent in `backend/src/agents/selected_text.py`
+- [x] T089 [US2] Implement selection validation (50-4000 tokens) in `backend/src/agents/selected_text.py`
+- [x] T090 [US2] Implement insufficient context detection in `backend/src/agents/selected_text.py`
+- [x] T091 [US2] Write unit tests for Selected-Text Agent in `backend/tests/unit/test_selected_text.py`
+- [x] T092 [US2] Verify zero vector searches triggered (unit test)
 
 ### Text Actions for User Story 2
 
-- [ ] T093 [P] [US2] Implement "Explain" action in `backend/src/agents/response.py`
-- [ ] T094 [P] [US2] Implement "Summarize" action in `backend/src/agents/response.py`
-- [ ] T095 [P] [US2] Implement "Example" action in `backend/src/agents/response.py`
-- [ ] T096 [P] [US2] Implement "Simplify" action in `backend/src/agents/response.py`
+- [x] T093 [P] [US2] Implement "Explain" action in `backend/src/agents/response.py`
+- [x] T094 [P] [US2] Implement "Summarize" action in `backend/src/agents/response.py`
+- [x] T095 [P] [US2] Implement "Example" action in `backend/src/agents/response.py`
+- [x] T096 [P] [US2] Implement "Simplify" action in `backend/src/agents/response.py`
 
 ### Frontend Highlight-to-Ask for User Story 2
 
-- [ ] T097 [P] [US2] Implement text selection detection hook in `frontend/src/components/highlight/useTextSelection.ts`
-- [ ] T098 [P] [US2] Create SelectionToolbar component in `frontend/src/components/highlight/SelectionToolbar.tsx`
-- [ ] T099 [US2] Integrate SelectionToolbar into textbook pages in `frontend/src/app/(textbook)/[book]/[chapter]/page.tsx`
-- [ ] T100 [US2] Implement mobile touch selection support in `frontend/src/components/highlight/useTextSelection.ts`
-- [ ] T101 [US2] Write E2E test for highlight-to-ask flow in `frontend/tests/e2e/highlight-to-ask.spec.ts`
+- [x] T097 [P] [US2] Implement text selection detection hook in `frontend/src/components/highlight/useTextSelection.ts`
+- [x] T098 [P] [US2] Create SelectionToolbar component in `frontend/src/components/highlight/SelectionToolbar.tsx`
+- [x] T099 [US2] Integrate SelectionToolbar into textbook pages in `frontend/src/app/(textbook)/[book]/[chapter]/page.tsx`
+- [x] T100 [US2] Implement mobile touch selection support in `frontend/src/components/highlight/useTextSelection.ts`
+- [x] T101 [US2] Write E2E test for highlight-to-ask flow in `frontend/tests/e2e/highlight-to-ask.spec.ts`
 
 ### Validation for User Story 2
 
@@ -308,24 +308,24 @@
 
 ### General Knowledge Mode Implementation for User Story 6
 
-- [ ] T133 [US6] Implement General Knowledge Agent (dual-pass) in `backend/src/agents/general_knowledge.py`
-- [ ] T134 [US6] Implement first pass (textbook-only retrieval) in `backend/src/agents/general_knowledge.py`
-- [ ] T135 [US6] Implement second pass (combine with external knowledge) in `backend/src/agents/general_knowledge.py`
-- [ ] T136 [US6] Implement source labeling ([Textbook] / [General Knowledge]) in `backend/src/agents/general_knowledge.py`
-- [ ] T137 [US6] Write unit tests for dual-pass approach in `backend/tests/unit/test_general_knowledge.py`
+- [x] T133 [US6] Implement General Knowledge Agent (dual-pass) in `backend/src/agents/general_knowledge.py`
+- [x] T134 [US6] Implement first pass (textbook-only retrieval) in `backend/src/agents/general_knowledge.py`
+- [x] T135 [US6] Implement second pass (combine with external knowledge) in `backend/src/agents/general_knowledge.py`
+- [x] T136 [US6] Implement source labeling ([Textbook] / [General Knowledge]) in `backend/src/agents/general_knowledge.py`
+- [x] T137 [US6] Write unit tests for dual-pass approach in `backend/tests/unit/test_general_knowledge.py`
 
 ### Mode Boundary Enforcement for User Story 6
 
-- [ ] T138 [US6] Implement mode boundary validation in Router Agent in `backend/src/agents/router.py`
-- [ ] T139 [US6] Implement mode switching prompts in Response Agent in `backend/src/agents/response.py`
-- [ ] T140 [US6] Write unit tests for mode boundary enforcement in `backend/tests/unit/test_mode_boundaries.py`
+- [x] T138 [US6] Implement mode boundary validation in Router Agent in `backend/src/agents/router.py`
+- [x] T139 [US6] Implement mode switching prompts in Response Agent in `backend/src/agents/response.py`
+- [x] T140 [US6] Write unit tests for mode boundary enforcement in `backend/tests/unit/test_mode_boundaries.py`
 
 ### Frontend Mode Switching for User Story 6
 
-- [ ] T141 [US6] Enhance ModeSelector with General Knowledge mode in `frontend/src/components/chat/ModeSelector.tsx`
-- [ ] T142 [US6] Implement source section labels (green/blue borders) in `frontend/src/components/chat/MessageList.tsx`
-- [ ] T143 [US6] Implement mode switch confirmation prompt in `frontend/src/components/chat/ModeSelector.tsx`
-- [ ] T144 [US6] Write E2E test for mode switching in `frontend/tests/e2e/mode-switching.spec.ts`
+- [x] T141 [US6] Enhance ModeSelector with General Knowledge mode in `frontend/src/components/chat/ModeSelector.tsx`
+- [x] T142 [US6] Implement source section labels (green/blue borders) in `frontend/src/components/chat/MessageList.tsx`
+- [x] T143 [US6] Implement mode switch confirmation prompt in `frontend/src/components/chat/ModeSelector.tsx`
+- [x] T144 [US6] Write E2E test for mode switching in `frontend/tests/e2e/mode-switching.spec.ts`
 
 ### Validation for User Story 6
 
@@ -345,13 +345,13 @@
 
 ### Rate Limiting & Abuse Protection
 
-- [ ] T150 [P] Implement rate limiting (10/100 req/hr) in `backend/src/api/middleware.py`
-- [ ] T151 [P] Implement prompt injection detection in `backend/src/api/middleware.py`
-- [ ] T152 Implement IP-based temporary bans in `backend/src/api/middleware.py`
+- [x] T150 [P] Implement rate limiting (10/100 req/hr) in `backend/src/api/middleware.py`
+- [x] T151 [P] Implement prompt injection detection in `backend/src/api/middleware.py`
+- [x] T152 Implement IP-based temporary bans in `backend/src/api/middleware.py`
 
 ### Graceful Degradation
 
-- [ ] T153 [P] Implement Postgres full-text search fallback in `backend/src/mcp/search.py`
+- [x] T153 [P] Implement Postgres full-text search fallback in `backend/src/mcp/search.py`
 - [ ] T154 [P] Implement request queuing for LLM API downtime in `backend/src/agents/response.py`
 - [ ] T155 Implement clear error messages for all failure modes in `backend/src/api/v1/chat.py`
 
