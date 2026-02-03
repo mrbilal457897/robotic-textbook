@@ -1,0 +1,136 @@
+# ============================================
+# RAG Textbook Chatbot - Backend Dependencies
+# ============================================
+# Python 3.11+
+
+# ============================================
+# Core Framework
+# ============================================
+fastapi>=0.109.0
+uvicorn[standard]>=0.27.0
+pydantic>=2.5.0
+pydantic-settings>=2.1.0
+python-multipart>=0.0.6  # For file uploads
+
+# ============================================
+# AI & ML APIs
+# ============================================
+# Cohere Embeddings API
+cohere>=4.37
+
+# Google Gemini AI SDK (for chat)
+google-generativeai>=0.3.0
+
+# ============================================
+# Vector Database
+# ============================================
+qdrant-client>=1.7.0
+
+# ============================================
+# Relational Database (Postgres)
+# ============================================
+psycopg2-binary>=2.9.9
+sqlalchemy>=2.0.25  # ORM (optional, for complex queries)
+alembic>=1.13.1     # Database migrations
+
+# ============================================
+# Redis (Rate Limiting)
+# ============================================
+redis>=5.0.1
+hiredis>=2.3.2  # C parser for better performance
+
+# ============================================
+# Authentication & Security
+# ============================================
+python-jose[cryptography]>=3.3.0  # JWT tokens
+passlib[bcrypt]>=1.7.4           # Password hashing
+python-multipart>=0.0.6           # OAuth form data
+httpx>=0.26.0                     # OAuth HTTP client
+itsdangerous>=2.1.2               # Session signing
+
+# ============================================
+# PDF Processing (for ingestion)
+# ============================================
+PyPDF2>=3.0.0
+pdfplumber>=0.10.3  # Better text extraction
+pypdf>=4.0.0        # Alternative PDF parser
+
+# ============================================
+# Text Processing
+# ============================================
+tiktoken>=0.5.2     # Token counting (OpenAI tokenizer)
+nltk>=3.8.1         # Natural language processing
+spacy>=3.7.2        # Advanced NLP (optional)
+
+# ============================================
+# HTTP & API Client
+# ============================================
+requests>=2.31.0
+httpx>=0.26.0  # Async HTTP client
+aiohttp>=3.9.1  # Alternative async HTTP
+
+# ============================================
+# Monitoring & Observability
+# ============================================
+sentry-sdk[fastapi]>=1.40.0  # Error tracking
+prometheus-client>=0.19.0     # Metrics export
+opentelemetry-api>=1.22.0     # Distributed tracing (optional)
+
+# ============================================
+# Logging
+# ============================================
+python-json-logger>=2.0.7  # JSON structured logging
+loguru>=0.7.2              # Better logging (alternative)
+
+# ============================================
+# Configuration & Environment
+# ============================================
+python-dotenv>=1.0.0
+pyyaml>=6.0.1  # YAML config support
+
+# ============================================
+# Testing
+# ============================================
+pytest>=8.0.0
+pytest-asyncio>=0.23.0
+pytest-cov>=4.1.0        # Coverage reporting
+pytest-mock>=3.12.0      # Mocking
+httpx>=0.26.0            # For testing async endpoints
+faker>=22.0.0            # Generate fake data for tests
+
+# ============================================
+# Development Tools
+# ============================================
+# Linting & Formatting
+ruff>=0.1.0              # Fast Python linter
+black>=24.1.0            # Code formatter
+isort>=5.13.2            # Import sorting
+mypy>=1.8.0              # Type checking
+
+# Documentation
+mkdocs>=1.5.3            # Documentation generator
+mkdocs-material>=9.5.3   # Material theme
+
+# ============================================
+# Performance & Optimization
+# ============================================
+orjson>=3.9.12           # Fast JSON serialization
+uvloop>=0.19.0           # Fast event loop (Unix only)
+gunicorn>=21.2.0         # Production WSGI server
+
+# ============================================
+# Utilities
+# ============================================
+python-slugify>=8.0.1    # URL slug generation
+pytz>=2024.1             # Timezone handling
+python-dateutil>=2.8.2   # Date parsing
+email-validator>=2.1.0   # Email validation
+
+# ============================================
+# Optional: Advanced Features
+# ============================================
+# celery>=5.3.4          # Background tasks
+# redis>=5.0.1           # Celery broker
+# flower>=2.0.1          # Celery monitoring
+# langchain>=0.1.0       # LLM framework (if needed)
+# langsmith>=0.0.87      # LangChain monitoring

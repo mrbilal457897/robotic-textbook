@@ -108,8 +108,8 @@ const config: Config = {
     navbar: {
       title: 'Physical AI & Humanoid Robotics',
       logo: {
-        alt: 'Physical AI Logo',
-        src: 'img/logo.svg',
+        alt: 'AI Agent Robot',
+        src: 'img/robot-agent.png',
       },
       items: [
         {

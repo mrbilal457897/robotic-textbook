@@ -6,6 +6,7 @@
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { ChapterContent } from "@/components/textbook/ChapterContent";
 
 interface ChapterPageProps {
   params: {
@@ -28,9 +29,10 @@ export default async function ChapterPage({ params }: ChapterPageProps) {
   }
 
   return (
-    <article className="space-y-8">
-      {/* Chapter Header */}
-      <header className="border-b border-gray-200 pb-6 dark:border-gray-800">
+    <ChapterContent bookId={book} chapterId={chapterId}>
+      <article className="space-y-8">
+        {/* Chapter Header */}
+        <header className="border-b border-gray-200 pb-6 dark:border-gray-800">
         <div className="mb-2 text-sm font-medium text-blue-600 dark:text-blue-400">
           Chapter {chapterData.id}
         </div>
@@ -120,7 +122,8 @@ export default async function ChapterPage({ params }: ChapterPageProps) {
           </ul>
         </div>
       )}
-    </article>
+      </article>
+    </ChapterContent>
   );
 }
 

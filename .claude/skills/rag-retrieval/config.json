@@ -1,0 +1,162 @@
+{
+  "skill_name": "rag-retrieval",
+  "version": "1.0.0",
+  "description": "Semantic search retrieval with scope enforcement for RAG queries",
+  "embedding": {
+    "provider": "openai",
+    "model": "text-embedding-3-small",
+    "dimensions": 1536,
+    "preprocess_query": true,
+    "cache_embeddings": true,
+    "cache_size": 1000,
+    "timeout_seconds": 30
+  },
+  "retrieval": {
+    "qdrant": {
+      "url_env": "QDRANT_URL",
+      "api_key_env": "QDRANT_API_KEY",
+      "default_collection": "textbook-v1"
+    },
+    "search": {
+      "default_limit": 10,
+      "min_limit": 1,
+      "max_limit": 100,
+      "score_threshold_book_only": 0.7,
+      "score_threshold_selected_text": 0.75,
+      "score_threshold_general": 0.5
+    },
+    "search_mode": {
+      "deterministic": false,
+      "hnsw_ef": 128,
+      "exact_search": false
+    },
+    "timeout_seconds": 10
+  },
+  "modes": {
+    "book_only": {
+      "description": "Retrieve only from textbook content",
+      "min_results_required": 1,
+      "min_score_threshold": 0.7,
+      "allow_external_knowledge": false,
+      "scope_strict": true
+    },
+    "selected_text_only": {
+      "description": "Retrieve from highlighted passage only",
+      "selected_text_weight": 0.3,
+      "query_weight": 0.7,
+      "max_results": 5,
+      "allow_external_knowledge": false,
+      "scope_strict": true
+    },
+    "general": {
+      "description": "Retrieve from textbook with optional external context",
+      "min_results_required": 0,
+      "min_score_threshold": 0.5,
+      "allow_external_knowledge": true,
+      "scope_strict": false
+    }
+  },
+  "query_preprocessing": {
+    "enabled": true,
+    "normalize_whitespace": true,
+    "remove_stop_words": true,
+    "stop_words": [
+      "explain",
+      "describe",
+      "tell me about",
+      "what is",
+      "what are",
+      "how does",
+      "how do",
+      "why"
+    ],
+    "remove_question_mark": true,
+    "min_length": 3
+  },
+  "reranking": {
+    "enabled": true,
+    "strategies": {
+      "cohere": {
+        "provider": "cohere",
+        "model": "rerank-english-v3.0",
+        "api_key_env": "COHERE_API_KEY",
+        "initial_retrieve": 20,
+        "final_top_n": 5,
+        "cost_per_1000_searches": 1.0,
+        "batch_size": 50
+      },
+      "cross_encoder": {
+        "provider": "local",
+        "model": "cross-encoder/ms-marco-MiniLM-L-6-v2",
+        "initial_retrieve": 20,
+        "final_top_n": 5,
+        "batch_size": 32,
+        "device": "cuda"
+      },
+      "keyword_boost": {
+        "provider": "local",
+        "boost_factor": 1.5,
+        "initial_retrieve": 10
+      },
+      "none": {
+        "provider": "none",
+        "description": "No reranking, use vector scores"
+      }
+    },
+    "default_strategy": "cohere"
+  },
+  "filtering": {
+    "supported_fields": [
+      "chapter",
+      "section",
+      "difficulty",
+      "contains_code",
+      "contains_math",
+      "word_count"
+    ],
+    "default_filters": {},
+    "filter_operators": {
+      "chapter": "keyword",
+      "section": "keyword",
+      "difficulty": ["beginner", "intermediate", "advanced"],
+      "contains_code": ["true", "false"],
+      "contains_math": ["true", "false"]
+    }
+  },
+  "output": {
+    "format": "json",
+    "truncate_content": 1000,
+    "include_metadata": true,
+    "include_full_payload": false,
+    "include_vectors": false,
+    "include_embedding_time": true,
+    "include_search_time": true
+  },
+  "performance": {
+    "parallel_embedding": false,
+    "batch_processing": true,
+    "batch_size": 10,
+    "progress_tracking": true,
+    "measure_latency": true
+  },
+  "validation": {
+    "check_query_length": true,
+    "check_mode_validity": true,
+    "check_collection_exists": true,
+    "enforce_limits": true
+  },
+  "error_handling": {
+    "log_errors": true,
+    "return_error_details": true,
+    "fallback_strategy": "general_mode",
+    "retry_on_failure": true,
+    "max_retries": 3,
+    "retry_delay_seconds": 1
+  },
+  "monitoring": {
+    "track_retrieval_quality": true,
+    "track_latency": true,
+    "track_reranking_impact": true,
+    "metrics_file": "rag-retrieval-metrics.json"
+  }
+}

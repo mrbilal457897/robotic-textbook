@@ -34,6 +34,14 @@ export default function About(): JSX.Element {
                 xmlns="http://www.w3.org/2000/svg"
                 className={styles.illustrationSvg}
               >
+                {/* Outer glow effect */}
+                <defs>
+                  <radialGradient id="glowGradient" cx="50%" cy="50%">
+                    <stop offset="0%" stopColor="var(--primary)" stopOpacity="0.2" />
+                    <stop offset="100%" stopColor="var(--primary)" stopOpacity="0" />
+                  </radialGradient>
+                </defs>
+
                 {/* Robot Body */}
                 <rect
                   x="150"

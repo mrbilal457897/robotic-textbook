@@ -1,0 +1,6 @@
+QDRANT_API_KEY= eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3MiOiJtIn0.a8BW0puoL6WqslhMFHx7Vs2MlgkGoGbWqVxXsAWKvEM
+QDRANT_URL= https://f889c4e3-e796-44cc-9f5c-90bc6f054adb.europe-west3-0.gcp.cloud.qdrant.io:6333
+NEON_POSTGRES_URL= postgresql://neondb_owner:npg_OaFwYoV19Ply@ep-rough-grass-a8n0xkzo-pooler.eastus2.azure.neon.tech/neondb?sslmode=require&channel_binding=require
+GEMINI_API_KEY= AIzaSyBekKZc2yRc4O-4r0Xg-gEp0H412lcKM5M
+GEMINI_MODEL_NAME=gemini-2.5-flash
+REDIS_URL=redis://localhost:6379/0

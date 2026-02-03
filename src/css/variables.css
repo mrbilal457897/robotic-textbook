@@ -57,8 +57,8 @@
 
   /* Font Families */
   --font-display: 'Orbitron', sans-serif;           /* Display/Hero titles */
-  --font-heading: 'Rajdhani', sans-serif;           /* Section headings */
-  --font-body: 'Source Code Pro', monospace;        /* Body text */
+  --font-heading: 'Josefin Sans', sans-serif;       /* Section headings */
+  --font-body: 'Josefin Sans', sans-serif;          /* Body text */
   --font-mono: 'JetBrains Mono', monospace;         /* Code blocks */
 
   /* Font Sizes */

@@ -352,29 +352,29 @@
 ### Graceful Degradation
 
 - [x] T153 [P] Implement Postgres full-text search fallback in `backend/src/mcp/search.py`
-- [ ] T154 [P] Implement request queuing for LLM API downtime in `backend/src/agents/response.py`
-- [ ] T155 Implement clear error messages for all failure modes in `backend/src/api/v1/chat.py`
+- [x] T154 [P] Implement request queuing for LLM API downtime in `backend/src/agents/response.py`
+- [x] T155 Implement clear error messages for all failure modes in `backend/src/api/v1/chat.py`
 
 ### Security Hardening
 
-- [ ] T156 Run automated security scan (Trufflehog) in CI/CD
-- [ ] T157 Verify no API keys in client-side code (automated scan)
-- [ ] T158 Implement API key rotation schedule (quarterly) in docs
+- [x] T156 Run automated security scan (Trufflehog) in CI/CD
+- [x] T157 Verify no API keys in client-side code (automated scan)
+- [x] T158 Implement API key rotation schedule (quarterly) in docs
 
 ### Monitoring & Observability
 
-- [ ] T159 [P] Configure Sentry error tracking in `backend/src/main.py`
-- [ ] T160 [P] Setup Vercel Analytics with RAG metrics in `frontend/src/app/layout.tsx`
-- [ ] T161 Implement RAG pipeline stage metrics in `backend/src/services/observability.py`
-- [ ] T162 Implement retrieval quality metrics in `backend/src/services/observability.py`
-- [ ] T163 Implement response quality metrics in `backend/src/services/observability.py`
-- [ ] T164 Configure alerting thresholds (confidence < 0.75, latency > 5s, refusal > 20%) in Sentry
+- [x] T159 [P] Configure Sentry error tracking in `backend/src/main.py`
+- [x] T160 [P] Setup Vercel Analytics with RAG metrics in `frontend/src/app/layout.tsx`
+- [x] T161 Implement RAG pipeline stage metrics in `backend/src/services/observability.py`
+- [x] T162 Implement retrieval quality metrics in `backend/src/services/observability.py`
+- [x] T163 Implement response quality metrics in `backend/src/services/observability.py`
+- [x] T164 Configure alerting thresholds (confidence < 0.75, latency > 5s, refusal > 20%) in Sentry
 
 ### Background Jobs
 
-- [ ] T165 Implement daily cleanup job in `backend/src/services/cleanup.py`
-- [ ] T166 Configure Vercel Cron for 2 AM UTC execution in `vercel.json`
-- [ ] T167 Test cleanup job reliability (5 consecutive days)
+- [x] T165 Implement daily cleanup job in `backend/src/services/cleanup.py`
+- [x] T166 Configure Vercel Cron for 2 AM UTC execution in `vercel.json`
+- [x] T167 Test cleanup job reliability (5 consecutive days)
 
 ---
 

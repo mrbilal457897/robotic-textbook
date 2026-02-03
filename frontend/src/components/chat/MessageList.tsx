@@ -65,6 +65,56 @@ interface MessageBubbleProps {
   onCitationClick?: (citation: Citation) => void;
 }
 
+/**
+ * Parse content sections with source labels
+ * Returns array of sections with type and content
+ */
+function parseSourceSections(content: string): Array<{ type: 'textbook' | 'general' | 'default', content: string }> {
+  const sections: Array<{ type: 'textbook' | 'general' | 'default', content: string }> = [];
+
+  // Check if content has source labels
+  const hasTextbookLabel = content.includes('**[Textbook]**');
+  const hasGeneralLabel = content.includes('**[General Knowledge]**');
+
+  if (!hasTextbookLabel && !hasGeneralLabel) {
+    // No source labels - return as single default section
+    return [{ type: 'default', content }];
+  }
+
+  // Split by source labels and separators
+  const parts = content.split(/(?=\*\*\[(?:Textbook|General Knowledge)\]\*\*)/);
+
+  for (const part of parts) {
+    const trimmedPart = part.trim();
+    if (!trimmedPart) continue;
+
+    if (trimmedPart.startsWith('**[Textbook]**')) {
+      // Remove label and separator
+      const contentOnly = trimmedPart
+        .replace(/^\*\*\[Textbook\]\*\*\n*/, '')
+        .replace(/\n*---\n*$/, '')
+        .trim();
+      if (contentOnly) {
+        sections.push({ type: 'textbook', content: contentOnly });
+      }
+    } else if (trimmedPart.startsWith('**[General Knowledge]**')) {
+      // Remove label and separator
+      const contentOnly = trimmedPart
+        .replace(/^\*\*\[General Knowledge\]\*\*\n*/, '')
+        .replace(/\n*---\n*$/, '')
+        .trim();
+      if (contentOnly) {
+        sections.push({ type: 'general', content: contentOnly });
+      }
+    } else {
+      // Other content (notes, disclaimers, etc.)
+      sections.push({ type: 'default', content: trimmedPart });
+    }
+  }
+
+  return sections;
+}
+
 function MessageBubble({ message, onCitationClick }: MessageBubbleProps) {
   const isUser = message.role === "user";
   const isSystem = message.role === "system";
@@ -77,6 +127,10 @@ function MessageBubble({ message, onCitationClick }: MessageBubbleProps) {
       </div>
     );
   }
+
+  // Parse source sections for assistant messages
+  const sourceSections = !isUser ? parseSourceSections(message.content) : [];
+  const hasMultipleSources = sourceSections.length > 1 && sourceSections.some(s => s.type !== 'default');
 
   return (
     <div
@@ -105,24 +159,74 @@ function MessageBubble({ message, onCitationClick }: MessageBubbleProps) {
         )}
       >
         {/* Message Bubble */}
-        <div
-          className={cn(
-            "rounded-lg px-4 py-2",
-            isUser
-              ? "bg-blue-600 text-white"
-              : "bg-gray-100 text-gray-900 dark:bg-gray-800 dark:text-gray-100"
-          )}
-        >
-          {isUser ? (
-            <div className="whitespace-pre-wrap text-sm">{message.content}</div>
-          ) : (
-            <div className="prose prose-sm dark:prose-invert max-w-none">
-              <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                {message.content}
-              </ReactMarkdown>
-            </div>
-          )}
-        </div>
+        {hasMultipleSources ? (
+          // Multiple source sections with visual labels
+          <div className="flex w-full flex-col gap-3">
+            {sourceSections.map((section, index) => {
+              const isTextbook = section.type === 'textbook';
+              const isGeneral = section.type === 'general';
+
+              return (
+                <div
+                  key={index}
+                  className={cn(
+                    "rounded-lg px-4 py-3",
+                    isTextbook && "border-l-4 border-green-500 bg-green-50 dark:bg-green-950/30",
+                    isGeneral && "border-l-4 border-blue-500 bg-blue-50 dark:bg-blue-950/30",
+                    !isTextbook && !isGeneral && "bg-gray-100 dark:bg-gray-800"
+                  )}
+                >
+                  {/* Source Label */}
+                  {(isTextbook || isGeneral) && (
+                    <div className={cn(
+                      "mb-2 flex items-center gap-2 text-xs font-semibold uppercase tracking-wide",
+                      isTextbook && "text-green-700 dark:text-green-400",
+                      isGeneral && "text-blue-700 dark:text-blue-400"
+                    )}>
+                      <span className={cn(
+                        "h-1.5 w-1.5 rounded-full",
+                        isTextbook && "bg-green-500",
+                        isGeneral && "bg-blue-500"
+                      )} />
+                      {isTextbook ? "Textbook" : "General Knowledge"}
+                    </div>
+                  )}
+
+                  {/* Section Content */}
+                  <div className={cn(
+                    "prose prose-sm dark:prose-invert max-w-none",
+                    isTextbook && "prose-green",
+                    isGeneral && "prose-blue"
+                  )}>
+                    <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                      {section.content}
+                    </ReactMarkdown>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        ) : (
+          // Single section (default display)
+          <div
+            className={cn(
+              "rounded-lg px-4 py-2",
+              isUser
+                ? "bg-blue-600 text-white"
+                : "bg-gray-100 text-gray-900 dark:bg-gray-800 dark:text-gray-100"
+            )}
+          >
+            {isUser ? (
+              <div className="whitespace-pre-wrap text-sm">{message.content}</div>
+            ) : (
+              <div className="prose prose-sm dark:prose-invert max-w-none">
+                <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                  {message.content}
+                </ReactMarkdown>
+              </div>
+            )}
+          </div>
+        )}
 
         {/* Metadata (for assistant messages) */}
         {!isUser && (

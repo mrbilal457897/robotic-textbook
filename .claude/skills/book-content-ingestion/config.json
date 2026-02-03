@@ -1,0 +1,65 @@
+{
+  "skill_name": "book-content-ingestion",
+  "version": "1.0.0",
+  "description": "Extract and prepare textbook content for RAG pipeline ingestion",
+  "default_config": {
+    "chunk_size_target": 1000,
+    "chunk_overlap": 100,
+    "max_heading_level": 4,
+    "include_blog": true,
+    "include_code_blocks": true,
+    "extract_learning_objectives": true,
+    "output_format": "jsonl",
+    "validate_links": true,
+    "parallel_processing": true,
+    "output_directory": "output/rag-ingestion",
+    "supported_formats": ["md", "mdx"],
+    "content_directories": ["docs", "blog"],
+    "preserve_frontmatter": true,
+    "generate_validation_report": true
+  },
+  "metadata_schema": {
+    "required_fields": [
+      "chunk_id",
+      "book_id",
+      "chapter",
+      "section",
+      "content",
+      "slug",
+      "file_path"
+    ],
+    "optional_fields": [
+      "subsection",
+      "heading_path",
+      "heading_level",
+      "tags",
+      "learning_objectives",
+      "prerequisites",
+      "content_type",
+      "difficulty",
+      "reading_time_minutes",
+      "last_updated",
+      "authors",
+      "contains_code",
+      "contains_diagram",
+      "word_count",
+      "position_in_doc"
+    ]
+  },
+  "chunking_strategy": {
+    "method": "heading-based",
+    "min_chunk_size": 600,
+    "max_chunk_size": 1500,
+    "target_chunk_size": 1000,
+    "overlap_tokens": 100,
+    "preserve_code_blocks": true,
+    "split_at_sentence_boundaries": true
+  },
+  "quality_checks": {
+    "validate_frontmatter": true,
+    "check_heading_hierarchy": true,
+    "detect_broken_links": true,
+    "verify_chunk_sizes": true,
+    "ensure_metadata_completeness": true
+  }
+}

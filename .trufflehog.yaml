@@ -1,0 +1,41 @@
+# Trufflehog Security Scan Configuration
+# Scans repository for exposed secrets, API keys, and credentials
+
+# Scan configuration
+detectors:
+  - name: all # Enable all built-in detectors
+
+# Verification
+verify: true # Verify found secrets against their services
+
+# Output
+json: false
+only-verified: false
+
+# Exclusions
+exclude-paths:
+  - "**/*.lock"
+  - "**/*.sum"
+  - "**/node_modules/**"
+  - "**/venv/**"
+  - "**/.venv/**"
+  - "**/dist/**"
+  - "**/build/**"
+  - "**/__pycache__/**"
+  - "**/.git/**"
+  - "**/coverage/**"
+  - "**/test-results/**"
+  - "**/.pytest_cache/**"
+
+# Allowlist patterns (false positives)
+allow:
+  # Example patterns - adjust as needed
+  - pattern: "EXAMPLE_API_KEY"
+    reason: "Documentation example, not a real key"
+  - pattern: "your-.*-here"
+    reason: "Placeholder pattern in templates"
+  - pattern: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+    reason: "UUID placeholder pattern"
+
+# Exit codes
+exit-code: 1 # Exit with error if secrets found

@@ -1,0 +1,120 @@
+{
+  "skill_name": "selected-text-constraint",
+  "version": "1.0.0",
+  "description": "Enforce selected-text-only constraints for RAG queries",
+  "selection_validation": {
+    "enabled": true,
+    "min_length": 50,
+    "max_length": 5000,
+    "validate_encoding": true,
+    "encoding": "utf-8",
+    "max_newlines": 20,
+    "check_contiguity": true,
+    "allow_whitespace_normalization": true
+  },
+  "query_validation": {
+    "enabled": true,
+    "min_length": 3,
+    "max_length": 1000,
+    "block_external_knowledge_requests": true,
+    "external_patterns": [
+      "compare.*to.*external",
+      "how is.*used.*in.*industry",
+      "real.*world.*example",
+      "outside.*this",
+      "in practice",
+      "in the real world"
+    ]
+  },
+  "sufficiency_assessment": {
+    "enabled": true,
+    "method": "hybrid",
+    "semantic_similarity_weight": 0.5,
+    "term_overlap_weight": 0.5,
+    "min_semantic_similarity": 0.5,
+    "min_term_overlap": 0.3,
+    "combined_score_threshold": 0.4,
+    "embedding_model": "text-embedding-3-small",
+    "timeout_seconds": 5
+  },
+  "retrieval": {
+    "mode": "selected_text_only",
+    "source": "selected_text",
+    "extraction_method": "sentence_based",
+    "max_chunks": 3,
+    "block_external_sources": true,
+    "block_qdrant_retrieval": true,
+    "block_broad_textbook_retrieval": true,
+    "sentence_splitting": {
+      "delimiter": ".",
+      "preserve_delimiter": true,
+      "min_sentence_length": 10
+    }
+  },
+  "generation": {
+    "temperature": 0.3,
+    "max_tokens": 300,
+    "enforce_constraint_prompt": true,
+    "system_prompt": "You are a strict text analyzer. Only use information from the provided text. Do not add external knowledge. If the text doesn't answer the question, say so clearly.",
+    "model": "gpt-4",
+    "constraint_level": "strict"
+  },
+  "response_validation": {
+    "enabled": true,
+    "check_external_citations": true,
+    "check_external_knowledge": true,
+    "check_term_coverage": true,
+    "min_term_coverage": 0.2,
+    "external_knowledge_patterns": [
+      "according to.*(?!the text|the passage|above)",
+      "research shows",
+      "studies indicate",
+      "in real world",
+      "in practice",
+      "industry standard",
+      "common knowledge",
+      "it is known that"
+    ]
+  },
+  "refusal": {
+    "enabled": true,
+    "detailed_messages": true,
+    "include_explanations": true,
+    "include_suggestions": true,
+    "suggest_alternatives": true,
+    "refusal_categories": [
+      "insufficient_context",
+      "topic_mismatch",
+      "external_knowledge_required",
+      "ambiguous_question",
+      "no_selection"
+    ]
+  },
+  "constraints_enforcement": {
+    "fail_safe": true,
+    "prefer_refusal_over_leak": true,
+    "block_all_external": true,
+    "multiple_validation_passes": true,
+    "log_violations": true,
+    "strict_mode": true
+  },
+  "performance": {
+    "parallel_validation": false,
+    "cache_embeddings": true,
+    "cache_size": 100,
+    "timeout_total_seconds": 15
+  },
+  "monitoring": {
+    "track_constraint_violations": true,
+    "track_refusals": true,
+    "track_validation_passes": true,
+    "log_boundary_cases": true,
+    "metrics_file": "selected-text-constraint-metrics.json"
+  },
+  "error_handling": {
+    "log_errors": true,
+    "return_error_details": true,
+    "fail_safe_mode": true,
+    "max_retries": 1
+  }
+}

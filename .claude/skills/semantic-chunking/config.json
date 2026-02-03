@@ -1,0 +1,118 @@
+{
+  "skill_name": "semantic-chunking",
+  "version": "1.0.0",
+  "description": "Intelligently split content into semantic chunks for embeddings and RAG",
+  "default_config": {
+    "chunking_strategy": "heading-based",
+    "target_chunk_size": 1000,
+    "min_chunk_size": 600,
+    "max_chunk_size": 1500,
+    "chunk_overlap": 100,
+    "overlap_strategy": "token-based",
+    "output_directory": "output/semantic-chunks"
+  },
+  "strategies": {
+    "heading-based": {
+      "description": "Split at heading boundaries (h2, h3)",
+      "primary_split_level": 2,
+      "secondary_split_level": 3,
+      "include_parent_context": true,
+      "max_heading_levels": 4,
+      "best_for": ["structured lessons", "tutorials", "reference docs"]
+    },
+    "semantic-similarity": {
+      "description": "Split at semantic topic shifts using embeddings",
+      "similarity_threshold": 0.7,
+      "embedding_model": "text-embedding-3-small",
+      "min_sentences_per_chunk": 3,
+      "best_for": ["blog posts", "narrative content", "unstructured text"]
+    },
+    "paragraph-based": {
+      "description": "Split at paragraph boundaries",
+      "accumulate_to_target": true,
+      "respect_code_blocks": true,
+      "best_for": ["uniform content", "quick prototyping", "testing"]
+    },
+    "fixed-size-smart": {
+      "description": "Fixed size with intelligent boundary selection",
+      "tolerance_window": 100,
+      "boundary_preference": ["heading", "paragraph", "sentence", "word"],
+      "best_for": ["strict size constraints", "embedding model limits"]
+    }
+  },
+  "context_preservation": {
+    "include_heading_path": true,
+    "include_parent_section": true,
+    "preserve_code_blocks": true,
+    "preserve_math_blocks": true,
+    "preserve_tables": true,
+    "preserve_admonitions": true,
+    "add_section_summary": false
+  },
+  "id_generation": {
+    "strategy": "content-hash",
+    "hash_algorithm": "sha256",
+    "id_length": 16,
+    "include_version": true,
+    "version": "v2",
+    "prefix": "physical-ai-textbook"
+  },
+  "quality_validation": {
+    "enforce_size_limits": true,
+    "verify_overlap": true,
+    "check_code_integrity": true,
+    "validate_context": true,
+    "allow_undersized_final_chunks": true,
+    "min_overlap": 50,
+    "max_size_tolerance": 100
+  },
+  "advanced_features": {
+    "adaptive_chunking": {
+      "enabled": false,
+      "code_heavy_multiplier": 0.7,
+      "narrative_multiplier": 1.3,
+      "math_heavy_multiplier": 0.8
+    },
+    "multi_level_chunking": {
+      "enabled": false,
+      "levels": ["section", "subsection", "paragraph"]
+    },
+    "content_aware_overlap": {
+      "enabled": false,
+      "high_similarity_overlap": 50,
+      "low_similarity_overlap": 150
+    },
+    "chunk_versioning": {
+      "enabled": true,
+      "track_changes": true,
+      "store_previous_versions": false
+    }
+  },
+  "performance": {
+    "parallel_processing": true,
+    "max_workers": 8,
+    "cache_tokenization": true,
+    "incremental_updates": true,
+    "batch_size": 100
+  },
+  "output": {
+    "format": "jsonl",
+    "include_statistics": true,
+    "generate_visualization": false,
+    "write_index": true,
+    "compress_output": false
+  },
+  "tokenization": {
+    "method": "tiktoken",
+    "model": "cl100k_base",
+    "add_special_tokens": false,
+    "estimate_multiplier": 1.3
+  },
+  "evaluation_metrics": {
+    "track_size_distribution": true,
+    "track_context_coverage": true,
+    "track_code_integrity": true,
+    "track_overlap_consistency": true,
+    "track_boundary_quality": true
+  }
+}

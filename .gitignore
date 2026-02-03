@@ -77,3 +77,70 @@ out/
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# Python (Backend)
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+ENV/
+env/
+*.egg
+*.egg-info/
+.eggs/
+pip-log.txt
+pip-delete-this-directory.txt
+.pytest_cache/
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Backend specific
+backend/.env
+backend/.env.*
+backend/scripts/*.log
+backend/logs/
+backend/uploads/
+backend/db/data/
+
+# Frontend specific (Next.js)
+frontend/.env
+frontend/.env.*
+frontend/.next/
+frontend/out/
+
+# Database & Vector Storage
+*.db
+*.sqlite
+*.sqlite3
+qdrant_storage/
+*.dump
+*.sql.backup
+
+# PDF & Document uploads (textbook content)
+*.pdf
+uploads/
+textbooks/
+
+# Sensitive data & credentials
+secrets/
+*.key
+*.pem
+*.p12
+*.pfx
+credentials.json
+service-account.json
+
+# API keys and tokens
+.api-keys
+*.token
+
+# Session data
+sessions/
+*.session

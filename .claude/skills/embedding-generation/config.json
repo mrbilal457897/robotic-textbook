@@ -1,0 +1,218 @@
+{
+  "skill_name": "embedding-generation",
+  "version": "1.0.0",
+  "description": "Generate vector embeddings with batch processing, retry logic, and idempotency",
+  "default_config": {
+    "provider": "openai",
+    "model": "text-embedding-3-small",
+    "dimensions": 1536,
+    "batch_size": 100,
+    "output_directory": "output/embeddings"
+  },
+  "providers": {
+    "openai": {
+      "models": {
+        "text-embedding-3-small": {
+          "dimensions": 1536,
+          "cost_per_million_tokens": 0.02,
+          "max_tokens_per_request": 8191,
+          "batch_size": 100,
+          "rate_limits": {
+            "free_tier": {
+              "requests_per_minute": 3,
+              "tokens_per_minute": 150000
+            },
+            "tier_1": {
+              "requests_per_minute": 3000,
+              "tokens_per_minute": 1000000
+            },
+            "tier_2": {
+              "requests_per_minute": 5000,
+              "tokens_per_minute": 2000000
+            }
+          }
+        },
+        "text-embedding-3-large": {
+          "dimensions": 3072,
+          "cost_per_million_tokens": 0.13,
+          "max_tokens_per_request": 8191,
+          "batch_size": 100,
+          "rate_limits": {
+            "tier_1": {
+              "requests_per_minute": 3000,
+              "tokens_per_minute": 1000000
+            }
+          }
+        },
+        "text-embedding-ada-002": {
+          "dimensions": 1536,
+          "cost_per_million_tokens": 0.10,
+          "max_tokens_per_request": 8191,
+          "batch_size": 100,
+          "deprecated": true
+        }
+      },
+      "api_key_env": "OPENAI_API_KEY",
+      "supports_dimension_reduction": true
+    },
+    "cohere": {
+      "models": {
+        "embed-english-v3.0": {
+          "dimensions": 1024,
+          "cost_per_million_tokens": 0.10,
+          "max_texts_per_request": 96,
+          "batch_size": 96,
+          "input_type": "search_document",
+          "rate_limits": {
+            "default": {
+              "requests_per_minute": 1000
+            }
+          }
+        },
+        "embed-multilingual-v3.0": {
+          "dimensions": 1024,
+          "cost_per_million_tokens": 0.10,
+          "max_texts_per_request": 96,
+          "batch_size": 96,
+          "input_type": "search_document",
+          "languages": "100+",
+          "rate_limits": {
+            "default": {
+              "requests_per_minute": 1000
+            }
+          }
+        }
+      },
+      "api_key_env": "COHERE_API_KEY"
+    },
+    "local": {
+      "models": {
+        "all-MiniLM-L6-v2": {
+          "dimensions": 384,
+          "cost_per_million_tokens": 0.0,
+          "batch_size": 32,
+          "speed": "fast",
+          "quality": "good",
+          "device": "cuda"
+        },
+        "all-mpnet-base-v2": {
+          "dimensions": 768,
+          "cost_per_million_tokens": 0.0,
+          "batch_size": 32,
+          "speed": "medium",
+          "quality": "better",
+          "device": "cuda"
+        },
+        "instructor-large": {
+          "dimensions": 768,
+          "cost_per_million_tokens": 0.0,
+          "batch_size": 16,
+          "speed": "slow",
+          "quality": "best",
+          "device": "cuda",
+          "instruction_based": true
+        }
+      },
+      "requires_gpu": true,
+      "fallback_device": "cpu"
+    }
+  },
+  "rate_limiting": {
+    "enabled": true,
+    "strategy": "token_bucket",
+    "default_requests_per_minute": 3000,
+    "default_tokens_per_minute": 1000000,
+    "burst_allowance": 1.1,
+    "cooldown_on_429": 60
+  },
+  "retry_policy": {
+    "enabled": true,
+    "max_retries": 5,
+    "base_delay_seconds": 1,
+    "max_delay_seconds": 60,
+    "exponential_base": 2,
+    "jitter": true,
+    "retry_on_errors": [
+      "429",
+      "500",
+      "502",
+      "503",
+      "504",
+      "connection_timeout",
+      "network_error"
+    ],
+    "no_retry_on_errors": [
+      "401",
+      "403",
+      "400"
+    ]
+  },
+  "idempotency": {
+    "enabled": true,
+    "state_file": "embedding-state.json",
+    "checkpoint_strategy": "per_batch",
+    "checkpoint_frequency": 1,
+    "track_failed_chunks": true,
+    "allow_resume": true
+  },
+  "preprocessing": {
+    "normalize_whitespace": true,
+    "remove_markdown_artifacts": false,
+    "truncate_max_tokens": 8000,
+    "min_content_length": 10,
+    "remove_special_characters": false,
+    "lowercase": false
+  },
+  "cost_optimization": {
+    "cache_embeddings": true,
+    "cache_size": 10000,
+    "reduce_dimensions": false,
+    "custom_dimensions": null,
+    "skip_duplicates": true,
+    "preprocess_aggressively": false
+  },
+  "batching": {
+    "strategy": "intelligent",
+    "max_batch_size": 100,
+    "max_tokens_per_batch": 8000,
+    "dynamic_batch_sizing": true,
+    "respect_token_limits": true
+  },
+  "output": {
+    "format": "jsonl",
+    "include_metadata": true,
+    "compress": false,
+    "separate_embeddings_file": false,
+    "embedding_precision": "float32",
+    "validate_output": true
+  },
+  "error_handling": {
+    "log_failed_chunks": true,
+    "failed_chunks_file": "failed-chunks.jsonl",
+    "continue_on_error": true,
+    "max_consecutive_failures": 10,
+    "fail_fast": false
+  },
+  "performance": {
+    "parallel_processing": false,
+    "max_workers": 4,
+    "progress_bar": true,
+    "verbose_logging": false,
+    "measure_latency": true
+  },
+  "validation": {
+    "check_embedding_shape": true,
+    "check_for_zero_vectors": true,
+    "check_for_nan_values": true,
+    "verify_dimensions": true,
+    "sample_validation": true,
+    "sample_size": 10
+  },
+  "monitoring": {
+    "track_cost": true,
+    "track_latency": true,
+    "track_throughput": true,
+    "log_statistics": true,
+    "real_time_progress": true
+  }
+}

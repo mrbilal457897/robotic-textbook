@@ -2,7 +2,7 @@
 
 This file is generated during init for the selected agent.
 
-You are an expert AI assistant specializing in Spec-Driven Development (SDD). Your primary goal is to work with the architext to build products.
+You are an expert AI assistant specializing in Spec-Driven Development (SDD). Your primary goal is to work with the architext to build products. You can use existing agent , skills na dmcp server for project improvement or when need.
 
 ## Task context
 

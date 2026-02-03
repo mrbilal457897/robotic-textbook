@@ -1,0 +1,242 @@
+{
+  "skill_name": "qdrant-vector-storage",
+  "version": "1.0.0",
+  "description": "Manage vector storage and retrieval in Qdrant Cloud for RAG systems",
+  "qdrant": {
+    "url_env": "QDRANT_URL",
+    "api_key_env": "QDRANT_API_KEY",
+    "timeout_seconds": 30,
+    "prefer_grpc": false,
+    "https": true
+  },
+  "collection": {
+    "default_name": "textbook-v1",
+    "naming_convention": "{book-id}-{version}-{date}",
+    "vector_config": {
+      "size": 1536,
+      "distance_metric": "Cosine",
+      "on_disk": false
+    },
+    "shard_config": {
+      "replication_factor": 1,
+      "write_consistency_factor": 1,
+      "shard_number": 1
+    },
+    "optimizer_config": {
+      "deleted_threshold": 0.2,
+      "vacuum_min_vector_number": 1000,
+      "default_segment_number": 2,
+      "max_segment_size": 200000,
+      "memmap_threshold": 50000,
+      "indexing_threshold": 20000,
+      "flush_interval_sec": 5,
+      "max_optimization_threads": 1
+    }
+  },
+  "distance_metrics": {
+    "cosine": {
+      "value": "Cosine",
+      "description": "Cosine similarity (0-2 range)",
+      "recommended_for": ["OpenAI", "Cohere", "most embeddings"],
+      "normalize_vectors": false
+    },
+    "euclid": {
+      "value": "Euclid",
+      "description": "Euclidean distance (L2 norm)",
+      "recommended_for": ["Image embeddings"],
+      "normalize_vectors": false
+    },
+    "dot": {
+      "value": "Dot",
+      "description": "Dot product similarity",
+      "recommended_for": ["Normalized embeddings"],
+      "normalize_vectors": true
+    }
+  },
+  "payload_indexes": [
+    {
+      "field": "chapter",
+      "type": "keyword",
+      "description": "Chapter name for filtering"
+    },
+    {
+      "field": "section",
+      "type": "keyword",
+      "description": "Section name for filtering"
+    },
+    {
+      "field": "difficulty",
+      "type": "keyword",
+      "description": "Difficulty level (beginner, intermediate, advanced)"
+    },
+    {
+      "field": "contains_code",
+      "type": "bool",
+      "description": "Whether chunk contains code blocks"
+    },
+    {
+      "field": "contains_math",
+      "type": "bool",
+      "description": "Whether chunk contains math equations"
+    },
+    {
+      "field": "word_count",
+      "type": "integer",
+      "description": "Word count for range filtering"
+    }
+  ],
+  "upload": {
+    "batch_size": 100,
+    "parallel_uploads": false,
+    "wait_for_index": true,
+    "retry_policy": {
+      "max_retries": 3,
+      "base_delay_seconds": 1,
+      "exponential_backoff": true
+    },
+    "idempotency": {
+      "enabled": true,
+      "state_file": "qdrant-upload-state.json",
+      "use_upsert": true
+    },
+    "validation": {
+      "verify_after_upload": true,
+      "sample_search": true
+    }
+  },
+  "search": {
+    "default_limit": 10,
+    "max_limit": 100,
+    "min_score_threshold": 0.0,
+    "search_params": {
+      "hnsw_ef": 128,
+      "exact": false
+    },
+    "output": {
+      "with_payload": true,
+      "with_vectors": false,
+      "with_score": true
+    },
+    "timeout_seconds": 10
+  },
+  "filtering": {
+    "supported_operators": ["match", "range", "geo_bounding_box", "geo_radius", "values_count"],
+    "supported_conditions": ["must", "should", "must_not"],
+    "examples": [
+      {
+        "name": "Filter by chapter",
+        "filter": {
+          "must": [
+            {"key": "chapter", "match": {"value": "Week 1"}}
+          ]
+        }
+      },
+      {
+        "name": "Filter code-only chunks",
+        "filter": {
+          "must": [
+            {"key": "contains_code", "match": {"value": true}}
+          ]
+        }
+      },
+      {
+        "name": "Filter by difficulty and chapter",
+        "filter": {
+          "must": [
+            {"key": "difficulty", "match": {"value": "beginner"}},
+            {"key": "chapter", "match": {"value": "Week 1"}}
+          ]
+        }
+      }
+    ]
+  },
+  "reranking": {
+    "enabled": true,
+    "strategies": {
+      "cohere": {
+        "provider": "cohere",
+        "model": "rerank-english-v3.0",
+        "api_key_env": "COHERE_API_KEY",
+        "initial_retrieve": 50,
+        "final_top_n": 10,
+        "cost_per_1000_searches": 1.0
+      },
+      "cross_encoder": {
+        "provider": "local",
+        "model": "cross-encoder/ms-marco-MiniLM-L-6-v2",
+        "initial_retrieve": 50,
+        "final_top_n": 10,
+        "batch_size": 32
+      },
+      "keyword_boost": {
+        "provider": "local",
+        "boost_factor": 1.5,
+        "initial_retrieve": 20
+      },
+      "mmr": {
+        "provider": "local",
+        "lambda_param": 0.5,
+        "initial_retrieve": 20,
+        "final_top_n": 10
+      },
+      "rrf": {
+        "provider": "local",
+        "k_constant": 60,
+        "strategies": ["vector", "filtered", "code_filtered"],
+        "final_top_n": 10
+      }
+    },
+    "default_strategy": "cohere"
+  },
+  "free_tier": {
+    "limits": {
+      "storage_gb": 1.0,
+      "max_vectors": 1000000,
+      "clusters": 1
+    },
+    "optimization": {
+      "quantization": {
+        "enabled": false,
+        "type": "int8",
+        "quantile": 0.99,
+        "storage_reduction": 4
+      },
+      "payload": {
+        "max_content_length": 5000,
+        "truncate_long_fields": true,
+        "optimize_arrays": true,
+        "remove_debug_fields": true
+      }
+    },
+    "monitoring": {
+      "check_storage": true,
+      "warn_at_gb": 0.9,
+      "warn_at_vectors": 900000,
+      "alert_frequency": "per_upload"
+    }
+  },
+  "deterministic_retrieval": {
+    "enabled": false,
+    "exact_search": true,
+    "hnsw_ef": 128,
+    "description": "Use exact search for reproducible results (slower)"
+  },
+  "error_handling": {
+    "retry_on_errors": ["timeout", "connection_error", "rate_limit"],
+    "fail_on_errors": ["authentication_error", "invalid_collection"],
+    "log_errors": true,
+    "error_log_file": "qdrant-errors.log"
+  },
+  "monitoring": {
+    "track_latency": true,
+    "track_storage_usage": true,
+    "track_vector_count": true,
+    "log_searches": false,
+    "metrics_file": "qdrant-metrics.json"
+  },
+  "point_id_generation": {
+    "strategy": "uuid5",
+    "namespace": "6ba7b810-9dad-11d1-80b4-00c04fd430c8",
+    "deterministic": true
+  }
+}

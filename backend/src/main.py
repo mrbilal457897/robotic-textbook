@@ -18,7 +18,7 @@ from .api.middleware import (
     IPBanMiddleware,
     PromptInjectionMiddleware,
 )
-from .api.v1 import auth
+from .api.v1 import auth, metrics, cleanup
 from .config import Settings
 
 # Initialize settings
@@ -128,6 +128,8 @@ app.add_middleware(PromptInjectionMiddleware)
 # ============================================
 
 app.include_router(auth.router, prefix="/api/v1")
+app.include_router(metrics.router, prefix="/api/v1")
+app.include_router(cleanup.router, prefix="/api/v1")
 
 # ============================================
 # Health Check Endpoints
