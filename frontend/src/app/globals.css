@@ -132,3 +132,34 @@
 .prose th {
   @apply bg-gray-100 font-semibold dark:bg-gray-800;
 }
+
+/* Citation highlight animation (T122) */
+@keyframes citation-highlight-fade {
+  0% {
+    background-color: rgba(251, 191, 36, 0.4); /* amber-400 with opacity */
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+
+@keyframes citation-highlight-fade-dark {
+  0% {
+    background-color: rgba(217, 119, 6, 0.3); /* amber-600 with opacity for dark mode */
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+
+.citation-highlight {
+  animation: citation-highlight-fade 2s ease-out;
+  border-radius: 0.25rem;
+  padding: 0.5rem;
+  margin: -0.5rem;
+  scroll-margin-top: 100px; /* Offset for fixed header */
+}
+
+.dark .citation-highlight {
+  animation: citation-highlight-fade-dark 2s ease-out;
+}

@@ -257,16 +257,16 @@
 
 ### Backend Citation Metadata for User Story 4
 
-- [ ] T117 [US4] Enhance Metadata MCP to include context (prev/next chunks) in `backend/src/mcp/metadata.py`
-- [ ] T118 [US4] Implement batch metadata lookup (/metadata/batch endpoint) in `backend/src/mcp/metadata.py`
+- [x] T117 [US4] Enhance Metadata MCP to include context (prev/next chunks) in `backend/src/mcp/metadata.py`
+- [x] T118 [US4] Implement batch metadata lookup (/metadata/batch endpoint) in `backend/src/mcp/metadata.py`
 
 ### Frontend Source Navigation for User Story 4
 
-- [ ] T119 [US4] Enhance CitationBadge with hover tooltip in `frontend/src/components/chat/CitationBadge.tsx`
-- [ ] T120 [US4] Enhance SourcePreview modal with full passage + confidence score in `frontend/src/components/chat/SourcePreview.tsx`
-- [ ] T121 [US4] Implement "Go to source" navigation in `frontend/src/components/chat/SourcePreview.tsx`
-- [ ] T122 [US4] Implement paragraph highlighting with 2-second fade in `frontend/src/app/(textbook)/[book]/[chapter]/page.tsx`
-- [ ] T123 [US4] Write E2E test for citation navigation in `frontend/tests/e2e/citation-navigation.spec.ts`
+- [x] T119 [US4] Enhance CitationBadge with hover tooltip in `frontend/src/components/chat/CitationBadge.tsx`
+- [x] T120 [US4] Enhance SourcePreview modal with full passage + confidence score in `frontend/src/components/chat/SourcePreview.tsx`
+- [x] T121 [US4] Implement "Go to source" navigation in `frontend/src/components/chat/SourcePreview.tsx`
+- [x] T122 [US4] Implement paragraph highlighting with 2-second fade in `frontend/src/app/(textbook)/[book]/[chapter]/page.tsx`
+- [x] T123 [US4] Write E2E test for citation navigation in `frontend/tests/e2e/citation-navigation.spec.ts`
 
 ### Validation for User Story 4
 
