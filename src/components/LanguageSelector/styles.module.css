@@ -7,40 +7,45 @@
 .selectorButton {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 1rem;
-  background: rgba(0, 240, 255, 0.1);
-  border: 1px solid rgba(0, 240, 255, 0.3);
-  border-radius: 8px;
-  color: #00f0ff;
+  gap: 5px;
+  padding: 6px 10px;
+  background: rgba(167, 139, 250, 0.08);
+  border: 1px solid rgba(167, 139, 250, 0.2);
+  border-radius: 999px;
+  color: var(--text-secondary, #b8a8da);
   cursor: pointer;
-  transition: all 0.3s ease;
-  font-size: 0.95rem;
+  transition: all 150ms ease;
+  font-size: 0.8rem;
   font-weight: 500;
+  white-space: nowrap;
+  line-height: 1;
 }
 
 .selectorButton:hover {
-  background: rgba(0, 240, 255, 0.2);
-  border-color: #00f0ff;
+  background: rgba(167, 139, 250, 0.15);
+  border-color: #a78bfa;
+  color: var(--text-primary, #ede8fa);
 }
 
-.selectorButton:focus {
-  outline: 2px solid #00f0ff;
+.selectorButton:focus-visible {
+  outline: 2px solid #a78bfa;
   outline-offset: 2px;
 }
 
 .flag {
-  font-size: 1.2rem;
+  font-size: 1rem;
   line-height: 1;
 }
 
 .languageName {
   white-space: nowrap;
+  font-size: 0.8rem;
 }
 
 .chevron {
-  font-size: 0.75rem;
-  transition: transform 0.3s ease;
+  font-size: 0.65rem;
+  transition: transform 0.2s ease;
+  opacity: 0.7;
 }
 
 .chevron.open {
@@ -49,15 +54,17 @@
 
 .dropdown {
   position: absolute;
-  top: calc(100% + 0.5rem);
+  top: calc(100% + 8px);
   right: 0;
-  min-width: 200px;
-  background: linear-gradient(135deg, #1a2230 0%, #0a0e14 100%);
-  border: 1px solid rgba(0, 240, 255, 0.2);
-  border-radius: 8px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  min-width: 190px;
+  background: var(--bg-card, #111111);
+  border: 1px solid rgba(167, 139, 250, 0.2);
+  border-radius: 12px;
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.3),
+    0 16px 32px -4px rgba(0, 0, 0, 0.4);
   z-index: 1000;
-  animation: slideDown 0.2s ease-out;
+  animation: slideDown 0.15s ease-out;
   overflow: hidden;
 }
 
@@ -81,31 +88,33 @@
 .languageOption {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  padding: 0.75rem 1rem;
-  color: #b8c4ce;
+  gap: 0.65rem;
+  padding: 0.55rem 0.85rem;
+  color: var(--text-secondary, #b8a8da);
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition:
+    background 120ms ease,
+    color 120ms ease;
   border: none;
   background: transparent;
   width: 100%;
   text-align: left;
-  font-size: 0.95rem;
+  font-size: 0.85rem;
 }
 
 .languageOption:hover {
-  background: rgba(0, 240, 255, 0.1);
-  color: #00f0ff;
+  background: rgba(167, 139, 250, 0.1);
+  color: var(--text-primary, #ede8fa);
 }
 
 .languageOption.current {
-  background: rgba(0, 240, 255, 0.15);
-  color: #00f0ff;
+  background: rgba(167, 139, 250, 0.12);
+  color: #a78bfa;
   font-weight: 600;
 }
 
 .languageOption .flag {
-  font-size: 1.25rem;
+  font-size: 1.1rem;
 }
 
 .languageInfo {
@@ -125,8 +134,8 @@
 }
 
 .checkmark {
-  color: #00f0ff;
-  font-size: 1rem;
+  color: #a78bfa;
+  font-size: 0.85rem;
 }
 
 /* Mobile Responsive */
@@ -172,12 +181,12 @@
 
 /* RTL Support */
 
-[dir="rtl"] .dropdown {
+[dir='rtl'] .dropdown {
   right: auto;
   left: 0;
 }
 
-[dir="rtl"] .selectorButton,
-[dir="rtl"] .languageOption {
+[dir='rtl'] .selectorButton,
+[dir='rtl'] .languageOption {
   flex-direction: row-reverse;
 }

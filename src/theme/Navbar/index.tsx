@@ -20,6 +20,7 @@ import { LanguageSelector } from '../../components/LanguageSelector';
 import { LoginButton } from '../../components/Auth/LoginButton';
 import { UserProfile } from '../../components/Auth/UserProfile';
 import { useAuth } from '../../hooks/useAuth';
+import { ThemeToggle } from '../../components/ThemeToggle';
 import styles from './styles.module.css';
 
 export default function Navbar(): JSX.Element {
@@ -121,6 +122,8 @@ export default function Navbar(): JSX.Element {
 
           {/* Desktop Actions */}
           <div className={styles.navbarActions}>
+            {/* Theme Toggle */}
+            <ThemeToggle />
             {/* Search Button */}
             <button
               className={styles.searchButton}

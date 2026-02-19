@@ -1,60 +1,58 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    './src/**/*.{js,jsx,ts,tsx,md,mdx}',
-    './docs/**/*.{md,mdx}',
-    './blog/**/*.{md,mdx}',
-  ],
-  darkMode: 'class',
+  content: ['./src/**/*.{js,jsx,ts,tsx,md,mdx}', './docs/**/*.{md,mdx}', './blog/**/*.{md,mdx}'],
+  // Support both the legacy `.dark` class AND Docusaurus's data-theme="dark" attribute.
+  // This ensures Tailwind dark: utilities work with Docusaurus's native theme system.
+  darkMode: ['class', '[data-theme="dark"]', '[data-color-theme="high-contrast"]'],
   theme: {
     extend: {
-      // Colors from design-tokens.ts
+      // Colors - Velvet Cosmos theme
       colors: {
         primary: {
-          DEFAULT: '#00F0FF', // Electric Cyan
-          light: '#33F3FF',
-          dark: '#00B8CC',
-          contrast: '#0A0E14',
+          DEFAULT: '#A78BFA', // Soft Amethyst Violet
+          light: '#B9A3FC',
+          dark: '#8562EC',
+          contrast: '#0D0B1A',
         },
         secondary: {
-          DEFAULT: '#B8C4CE', // Titanium Silver
-          light: '#D1DAE0',
-          dark: '#8A9AA8',
-          contrast: '#0A0E14',
+          DEFAULT: '#818CF8', // Periwinkle Indigo
+          light: '#9BA6FA',
+          dark: '#6170F4',
+          contrast: '#0D0B1A',
         },
         accent: {
-          DEFAULT: '#FF6B35', // Plasma Orange
-          light: '#FF8F66',
-          dark: '#CC5529',
+          DEFAULT: '#FB923C', // Warm Sunset Orange
+          light: '#FCA55E',
+          dark: '#EA7520',
           contrast: '#FFFFFF',
         },
         background: {
-          primary: '#0A0E14', // Deep Space Black
-          card: '#1A2230', // Midnight Blue
-          surface: '#242D3C',
-          overlay: 'rgba(10, 14, 20, 0.95)',
-          elevated: '#2A3544',
+          primary: '#0D0B1A', // Deep Cosmic
+          card: '#171230', // Rich Midnight Purple
+          surface: '#211A3F',
+          overlay: 'rgba(23, 18, 48, 0.95)',
+          elevated: '#2A2250',
         },
         text: {
-          primary: '#E8EDF3',
-          secondary: '#9AABB8',
-          tertiary: '#6B7E8F',
-          disabled: '#4A5766',
-          inverse: '#0A0E14',
+          primary: '#EDE8FA',
+          secondary: '#B4A8D6',
+          tertiary: '#7B6FA8',
+          disabled: '#4D4570',
+          inverse: '#0D0B1A',
         },
         status: {
-          success: '#00E676',
-          warning: '#FFB300',
-          error: '#FF5252',
-          info: '#00F0FF',
+          success: '#34D399',
+          warning: '#FBBF24',
+          error: '#F87171',
+          info: '#60A5FA',
         },
       },
 
-      // Typography from design-tokens.ts
+      // Typography - Velvet Cosmos
       fontFamily: {
-        display: ['"Orbitron"', '"Rajdhani"', 'sans-serif'],
-        heading: ['"Rajdhani"', 'sans-serif'],
-        body: ['"Source Code Pro"', 'monospace'],
+        display: ['"Outfit"', 'sans-serif'],
+        heading: ['"DM Sans"', 'sans-serif'],
+        body: ['"Inter"', 'sans-serif'],
         code: ['"JetBrains Mono"', '"Courier New"', 'monospace'],
       },
 
@@ -156,8 +154,7 @@ module.exports = {
       // Box Shadow
       boxShadow: {
         sm: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
-        DEFAULT:
-          '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
+        DEFAULT: '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
         md: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
         lg: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
         xl: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
@@ -165,9 +162,9 @@ module.exports = {
         inner: 'inset 0 2px 4px 0 rgba(0, 0, 0, 0.06)',
         none: 'none',
         // Glow effects
-        'glow-primary': '0 0 20px rgba(0, 240, 255, 0.5)',
-        'glow-accent': '0 0 20px rgba(255, 107, 53, 0.5)',
-        'glow-success': '0 0 20px rgba(0, 230, 118, 0.5)',
+        'glow-primary': '0 0 20px rgba(167, 139, 250, 0.5)',
+        'glow-accent': '0 0 20px rgba(251, 146, 60, 0.5)',
+        'glow-success': '0 0 20px rgba(52, 211, 153, 0.5)',
       },
 
       // Transitions
@@ -230,9 +227,9 @@ module.exports = {
           '100%': { transform: 'translateY(0)', opacity: '1' },
         },
         glowExpand: {
-          '0%': { boxShadow: '0 0 0 rgba(0, 240, 255, 0)' },
-          '50%': { boxShadow: '0 0 20px rgba(0, 240, 255, 0.5)' },
-          '100%': { boxShadow: '0 0 10px rgba(0, 240, 255, 0.3)' },
+          '0%': { boxShadow: '0 0 0 rgba(167, 139, 250, 0)' },
+          '50%': { boxShadow: '0 0 20px rgba(167, 139, 250, 0.5)' },
+          '100%': { boxShadow: '0 0 10px rgba(167, 139, 250, 0.3)' },
         },
       },
     },
@@ -242,22 +239,22 @@ module.exports = {
     function ({ addUtilities }) {
       const newUtilities = {
         '.glass': {
-          background: 'rgba(26, 34, 48, 0.7)',
+          background: 'rgba(13, 11, 26, 0.25)',
           backdropFilter: 'blur(12px)',
           WebkitBackdropFilter: 'blur(12px)',
-          border: '1px solid rgba(255, 255, 255, 0.1)',
+          border: '1px solid rgba(167, 139, 250, 0.12)',
         },
         '.glass-light': {
-          background: 'rgba(26, 34, 48, 0.5)',
+          background: 'rgba(13, 11, 26, 0.15)',
           backdropFilter: 'blur(8px)',
           WebkitBackdropFilter: 'blur(8px)',
-          border: '1px solid rgba(255, 255, 255, 0.08)',
+          border: '1px solid rgba(167, 139, 250, 0.08)',
         },
         '.glass-heavy': {
-          background: 'rgba(26, 34, 48, 0.9)',
+          background: 'rgba(13, 11, 26, 0.4)',
           backdropFilter: 'blur(16px)',
           WebkitBackdropFilter: 'blur(16px)',
-          border: '1px solid rgba(255, 255, 255, 0.15)',
+          border: '1px solid rgba(167, 139, 250, 0.18)',
         },
       };
 
@@ -268,11 +265,11 @@ module.exports = {
     function ({ addUtilities }) {
       const newUtilities = {
         '.focus-ring': {
-          outline: '2px solid #00F0FF',
+          outline: '2px solid #A78BFA',
           outlineOffset: '2px',
         },
         '.focus-ring-error': {
-          outline: '2px solid #FF5252',
+          outline: '2px solid #F87171',
           outlineOffset: '2px',
         },
       };

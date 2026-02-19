@@ -1,0 +1,245 @@
+/**
+ * ThemeToggle Styles — Physical AI Textbook
+ * Adapts to all 5 theme modes via CSS variables
+ */
+
+/* ─── Wrapper ─────────────────────────────────────────── */
+.wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* ─── Trigger Button ──────────────────────────────────── */
+.trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: var(--radius-full);
+  background: var(--theme-toggle-bg, rgba(167, 139, 250, 0.08));
+  border: 1px solid var(--theme-toggle-border, rgba(167, 139, 250, 0.2));
+  color: var(--text-secondary);
+  font-family: var(--font-body);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: all 150ms ease;
+  white-space: nowrap;
+  line-height: 1;
+}
+
+.trigger:hover {
+  background: var(--theme-toggle-bg-hover, rgba(167, 139, 250, 0.15));
+  border-color: var(--primary);
+  color: var(--text-primary);
+}
+
+.trigger:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.triggerIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary);
+  flex-shrink: 0;
+}
+
+.triggerLabel {
+  font-size: var(--font-size-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-tertiary);
+}
+
+.chevron {
+  display: flex;
+  align-items: center;
+  color: var(--text-tertiary);
+  transition: transform 200ms ease;
+  flex-shrink: 0;
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+}
+
+/* ─── Popover ─────────────────────────────────────────── */
+.popover {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: var(--z-index-dropdown, 1000);
+  min-width: 260px;
+  background: var(--bg-card);
+  border: 1px solid var(--theme-border, rgba(167, 139, 250, 0.2));
+  border-radius: var(--radius-xl);
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.3),
+    0 16px 32px -4px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(167, 139, 250, 0.05);
+  overflow: hidden;
+  animation: popoverIn 150ms ease-out;
+}
+
+@keyframes popoverIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.popoverHeader {
+  padding: 10px 14px 6px;
+  font-family: var(--font-body);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-bottom: 1px solid var(--theme-border, rgba(167, 139, 250, 0.1));
+}
+
+/* ─── Menu Items ──────────────────────────────────────── */
+.menuItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 10px 14px;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: background 120ms ease;
+  text-align: left;
+}
+
+.menuItem:hover {
+  background: var(--theme-item-hover, rgba(167, 139, 250, 0.08));
+  color: var(--text-primary);
+}
+
+.menuItem:focus-visible {
+  outline: none;
+  background: var(--theme-item-hover, rgba(167, 139, 250, 0.1));
+  color: var(--text-primary);
+}
+
+.menuItemActive {
+  color: var(--text-primary);
+  background: var(--theme-item-active, rgba(167, 139, 250, 0.12));
+}
+
+.menuItemIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-lg);
+  background: var(--theme-icon-bg, rgba(167, 139, 250, 0.1));
+  color: var(--primary);
+  flex-shrink: 0;
+  transition: background 120ms ease;
+}
+
+.menuItemActive .menuItemIcon {
+  background: var(--primary);
+  color: var(--bg-primary);
+}
+
+.menuItemText {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  flex: 1;
+  min-width: 0;
+}
+
+.menuItemLabel {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: inherit;
+  line-height: 1.3;
+}
+
+.menuItemDesc {
+  font-size: var(--font-size-xs);
+  color: var(--text-tertiary);
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.menuItemCheck {
+  display: flex;
+  align-items: center;
+  color: var(--primary);
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+/* ─── Light Mode Overrides ────────────────────────────── */
+[data-theme='light'] .trigger {
+  --theme-toggle-bg: rgba(109, 40, 217, 0.06);
+  --theme-toggle-border: rgba(109, 40, 217, 0.18);
+  --theme-toggle-bg-hover: rgba(109, 40, 217, 0.12);
+}
+
+[data-theme='light'] .popover {
+  --theme-border: rgba(109, 40, 217, 0.18);
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.08),
+    0 16px 32px -4px rgba(0, 0, 0, 0.12);
+}
+
+[data-theme='light'] .menuItem:hover,
+[data-theme='light'] .menuItem:focus-visible {
+  --theme-item-hover: rgba(109, 40, 217, 0.06);
+}
+
+[data-theme='light'] .menuItemActive {
+  --theme-item-active: rgba(109, 40, 217, 0.1);
+}
+
+[data-theme='light'] .menuItemIcon {
+  --theme-icon-bg: rgba(109, 40, 217, 0.08);
+}
+
+/* ─── Sepia Mode Overrides ────────────────────────────── */
+[data-color-theme='sepia'] .trigger {
+  --theme-toggle-bg: rgba(124, 58, 16, 0.08);
+  --theme-toggle-border: rgba(124, 58, 16, 0.25);
+  --theme-toggle-bg-hover: rgba(124, 58, 16, 0.15);
+}
+
+[data-color-theme='sepia'] .popover {
+  --theme-border: rgba(124, 58, 16, 0.25);
+}
+
+/* ─── High-Contrast Overrides ─────────────────────────── */
+[data-color-theme='high-contrast'] .trigger {
+  --theme-toggle-bg: rgba(255, 255, 0, 0.1);
+  --theme-toggle-border: #ffff00;
+  --theme-toggle-bg-hover: rgba(255, 255, 0, 0.2);
+}
+
+[data-color-theme='high-contrast'] .popover {
+  --theme-border: #ffffff;
+  border-color: #ffffff;
+}
+
+[data-color-theme='high-contrast'] .menuItem:focus-visible {
+  outline: 2px solid #ffff00;
+  outline-offset: -2px;
+}

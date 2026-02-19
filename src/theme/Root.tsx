@@ -11,14 +11,17 @@ import React, { useState } from 'react';
 import { CookieConsentBanner } from '../components/CookieConsent/Banner';
 import { PreferencesModal } from '../components/CookieConsent/PreferencesModal';
 import { useCookieConsent } from '../hooks/useCookieConsent';
+import { ChatPanel } from '../components/chat/ChatPanel';
+import { ThemeProvider } from '../lib/theme/ThemeContext';
 
 export default function Root({ children }: { children: React.ReactNode }): JSX.Element {
   const { showBanner, preferences, savePreferences, resetPreferences } = useCookieConsent();
   const [showPreferencesModal, setShowPreferencesModal] = useState(false);
 
   return (
-    <>
+    <ThemeProvider>
       {children}
+      <ChatPanel defaultOpen={false} />
       {showBanner && (
         <CookieConsentBanner
           onAcceptAll={() => {
@@ -43,13 +46,13 @@ export default function Root({ children }: { children: React.ReactNode }): JSX.E
       {showPreferencesModal && (
         <PreferencesModal
           currentPreferences={preferences}
-          onSave={(prefs) => {
+          onSave={prefs => {
             savePreferences(prefs);
             setShowPreferencesModal(false);
           }}
           onClose={() => setShowPreferencesModal(false)}
         />
       )}
-    </>
+    </ThemeProvider>
   );
 }

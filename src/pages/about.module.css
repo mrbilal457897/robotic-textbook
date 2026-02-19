@@ -17,7 +17,7 @@
     var(--bg-card) 50%,
     var(--bg-primary) 100%
   );
-  border-bottom: 1px solid rgba(0, 240, 255, 0.1);
+  border-bottom: 1px solid rgba(167, 139, 250, 0.15);
 }
 
 .heroContent {
@@ -52,27 +52,27 @@
   margin: 0;
 }
 
-.heroIllustration {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.heroImageWrapper {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow:
+    0 0 0 1px rgba(167, 139, 250, 0.15),
+    0 24px 64px rgba(0, 0, 0, 0.5);
 }
 
-.illustrationSvg {
+.heroImage {
   width: 100%;
-  max-width: 400px;
-  height: auto;
-  filter: drop-shadow(0 0 20px rgba(0, 240, 255, 0.2));
-  animation: float 3s ease-in-out infinite;
+  height: 420px;
+  object-fit: cover;
+  display: block;
 }
 
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-20px);
-  }
+.heroImageOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(167, 139, 250, 0.08) 0%, transparent 60%);
+  pointer-events: none;
 }
 
 /* Section Styles */
@@ -291,6 +291,52 @@
   color: var(--primary);
 }
 
+/* Simulation Section Layout */
+.simulationLayout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3xl);
+  align-items: center;
+}
+
+.simulationText {
+  display: flex;
+  flex-direction: column;
+}
+
+.simulationImageWrapper {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow:
+    0 0 0 1px rgba(167, 139, 250, 0.15),
+    0 20px 48px rgba(0, 0, 0, 0.5);
+}
+
+.simulationImage {
+  width: 100%;
+  height: 380px;
+  object-fit: cover;
+  display: block;
+}
+
+.simulationImageOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(225deg, rgba(167, 139, 250, 0.1) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  .simulationLayout {
+    grid-template-columns: 1fr;
+  }
+
+  .simulationImage {
+    height: 260px;
+  }
+}
+
 /* CTA Section */
 .ctaSection {
   padding: var(--space-4xl) var(--space-lg);
@@ -342,8 +388,16 @@
     font-size: var(--font-size-5xl);
   }
 
+  .heroImage {
+    height: 300px;
+  }
+
   .featureGrid,
   .audienceGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .simulationLayout {
     grid-template-columns: 1fr;
   }
 }

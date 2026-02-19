@@ -6,9 +6,13 @@
 import React from 'react';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
+import useBaseUrl from '@docusaurus/useBaseUrl';
 import styles from './about.module.css';
 
 export default function About(): JSX.Element {
+  const heroImgSrc = useBaseUrl('/img/about/about-hero.jpg');
+  const simulationImgSrc = useBaseUrl('/img/about/about-simulation.jpg');
+
   return (
     <Layout
       title="About"
@@ -27,144 +31,14 @@ export default function About(): JSX.Element {
                 robotics, Physical AI, and autonomous systems development.
               </p>
             </div>
-            <div className={styles.heroIllustration}>
-              <svg
-                viewBox="0 0 400 400"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                className={styles.illustrationSvg}
-              >
-                {/* Outer glow effect */}
-                <defs>
-                  <radialGradient id="glowGradient" cx="50%" cy="50%">
-                    <stop offset="0%" stopColor="var(--primary)" stopOpacity="0.2" />
-                    <stop offset="100%" stopColor="var(--primary)" stopOpacity="0" />
-                  </radialGradient>
-                </defs>
-
-                {/* Robot Body */}
-                <rect
-                  x="150"
-                  y="180"
-                  width="100"
-                  height="120"
-                  rx="8"
-                  stroke="var(--primary)"
-                  strokeWidth="2"
-                  fill="var(--bg-card)"
-                />
-
-                {/* Robot Head */}
-                <rect
-                  x="160"
-                  y="140"
-                  width="80"
-                  height="50"
-                  rx="8"
-                  stroke="var(--primary)"
-                  strokeWidth="2"
-                  fill="var(--bg-card)"
-                />
-
-                {/* Eyes */}
-                <circle cx="180" cy="160" r="6" fill="var(--primary)" />
-                <circle cx="220" cy="160" r="6" fill="var(--primary)" />
-
-                {/* Antenna */}
-                <line x1="200" y1="140" x2="200" y2="120" stroke="var(--primary)" strokeWidth="2" />
-                <circle cx="200" cy="115" r="5" fill="var(--accent)" />
-
-                {/* Arms */}
-                <rect
-                  x="120"
-                  y="200"
-                  width="30"
-                  height="60"
-                  rx="4"
-                  stroke="var(--secondary)"
-                  strokeWidth="2"
-                  fill="var(--bg-card)"
-                />
-                <rect
-                  x="250"
-                  y="200"
-                  width="30"
-                  height="60"
-                  rx="4"
-                  stroke="var(--secondary)"
-                  strokeWidth="2"
-                  fill="var(--bg-card)"
-                />
-
-                {/* Legs */}
-                <rect
-                  x="165"
-                  y="300"
-                  width="30"
-                  height="70"
-                  rx="4"
-                  stroke="var(--secondary)"
-                  strokeWidth="2"
-                  fill="var(--bg-card)"
-                />
-                <rect
-                  x="205"
-                  y="300"
-                  width="30"
-                  height="70"
-                  rx="4"
-                  stroke="var(--secondary)"
-                  strokeWidth="2"
-                  fill="var(--bg-card)"
-                />
-
-                {/* Circuit Lines */}
-                <path
-                  d="M 50 100 L 150 100 L 150 150"
-                  stroke="var(--primary)"
-                  strokeWidth="1.5"
-                  strokeDasharray="4 4"
-                  opacity="0.5"
-                />
-                <path
-                  d="M 350 100 L 250 100 L 250 150"
-                  stroke="var(--primary)"
-                  strokeWidth="1.5"
-                  strokeDasharray="4 4"
-                  opacity="0.5"
-                />
-                <circle cx="50" cy="100" r="4" fill="var(--primary)" opacity="0.7" />
-                <circle cx="350" cy="100" r="4" fill="var(--primary)" opacity="0.7" />
-
-                {/* Brain/AI Symbol */}
-                <circle
-                  cx="200"
-                  cy="165"
-                  r="15"
-                  stroke="var(--accent)"
-                  strokeWidth="1.5"
-                  fill="none"
-                  opacity="0.8"
-                />
-                <path
-                  d="M 190 165 Q 200 155 210 165"
-                  stroke="var(--accent)"
-                  strokeWidth="1.5"
-                  fill="none"
-                  opacity="0.8"
-                />
-                <path
-                  d="M 190 170 Q 200 180 210 170"
-                  stroke="var(--accent)"
-                  strokeWidth="1.5"
-                  fill="none"
-                  opacity="0.8"
-                />
-
-                {/* Glow Effects */}
-                <circle cx="200" cy="115" r="8" fill="var(--accent)" opacity="0.2" />
-                <circle cx="200" cy="115" r="12" fill="var(--accent)" opacity="0.1" />
-              </svg>
+            <div className={styles.heroImageWrapper}>
+              <img
+                src={heroImgSrc}
+                alt="Advanced humanoid robot in a research laboratory"
+                className={styles.heroImage}
+                loading="eager"
+              />
+              <div className={styles.heroImageOverlay} aria-hidden="true" />
             </div>
           </div>
         </section>
@@ -339,29 +213,45 @@ export default function About(): JSX.Element {
               <h2 className={styles.sectionTitle}>Simulation-First Approach</h2>
               <div className={styles.divider} />
             </div>
-            <p className={styles.bodyText}>
-              This textbook follows a <strong>simulation-first</strong> pedagogy, meaning all
-              examples, exercises, and projects are designed to run safely in virtual environments
-              before real-world deployment:
-            </p>
-            <ul className={styles.benefitsList}>
-              <li>
-                <strong>Safety:</strong> Test behaviors without risk of hardware damage or injury
-              </li>
-              <li>
-                <strong>Accessibility:</strong> Learn without expensive robotic hardware
-              </li>
-              <li>
-                <strong>Rapid Iteration:</strong> Debug and refine faster than real-world testing
-              </li>
-              <li>
-                <strong>Reproducibility:</strong> Share exact simulation environments for
-                collaboration
-              </li>
-              <li>
-                <strong>Scalability:</strong> Train AI models with thousands of simulated scenarios
-              </li>
-            </ul>
+            <div className={styles.simulationLayout}>
+              <div className={styles.simulationText}>
+                <p className={styles.bodyText}>
+                  This textbook follows a <strong>simulation-first</strong> pedagogy, meaning all
+                  examples, exercises, and projects are designed to run safely in virtual
+                  environments before real-world deployment:
+                </p>
+                <ul className={styles.benefitsList}>
+                  <li>
+                    <strong>Safety:</strong> Test behaviors without risk of hardware damage or
+                    injury
+                  </li>
+                  <li>
+                    <strong>Accessibility:</strong> Learn without expensive robotic hardware
+                  </li>
+                  <li>
+                    <strong>Rapid Iteration:</strong> Debug and refine faster than real-world
+                    testing
+                  </li>
+                  <li>
+                    <strong>Reproducibility:</strong> Share exact simulation environments for
+                    collaboration
+                  </li>
+                  <li>
+                    <strong>Scalability:</strong> Train AI models with thousands of simulated
+                    scenarios
+                  </li>
+                </ul>
+              </div>
+              <div className={styles.simulationImageWrapper}>
+                <img
+                  src={simulationImgSrc}
+                  alt="AI simulation and digital twin visualization"
+                  className={styles.simulationImage}
+                  loading="lazy"
+                />
+                <div className={styles.simulationImageOverlay} aria-hidden="true" />
+              </div>
+            </div>
           </div>
         </section>
 
