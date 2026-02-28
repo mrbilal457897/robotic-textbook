@@ -23,7 +23,7 @@
      =========================== */
 
   /* Primary Colors */
-  --primary: #a78bfa; /* Soft Amethyst Violet */
+  --primary: #29abb7; /* Teal Turquoise */
   --secondary: #818cf8; /* Periwinkle Indigo */
   --accent: #fb923c; /* Warm Sunset Orange */
 
@@ -116,8 +116,8 @@
   --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
 
   /* Glow Shadows (themed) */
-  --shadow-glow-primary: 0 0 20px rgba(167, 139, 250, 0.3);
-  --shadow-glow-primary-lg: 0 0 40px rgba(167, 139, 250, 0.5);
+  --shadow-glow-primary: 0 0 20px rgba(41, 171, 183, 0.3);
+  --shadow-glow-primary-lg: 0 0 40px rgba(41, 171, 183, 0.5);
   --shadow-glow-accent: 0 0 20px rgba(251, 146, 60, 0.3);
   --shadow-glow-success: 0 0 20px rgba(52, 211, 153, 0.3);
 
@@ -178,22 +178,22 @@
 [data-theme='dark'] {
   /* Docusaurus theme variable overrides */
   --ifm-color-primary: var(--primary);
-  --ifm-color-primary-dark: #9271f0;
+  --ifm-color-primary-dark: #29abb7;
   --ifm-color-primary-darker: #8562ec;
   --ifm-color-primary-darkest: #6d44e4;
   --ifm-color-primary-light: #b9a3fc;
   --ifm-color-primary-lighter: #c9b8fd;
   --ifm-color-primary-lightest: #ddd3fe;
 
-  --ifm-background-color: var(--bg-primary);
-  --ifm-background-surface-color: var(--bg-card);
+  --ifm-background-color: #0c0c0c;
+  --ifm-background-surface-color: #0c0c0c;
   --ifm-navbar-background-color: #0c0c0c;
   --ifm-footer-background-color: #0c0c0c;
 
   --ifm-font-color-base: var(--text-primary);
   --ifm-font-color-secondary: var(--text-secondary);
 
-  --ifm-code-background: var(--bg-card);
+  --ifm-code-background: #0c0c0c;
   --ifm-code-color: var(--primary);
 
   --ifm-link-color: var(--primary);
@@ -209,16 +209,16 @@
 
 [data-theme='light'] {
   /* ── Palette ── */
-  --primary: #6d28d9; /* Darker violet — readable on light bg */
-  --primary-light: #7c3aed;
-  --primary-dark: #5b21b6;
+  --primary: #29abb7; /* Teal — readable on light bg */
+  --primary-light: #3dbcc9;
+  --primary-dark: #1a8a95;
   --secondary: #4f46e5; /* Indigo */
   --accent: #c2410c; /* Dark orange for light bg */
 
   /* ── Backgrounds ── */
   --bg-primary: #f8f7ff; /* Warm lavender-white, avoids pure white */
   --bg-card: #ffffff;
-  --bg-overlay: rgba(109, 40, 217, 0.04);
+  --bg-overlay: rgba(41, 171, 183, 0.04);
 
   /* ── Text — contrast ratios ── */
   --text-primary: #1a1527; /* Deep violet-black   ~13.5:1 on #F8F7FF ✓ */
@@ -232,18 +232,18 @@
   --info: #1e40af;
 
   /* ── Shadows ── */
-  --shadow-glow-primary: 0 0 16px rgba(109, 40, 217, 0.2);
-  --shadow-glow-primary-lg: 0 0 32px rgba(109, 40, 217, 0.3);
+  --shadow-glow-primary: 0 0 16px rgba(41, 171, 183, 0.2);
+  --shadow-glow-primary-lg: 0 0 32px rgba(41, 171, 183, 0.3);
   --shadow-glow-accent: 0 0 16px rgba(194, 65, 12, 0.2);
 
   /* ── Docusaurus IFM overrides ── */
-  --ifm-color-primary: #6d28d9;
-  --ifm-color-primary-dark: #5b21b6;
-  --ifm-color-primary-darker: #4c1d95;
-  --ifm-color-primary-darkest: #3b0764;
-  --ifm-color-primary-light: #7c3aed;
-  --ifm-color-primary-lighter: #8b5cf6;
-  --ifm-color-primary-lightest: #a78bfa;
+  --ifm-color-primary: #29abb7;
+  --ifm-color-primary-dark: #228b98;
+  --ifm-color-primary-darker: #1a7580;
+  --ifm-color-primary-darkest: #125f68;
+  --ifm-color-primary-light: #3dbcc9;
+  --ifm-color-primary-lighter: #51c7d3;
+  --ifm-color-primary-lightest: #29abb7;
 
   --ifm-background-color: #f8f7ff;
   --ifm-background-surface-color: #ffffff;
@@ -253,17 +253,17 @@
   --ifm-font-color-base: #1a1527;
   --ifm-font-color-secondary: #3d2d6b;
 
-  --ifm-link-color: #6d28d9;
-  --ifm-link-hover-color: #5b21b6;
+  --ifm-link-color: #29abb7;
+  --ifm-link-hover-color: #1a8a95;
   --ifm-link-decoration: underline;
 
   --ifm-code-background: #ede9f8;
-  --ifm-code-color: #5b21b6;
+  --ifm-code-color: #1a8a95;
 
   --ifm-blockquote-color: #3d2d6b;
-  --ifm-blockquote-border-color: #a78bfa;
+  --ifm-blockquote-border-color: #29abb7;
 
-  --ifm-toc-border-color: rgba(109, 40, 217, 0.2);
+  --ifm-toc-border-color: rgba(41, 171, 183, 0.2);
 }
 
 /* ===========================

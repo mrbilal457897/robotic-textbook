@@ -5,7 +5,14 @@ Main application setup with middleware and routing
 
 import os
 import logging
-from fastapi import FastAPI
+from pathlib import Path
+from dotenv import load_dotenv
+
+# Ensure .env is loaded regardless of working directory
+load_dotenv(Path(__file__).resolve().parent.parent / ".env")
+from fastapi import FastAPI, Request
+from fastapi.exceptions import RequestValidationError
+from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
 
@@ -18,7 +25,7 @@ from .api.middleware import (
     IPBanMiddleware,
     PromptInjectionMiddleware,
 )
-from .api.v1 import auth, metrics, cleanup, metadata
+from .api.v1 import auth, chat, conversations, metrics, cleanup, metadata
 from .config import Settings
 
 # Initialize settings
@@ -69,12 +76,30 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
+
+@app.exception_handler(RequestValidationError)
+async def validation_exception_handler(request: Request, exc: RequestValidationError):
+    """Log exact validation errors so we can debug 422s"""
+    # Strip non-serializable ctx values before logging/returning
+    errors = [
+        {k: str(v) if k == "ctx" else v for k, v in err.items()}
+        for err in exc.errors()
+    ]
+    logger.error(f"422 Validation error on {request.method} {request.url.path}: {errors}")
+    try:
+        body = await request.body()
+        logger.error(f"Request body: {body.decode()}")
+    except Exception:
+        pass
+    return JSONResponse(status_code=422, content={"detail": errors})
+
+
 # ============================================
 # Configure CORS
 # ============================================
 
-# Parse CORS origins from comma-separated string
-cors_origins = [
+# CORS origins (already parsed as list by Settings validator)
+cors_origins = settings.cors_origins if isinstance(settings.cors_origins, list) else [
     origin.strip() for origin in settings.cors_origins.split(",") if origin.strip()
 ]
 
@@ -112,10 +137,13 @@ app.add_middleware(
 app.add_middleware(RequestValidationMiddleware, max_content_length=10 * 1024 * 1024)
 
 # 6. Rate Limiting (after validation, records violations via IP ban middleware)
+# Config values are per-hour limits; use defaults for per-minute
 app.add_middleware(
     RateLimitMiddleware,
-    anonymous_limit=int(settings.rate_limit_anonymous),
-    authenticated_limit=int(settings.rate_limit_authenticated),
+    anonymous_per_minute=10,  # Default from middleware
+    anonymous_per_hour=int(settings.rate_limit_anonymous),
+    authenticated_per_minute=30,  # Default from middleware
+    authenticated_per_hour=int(settings.rate_limit_authenticated),
 )
 
 # 7. Prompt Injection Detection (after rate limiting, records violations)
@@ -128,6 +156,8 @@ app.add_middleware(PromptInjectionMiddleware)
 # ============================================
 
 app.include_router(auth.router, prefix="/api/v1")
+app.include_router(chat.router, prefix="/api/v1")
+app.include_router(conversations.router, prefix="/api/v1")
 app.include_router(metrics.router, prefix="/api/v1")
 app.include_router(cleanup.router, prefix="/api/v1")
 app.include_router(metadata.router, prefix="/api/v1")

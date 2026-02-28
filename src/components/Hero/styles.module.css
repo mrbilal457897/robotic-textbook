@@ -16,13 +16,26 @@
 
 .hero {
   position: relative;
-  min-height: 100vh;
+  min-height: calc(100vh - 72px);
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--bg-primary);
+  background: #0c0c0c;
   overflow: hidden;
   padding: var(--space-3xl) var(--space-lg);
+}
+
+/* Color Mode Overrides */
+[data-theme='light'] .hero {
+  background: #f8f7ff;
+}
+
+[data-color-theme='sepia'] .hero {
+  background: #f4ecd6;
+}
+
+[data-color-theme='high-contrast'] .hero {
+  background: #000000;
 }
 
 /* ===========================
@@ -164,15 +177,34 @@
 }
 
 .heroPrimaryButton {
-  background: linear-gradient(135deg, var(--primary), var(--accent));
-  color: var(--bg-primary);
+  background: #29abb7;
+  color: #ffffff;
   border: none;
-  box-shadow: var(--shadow-glow-primary);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  position: relative;
+  overflow: hidden;
+}
+
+.heroPrimaryButton::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.heroPrimaryButton:hover::before {
+  left: 100%;
 }
 
 .heroPrimaryButton:hover {
   transform: translateY(-2px);
-  box-shadow: var(--shadow-glow-primary-lg);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  background: #ffffff;
+  color: #000000;
   text-decoration: none;
 }
 
@@ -228,7 +260,7 @@
 
 @media screen and (max-width: 768px) {
   .hero {
-    min-height: 90vh;
+    min-height: calc(90vh - 64px);
     padding: var(--space-2xl) var(--space-md);
   }
 
@@ -269,7 +301,7 @@
 
 @media screen and (max-width: 480px) {
   .hero {
-    min-height: 85vh;
+    min-height: calc(85vh - 60px);
     padding: var(--space-xl) var(--space-sm);
   }
 
@@ -301,13 +333,30 @@
 }
 
 /* ===========================
+   Button Animations
+   =========================== */
+
+@keyframes buttonPulse {
+  0%,
+  100% {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+  50% {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+}
+
+/* Removed pulse animation from button */
+
+/* ===========================
    Accessibility: Reduced Motion
    =========================== */
 
 @media (prefers-reduced-motion: reduce) {
   .heroCanvas,
   .neuralGrid,
-  .scrollIndicator {
+  .scrollIndicator,
+  .heroPrimaryButton {
     animation: none !important;
   }
 
@@ -319,5 +368,9 @@
   .heroPrimaryButton:hover,
   .heroSecondaryButton:hover {
     transform: none !important;
+  }
+
+  .heroPrimaryButton::before {
+    display: none;
   }
 }

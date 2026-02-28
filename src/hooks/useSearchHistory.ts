@@ -1,109 +1,67 @@
 /**
  * useSearchHistory Hook
- * Manages search history for authenticated users
+ * Manages search history in localStorage
  */
 
-import { useEffect, useState } from "react";
+import { useState, useEffect, useCallback } from 'react';
 
-export interface SearchHistoryItem {
-  query: string;
-  timestamp: string;
-  resultCount?: number;
-}
+const SEARCH_HISTORY_KEY = 'search_history';
+const MAX_HISTORY_ITEMS = 10;
 
-interface UseSearchHistoryReturn {
-  history: SearchHistoryItem[];
-  addToHistory: (query: string, resultCount?: number) => void;
-  clearHistory: () => void;
-  removeFromHistory: (query: string) => void;
-}
+export function useSearchHistory() {
+  const [history, setHistory] = useState<string[]>([]);
 
-const SEARCH_HISTORY_KEY = "search_history";
-const MAX_HISTORY_ITEMS = 20;
-
-/**
- * Hook for managing search history
- * @returns Search history items and control functions
- */
-export function useSearchHistory(): UseSearchHistoryReturn {
-  const [history, setHistory] = useState<SearchHistoryItem[]>([]);
-
-  // Load history on mount
+  // Load history from localStorage on mount
   useEffect(() => {
-    const loadHistory = () => {
-      try {
-        const stored = localStorage.getItem(SEARCH_HISTORY_KEY);
-        if (stored) {
-          const items: SearchHistoryItem[] = JSON.parse(stored);
-          setHistory(items);
-        }
-      } catch (error) {
-        console.error("Failed to load search history:", error);
+    try {
+      const stored = localStorage.getItem(SEARCH_HISTORY_KEY);
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        setHistory(Array.isArray(parsed) ? parsed : []);
       }
-    };
-
-    loadHistory();
+    } catch (error) {
+      console.error('Failed to load search history:', error);
+      setHistory([]);
+    }
   }, []);
 
-  const addToHistory = (query: string, resultCount?: number) => {
-    const trimmedQuery = query.trim();
-    if (!trimmedQuery) return;
+  // Add search query to history
+  const addToHistory = useCallback((query: string) => {
+    if (!query.trim()) return;
 
-    setHistory((prevHistory) => {
-      // Remove duplicate if it exists
-      const filtered = prevHistory.filter(
-        (item) => item.query.toLowerCase() !== trimmedQuery.toLowerCase()
-      );
-
-      // Add new item to the beginning
-      const newItem: SearchHistoryItem = {
-        query: trimmedQuery,
-        timestamp: new Date().toISOString(),
-        resultCount,
-      };
-
-      const updated = [newItem, ...filtered].slice(0, MAX_HISTORY_ITEMS);
+    setHistory(prev => {
+      // Remove duplicate if exists
+      const filtered = prev.filter(item => item !== query);
+      // Add to beginning and limit to MAX_HISTORY_ITEMS
+      const updated = [query, ...filtered].slice(0, MAX_HISTORY_ITEMS);
 
       // Save to localStorage
       try {
         localStorage.setItem(SEARCH_HISTORY_KEY, JSON.stringify(updated));
       } catch (error) {
-        console.error("Failed to save search history:", error);
+        console.error('Failed to save search history:', error);
       }
 
       return updated;
     });
-  };
+  }, []);
 
-  const clearHistory = () => {
+  // Clear all history
+  const clearHistory = useCallback(() => {
     setHistory([]);
     try {
       localStorage.removeItem(SEARCH_HISTORY_KEY);
     } catch (error) {
-      console.error("Failed to clear search history:", error);
+      console.error('Failed to clear search history:', error);
     }
-  };
+  }, []);
 
-  const removeFromHistory = (query: string) => {
-    setHistory((prevHistory) => {
-      const updated = prevHistory.filter(
-        (item) => item.query.toLowerCase() !== query.toLowerCase()
-      );
-
-      try {
-        localStorage.setItem(SEARCH_HISTORY_KEY, JSON.stringify(updated));
-      } catch (error) {
-        console.error("Failed to update search history:", error);
-      }
-
-      return updated;
-    });
-  };
+  // Get current history
+  const getHistory = useCallback(() => history, [history]);
 
   return {
-    history,
     addToHistory,
     clearHistory,
-    removeFromHistory,
+    getHistory,
   };
 }

@@ -13,7 +13,7 @@ from qdrant_client.models import (
     MatchValue,
     Distance,
     VectorParams,
-    SearchParams,
+    PayloadSchemaType,
 )
 import logging
 
@@ -38,13 +38,33 @@ class QdrantDB:
 
     def ensure_collection(self):
         """
-        Ensure collection exists, create if not
+        Ensure collection exists with correct vector size, create/recreate if needed.
 
         This should be called during initialization/ingestion only
         """
         try:
             collections = self.client.get_collections()
             collection_names = [col.name for col in collections.collections]
+
+            if self.collection_name in collection_names:
+                # Check existing collection's vector size
+                info = self.client.get_collection(collection_name=self.collection_name)
+                vectors_cfg = info.config.params.vectors
+                if isinstance(vectors_cfg, dict):
+                    existing_size = next(iter(vectors_cfg.values())).size
+                else:
+                    existing_size = vectors_cfg.size if vectors_cfg else 0
+                if existing_size != self.vector_size:
+                    logger.warning(
+                        f"Collection '{self.collection_name}' has wrong vector size "
+                        f"({existing_size} != {self.vector_size}). Recreating..."
+                    )
+                    self.client.delete_collection(collection_name=self.collection_name)
+                    collection_names.remove(self.collection_name)
+                else:
+                    logger.info(
+                        f"Collection '{self.collection_name}' exists with correct size {existing_size}"
+                    )
 
             if self.collection_name not in collection_names:
                 logger.info(
@@ -59,8 +79,17 @@ class QdrantDB:
                 )
 
                 logger.info(f"Collection '{self.collection_name}' created successfully")
-            else:
-                logger.info(f"Collection '{self.collection_name}' already exists")
+
+            # Ensure payload indexes exist for filterable fields
+            for field in ["book_id", "chapter"]:
+                try:
+                    self.client.create_payload_index(
+                        collection_name=self.collection_name,
+                        field_name=field,
+                        field_schema=PayloadSchemaType.KEYWORD,
+                    )
+                except Exception:
+                    pass  # Index may already exist
 
         except Exception as e:
             logger.error(f"Failed to ensure collection: {e}")
@@ -97,21 +126,19 @@ class QdrantDB:
                 if conditions:
                     query_filter = Filter(must=conditions)
 
-            # Search
-            search_params = SearchParams(exact=False)
-
-            results = self.client.search(
+            # Use query_points (qdrant-client >= 1.7)
+            response = self.client.query_points(
                 collection_name=self.collection_name,
-                query_vector=query_vector,
+                query=query_vector,
                 query_filter=query_filter,
                 limit=top_k,
                 score_threshold=score_threshold,
-                search_params=search_params,
+                with_payload=True,
             )
 
             # Format results
             formatted_results = []
-            for hit in results:
+            for hit in response.points:
                 formatted_results.append(
                     {
                         "chunk_id": str(hit.id),
@@ -200,11 +227,20 @@ class QdrantDB:
         try:
             info = self.client.get_collection(collection_name=self.collection_name)
 
+            vectors_cfg = info.config.params.vectors
+            if isinstance(vectors_cfg, dict):
+                first = next(iter(vectors_cfg.values()))
+                vec_size = first.size
+                vec_distance = first.distance.name
+            else:
+                vec_size = vectors_cfg.size if vectors_cfg else 0
+                vec_distance = vectors_cfg.distance.name if vectors_cfg else "unknown"
+
             return {
                 "collection_name": self.collection_name,
                 "points_count": info.points_count,
-                "vector_size": info.config.params.vectors.size,
-                "distance": info.config.params.vectors.distance.name,
+                "vector_size": vec_size,
+                "distance": vec_distance,
             }
 
         except Exception as e:

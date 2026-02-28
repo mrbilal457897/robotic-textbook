@@ -30,7 +30,7 @@ class UpstashRedis:
             self.headers = {"Authorization": f"Bearer {self.redis_token}"}
             logger.info("Upstash Redis client initialized")
 
-    def _make_request(self, commands: list) -> dict:
+    def _make_request(self, commands: list) -> list:
         """
         Make a request to Upstash Redis REST API
 
@@ -41,7 +41,7 @@ class UpstashRedis:
             Response data from Redis
         """
         if not self.enabled:
-            return {"result": None}
+            return []
 
         try:
             response = requests.post(
@@ -55,7 +55,7 @@ class UpstashRedis:
         except requests.RequestException as e:
             logger.error(f"Upstash Redis request failed: {e}")
             # Don't raise - allow graceful degradation
-            return {"result": None}
+            return []
 
     def get(self, key: str) -> Optional[str]:
         """

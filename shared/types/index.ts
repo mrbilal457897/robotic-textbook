@@ -11,7 +11,7 @@ export interface User {
   id: string;
   email?: string;
   name?: string;
-  provider?: "github" | "google" | "anonymous";
+  provider?: 'github' | 'google' | 'anonymous';
   created_at: string;
 }
 
@@ -26,16 +26,25 @@ export interface Session {
 // Chat & Message Types
 // ============================================
 
-export type AnsweringMode = "book-only" | "selected-text-only" | "general-knowledge";
+export type AnsweringMode = 'book-only' | 'selected-text-only' | 'general-knowledge';
 
-export type ToneType = "academic" | "beginner-friendly" | "concise";
+export type ToneType = 'academic' | 'beginner-friendly' | 'concise';
 
-export type TextAction = "explain" | "summarize" | "example" | "simplify";
+export type TextAction = 'explain' | 'summarize' | 'example' | 'simplify';
+
+export interface KeyTerm {
+  term: string;
+  matched_text: string;
+  definition: string;
+  category: string;
+  start_pos: number;
+  end_pos: number;
+}
 
 export interface Message {
   id: string;
   conversation_id: string;
-  role: "user" | "assistant" | "system";
+  role: 'user' | 'assistant' | 'system';
   content: string;
   mode: AnsweringMode;
   tone?: ToneType;
@@ -43,6 +52,7 @@ export interface Message {
   confidence_score?: number;
   selected_text?: string;
   action?: TextAction;
+  key_terms?: KeyTerm[];
   metadata?: Record<string, any>;
   created_at: string;
 }
@@ -104,8 +114,8 @@ export interface ChatRequest {
   tone?: ToneType;
   selected_text?: string;
   action?: TextAction;
-  book_id?: string;
-  chapter?: string;
+  book_id: string;
+  chapter_id?: number;
 }
 
 export interface ChatResponse {
@@ -186,13 +196,13 @@ export const VALIDATION_LIMITS = {
 // ============================================
 
 export function isValidMode(mode: string): mode is AnsweringMode {
-  return ["book-only", "selected-text-only", "general-knowledge"].includes(mode);
+  return ['book-only', 'selected-text-only', 'general-knowledge'].includes(mode);
 }
 
 export function isValidTone(tone: string): tone is ToneType {
-  return ["academic", "beginner-friendly", "concise"].includes(tone);
+  return ['academic', 'beginner-friendly', 'concise'].includes(tone);
 }
 
 export function isValidAction(action: string): action is TextAction {
-  return ["explain", "summarize", "example", "simplify"].includes(action);
+  return ['explain', 'summarize', 'example', 'simplify'].includes(action);
 }

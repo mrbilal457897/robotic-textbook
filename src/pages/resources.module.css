@@ -17,7 +17,7 @@
     var(--bg-card) 50%,
     var(--bg-primary) 100%
   );
-  border-bottom: 1px solid rgba(167, 139, 250, 0.1);
+  border-bottom: 1px solid rgba(41, 171, 183, 0.1);
   overflow: hidden;
 }
 
@@ -70,8 +70,13 @@
   font-family: var(--font-display);
   font-size: var(--font-size-3xl);
   font-weight: var(--font-weight-bold);
-  color: var(--primary);
+  color: var(--text-secondary);
   line-height: 1;
+  transition: color var(--transition-fast);
+}
+
+.stat:hover .statNumber {
+  color: #29abb7;
 }
 
 .statLabel {
@@ -85,7 +90,7 @@
 .statDivider {
   width: 1px;
   height: 40px;
-  background: rgba(167, 139, 250, 0.3);
+  background: rgba(41, 171, 183, 0.3);
 }
 
 .heroImageWrapper {
@@ -93,9 +98,9 @@
   border-radius: var(--radius-2xl);
   overflow: hidden;
   box-shadow:
-    0 0 40px rgba(167, 139, 250, 0.15),
+    0 0 40px rgba(41, 171, 183, 0.15),
     0 20px 60px rgba(0, 0, 0, 0.5);
-  border: 1px solid rgba(167, 139, 250, 0.2);
+  border: 1px solid rgba(41, 171, 183, 0.2);
 }
 
 .heroImage {
@@ -108,7 +113,7 @@
 .heroImageOverlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(167, 139, 250, 0.05) 0%, transparent 60%);
+  background: linear-gradient(135deg, rgba(41, 171, 183, 0.05) 0%, transparent 60%);
   pointer-events: none;
 }
 
@@ -116,7 +121,7 @@
 .filterSection {
   padding: var(--space-xl) var(--space-lg);
   background: var(--bg-card);
-  border-bottom: 1px solid rgba(167, 139, 250, 0.08);
+  border-bottom: 1px solid rgba(41, 171, 183, 0.08);
   position: sticky;
   top: 60px;
   z-index: 10;
@@ -140,7 +145,7 @@
   padding: var(--space-sm) var(--space-lg);
   border-radius: var(--radius-full);
   background: var(--bg-overlay);
-  border: 1px solid rgba(167, 139, 250, 0.15);
+  border: 1px solid rgba(41, 171, 183, 0.15);
   color: var(--text-secondary);
   font-family: var(--font-body);
   font-size: var(--font-size-sm);
@@ -151,13 +156,13 @@
 }
 
 .filterTab:hover {
-  border-color: rgba(167, 139, 250, 0.4);
+  border-color: rgba(41, 171, 183, 0.4);
   color: var(--text-primary);
-  background: rgba(167, 139, 250, 0.05);
+  background: rgba(41, 171, 183, 0.05);
 }
 
 .filterTabActive {
-  background: rgba(167, 139, 250, 0.1);
+  background: rgba(41, 171, 183, 0.1);
   border-color: var(--primary);
   color: var(--primary);
 }
@@ -175,7 +180,7 @@
   height: 22px;
   padding: 0 6px;
   border-radius: var(--radius-full);
-  background: rgba(167, 139, 250, 0.15);
+  background: rgba(41, 171, 183, 0.15);
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-semibold);
   color: inherit;
@@ -214,7 +219,7 @@
 .categoryDivider {
   flex: 1;
   height: 2px;
-  background: linear-gradient(90deg, rgba(167, 139, 250, 0.4), transparent);
+  background: linear-gradient(90deg, rgba(41, 171, 183, 0.4), transparent);
 }
 
 .resourceGrid {
@@ -230,7 +235,7 @@
   background: var(--bg-overlay);
   border-radius: var(--radius-xl);
   padding: var(--space-xl);
-  border: 1px solid rgba(167, 139, 250, 0.15);
+  border: 1px solid rgba(41, 171, 183, 0.15);
   text-decoration: none;
   transition: all var(--transition-normal);
   cursor: pointer;
@@ -239,7 +244,7 @@
 .resourceCard:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow-glow-primary);
-  border-color: rgba(167, 139, 250, 0.4);
+  border-color: rgba(41, 171, 183, 0.4);
   text-decoration: none;
 }
 
@@ -266,9 +271,9 @@
 }
 
 .badge_primary {
-  background: rgba(167, 139, 250, 0.15);
+  background: rgba(41, 171, 183, 0.15);
   color: var(--primary);
-  border: 1px solid rgba(167, 139, 250, 0.3);
+  border: 1px solid rgba(41, 171, 183, 0.3);
 }
 
 .badge_accent {
@@ -293,7 +298,7 @@
 }
 
 .resourceCard:hover .cardTitle {
-  color: var(--primary);
+  color: #29abb7;
 }
 
 .cardDescription {
@@ -308,7 +313,7 @@
 .cardFooter {
   margin-top: var(--space-lg);
   padding-top: var(--space-md);
-  border-top: 1px solid rgba(167, 139, 250, 0.08);
+  border-top: 1px solid rgba(41, 171, 183, 0.08);
 }
 
 .cardLink {
@@ -318,20 +323,20 @@
   font-family: var(--font-body);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-medium);
-  color: var(--primary);
-  transition: gap var(--transition-fast);
+  color: var(--text-secondary);
+  transition: all var(--transition-fast);
 }
 
 .resourceCard:hover .cardLink {
-  gap: var(--space-sm);
+  color: #29abb7;
 }
 
 /* ─── Banner Section ────────────────────────────────── */
 .bannerSection {
   padding: var(--space-4xl) var(--space-lg);
   background: var(--bg-card);
-  border-top: 1px solid rgba(167, 139, 250, 0.08);
-  border-bottom: 1px solid rgba(167, 139, 250, 0.08);
+  border-top: 1px solid rgba(41, 171, 183, 0.08);
+  border-bottom: 1px solid rgba(41, 171, 183, 0.08);
 }
 
 .bannerInner {
@@ -348,9 +353,9 @@
   border-radius: var(--radius-xl);
   overflow: hidden;
   box-shadow:
-    0 0 30px rgba(167, 139, 250, 0.1),
+    0 0 30px rgba(41, 171, 183, 0.1),
     0 20px 50px rgba(0, 0, 0, 0.4);
-  border: 1px solid rgba(167, 139, 250, 0.15);
+  border: 1px solid rgba(41, 171, 183, 0.15);
 }
 
 .bannerImage {
@@ -363,7 +368,7 @@
 .bannerOverlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to right, rgba(167, 139, 250, 0.08) 0%, transparent 70%);
+  background: linear-gradient(to right, rgba(41, 171, 183, 0.08) 0%, transparent 70%);
   pointer-events: none;
 }
 
@@ -462,7 +467,7 @@
   padding: var(--space-md) var(--space-lg);
   background: var(--bg-overlay);
   border-radius: var(--radius-lg);
-  border: 1px solid rgba(167, 139, 250, 0.15);
+  border: 1px solid rgba(41, 171, 183, 0.15);
   color: var(--text-secondary);
   font-family: var(--font-body);
   font-size: var(--font-size-base);
@@ -472,9 +477,9 @@
 }
 
 .moduleLink:hover {
-  border-color: rgba(167, 139, 250, 0.4);
+  border-color: rgba(41, 171, 183, 0.4);
   color: var(--text-primary);
-  background: rgba(167, 139, 250, 0.05);
+  background: rgba(41, 171, 183, 0.05);
   text-decoration: none;
 }
 
@@ -482,9 +487,15 @@
   font-family: var(--font-display);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-bold);
-  color: var(--primary);
+  color: var(--text-secondary);
   opacity: 0.8;
   min-width: 28px;
+  transition: color var(--transition-fast);
+}
+
+.moduleLink:hover .moduleLinkNumber {
+  color: #29abb7;
+  opacity: 1;
 }
 
 .quickLinksImageWrapper {
@@ -492,9 +503,9 @@
   border-radius: var(--radius-xl);
   overflow: hidden;
   box-shadow:
-    0 0 30px rgba(167, 139, 250, 0.1),
+    0 0 30px rgba(41, 171, 183, 0.1),
     0 20px 50px rgba(0, 0, 0, 0.4);
-  border: 1px solid rgba(167, 139, 250, 0.15);
+  border: 1px solid rgba(41, 171, 183, 0.15);
 }
 
 .quickLinksImage {
@@ -507,7 +518,7 @@
 .quickLinksImageOverlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to left, rgba(167, 139, 250, 0.08) 0%, transparent 70%);
+  background: linear-gradient(to left, rgba(41, 171, 183, 0.08) 0%, transparent 70%);
   pointer-events: none;
 }
 
@@ -520,7 +531,7 @@
     var(--bg-primary) 50%,
     var(--bg-card) 100%
   );
-  border-top: 1px solid rgba(167, 139, 250, 0.08);
+  border-top: 1px solid rgba(41, 171, 183, 0.08);
 }
 
 .ctaContent {

@@ -5,7 +5,7 @@
 
 import * as React from "react";
 import { useState } from "react";
-import { MessageCircle, X, Settings, AlertCircle } from "lucide-react";
+import { BookOpen, X, Settings, AlertCircle, MessageCircle } from "lucide-react";
 import { Button } from "../ui/Button";
 import { MessageList } from "./MessageList";
 import { MessageInput } from "./MessageInput";
@@ -59,7 +59,8 @@ export function ChatPanel({
 
   const handleNavigateToSource = (citation: Citation) => {
     // Build URL to navigate to the source
-    const url = citation.metadata?.url || `/textbook/${bookId}/chapter-${citation.chapter}`;
+    const url =
+      citation.metadata?.url || `/textbook/${bookId}/chapter-${citation.chapter}`;
 
     // Navigate to the source
     if (typeof window !== "undefined") {
@@ -72,7 +73,7 @@ export function ChatPanel({
       <button
         onClick={() => setIsOpen(true)}
         className={cn(
-          "fixed bottom-6 right-6 z-30 flex h-14 w-14 items-center justify-center rounded-full bg-blue-600 text-white shadow-lg transition-transform hover:scale-110 hover:bg-blue-700",
+          "fixed bottom-6 right-6 z-30 flex h-14 w-14 items-center justify-center rounded-full bg-[#00F0FF] text-[#0A0E14] shadow-lg transition-transform hover:scale-110 hover:shadow-[0_0_20px_rgba(0,240,255,0.6)]",
           className
         )}
         aria-label="Open chat"
@@ -85,15 +86,15 @@ export function ChatPanel({
   return (
     <div
       className={cn(
-        "fixed bottom-0 right-0 z-40 flex h-[600px] w-full flex-col bg-white shadow-2xl dark:bg-gray-950 sm:bottom-6 sm:right-6 sm:h-[700px] sm:w-96 sm:rounded-lg",
+        "fixed bottom-0 right-0 z-40 flex h-[450px] w-full flex-col bg-white shadow-2xl dark:bg-[#1A2230] sm:bottom-6 sm:right-6 sm:h-[500px] sm:w-96 sm:rounded-lg",
         className
       )}
     >
       {/* Header */}
       <div className="flex items-center justify-between border-b border-gray-200 px-4 py-3 dark:border-gray-800">
         <div className="flex items-center gap-2">
-          <MessageCircle className="h-5 w-5 text-blue-600 dark:text-blue-400" />
-          <h2 className="font-semibold text-gray-900 dark:text-gray-100">
+          <MessageCircle className="h-5 w-5 text-[#00F0FF] dark:text-[#00F0FF]" />
+          <h2 className="font-semibold text-gray-900 dark:text-[#E8EDF3]">
             Textbook Assistant
           </h2>
         </div>
@@ -102,20 +103,21 @@ export function ChatPanel({
           <button
             onClick={() => setShowSettings(!showSettings)}
             className={cn(
-              "rounded-md p-2 transition-colors hover:bg-gray-100 dark:hover:bg-gray-800",
+              "rounded-md p-2 transition-all hover:bg-gray-100 hover:shadow-[0_0_10px_rgba(0,240,255,0.3)] dark:hover:bg-gray-800",
               showSettings && "bg-gray-100 dark:bg-gray-800"
             )}
             aria-label="Settings"
           >
-            <Settings className="h-5 w-5 text-gray-600 dark:text-gray-400" />
+            <Settings className="h-5 w-5 text-gray-600 hover:text-[#00F0FF] dark:text-[#9AABB8]" />
           </button>
 
           <button
             onClick={() => setIsOpen(false)}
-            className="rounded-md p-2 transition-colors hover:bg-gray-100 dark:hover:bg-gray-800"
+            className="rounded-md p-2 transition-all hover:bg-gray-100 hover:shadow-[0_0_10px_rgba(0,240,255,0.3)] dark:hover:bg-gray-800"
             aria-label="Close chat"
+            title="Close chat"
           >
-            <X className="h-5 w-5 text-gray-600 dark:text-gray-400" />
+            <X className="h-5 w-5 text-gray-600 hover:text-[#00F0FF] dark:text-[#9AABB8]" />
           </button>
         </div>
       </div>

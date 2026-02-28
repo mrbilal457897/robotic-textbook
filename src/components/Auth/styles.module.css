@@ -3,11 +3,12 @@
 .loginButton {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 6px 12px;
-  background: rgba(167, 139, 250, 0.08);
-  color: #a78bfa;
-  border: 1px solid rgba(167, 139, 250, 0.25);
+  justify-content: center;
+  gap: 0;
+  padding: 7px;
+  background: rgba(41, 171, 183, 0.08);
+  color: #29abb7;
+  border: 1px solid rgba(41, 171, 183, 0.25);
   border-radius: 999px;
   font-size: 0.8rem;
   font-weight: 600;
@@ -17,15 +18,19 @@
   line-height: 1;
 }
 
+.loginText {
+  display: none;
+}
+
 .loginButton:hover {
-  background: rgba(167, 139, 250, 0.15);
-  border-color: #a78bfa;
-  color: var(--text-primary, #ede8fa);
-  box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.12);
+  background: rgba(41, 171, 183, 0.15);
+  border-color: #29abb7;
+  color: #29abb7;
+  box-shadow: 0 0 0 3px rgba(41, 171, 183, 0.12);
 }
 
 .loginButton:active {
-  background: rgba(167, 139, 250, 0.2);
+  background: rgba(41, 171, 183, 0.2);
 }
 
 .loginButton:disabled {
@@ -39,6 +44,34 @@
   flex-shrink: 0;
 }
 
+/* Loading Spinner */
+.spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinnerCircle {
+  opacity: 0.25;
+}
+
+.spinnerPath {
+  opacity: 0.75;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spinner {
+    animation: none;
+  }
+}
+
 .userProfile {
   position: relative;
 }
@@ -49,15 +82,15 @@
   gap: 0.5rem;
   padding: 3px;
   background: transparent;
-  border: 2px solid rgba(167, 139, 250, 0.3);
+  border: 2px solid rgba(41, 171, 183, 0.3);
   border-radius: 50%;
   cursor: pointer;
   transition: all 150ms ease;
 }
 
 .profileButton:hover {
-  background: rgba(167, 139, 250, 0.08);
-  border-color: #a78bfa;
+  background: rgba(41, 171, 183, 0.08);
+  border-color: #29abb7;
 }
 
 .profileAvatar {
@@ -65,7 +98,7 @@
   height: 28px;
   border-radius: 50%;
   object-fit: cover;
-  border: 1px solid rgba(167, 139, 250, 0.4);
+  border: 1px solid rgba(41, 171, 183, 0.4);
 }
 
 .profileDropdown {
@@ -73,7 +106,7 @@
   top: calc(100% + 8px);
   right: 0;
   background: var(--bg-card, #111111);
-  border: 1px solid rgba(167, 139, 250, 0.2);
+  border: 1px solid rgba(41, 171, 183, 0.2);
   border-radius: 12px;
   box-shadow:
     0 4px 6px -1px rgba(0, 0, 0, 0.3),
@@ -96,7 +129,7 @@
 
 .dropdownItem {
   padding: 0.75rem 0.85rem;
-  border-bottom: 1px solid rgba(167, 139, 250, 0.1);
+  border-bottom: 1px solid rgba(41, 171, 183, 0.1);
   color: var(--text-secondary, #b8a8da);
   text-align: left;
 }
@@ -107,7 +140,7 @@
 
 .username {
   font-weight: 600;
-  color: #a78bfa;
+  color: #29abb7;
 }
 
 .dropdownLink,
@@ -129,8 +162,8 @@
 
 .dropdownLink:hover,
 .dropdownButton:hover {
-  background: rgba(167, 139, 250, 0.1);
-  color: var(--text-primary, #ede8fa);
+  background: rgba(41, 171, 183, 0.1);
+  color: #29abb7;
 }
 
 .dropdownLink {

@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useCallback, useMemo } from "react";
-import { useHistory } from "@docusaurus/router";
-import { useSearchHistory } from "../../hooks/useSearchHistory";
-import { SearchResults, SearchResult } from "./SearchResults";
-import styles from "./styles.module.css";
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import { useHistory } from '@docusaurus/router';
+import { useSearchHistory } from '../../hooks/useSearchHistory';
+import { SearchResults, SearchResult } from './SearchResults';
+import styles from './styles.module.css';
 
 /**
  * SearchUI Component
@@ -14,9 +14,16 @@ import styles from "./styles.module.css";
  * - Keyboard navigation (arrow keys, enter)
  * - Mobile-responsive design
  */
-export function SearchUI() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
+
+interface SearchUIProps {
+  isOpen?: boolean;
+  onClose?: () => void;
+}
+
+export function SearchUI({ isOpen: externalIsOpen, onClose }: SearchUIProps = {}) {
+  const [internalIsOpen, setInternalIsOpen] = useState(false);
+  const isOpen = externalIsOpen !== undefined ? externalIsOpen : internalIsOpen;
+  const [searchQuery, setSearchQuery] = useState('');
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [results, setResults] = useState<SearchResult[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -24,26 +31,36 @@ export function SearchUI() {
   const history = useHistory();
   const recentSearches = getHistory();
 
+  const handleClose = useCallback(() => {
+    if (onClose) {
+      onClose();
+    } else {
+      setInternalIsOpen(false);
+    }
+  }, [onClose]);
+
   // Handle keyboard shortcut (Ctrl/Cmd+K) to open search
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       // Check for Ctrl+K (Windows/Linux) or Cmd+K (Mac)
-      if ((e.ctrlKey || e.metaKey) && e.key === "k") {
+      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
         e.preventDefault();
-        setIsOpen(true);
-        setSearchQuery("");
+        if (externalIsOpen === undefined) {
+          setInternalIsOpen(true);
+        }
+        setSearchQuery('');
         setSelectedIndex(0);
       }
 
       // Close on Escape
-      if (e.key === "Escape" && isOpen) {
-        setIsOpen(false);
+      if (e.key === 'Escape' && isOpen) {
+        handleClose();
       }
     };
 
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [isOpen]);
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, externalIsOpen, handleClose]);
 
   // Search function using docusaurus-search-local
   const performSearch = useCallback(async (query: string) => {
@@ -60,20 +77,18 @@ export function SearchUI() {
 
       if (searchIndex) {
         // Filter results from the search index
-        const filteredResults = Object.entries(searchIndex).filter(
-          ([_, meta]: [string, any]) => {
-            const searchableText =
-              `${meta.title || ""} ${meta.description || ""} ${meta.content || ""}`.toLowerCase();
-            return searchableText.includes(query.toLowerCase());
-          }
-        );
+        const filteredResults = Object.entries(searchIndex).filter(([_, meta]: [string, any]) => {
+          const searchableText =
+            `${meta.title || ''} ${meta.description || ''} ${meta.content || ''}`.toLowerCase();
+          return searchableText.includes(query.toLowerCase());
+        });
 
         const formattedResults = filteredResults.map(([url, meta]: [string, any]) => ({
           id: url,
-          title: meta.title || "Untitled",
-          breadcrumb: meta.breadcrumb || ["Module"],
+          title: meta.title || 'Untitled',
+          breadcrumb: meta.breadcrumb || ['Module'],
           snippet:
-            meta.description || meta.content?.substring(0, 150) || "No description available",
+            meta.description || meta.content?.substring(0, 150) || 'No description available',
           url,
         }));
 
@@ -84,7 +99,7 @@ export function SearchUI() {
         setResults([]);
       }
     } catch (error) {
-      console.error("Search error:", error);
+      console.error('Search error:', error);
       setResults([]);
     } finally {
       setIsLoading(false);
@@ -104,19 +119,17 @@ export function SearchUI() {
   const handleKeyDown = useCallback(
     (e: React.KeyboardEvent<HTMLInputElement>) => {
       switch (e.key) {
-        case "ArrowDown":
+        case 'ArrowDown':
           e.preventDefault();
-          setSelectedIndex((prev) =>
-            prev < results.length - 1 ? prev + 1 : prev
-          );
+          setSelectedIndex(prev => (prev < results.length - 1 ? prev + 1 : prev));
           break;
 
-        case "ArrowUp":
+        case 'ArrowUp':
           e.preventDefault();
-          setSelectedIndex((prev) => (prev > 0 ? prev - 1 : 0));
+          setSelectedIndex(prev => (prev > 0 ? prev - 1 : 0));
           break;
 
-        case "Enter":
+        case 'Enter':
           e.preventDefault();
           if (results.length > 0) {
             const selectedResult = results[selectedIndex];
@@ -126,7 +139,7 @@ export function SearchUI() {
           } else if (searchQuery.trim()) {
             // If no results but query exists, add to history and close
             addToHistory(searchQuery);
-            setIsOpen(false);
+            handleClose();
           }
           break;
 
@@ -140,7 +153,7 @@ export function SearchUI() {
   // Handle result selection
   const handleSelectResult = (url: string) => {
     addToHistory(searchQuery);
-    setIsOpen(false);
+    handleClose();
     history.push(url);
   };
 
@@ -170,11 +183,8 @@ export function SearchUI() {
   }
 
   return (
-    <div className={styles.searchModal} onClick={() => setIsOpen(false)}>
-      <div
-        className={styles.searchContainer}
-        onClick={(e) => e.stopPropagation()}
-      >
+    <div className={styles.searchModal} onClick={handleClose}>
+      <div className={styles.searchContainer} onClick={e => e.stopPropagation()}>
         {/* Search Header */}
         <div className={styles.searchHeader}>
           <div className={styles.searchInputWrapper}>
@@ -202,7 +212,7 @@ export function SearchUI() {
               className={styles.searchInput}
               placeholder="Search modules, lessons, concepts..."
               value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
+              onChange={e => setSearchQuery(e.target.value)}
               onKeyDown={handleKeyDown}
               autoFocus
             />
@@ -214,11 +224,7 @@ export function SearchUI() {
             </div>
 
             {/* Close Button */}
-            <button
-              className={styles.closeButton}
-              onClick={() => setIsOpen(false)}
-              aria-label="Close search"
-            >
+            <button className={styles.closeButton} onClick={handleClose} aria-label="Close search">
               ✕
             </button>
           </div>
@@ -267,13 +273,13 @@ export function SearchUI() {
                 <div className={styles.recentSearches}>
                   <div
                     style={{
-                      color: "#00f0ff",
-                      fontSize: "0.85rem",
-                      fontWeight: "600",
-                      textTransform: "uppercase",
-                      letterSpacing: "0.5px",
-                      marginBottom: "0.75rem",
-                      paddingLeft: "0.5rem",
+                      color: '#00f0ff',
+                      fontSize: '0.85rem',
+                      fontWeight: '600',
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.5px',
+                      marginBottom: '0.75rem',
+                      paddingLeft: '0.5rem',
                     }}
                   >
                     Recent Searches
@@ -287,7 +293,7 @@ export function SearchUI() {
                       <span className={styles.recentSearchText}>{search}</span>
                       <button
                         className={styles.removeButton}
-                        onClick={(e) => {
+                        onClick={e => {
                           e.stopPropagation();
                           handleRemoveRecent(search);
                         }}
@@ -328,16 +334,14 @@ export function SearchUI() {
             <span>
               <kbd>↑</kbd> <kbd>↓</kbd> Navigate
             </span>
-            <span style={{ marginLeft: "1rem" }}>
+            <span style={{ marginLeft: '1rem' }}>
               <kbd>⏎</kbd> Select
             </span>
-            <span style={{ marginLeft: "1rem" }}>
+            <span style={{ marginLeft: '1rem' }}>
               <kbd>ESC</kbd> Close
             </span>
           </div>
-          {results.length > 0 && (
-            <span>{results.length} result(s) found</span>
-          )}
+          {results.length > 0 && <span>{results.length} result(s) found</span>}
         </div>
       </div>
     </div>

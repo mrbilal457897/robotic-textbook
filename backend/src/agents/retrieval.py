@@ -25,6 +25,12 @@ class RetrievalAgent:
         self.search_mcp = get_search_mcp()
         self.metadata_mcp = get_metadata_mcp()
 
+        # Ensure Qdrant collection exists (creates if missing, no-op if already exists)
+        try:
+            self.search_mcp.qdrant.ensure_collection()
+        except Exception as e:
+            logger.warning(f"Could not ensure Qdrant collection exists: {e}")
+
         # Configuration from environment
         self.top_k_candidates = int(os.getenv("RAG_TOP_K_CANDIDATES", "20"))
         self.top_k_final = int(os.getenv("RAG_TOP_K_FINAL", "5"))

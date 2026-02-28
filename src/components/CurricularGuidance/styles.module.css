@@ -1,9 +1,22 @@
 /* Curricular Guidance Section */
 .guidance {
   padding: 8rem 2rem;
-  background: linear-gradient(180deg, var(--background-primary) 0%, #0f1419 100%);
+  background: #0c0c0c;
   position: relative;
   overflow: hidden;
+}
+
+/* Color Mode Overrides */
+[data-theme='light'] .guidance {
+  background: #f8f7ff;
+}
+
+[data-color-theme='sepia'] .guidance {
+  background: #f4ecd6;
+}
+
+[data-color-theme='high-contrast'] .guidance {
+  background: #000000;
 }
 
 .guidanceInner {
@@ -20,8 +33,8 @@
 .sectionLabel {
   display: inline-block;
   padding: 0.5rem 1.5rem;
-  background: rgba(0, 240, 255, 0.1);
-  border: 1px solid rgba(0, 240, 255, 0.3);
+  background: rgba(41, 171, 183, 0.08);
+  border: 1px solid rgba(41, 171, 183, 0.25);
   border-radius: 2rem;
   font-size: 0.875rem;
   font-weight: 600;
@@ -35,7 +48,7 @@
   font-size: 3rem;
   font-weight: 700;
   margin: 0 0 1.5rem 0;
-  font-family: 'Orbitron', sans-serif;
+  font-family: var(--font-display);
 }
 
 .sectionDescription {
@@ -60,22 +73,23 @@
   align-items: center;
   gap: 0.75rem;
   padding: 1rem 2rem;
-  background: rgba(26, 34, 48, 0.6);
-  border: 2px solid rgba(0, 240, 255, 0.2);
+  background: rgba(12, 12, 12, 0.25);
+  border: 2px solid rgba(41, 171, 183, 0.15);
   border-radius: 2rem;
   color: var(--text-secondary);
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s var(--ease-default);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .tabButton:hover {
-  background: rgba(26, 34, 48, 0.8);
-  border-color: rgba(0, 240, 255, 0.4);
+  background: rgba(12, 12, 12, 0.4);
+  border-color: rgba(41, 171, 183, 0.35);
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0, 240, 255, 0.15);
+  box-shadow: 0 8px 24px rgba(41, 171, 183, 0.15);
 }
 
 .tabButton:focus {
@@ -84,10 +98,10 @@
 }
 
 .tabButtonActive {
-  background: linear-gradient(135deg, rgba(0, 240, 255, 0.2), rgba(0, 240, 255, 0.1));
+  background: linear-gradient(135deg, rgba(41, 171, 183, 0.2), rgba(41, 171, 183, 0.1));
   border-color: var(--primary);
   color: var(--primary);
-  box-shadow: 0 8px 32px rgba(0, 240, 255, 0.25);
+  box-shadow: 0 8px 32px rgba(41, 171, 183, 0.2);
 }
 
 .tabIcon {
@@ -98,7 +112,7 @@
 }
 
 .tabLabel {
-  font-family: 'Rajdhani', sans-serif;
+  font-family: var(--font-heading);
   white-space: nowrap;
 }
 
@@ -129,18 +143,19 @@
 /* Content Cards */
 .contentCard {
   padding: 2rem;
-  background: rgba(26, 34, 48, 0.6);
-  border: 1px solid rgba(0, 240, 255, 0.2);
+  background: rgba(12, 12, 12, 0.25);
+  border: 1px solid rgba(41, 171, 183, 0.15);
   border-radius: 1rem;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   transition: all 0.3s var(--ease-default);
 }
 
 .contentCard:hover {
-  background: rgba(26, 34, 48, 0.8);
-  border-color: rgba(0, 240, 255, 0.4);
+  background: rgba(12, 12, 12, 0.4);
+  border-color: rgba(41, 171, 183, 0.3);
   transform: translateY(-4px);
-  box-shadow: 0 12px 32px rgba(0, 240, 255, 0.2);
+  box-shadow: 0 12px 32px rgba(41, 171, 183, 0.15);
 }
 
 .cardIcon {
@@ -156,7 +171,7 @@
   font-weight: 700;
   color: var(--text-primary);
   margin: 0 0 1rem 0;
-  font-family: 'Rajdhani', sans-serif;
+  font-family: var(--font-heading);
 }
 
 .cardDescription {

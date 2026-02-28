@@ -68,12 +68,12 @@ Successfully integrated **Cohere** for text embeddings while keeping **Gemini** 
 
 ```bash
 # Cohere Embeddings
-COHERE_API_KEY=your_cohere_api_key_here
+COHERE_API_KEY=REMOVED_API_KEY
 COHERE_EMBEDDING_MODEL=embed-english-v3.0
 COHERE_INPUT_TYPE=search_document
 
 # Gemini Chat
-GEMINI_API_KEY=your_gemini_api_key_here
+GEMINI_API_KEY=AIzaSyBekKZc2yRc4O-4r0Xg-gEp0H412lcKM5M
 GEMINI_CHAT_MODEL=gemini-2.5-flash
 
 # Qdrant Configuration

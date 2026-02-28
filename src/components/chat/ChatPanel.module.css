@@ -1,0 +1,37 @@
+/* ChatPanel Styles */
+
+.backdrop {
+  @apply fixed inset-0 z-30 bg-black/30 backdrop-blur-sm;
+}
+
+.chatPanel {
+  @apply bg-white/95 backdrop-blur-xl border border-white/30 dark:bg-gray-900/95 dark:border-gray-700/50;
+}
+
+.chatHeader {
+  @apply bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-700 dark:to-purple-700 border-b border-white/20;
+}
+
+.chatTitle {
+  @apply text-sm font-semibold text-white;
+}
+
+.settingsButton {
+  @apply rounded-md p-1.5 text-white/80 transition-colors hover:bg-white/20 hover:text-white;
+}
+
+.settingsButton.active {
+  @apply bg-white/30 text-white;
+}
+
+.closeButton {
+  @apply rounded-md p-1.5 text-white/80 transition-colors hover:bg-white/20 hover:text-white;
+}
+
+.settingsPanel {
+  @apply border-b border-gray-200 bg-gray-50 dark:border-gray-800 dark:bg-gray-950;
+}
+
+.inputContainer {
+  @apply border-t border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900;
+}

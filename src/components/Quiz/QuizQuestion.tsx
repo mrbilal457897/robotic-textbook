@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { Question } from "@/hooks/useQuiz";
-import styles from "./styles.module.css";
+import React, { useState } from 'react';
+import { Question } from '@/hooks/useQuiz';
+import styles from './styles.module.css';
 
 interface QuizQuestionProps {
   question: Question;
@@ -29,7 +29,7 @@ export function QuizQuestion({
   canGoNext,
   isLastQuestion,
 }: QuizQuestionProps) {
-  const progress = ((questionNumber) / totalQuestions) * 100;
+  const progress = (questionNumber / totalQuestions) * 100;
 
   return (
     <div className={styles.questionContainer}>
@@ -38,25 +38,18 @@ export function QuizQuestion({
           Question {questionNumber} of {totalQuestions}
         </div>
         <div className={styles.progressBarContainer}>
-          <div
-            className={styles.progressBar}
-            style={{ width: `${progress}%` }}
-          ></div>
+          <div className={styles.progressBar} style={{ width: `${progress}%` }}></div>
         </div>
       </div>
 
-      <div className={styles.questionText}>{question.text}</div>
+      <div className={styles.questionText}>{question.question}</div>
 
       <div className={styles.optionsContainer}>
         {question.options.map((option, index) => (
           <label key={index} className={styles.option}>
             <input
-              type={
-                question.type === "multiple-choice"
-                  ? "radio"
-                  : "radio"
-              }
-              name={`question-${question.id}`}
+              type="radio"
+              name={`question-${question.id || questionNumber}`}
               checked={userAnswer === index}
               onChange={() => onSelectAnswer(index)}
               aria-label={option}
@@ -77,11 +70,7 @@ export function QuizQuestion({
         </button>
 
         {isLastQuestion ? (
-          <button
-            className={styles.submitButton}
-            onClick={onSubmit}
-            aria-label="Submit quiz"
-          >
+          <button className={styles.submitButton} onClick={onSubmit} aria-label="Submit quiz">
             Submit Quiz
           </button>
         ) : (

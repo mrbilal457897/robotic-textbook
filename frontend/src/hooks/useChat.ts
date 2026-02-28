@@ -31,7 +31,11 @@ export interface UseChatReturn {
   tone: ToneType;
   setMode: (mode: AnsweringMode) => void;
   setTone: (tone: ToneType) => void;
-  sendMessage: (message: string, selectedText?: string, action?: TextAction) => Promise<void>;
+  sendMessage: (
+    message: string,
+    selectedText?: string,
+    action?: TextAction
+  ) => Promise<void>;
   clearError: () => void;
   lastUpdatedAt: string | null;
 }
@@ -79,27 +83,31 @@ export function useChat(options: UseChatOptions = {}): UseChatReturn {
   /**
    * Load conversation history from API
    */
-  const loadConversationHistory = useCallback(async (convId: string) => {
-    try {
-      setIsLoading(true);
-      const response = await getConversation(convId, true, 50);
+  const loadConversationHistory = useCallback(
+    async (convId: string) => {
+      try {
+        setIsLoading(true);
+        const response = await getConversation(convId, true, 50);
 
-      if (!isMounted.current) return;
+        if (!isMounted.current) return;
 
-      setMessages(response.messages);
-      setLastUpdatedAt(response.conversation.updated_at);
-    } catch (err) {
-      if (!isMounted.current) return;
+        setMessages(response.messages);
+        setLastUpdatedAt(response.conversation.updated_at);
+      } catch (err) {
+        if (!isMounted.current) return;
 
-      const error = err instanceof Error ? err : new Error("Failed to load conversation");
-      setError(error);
-      onError?.(error);
-    } finally {
-      if (isMounted.current) {
-        setIsLoading(false);
+        const error =
+          err instanceof Error ? err : new Error("Failed to load conversation");
+        setError(error);
+        onError?.(error);
+      } finally {
+        if (isMounted.current) {
+          setIsLoading(false);
+        }
       }
-    }
-  }, [onError]);
+    },
+    [onError]
+  );
 
   /**
    * Send a message to the chat API
@@ -135,7 +143,7 @@ export function useChat(options: UseChatOptions = {}): UseChatReturn {
           selected_text: selectedText,
           action,
           book_id: bookId,
-          chapter,
+          chapter_id: chapter ? parseInt(chapter, 10) || undefined : undefined,
         };
 
         const response = await sendChatMessage(request);
@@ -164,18 +172,14 @@ export function useChat(options: UseChatOptions = {}): UseChatReturn {
         if (!isMounted.current) return;
 
         // Remove optimistic message on error
-        setMessages((prev) =>
-          prev.filter((m) => m.id !== optimisticUserMessage.id)
-        );
+        setMessages((prev) => prev.filter((m) => m.id !== optimisticUserMessage.id));
 
         let error: Error;
 
         if (err instanceof APIClientError) {
           // Handle optimistic lock conflict (409)
           if (err.status === 409) {
-            error = new Error(
-              "Conversation was updated in another tab. Refreshing..."
-            );
+            error = new Error("Conversation was updated in another tab. Refreshing...");
             // Reload conversation to get latest state
             if (conversationId) {
               loadConversationHistory(conversationId);
@@ -235,11 +239,17 @@ export function useChat(options: UseChatOptions = {}): UseChatReturn {
       const savedMode = localStorage.getItem("chatbot-mode") as AnsweringMode | null;
       const savedTone = localStorage.getItem("chatbot-tone") as ToneType | null;
 
-      if (savedMode && ["book-only", "selected-text-only", "general-knowledge"].includes(savedMode)) {
+      if (
+        savedMode &&
+        ["book-only", "selected-text-only", "general-knowledge"].includes(savedMode)
+      ) {
         setMode(savedMode);
       }
 
-      if (savedTone && ["academic", "beginner-friendly", "concise"].includes(savedTone)) {
+      if (
+        savedTone &&
+        ["academic", "beginner-friendly", "concise"].includes(savedTone)
+      ) {
         setTone(savedTone);
       }
     }

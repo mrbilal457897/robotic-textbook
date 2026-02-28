@@ -13,11 +13,13 @@
 import React from 'react';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import useBaseUrl from '@docusaurus/useBaseUrl';
 import styles from './styles.module.css';
 
 export default function Footer(): JSX.Element {
   const { siteConfig } = useDocusaurusContext();
   const currentYear = new Date().getFullYear();
+  const humanIconUrl = useBaseUrl('/img/human.png');
 
   const quickLinks = [
     { label: 'Home', to: '/' },
@@ -86,22 +88,12 @@ export default function Footer(): JSX.Element {
           <div className={styles.footerBrand}>
             <Link to="/" className={styles.footerLogo} aria-label="Home">
               <div className={styles.logoIcon}>
-                <svg
-                  width="32"
-                  height="32"
-                  viewBox="0 0 32 32"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  aria-hidden="true"
-                >
-                  <circle cx="16" cy="16" r="14" stroke="currentColor" strokeWidth="2" />
-                  <path
-                    d="M16 8 L16 24 M10 16 L22 16"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                  />
-                </svg>
+                <img
+                  src={humanIconUrl}
+                  alt="Physical AI & Humanoid Robotics"
+                  width="40"
+                  height="40"
+                />
               </div>
               <span className={styles.logoText}>{siteConfig.title}</span>
             </Link>
@@ -112,7 +104,7 @@ export default function Footer(): JSX.Element {
           <div className={styles.footerSection}>
             <h3 className={styles.footerSectionTitle}>Quick Links</h3>
             <ul className={styles.footerLinksList}>
-              {quickLinks.map((link) => (
+              {quickLinks.map(link => (
                 <li key={link.to}>
                   <Link to={link.to} className={styles.footerLink}>
                     {link.label}
@@ -176,7 +168,7 @@ export default function Footer(): JSX.Element {
         <div className={styles.footerBottom}>
           {/* Social Links */}
           <div className={styles.socialLinks}>
-            {socialLinks.map((social) => (
+            {socialLinks.map(social => (
               <a
                 key={social.label}
                 href={social.href}

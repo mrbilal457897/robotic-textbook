@@ -228,6 +228,10 @@ def get_db() -> PostgresPool:
     return _db_instance
 
 
+# Alias used by chat and conversations endpoints
+get_postgres = get_db
+
+
 def close_db():
     """Close the global database instance"""
     global _db_instance

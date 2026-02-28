@@ -1,132 +1,97 @@
-{
-  "quizId": "module-2-quiz",
-  "moduleId": "module-2-digital-twin",
-  "title": "Digital Twin Fundamentals Quiz",
-  "questions": [
-    {
-      "id": "q1",
-      "type": "multiple-choice",
-      "text": "What is a Digital Twin?",
-      "options": [
-        "A backup copy of robot code",
-        "A virtual replica of a physical robot that mirrors its state and behavior in real-time",
-        "A type of robot sensor",
-        "A communication protocol for robot networks"
-      ],
-      "correctAnswer": 1,
-      "explanation": "A Digital Twin is a virtual representation of a physical system that continuously receives data from and sends data to its physical counterpart, enabling simulation, monitoring, and optimization.",
-      "difficulty": "easy"
-    },
-    {
-      "id": "q2",
-      "type": "multiple-choice",
-      "text": "What is Gazebo primarily used for in robotics?",
-      "options": [
-        "Hardware manufacturing",
-        "Physics-based simulation of robots in virtual environments",
-        "Real-time motion capture",
-        "Network communication"
-      ],
-      "correctAnswer": 1,
-      "explanation": "Gazebo is a physics simulator that allows robots to be tested and trained in virtual environments before deployment on real hardware. It simulates physics, sensors, and robot dynamics.",
-      "difficulty": "easy"
-    },
-    {
-      "id": "q3",
-      "type": "multiple-choice",
-      "text": "In sensor simulation, what is the primary benefit of simulating sensor noise and errors?",
-      "options": [
-        "To make the simulation run faster",
-        "To make the simulation more realistic and test robot control algorithms against real-world conditions",
-        "To reduce computational requirements",
-        "To eliminate the need for real sensor calibration"
-      ],
-      "correctAnswer": 1,
-      "explanation": "Simulating realistic sensor behavior, including noise and errors, prepares robot controllers for real-world deployment where sensors are imperfect. This leads to more robust control algorithms.",
-      "difficulty": "medium"
-    },
-    {
-      "id": "q4",
-      "type": "true-false",
-      "text": "Unity 3D can only be used for video game development and cannot be applied to robot simulation.",
-      "options": ["True", "False"],
-      "correctAnswer": 1,
-      "explanation": "Unity 3D is increasingly used for robotics visualization and simulation. Its powerful rendering, physics engine, and cross-platform capabilities make it suitable for creating digital twins and robot control interfaces.",
-      "difficulty": "medium"
-    },
-    {
-      "id": "q5",
-      "type": "multiple-choice",
-      "text": "What advantage does simulating a robot in Gazebo provide before deploying it on physical hardware?",
-      "options": [
-        "It guarantees the robot will work perfectly on real hardware",
-        "It reduces development cost and risk by testing control algorithms in a safe, virtual environment",
-        "It eliminates the need for real sensors",
-        "It makes the robot move faster in reality"
-      ],
-      "correctAnswer": 1,
-      "explanation": "Simulation in Gazebo allows developers to test and refine control algorithms, discover potential issues, and iterate quickly without the cost and risks of hardware damage or safety issues.",
-      "difficulty": "easy"
-    },
-    {
-      "id": "q6",
-      "type": "multiple-choice",
-      "text": "In a humanoid robot's digital twin, which of the following is MOST important to simulate accurately?",
-      "options": [
-        "The robot's color and appearance only",
-        "The joint dynamics, center of mass, and contact forces for realistic movement and stability",
-        "The robot's weight in kilograms",
-        "The manufacturing date"
-      ],
-      "correctAnswer": 1,
-      "explanation": "Accurate simulation of joint dynamics, inertias, and contact forces is critical because these properties directly affect the robot's ability to move, balance, and interact with its environment safely.",
-      "difficulty": "medium"
-    },
-    {
-      "id": "q7",
-      "type": "multiple-choice",
-      "text": "What is the main purpose of updating a Digital Twin with real-time data from the physical robot?",
-      "options": [
-        "To make the digital representation slower than reality",
-        "To continuously synchronize the virtual model with physical state, enabling real-time monitoring, prediction, and optimization",
-        "To replace the need for physical robots entirely",
-        "To reduce the number of sensors needed"
-      ],
-      "correctAnswer": 1,
-      "explanation": "Real-time data synchronization keeps the digital twin aligned with the physical robot's actual state. This enables anomaly detection, predictive maintenance, remote operation, and algorithm optimization.",
-      "difficulty": "medium"
-    },
-    {
-      "id": "q8",
-      "type": "true-false",
-      "text": "Camera and lidar sensor simulations in Gazebo produce identical output compared to real sensors without any filtering or post-processing.",
-      "options": ["True", "False"],
-      "correctAnswer": 1,
-      "explanation": "Simulated sensors are idealized approximations. Real sensors have noise, calibration errors, and performance characteristics that don't perfectly match simulations, which is why sim-to-real transfer requires careful tuning.",
-      "difficulty": "hard"
-    },
-    {
-      "id": "q9",
-      "type": "multiple-choice",
-      "text": "Which statement best describes the relationship between Gazebo simulation and Unity visualization for a humanoid robot digital twin?",
-      "options": [
-        "They serve identical purposes and either one can replace the other",
-        "Gazebo provides physics simulation while Unity provides visualization; they can work together for comprehensive digital twin modeling",
-        "Unity only works for industrial robots, not humanoids",
-        "Gazebo can visualize robots but cannot simulate physics"
-      ],
-      "correctAnswer": 1,
-      "explanation": "Gazebo excels at physics simulation and ROS integration, while Unity provides high-quality visualization and real-time rendering. Used together, they create comprehensive digital twins with both accurate physics and visual fidelity.",
-      "difficulty": "hard"
-    },
-    {
-      "id": "q10",
-      "type": "true-false",
-      "text": "If a humanoid robot's control algorithm works perfectly in a Gazebo simulation, it is guaranteed to work identically on the real robot.",
-      "options": ["True", "False"],
-      "correctAnswer": 1,
-      "explanation": "Sim-to-real transfer is a known challenge in robotics. Simulation imperfections, unmodeled dynamics, sensor differences, and environmental variations mean algorithms must be validated and tuned on real hardware.",
-      "difficulty": "hard"
-    }
-  ]
-}
+[
+  {
+    "question": "What is a Digital Twin?",
+    "options": [
+      "A backup copy of robot code",
+      "A virtual replica of a physical robot that mirrors its state and behavior in real-time",
+      "A type of robot sensor",
+      "A communication protocol for robot networks"
+    ],
+    "correctIndex": 1,
+    "explanation": "A Digital Twin is a virtual representation of a physical system that continuously receives data from and sends data to its physical counterpart, enabling simulation, monitoring, and optimization."
+  },
+  {
+    "question": "What is Gazebo primarily used for in robotics?",
+    "options": [
+      "Hardware manufacturing",
+      "Physics-based simulation of robots in virtual environments",
+      "Real-time motion capture",
+      "Network communication"
+    ],
+    "correctIndex": 1,
+    "explanation": "Gazebo is a physics simulator that allows robots to be tested and trained in virtual environments before deployment on real hardware. It simulates physics, sensors, and robot dynamics."
+  },
+  {
+    "question": "In sensor simulation, what is the primary benefit of simulating sensor noise and errors?",
+    "options": [
+      "To make the simulation run faster",
+      "To make the simulation more realistic and test robot control algorithms against real-world conditions",
+      "To reduce computational requirements",
+      "To eliminate the need for real sensor calibration"
+    ],
+    "correctIndex": 1,
+    "explanation": "Simulating realistic sensor behavior, including noise and errors, prepares robot controllers for real-world deployment where sensors are imperfect. This leads to more robust control algorithms."
+  },
+  {
+    "question": "Unity 3D can only be used for video game development and cannot be applied to robot simulation.",
+    "options": ["True", "False"],
+    "correctIndex": 1,
+    "explanation": "Unity 3D is increasingly used for robotics visualization and simulation. Its powerful rendering, physics engine, and cross-platform capabilities make it suitable for creating digital twins and robot control interfaces."
+  },
+  {
+    "question": "What advantage does simulating a robot in Gazebo provide before deploying it on physical hardware?",
+    "options": [
+      "It guarantees the robot will work perfectly on real hardware",
+      "It reduces development cost and risk by testing control algorithms in a safe, virtual environment",
+      "It eliminates the need for real sensors",
+      "It makes the robot move faster in reality"
+    ],
+    "correctIndex": 1,
+    "explanation": "Simulation in Gazebo allows developers to test and refine control algorithms, discover potential issues, and iterate quickly without the cost and risks of hardware damage or safety issues."
+  },
+  {
+    "question": "In a humanoid robot's digital twin, which of the following is MOST important to simulate accurately?",
+    "options": [
+      "The robot's color and appearance only",
+      "The joint dynamics, center of mass, and contact forces for realistic movement and stability",
+      "The robot's weight in kilograms",
+      "The manufacturing date"
+    ],
+    "correctIndex": 1,
+    "explanation": "Accurate simulation of joint dynamics, inertias, and contact forces is critical because these properties directly affect the robot's ability to move, balance, and interact with its environment safely."
+  },
+  {
+    "question": "What is the main purpose of updating a Digital Twin with real-time data from the physical robot?",
+    "options": [
+      "To make the digital representation slower than reality",
+      "To continuously synchronize the virtual model with physical state, enabling real-time monitoring, prediction, and optimization",
+      "To replace the need for physical robots entirely",
+      "To reduce the number of sensors needed"
+    ],
+    "correctIndex": 1,
+    "explanation": "Real-time data synchronization keeps the digital twin aligned with the physical robot's actual state. This enables anomaly detection, predictive maintenance, remote operation, and algorithm optimization."
+  },
+  {
+    "question": "Camera and lidar sensor simulations in Gazebo produce identical output compared to real sensors without any filtering or post-processing.",
+    "options": ["True", "False"],
+    "correctIndex": 1,
+    "explanation": "Simulated sensors are idealized approximations. Real sensors have noise, calibration errors, and performance characteristics that don't perfectly match simulations, which is why sim-to-real transfer requires careful tuning."
+  },
+  {
+    "question": "Which statement best describes the relationship between Gazebo simulation and Unity visualization for a humanoid robot digital twin?",
+    "options": [
+      "They serve identical purposes and either one can replace the other",
+      "Gazebo provides physics simulation while Unity provides visualization; they can work together for comprehensive digital twin modeling",
+      "Unity only works for industrial robots, not humanoids",
+      "Gazebo can visualize robots but cannot simulate physics"
+    ],
+    "correctIndex": 1,
+    "explanation": "Gazebo excels at physics simulation and ROS integration, while Unity provides high-quality visualization and real-time rendering. Used together, they create comprehensive digital twins with both accurate physics and visual fidelity."
+  },
+  {
+    "question": "If a humanoid robot's control algorithm works perfectly in a Gazebo simulation, it is guaranteed to work identically on the real robot.",
+    "options": ["True", "False"],
+    "correctIndex": 1,
+    "explanation": "Sim-to-real transfer is a known challenge in robotics. Simulation imperfections, unmodeled dynamics, sensor differences, and environmental variations mean algorithms must be validated and tuned on real hardware."
+  }
+]

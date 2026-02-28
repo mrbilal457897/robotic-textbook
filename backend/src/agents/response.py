@@ -27,7 +27,7 @@ class ResponseAgent:
 
     def __init__(self):
         self.gemini_api_key = os.getenv("GEMINI_API_KEY")
-        self.model_name = os.getenv("GEMINI_MODEL", "gemini-2.0-flash-exp")
+        self.model_name = os.getenv("GEMINI_CHAT_MODEL") or os.getenv("GEMINI_MODEL", "gemini-2.0-flash-exp")
 
         if not self.gemini_api_key:
             logger.warning("GEMINI_API_KEY not set; response generation will fail")
@@ -84,6 +84,9 @@ class ResponseAgent:
             # Calculate confidence score
             confidence_score = self._calculate_confidence(chunks, citations)
 
+            # Detect key terms for glossary highlighting (T127)
+            key_terms = self._detect_key_terms(response_text)
+
             return {
                 "status": "success",
                 "answer": response_text,
@@ -92,6 +95,7 @@ class ResponseAgent:
                 "mode": mode,
                 "tone": tone,
                 "chunks_used": len(chunks),
+                "key_terms": key_terms,  # T127: Add key terms for frontend highlighting
             }
 
         except Exception as e:
@@ -555,6 +559,114 @@ Would you like to switch to {suggested_desc}?
         response["mode_switch_suggestion"] = mode_switch_suggestion
 
         return response
+
+    def _detect_key_terms(self, response_text: str) -> List[Dict[str, Any]]:
+        """
+        Detect key technical terms in response text for glossary highlighting (T127)
+
+        Args:
+            response_text: Generated response text
+
+        Returns:
+            List of detected key terms with positions and definitions
+        """
+        import re
+        import json
+        from pathlib import Path
+
+        # Load glossary (cache in instance variable)
+        if not hasattr(self, "_glossary"):
+            try:
+                # Try to load from frontend/public/glossary.json
+                glossary_path = Path(__file__).parent.parent.parent.parent / "frontend" / "public" / "glossary.json"
+
+                if not glossary_path.exists():
+                    # Fallback: try relative to current file
+                    glossary_path = Path(__file__).parent.parent.parent / "glossary.json"
+
+                if glossary_path.exists():
+                    with open(glossary_path, 'r', encoding='utf-8') as f:
+                        glossary_data = json.load(f)
+                        self._glossary = glossary_data.get("terms", [])
+                        logger.info(f"Loaded glossary with {len(self._glossary)} terms")
+                else:
+                    logger.warning("Glossary file not found, key term detection disabled")
+                    self._glossary = []
+            except Exception as e:
+                logger.error(f"Failed to load glossary: {e}")
+                self._glossary = []
+
+        if not self._glossary:
+            return []
+
+        detected_terms = []
+        text_lower = response_text.lower()
+
+        # Build a set of terms to check (term + aliases)
+        terms_to_check = []
+        for term_data in self._glossary:
+            term = term_data["term"]
+            aliases = term_data.get("aliases", [])
+
+            # Add main term and aliases
+            terms_to_check.append({
+                "search_term": term,
+                "canonical_term": term,
+                "definition": term_data["definition"],
+                "category": term_data.get("category", "General")
+            })
+
+            for alias in aliases:
+                terms_to_check.append({
+                    "search_term": alias,
+                    "canonical_term": term,
+                    "definition": term_data["definition"],
+                    "category": term_data.get("category", "General")
+                })
+
+        # Sort by length (longest first) to match longer terms before shorter ones
+        # This prevents "ROS" from matching when "ROS 2" is present
+        terms_to_check.sort(key=lambda x: len(x["search_term"]), reverse=True)
+
+        # Track positions already matched to avoid overlaps
+        matched_positions = set()
+
+        for term_info in terms_to_check:
+            search_term = term_info["search_term"]
+
+            # Use word boundary regex to match whole words/phrases
+            # Handle terms with special characters and spaces
+            escaped_term = re.escape(search_term)
+            pattern = r'\b' + escaped_term + r'\b'
+
+            for match in re.finditer(pattern, response_text, re.IGNORECASE):
+                start_pos = match.start()
+                end_pos = match.end()
+
+                # Check if this position overlaps with already matched terms
+                if any(start_pos < pos < end_pos or pos < start_pos < pos + length
+                       for pos, length in matched_positions):
+                    continue
+
+                # Add to detected terms
+                detected_terms.append({
+                    "term": term_info["canonical_term"],
+                    "matched_text": match.group(),
+                    "definition": term_info["definition"],
+                    "category": term_info["category"],
+                    "start_pos": start_pos,
+                    "end_pos": end_pos
+                })
+
+                # Mark this position as matched
+                matched_positions.add((start_pos, end_pos - start_pos))
+
+        # Sort by position in text
+        detected_terms.sort(key=lambda x: x["start_pos"])
+
+        logger.info(f"Detected {len(detected_terms)} key terms in response")
+
+        return detected_terms
 
 
 # Global instance

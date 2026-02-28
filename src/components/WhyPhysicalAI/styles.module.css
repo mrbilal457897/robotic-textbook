@@ -5,7 +5,20 @@
 
 .whyPhysicalAI {
   padding: var(--space-4xl) var(--space-lg);
-  background-color: var(--bg-card);
+  background: #0c0c0c;
+}
+
+/* Color Mode Overrides */
+[data-theme='light'] .whyPhysicalAI {
+  background: #f8f7ff;
+}
+
+[data-color-theme='sepia'] .whyPhysicalAI {
+  background: #f4ecd6;
+}
+
+[data-color-theme='high-contrast'] .whyPhysicalAI {
+  background: #000000;
 }
 
 .whyPhysicalAIInner {
@@ -134,10 +147,10 @@
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-semibold);
   color: var(--text-primary);
-  background-color: rgba(0, 240, 255, 0.1);
+  background-color: rgba(41, 171, 183, 0.1);
   padding: var(--space-xs) var(--space-sm);
   border-radius: var(--radius-md);
-  border: 1px solid rgba(0, 240, 255, 0.3);
+  border: 1px solid rgba(41, 171, 183, 0.3);
   backdrop-filter: blur(10px);
   animation: float 4s ease-in-out infinite;
 }

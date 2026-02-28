@@ -11,11 +11,11 @@
  * - Mobile hamburger menu (<768px)
  */
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-import { useLocation } from '@docusaurus/router';
-import { SearchUI } from '../../components/Search/SearchUI';
+import useBaseUrl from '@docusaurus/useBaseUrl';
+import { useLocation, useHistory } from '@docusaurus/router';
 import { LanguageSelector } from '../../components/LanguageSelector';
 import { LoginButton } from '../../components/Auth/LoginButton';
 import { UserProfile } from '../../components/Auth/UserProfile';
@@ -26,10 +26,17 @@ import styles from './styles.module.css';
 export default function Navbar(): JSX.Element {
   const { siteConfig } = useDocusaurusContext();
   const location = useLocation();
+  const history = useHistory();
+  const robotIconUrl = useBaseUrl('/img/human.png');
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [searchResults, setSearchResults] = useState<any[]>([]);
+  const [selectedIndex, setSelectedIndex] = useState(0);
   const { user, isAuthenticated, isLoading, logout } = useAuth();
+  const searchRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   // Handle scroll effect
   useEffect(() => {
@@ -44,7 +51,94 @@ export default function Navbar(): JSX.Element {
   // Close mobile menu when route changes
   useEffect(() => {
     setIsMobileMenuOpen(false);
+    setIsSearchOpen(false);
   }, [location.pathname]);
+
+  // Close search when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
+        setIsSearchOpen(false);
+        setSearchQuery('');
+      }
+    };
+
+    if (isSearchOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+      return () => document.removeEventListener('mousedown', handleClickOutside);
+    }
+  }, [isSearchOpen]);
+
+  // Perform search
+  useEffect(() => {
+    if (!searchQuery.trim()) {
+      setSearchResults([]);
+      return;
+    }
+
+    const timer = setTimeout(() => {
+      // Simple search simulation - in production, connect to your search index
+      const mockResults = [
+        {
+          id: '1',
+          title: 'Module 1: ROS 2 Basics',
+          url: '/docs/module-1-ros2/',
+          snippet: 'Learn the fundamentals of ROS 2...',
+        },
+        {
+          id: '2',
+          title: 'Module 2: Digital Twins',
+          url: '/docs/module-2-digital-twin/',
+          snippet: 'Build virtual replicas of robots...',
+        },
+        {
+          id: '3',
+          title: 'Module 3: NVIDIA Isaac',
+          url: '/docs/module-3-isaac/',
+          snippet: 'GPU-accelerated robotics simulation...',
+        },
+        {
+          id: '4',
+          title: 'Module 4: VLA Models',
+          url: '/docs/module-4-vla/',
+          snippet: 'Vision-Language-Action integration...',
+        },
+      ].filter(
+        item =>
+          item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          item.snippet.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+
+      setSearchResults(mockResults);
+      setSelectedIndex(0);
+    }, 300);
+
+    return () => clearTimeout(timer);
+  }, [searchQuery]);
+
+  // Handle keyboard navigation
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      setSelectedIndex(prev => Math.min(prev + 1, searchResults.length - 1));
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      setSelectedIndex(prev => Math.max(prev - 1, 0));
+    } else if (e.key === 'Enter' && searchResults.length > 0) {
+      e.preventDefault();
+      const selected = searchResults[selectedIndex];
+      if (selected) {
+        history.push(selected.url);
+        setIsSearchOpen(false);
+        setSearchQuery('');
+      }
+    } else if (e.key === 'Escape') {
+      e.preventDefault();
+      setIsSearchOpen(false);
+      setSearchQuery('');
+      inputRef.current?.blur();
+    }
+  };
 
   // Prevent body scroll when mobile menu is open
   useEffect(() => {
@@ -87,22 +181,7 @@ export default function Navbar(): JSX.Element {
           {/* Logo */}
           <Link to="/" className={styles.navbarLogo} aria-label="Home">
             <div className={styles.logoIcon}>
-              <svg
-                width="32"
-                height="32"
-                viewBox="0 0 32 32"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                aria-hidden="true"
-              >
-                <circle cx="16" cy="16" r="14" stroke="currentColor" strokeWidth="2" />
-                <path
-                  d="M16 8 L16 24 M10 16 L22 16"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                />
-              </svg>
+              <img src={robotIconUrl} alt="Robot Agent" width="32" height="32" />
             </div>
             <span className={styles.logoText}>{siteConfig.title}</span>
           </Link>
@@ -122,32 +201,129 @@ export default function Navbar(): JSX.Element {
 
           {/* Desktop Actions */}
           <div className={styles.navbarActions}>
+            {/* Inline Search */}
+            <div className={styles.searchContainer} ref={searchRef}>
+              <div
+                className={`${styles.searchInputWrapper} ${isSearchOpen ? styles.searchInputExpanded : ''}`}
+              >
+                {/* Search Icon Button */}
+                {!isSearchOpen && (
+                  <button
+                    className={styles.searchIconButton}
+                    onClick={() => {
+                      setIsSearchOpen(true);
+                      setTimeout(() => inputRef.current?.focus(), 100);
+                    }}
+                    aria-label="Open search"
+                  >
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 20 20"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      aria-hidden="true"
+                    >
+                      <circle cx="9" cy="9" r="6" stroke="currentColor" strokeWidth="2" />
+                      <path
+                        d="M14 14 L18 18"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                      />
+                    </svg>
+                  </button>
+                )}
+
+                {/* Expanded Search Input */}
+                {isSearchOpen && (
+                  <>
+                    <svg
+                      className={styles.searchIcon}
+                      width="18"
+                      height="18"
+                      viewBox="0 0 20 20"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      aria-hidden="true"
+                    >
+                      <circle cx="9" cy="9" r="6" stroke="currentColor" strokeWidth="2" />
+                      <path
+                        d="M14 14 L18 18"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                      />
+                    </svg>
+                    <input
+                      ref={inputRef}
+                      type="text"
+                      className={styles.searchInput}
+                      placeholder="Search modules, lessons..."
+                      value={searchQuery}
+                      onChange={e => setSearchQuery(e.target.value)}
+                      onKeyDown={handleKeyDown}
+                      aria-label="Search modules and lessons"
+                    />
+                    <button
+                      className={styles.searchCloseButton}
+                      onClick={() => {
+                        setIsSearchOpen(false);
+                        setSearchQuery('');
+                      }}
+                      aria-label="Close search"
+                    >
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 16 16"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true"
+                      >
+                        <path
+                          d="M12 4L4 12M4 4l8 8"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                        />
+                      </svg>
+                    </button>
+                  </>
+                )}
+              </div>
+
+              {/* Search Results Dropdown */}
+              {isSearchOpen && searchQuery && (
+                <div className={styles.searchDropdown}>
+                  {searchResults.length > 0 ? (
+                    <>
+                      {searchResults.map((result, index) => (
+                        <Link
+                          key={result.id}
+                          to={result.url}
+                          className={`${styles.searchResultItem} ${index === selectedIndex ? styles.searchResultActive : ''}`}
+                          onClick={() => {
+                            setIsSearchOpen(false);
+                            setSearchQuery('');
+                          }}
+                        >
+                          <div className={styles.resultTitle}>{result.title}</div>
+                          <div className={styles.resultSnippet}>{result.snippet}</div>
+                        </Link>
+                      ))}
+                    </>
+                  ) : (
+                    <div className={styles.noResults}>
+                      <span>No results found</span>
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+
             {/* Theme Toggle */}
             <ThemeToggle />
-            {/* Search Button */}
-            <button
-              className={styles.searchButton}
-              onClick={() => setIsSearchOpen(true)}
-              aria-label="Search (Ctrl+K)"
-              title="Search modules and lessons (Ctrl+K)"
-            >
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 20 20"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                aria-hidden="true"
-              >
-                <circle cx="9" cy="9" r="6" stroke="currentColor" strokeWidth="2" />
-                <path
-                  d="M14 14 L18 18"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                />
-              </svg>
-            </button>
 
             {/* Language Selector */}
             <LanguageSelector />
@@ -304,9 +480,6 @@ export default function Navbar(): JSX.Element {
           )}
         </div>
       </div>
-
-      {/* Search Modal */}
-      {isSearchOpen && <SearchUI />}
     </>
   );
 }

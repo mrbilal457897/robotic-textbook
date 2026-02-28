@@ -4,16 +4,20 @@ Centralized configuration using Pydantic Settings
 """
 
 from functools import lru_cache
+from pathlib import Path
 from typing import Optional
 from pydantic import Field, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
+
+# Always resolve .env relative to the backend/ directory, not cwd
+_ENV_FILE = Path(__file__).resolve().parent.parent / ".env"
 
 
 class Settings(BaseSettings):
     """Application settings loaded from environment variables"""
 
     model_config = SettingsConfigDict(
-        env_file=".env",
+        env_file=str(_ENV_FILE),
         env_file_encoding="utf-8",
         case_sensitive=False,
         extra="ignore",
@@ -114,6 +118,14 @@ class Settings(BaseSettings):
     )
     anonymous_session_expiry_hours: int = Field(
         default=24, description="Anonymous session expiry in hours"
+    )
+
+    # ============================================
+    # Frontend Configuration
+    # ============================================
+    frontend_url: str = Field(
+        default="http://localhost:3000",
+        description="Frontend URL for OAuth redirects",
     )
 
     # ============================================

@@ -146,7 +146,7 @@ class RouterAgent:
         return routing_decision
 
     def _determine_mode(
-        self, explicit_mode: Optional[AnsweringMode], selected_text: Optional[str]
+        self, explicit_mode, selected_text: Optional[str]
     ) -> AnsweringMode:
         """
         Determine answering mode based on context
@@ -160,7 +160,9 @@ class RouterAgent:
             return AnsweringMode.SELECTED_TEXT_ONLY
 
         if explicit_mode:
-            return explicit_mode
+            if isinstance(explicit_mode, AnsweringMode):
+                return explicit_mode
+            return AnsweringMode(explicit_mode)
 
         return AnsweringMode.BOOK_ONLY
 
@@ -267,10 +269,7 @@ class RouterAgent:
             )
 
         elif mode == AnsweringMode.GENERAL_KNOWLEDGE:
-            # No filters for general mode (allows external knowledge)
-            # Optionally filter by book_id if provided for textbook-first approach
-            if book_id:
-                filters["book_id"] = book_id
+            # No vector search filters — search all content broadly
             filters["allow_external"] = True
 
         return filters

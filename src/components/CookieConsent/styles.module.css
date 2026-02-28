@@ -5,7 +5,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background: linear-gradient(135deg, #1a2230 0%, #0a0e14 100%);
+  background: #0c0c0c;
   border-top: 2px solid rgba(0, 240, 255, 0.3);
   box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.3);
   padding: 1.5rem;
@@ -128,7 +128,7 @@
 }
 
 .modal {
-  background: linear-gradient(135deg, #1a2230 0%, #0a0e14 100%);
+  background: #0c0c0c;
   border-radius: 12px;
   border: 1px solid rgba(0, 240, 255, 0.2);
   box-shadow: 0 16px 64px rgba(0, 0, 0, 0.5);
@@ -241,7 +241,7 @@
 
 .toggleSlider:before {
   position: absolute;
-  content: "";
+  content: '';
   height: 18px;
   width: 18px;
   left: 4px;

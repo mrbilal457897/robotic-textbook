@@ -1,61 +1,62 @@
 /**
  * useLanguage Hook
- * Manages language selection and persistence
+ * Manages language selection and persistence using Docusaurus's built-in i18n
  */
 
-import { useEffect, useState } from "react";
-import { useLocation } from "@docusaurus/router";
+import { useEffect, useState } from 'react';
+import { useLocation } from '@docusaurus/router';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 
-export type SupportedLanguage = "en" | "ur" | "ar" | "zh" | "es";
+export type SupportedLanguage = 'en' | 'ur' | 'ar' | 'zh' | 'es';
 
 export interface LanguageConfig {
   code: SupportedLanguage;
   name: string;
   nativeName: string;
-  direction: "ltr" | "rtl";
+  direction: 'ltr' | 'rtl';
   flag: string;
 }
 
 export const SUPPORTED_LANGUAGES: Record<SupportedLanguage, LanguageConfig> = {
   en: {
-    code: "en",
-    name: "English",
-    nativeName: "English",
-    direction: "ltr",
-    flag: "🇬🇧",
+    code: 'en',
+    name: 'English',
+    nativeName: 'English',
+    direction: 'ltr',
+    flag: '🇬🇧',
   },
   ur: {
-    code: "ur",
-    name: "Urdu",
-    nativeName: "اردو",
-    direction: "rtl",
-    flag: "🇵🇰",
+    code: 'ur',
+    name: 'Urdu',
+    nativeName: 'اردو',
+    direction: 'rtl',
+    flag: '🇵🇰',
   },
   ar: {
-    code: "ar",
-    name: "Arabic",
-    nativeName: "العربية",
-    direction: "rtl",
-    flag: "🇸🇦",
+    code: 'ar',
+    name: 'Arabic',
+    nativeName: 'العربية',
+    direction: 'rtl',
+    flag: '🇸🇦',
   },
   zh: {
-    code: "zh",
-    name: "Chinese",
-    nativeName: "中文",
-    direction: "ltr",
-    flag: "🇨🇳",
+    code: 'zh',
+    name: 'Chinese',
+    nativeName: '中文',
+    direction: 'ltr',
+    flag: '🇨🇳',
   },
   es: {
-    code: "es",
-    name: "Spanish",
-    nativeName: "Español",
-    direction: "ltr",
-    flag: "🇪🇸",
+    code: 'es',
+    name: 'Spanish',
+    nativeName: 'Español',
+    direction: 'ltr',
+    flag: '🇪🇸',
   },
 };
 
-const LANGUAGE_STORAGE_KEY = "preferredLanguage";
-const DEFAULT_LANGUAGE: SupportedLanguage = "en";
+const LANGUAGE_STORAGE_KEY = 'preferredLanguage';
+const DEFAULT_LANGUAGE: SupportedLanguage = 'en';
 
 interface UseLanguageReturn {
   currentLanguage: SupportedLanguage;
@@ -71,38 +72,23 @@ interface UseLanguageReturn {
  */
 export function useLanguage(): UseLanguageReturn {
   const location = useLocation();
-  const [currentLanguage, setCurrentLanguage] =
-    useState<SupportedLanguage>(DEFAULT_LANGUAGE);
+  const { i18n } = useDocusaurusContext();
+  const [currentLanguage, setCurrentLanguage] = useState<SupportedLanguage>(DEFAULT_LANGUAGE);
 
-  // Extract language from URL path
+  // Extract language from Docusaurus i18n context
   useEffect(() => {
-    const extractLanguageFromPath = (): SupportedLanguage => {
-      const pathSegments = location.pathname.split("/").filter(Boolean);
+    const docusaurusLocale = i18n.currentLocale as SupportedLanguage;
+    if (Object.keys(SUPPORTED_LANGUAGES).includes(docusaurusLocale)) {
+      setCurrentLanguage(docusaurusLocale);
 
-      // Check if first segment is a valid language code
-      if (pathSegments.length > 0) {
-        const potentialLang = pathSegments[0] as SupportedLanguage;
-        if (Object.keys(SUPPORTED_LANGUAGES).includes(potentialLang)) {
-          return potentialLang;
-        }
-      }
-
-      // Check localStorage for saved preference
+      // Save to localStorage
       try {
-        const stored = localStorage.getItem(LANGUAGE_STORAGE_KEY);
-        if (stored && Object.keys(SUPPORTED_LANGUAGES).includes(stored)) {
-          return stored as SupportedLanguage;
-        }
+        localStorage.setItem(LANGUAGE_STORAGE_KEY, docusaurusLocale);
       } catch (error) {
-        console.error("Failed to read language preference:", error);
+        console.error('Failed to save language preference:', error);
       }
-
-      return DEFAULT_LANGUAGE;
-    };
-
-    const detectedLang = extractLanguageFromPath();
-    setCurrentLanguage(detectedLang);
-  }, [location.pathname]);
+    }
+  }, [i18n.currentLocale]);
 
   const switchLanguage = (lang: SupportedLanguage) => {
     if (!Object.keys(SUPPORTED_LANGUAGES).includes(lang)) {
@@ -114,35 +100,67 @@ export function useLanguage(): UseLanguageReturn {
     try {
       localStorage.setItem(LANGUAGE_STORAGE_KEY, lang);
     } catch (error) {
-      console.error("Failed to save language preference:", error);
+      console.error('Failed to save language preference:', error);
     }
 
-    // Build new URL with language prefix
-    const currentPath = location.pathname;
-    const pathSegments = currentPath.split("/").filter(Boolean);
+    // SIMPLIFIED APPROACH: Use window.location.origin and rebuild URL
+    const currentPath = window.location.pathname;
+    const baseUrl = '/physical-ai-textbook/'; // From docusaurus.config.ts
 
-    // Remove current language prefix if exists
+    // Remove baseUrl from current path to get the page path
+    let pagePath = currentPath;
+    if (currentPath.startsWith(baseUrl)) {
+      pagePath = currentPath.substring(baseUrl.length);
+    }
+
+    // Remove current locale from page path if it exists
+    const locales = ['en', 'ur', 'ar', 'zh', 'es'];
+    for (const locale of locales) {
+      if (pagePath.startsWith(`${locale}/`)) {
+        pagePath = pagePath.substring(locale.length + 1);
+        break;
+      } else if (pagePath === locale) {
+        pagePath = '';
+        break;
+      }
+    }
+
+    // Build new URL
+    let newUrl = window.location.origin + baseUrl;
+
+    // Add locale prefix for non-default languages
+    if (lang !== 'en') {
+      newUrl += `${lang}/`;
+    }
+
+    // Add page path
+    newUrl += pagePath;
+
+    // Remove trailing slash if it's not the root
     if (
-      pathSegments.length > 0 &&
-      Object.keys(SUPPORTED_LANGUAGES).includes(pathSegments[0])
+      newUrl.endsWith('/') &&
+      newUrl !== window.location.origin + baseUrl &&
+      newUrl !== window.location.origin + baseUrl + `${lang}/`
     ) {
-      pathSegments.shift();
+      newUrl = newUrl.slice(0, -1);
     }
 
-    // Add new language prefix (except for default language)
-    let newPath = "/";
-    if (lang !== DEFAULT_LANGUAGE) {
-      newPath += `${lang}/`;
-    }
-    newPath += pathSegments.join("/");
+    console.log('Switching language:', {
+      from: currentLanguage,
+      to: lang,
+      currentPath,
+      pagePath,
+      newUrl,
+      baseUrl,
+    });
 
     // Navigate to new URL
-    window.location.href = newPath;
+    window.location.href = newUrl;
   };
 
   const currentConfig = SUPPORTED_LANGUAGES[currentLanguage];
   const availableLanguages = Object.values(SUPPORTED_LANGUAGES);
-  const isRTL = currentConfig.direction === "rtl";
+  const isRTL = currentConfig.direction === 'rtl';
 
   return {
     currentLanguage,

@@ -144,3 +144,6 @@ service-account.json
 # Session data
 sessions/
 *.session
+nul 
+src/nul 
+static/img/nul 

@@ -10,6 +10,7 @@ import logging
 
 from ...services.auth import get_auth_service
 from ...db.postgres import get_db
+from ...config import settings
 
 logger = logging.getLogger(__name__)
 
@@ -35,7 +36,7 @@ async def github_login(request: Request, response: Response):
         key="oauth_state",
         value=csrf_token,
         httponly=True,
-        secure=True,
+        secure=False,  # Set to True in production with HTTPS
         samesite="lax",
         max_age=600,  # 10 minutes
     )
@@ -89,14 +90,14 @@ async def github_callback(
     await _store_session(db, session_data)
 
     # Create response with session cookie
-    frontend_url = request.url_for("root")
-    response = RedirectResponse(url=str(frontend_url))
+    # Redirect to frontend after successful OAuth
+    response = RedirectResponse(url=settings.frontend_url)
 
     response.set_cookie(
         key="session_id",
         value=session_data["session_id"],
         httponly=True,
-        secure=True,
+        secure=False,  # Set to True in production with HTTPS
         samesite="lax",
         max_age=auth_service.session_max_age,
     )
@@ -126,7 +127,7 @@ async def google_login(request: Request, response: Response):
         key="oauth_state",
         value=csrf_token,
         httponly=True,
-        secure=True,
+        secure=False,  # Set to True in production with HTTPS
         samesite="lax",
         max_age=600,  # 10 minutes
     )
@@ -180,14 +181,14 @@ async def google_callback(
     await _store_session(db, session_data)
 
     # Create response with session cookie
-    frontend_url = request.url_for("root")
-    response = RedirectResponse(url=str(frontend_url))
+    # Redirect to frontend after successful OAuth
+    response = RedirectResponse(url=settings.frontend_url)
 
     response.set_cookie(
         key="session_id",
         value=session_data["session_id"],
         httponly=True,
-        secure=True,
+        secure=False,  # Set to True in production with HTTPS
         samesite="lax",
         max_age=auth_service.session_max_age,
     )
@@ -230,6 +231,47 @@ async def create_anonymous_session(response: Response):
         "user_id": session_data["user_id"],
         "is_anonymous": True,
         "expires_at": session_data["expires_at"].isoformat(),
+    }
+
+
+@router.get("/me")
+async def get_current_user(request: Request):
+    """
+    Get current authenticated user info
+
+    Returns:
+        User info if authenticated, 401 if not
+    """
+    session_id = request.cookies.get("session_id")
+
+    if not session_id:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Not authenticated"
+        )
+
+    # Get session from database
+    db = get_db()
+    query = """
+        SELECT s.user_id, s.is_anonymous, u.name, u.email, u.avatar_url, u.provider
+        FROM sessions s
+        LEFT JOIN users u ON s.user_id = u.id::text
+        WHERE s.session_id = %s
+    """
+    session = db.execute_query(query, (session_id,), fetch_one=True)
+
+    if not session or session["is_anonymous"]:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Not authenticated"
+        )
+
+    return {
+        "id": session["user_id"],
+        "username": session["name"],
+        "email": session["email"],
+        "avatar": session["avatar_url"],
+        "provider": session["provider"]
     }
 
 

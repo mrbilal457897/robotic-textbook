@@ -2,7 +2,7 @@ import { themes as prismThemes } from 'prism-react-renderer';
 const config = {
   title: 'Physical AI & Humanoid Robotics',
   tagline: 'Bridging the gap between digital minds and physical bodies',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/human.png',
   // GitHub Pages deployment configuration
   url: 'https://YOUR_GITHUB_USERNAME.github.io',
   baseUrl: '/physical-ai-textbook/',

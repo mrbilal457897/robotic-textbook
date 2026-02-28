@@ -5,7 +5,7 @@ Tests T109: Verify all three tones (academic, beginner-friendly, concise) work c
 
 import pytest
 from unittest.mock import Mock, patch, MagicMock
-from backend.src.agents.response import ResponseAgent, ToneMode
+from src.agents.response import ResponseAgent, ToneMode
 
 
 @pytest.fixture
@@ -83,7 +83,7 @@ class TestAcademicTone:
             # Verify the tone was set to academic
             assert result["tone"] == "academic"
 
-    @patch("backend.src.agents.response.genai")
+    @patch("src.agents.response.genai")
     def test_academic_tone_response_generation(
         self, mock_genai, response_agent, sample_chunks
     ):
@@ -126,7 +126,7 @@ class TestBeginnerFriendlyTone:
         assert "simple" in system_prompt.lower()
         assert "analogies" in system_prompt.lower() or "analogy" in system_prompt.lower()
 
-    @patch("backend.src.agents.response.genai")
+    @patch("src.agents.response.genai")
     def test_beginner_friendly_tone_response_generation(
         self, mock_genai, response_agent, sample_chunks
     ):
@@ -178,7 +178,7 @@ class TestConciseTone:
         assert "brief" in system_prompt.lower() or "short" in system_prompt.lower()
         assert "2-3 sentences" in system_prompt.lower()
 
-    @patch("backend.src.agents.response.genai")
+    @patch("src.agents.response.genai")
     def test_concise_tone_response_generation(
         self, mock_genai, response_agent, sample_chunks
     ):
@@ -252,7 +252,7 @@ class TestToneCombinationWithModes:
 class TestToneCitationConsistency:
     """Test that citations remain consistent across all tones (T115)"""
 
-    @patch("backend.src.agents.response.genai")
+    @patch("src.agents.response.genai")
     def test_citations_identical_across_tones(
         self, mock_genai, response_agent, sample_chunks
     ):
@@ -301,7 +301,7 @@ class TestInvalidTone:
         assert system_prompt is not None
         assert len(system_prompt) > 0
 
-    @patch("backend.src.agents.response.genai")
+    @patch("src.agents.response.genai")
     def test_empty_tone_uses_default(self, mock_genai, response_agent, sample_chunks):
         """Test that empty tone falls back to default (academic)"""
         mock_model = MagicMock()

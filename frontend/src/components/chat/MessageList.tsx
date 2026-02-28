@@ -4,13 +4,19 @@
  */
 
 import * as React from "react";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useMemo } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { User, Bot, AlertCircle } from "lucide-react";
-import { cn, formatRelativeTime, formatConfidence, getConfidenceColor } from "../../lib/utils";
+import {
+  cn,
+  formatRelativeTime,
+  formatConfidence,
+  getConfidenceColor,
+} from "../../lib/utils";
 import { CitationBadge } from "./CitationBadge";
-import type { Message, Citation } from "../../../../shared/types";
+import { GlossaryTooltip } from "./GlossaryTooltip";
+import type { Message, Citation, KeyTerm } from "../../../../shared/types";
 
 export interface MessageListProps {
   messages: Message[];
@@ -32,7 +38,12 @@ export function MessageList({
 
   if (messages.length === 0) {
     return (
-      <div className={cn("flex flex-col items-center justify-center gap-4 p-8 text-center", className)}>
+      <div
+        className={cn(
+          "flex flex-col items-center justify-center gap-4 p-8 text-center",
+          className
+        )}
+      >
         <Bot className="h-16 w-16 text-gray-400" />
         <div>
           <h3 className="text-lg font-semibold text-gray-700 dark:text-gray-300">
@@ -69,16 +80,19 @@ interface MessageBubbleProps {
  * Parse content sections with source labels
  * Returns array of sections with type and content
  */
-function parseSourceSections(content: string): Array<{ type: 'textbook' | 'general' | 'default', content: string }> {
-  const sections: Array<{ type: 'textbook' | 'general' | 'default', content: string }> = [];
+function parseSourceSections(
+  content: string
+): Array<{ type: "textbook" | "general" | "default"; content: string }> {
+  const sections: Array<{ type: "textbook" | "general" | "default"; content: string }> =
+    [];
 
   // Check if content has source labels
-  const hasTextbookLabel = content.includes('**[Textbook]**');
-  const hasGeneralLabel = content.includes('**[General Knowledge]**');
+  const hasTextbookLabel = content.includes("**[Textbook]**");
+  const hasGeneralLabel = content.includes("**[General Knowledge]**");
 
   if (!hasTextbookLabel && !hasGeneralLabel) {
     // No source labels - return as single default section
-    return [{ type: 'default', content }];
+    return [{ type: "default", content }];
   }
 
   // Split by source labels and separators
@@ -88,31 +102,111 @@ function parseSourceSections(content: string): Array<{ type: 'textbook' | 'gener
     const trimmedPart = part.trim();
     if (!trimmedPart) continue;
 
-    if (trimmedPart.startsWith('**[Textbook]**')) {
+    if (trimmedPart.startsWith("**[Textbook]**")) {
       // Remove label and separator
       const contentOnly = trimmedPart
-        .replace(/^\*\*\[Textbook\]\*\*\n*/, '')
-        .replace(/\n*---\n*$/, '')
+        .replace(/^\*\*\[Textbook\]\*\*\n*/, "")
+        .replace(/\n*---\n*$/, "")
         .trim();
       if (contentOnly) {
-        sections.push({ type: 'textbook', content: contentOnly });
+        sections.push({ type: "textbook", content: contentOnly });
       }
-    } else if (trimmedPart.startsWith('**[General Knowledge]**')) {
+    } else if (trimmedPart.startsWith("**[General Knowledge]**")) {
       // Remove label and separator
       const contentOnly = trimmedPart
-        .replace(/^\*\*\[General Knowledge\]\*\*\n*/, '')
-        .replace(/\n*---\n*$/, '')
+        .replace(/^\*\*\[General Knowledge\]\*\*\n*/, "")
+        .replace(/\n*---\n*$/, "")
         .trim();
       if (contentOnly) {
-        sections.push({ type: 'general', content: contentOnly });
+        sections.push({ type: "general", content: contentOnly });
       }
     } else {
       // Other content (notes, disclaimers, etc.)
-      sections.push({ type: 'default', content: trimmedPart });
+      sections.push({ type: "default", content: trimmedPart });
     }
   }
 
   return sections;
+}
+
+/**
+ * Highlight key terms in content with glossary tooltips (T128)
+ * Converts plain text content into JSX with GlossaryTooltip components
+ */
+function highlightKeyTerms(content: string, keyTerms?: KeyTerm[]): React.ReactNode {
+  if (!keyTerms || keyTerms.length === 0) {
+    return content;
+  }
+
+  // Sort terms by start position
+  const sortedTerms = [...keyTerms].sort((a, b) => a.start_pos - b.start_pos);
+
+  const elements: React.ReactNode[] = [];
+  let lastIndex = 0;
+
+  sortedTerms.forEach((term, index) => {
+    // Add text before this term
+    if (term.start_pos > lastIndex) {
+      elements.push(
+        <span key={`text-${index}`}>
+          {content.substring(lastIndex, term.start_pos)}
+        </span>
+      );
+    }
+
+    // Add highlighted term with tooltip
+    elements.push(
+      <GlossaryTooltip key={`term-${index}`} term={term}>
+        {term.matched_text}
+      </GlossaryTooltip>
+    );
+
+    lastIndex = term.end_pos;
+  });
+
+  // Add remaining text after last term
+  if (lastIndex < content.length) {
+    elements.push(<span key="text-final">{content.substring(lastIndex)}</span>);
+  }
+
+  return <>{elements}</>;
+}
+
+/**
+ * MarkdownWithGlossary Component (T128)
+ * Renders markdown with glossary term highlighting
+ */
+function MarkdownWithGlossary({
+  content,
+  keyTerms,
+}: {
+  content: string;
+  keyTerms?: KeyTerm[];
+}) {
+  // If no key terms, use standard ReactMarkdown
+  if (!keyTerms || keyTerms.length === 0) {
+    return <ReactMarkdown remarkPlugins={[remarkGfm]}>{content}</ReactMarkdown>;
+  }
+
+  // Process content to wrap key terms with GlossaryTooltip
+  // Note: This is a simplified approach. For production, consider using
+  // a more sophisticated markdown parser that preserves markdown structure
+  // while applying term highlighting
+  const contentWithHighlights = useMemo(() => {
+    return highlightKeyTerms(content, keyTerms);
+  }, [content, keyTerms]);
+
+  return (
+    <div className="markdown-content">
+      {typeof contentWithHighlights === "string" ? (
+        <ReactMarkdown remarkPlugins={[remarkGfm]}>
+          {contentWithHighlights}
+        </ReactMarkdown>
+      ) : (
+        contentWithHighlights
+      )}
+    </div>
+  );
 }
 
 function MessageBubble({ message, onCitationClick }: MessageBubbleProps) {
@@ -130,15 +224,11 @@ function MessageBubble({ message, onCitationClick }: MessageBubbleProps) {
 
   // Parse source sections for assistant messages
   const sourceSections = !isUser ? parseSourceSections(message.content) : [];
-  const hasMultipleSources = sourceSections.length > 1 && sourceSections.some(s => s.type !== 'default');
+  const hasMultipleSources =
+    sourceSections.length > 1 && sourceSections.some((s) => s.type !== "default");
 
   return (
-    <div
-      className={cn(
-        "flex gap-3",
-        isUser ? "flex-row-reverse" : "flex-row"
-      )}
-    >
+    <div className={cn("flex gap-3", isUser ? "flex-row-reverse" : "flex-row")}>
       {/* Avatar */}
       <div
         className={cn(
@@ -163,44 +253,53 @@ function MessageBubble({ message, onCitationClick }: MessageBubbleProps) {
           // Multiple source sections with visual labels
           <div className="flex w-full flex-col gap-3">
             {sourceSections.map((section, index) => {
-              const isTextbook = section.type === 'textbook';
-              const isGeneral = section.type === 'general';
+              const isTextbook = section.type === "textbook";
+              const isGeneral = section.type === "general";
 
               return (
                 <div
                   key={index}
                   className={cn(
                     "rounded-lg px-4 py-3",
-                    isTextbook && "border-l-4 border-green-500 bg-green-50 dark:bg-green-950/30",
-                    isGeneral && "border-l-4 border-blue-500 bg-blue-50 dark:bg-blue-950/30",
+                    isTextbook &&
+                      "border-l-4 border-green-500 bg-green-50 dark:bg-green-950/30",
+                    isGeneral &&
+                      "border-l-4 border-blue-500 bg-blue-50 dark:bg-blue-950/30",
                     !isTextbook && !isGeneral && "bg-gray-100 dark:bg-gray-800"
                   )}
                 >
                   {/* Source Label */}
                   {(isTextbook || isGeneral) && (
-                    <div className={cn(
-                      "mb-2 flex items-center gap-2 text-xs font-semibold uppercase tracking-wide",
-                      isTextbook && "text-green-700 dark:text-green-400",
-                      isGeneral && "text-blue-700 dark:text-blue-400"
-                    )}>
-                      <span className={cn(
-                        "h-1.5 w-1.5 rounded-full",
-                        isTextbook && "bg-green-500",
-                        isGeneral && "bg-blue-500"
-                      )} />
+                    <div
+                      className={cn(
+                        "mb-2 flex items-center gap-2 text-xs font-semibold uppercase tracking-wide",
+                        isTextbook && "text-green-700 dark:text-green-400",
+                        isGeneral && "text-blue-700 dark:text-blue-400"
+                      )}
+                    >
+                      <span
+                        className={cn(
+                          "h-1.5 w-1.5 rounded-full",
+                          isTextbook && "bg-green-500",
+                          isGeneral && "bg-blue-500"
+                        )}
+                      />
                       {isTextbook ? "Textbook" : "General Knowledge"}
                     </div>
                   )}
 
                   {/* Section Content */}
-                  <div className={cn(
-                    "prose prose-sm dark:prose-invert max-w-none",
-                    isTextbook && "prose-green",
-                    isGeneral && "prose-blue"
-                  )}>
-                    <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                      {section.content}
-                    </ReactMarkdown>
+                  <div
+                    className={cn(
+                      "prose prose-sm dark:prose-invert max-w-none",
+                      isTextbook && "prose-green",
+                      isGeneral && "prose-blue"
+                    )}
+                  >
+                    <MarkdownWithGlossary
+                      content={section.content}
+                      keyTerms={message.key_terms}
+                    />
                   </div>
                 </div>
               );
@@ -220,9 +319,10 @@ function MessageBubble({ message, onCitationClick }: MessageBubbleProps) {
               <div className="whitespace-pre-wrap text-sm">{message.content}</div>
             ) : (
               <div className="prose prose-sm dark:prose-invert max-w-none">
-                <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                  {message.content}
-                </ReactMarkdown>
+                <MarkdownWithGlossary
+                  content={message.content}
+                  keyTerms={message.key_terms}
+                />
               </div>
             )}
           </div>

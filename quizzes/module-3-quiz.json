@@ -1,132 +1,97 @@
-{
-  "quizId": "module-3-quiz",
-  "moduleId": "module-3-isaac",
-  "title": "NVIDIA Isaac Ecosystem Quiz",
-  "questions": [
-    {
-      "id": "q1",
-      "type": "multiple-choice",
-      "text": "What is NVIDIA Isaac Sim?",
-      "options": [
-        "A robot programming language",
-        "A cloud platform for video streaming",
-        "An enterprise-grade simulation platform for robotics built on Omniverse",
-        "A machine learning training framework"
-      ],
-      "correctAnswer": 2,
-      "explanation": "NVIDIA Isaac Sim is a powerful simulation platform built on NVIDIA Omniverse that provides photorealistic rendering, advanced physics simulation, and seamless integration with ROS for developing and testing robot applications.",
-      "difficulty": "easy"
-    },
-    {
-      "id": "q2",
-      "type": "multiple-choice",
-      "text": "What does vSLAM stand for in the context of robotics?",
-      "options": [
-        "Very Smart Learning Algorithm Method",
-        "Visual Simultaneous Localization and Mapping",
-        "Virtual System Location Analysis Module",
-        "Vision Sensor Logical Architecture Model"
-      ],
-      "correctAnswer": 1,
-      "explanation": "vSLAM (Visual SLAM) is a technique that enables robots to build maps of their environment while simultaneously determining their own position using visual input from cameras.",
-      "difficulty": "easy"
-    },
-    {
-      "id": "q3",
-      "type": "multiple-choice",
-      "text": "What is the primary advantage of Isaac ROS over standard ROS 2 for perception tasks?",
-      "options": [
-        "It is faster because it uses fewer nodes",
-        "It provides GPU-accelerated perception libraries optimized for NVIDIA hardware",
-        "It eliminates the need for sensor calibration",
-        "It can work without any sensors"
-      ],
-      "correctAnswer": 1,
-      "explanation": "Isaac ROS provides GPU-accelerated perception libraries (GXF framework) that leverage NVIDIA hardware to process sensor data much faster than CPU-based ROS 2 nodes, critical for real-time robot perception.",
-      "difficulty": "medium"
-    },
-    {
-      "id": "q4",
-      "type": "true-false",
-      "text": "Nav2 (Navigation 2) is a ROS 2 package specifically designed for indoor navigation only.",
-      "options": ["True", "False"],
-      "correctAnswer": 1,
-      "explanation": "Nav2 is a flexible navigation framework that works for both indoor and outdoor environments. It provides path planning, collision avoidance, and costmap management for autonomous mobile robots.",
-      "difficulty": "medium"
-    },
-    {
-      "id": "q5",
-      "type": "multiple-choice",
-      "text": "What role does the costmap play in robot path planning with Nav2?",
-      "options": [
-        "It calculates the financial cost of robot operation",
-        "It represents the environment as a grid where each cell has a cost value based on obstacles and distance to obstacles",
-        "It measures CPU processing costs",
-        "It tracks the robot's energy consumption"
-      ],
-      "correctAnswer": 1,
-      "explanation": "The costmap is a gridded representation of the robot's environment where each cell has a cost indicating how favorable that location is for navigation. Higher costs near obstacles guide the planner away from collisions.",
-      "difficulty": "medium"
-    },
-    {
-      "id": "q6",
-      "type": "multiple-choice",
-      "text": "How does Isaac Sim accelerate robot development compared to traditional Gazebo simulation?",
-      "options": [
-        "It eliminates the need for ROS integration",
-        "It provides photorealistic rendering, faster physics, and better sensor simulation fidelity",
-        "It requires less computational power",
-        "It cannot be used with real robots"
-      ],
-      "correctAnswer": 1,
-      "explanation": "Isaac Sim offers superior physics accuracy, photorealistic visuals for camera simulation, GPU acceleration, and advanced sensor simulation, enabling faster iteration and more realistic testing compared to traditional simulators.",
-      "difficulty": "medium"
-    },
-    {
-      "id": "q7",
-      "type": "multiple-choice",
-      "text": "In Isaac ROS, what is the GXF framework used for?",
-      "options": [
-        "General XML Framework for robotics",
-        "A middleware for composing GPU-accelerated perception pipelines",
-        "A graphical user interface for Isaac Sim",
-        "A file format for storing robot configurations"
-      ],
-      "correctAnswer": 1,
-      "explanation": "GXF (Graph Execution Framework) is NVIDIA's middleware for building modular, GPU-accelerated perception applications. It enables efficient data flow between perception nodes on NVIDIA hardware.",
-      "difficulty": "hard"
-    },
-    {
-      "id": "q8",
-      "type": "true-false",
-      "text": "A humanoid robot can use vSLAM to simultaneously build a map and localize itself without pre-existing map data.",
-      "options": ["True", "False"],
-      "correctAnswer": 0,
-      "explanation": "Yes, this is one of the key advantages of SLAM. A robot equipped with cameras can enter an unknown environment and incrementally build a map while tracking its own position using visual features.",
-      "difficulty": "hard"
-    },
-    {
-      "id": "q9",
-      "type": "multiple-choice",
-      "text": "What must be done before deploying Nav2 path planning on a real humanoid robot?",
-      "options": [
-        "Replace it with a custom algorithm",
-        "Create a detailed costmap of the environment and tune planner parameters based on robot dynamics",
-        "Use only pre-computed paths",
-        "Disable obstacle avoidance"
-      ],
-      "correctAnswer": 1,
-      "explanation": "Successful deployment requires creating accurate environmental representations (costmaps), tuning planner parameters (inflation radius, planning time, etc.) for the specific robot's dynamics, and thorough testing.",
-      "difficulty": "hard"
-    },
-    {
-      "id": "q10",
-      "type": "true-false",
-      "text": "Isaac Sim can directly replace physical hardware testing completely; no real robots are needed for development.",
-      "options": ["True", "False"],
-      "correctAnswer": 1,
-      "explanation": "While Isaac Sim is extremely valuable for development, testing, and validation, sim-to-real transfer issues mean physical testing on real robots is still necessary to validate algorithms before deployment.",
-      "difficulty": "hard"
-    }
-  ]
-}
+[
+  {
+    "question": "What is NVIDIA Isaac Sim?",
+    "options": [
+      "A robot programming language",
+      "A cloud platform for video streaming",
+      "An enterprise-grade simulation platform for robotics built on Omniverse",
+      "A machine learning training framework"
+    ],
+    "correctIndex": 2,
+    "explanation": "NVIDIA Isaac Sim is a powerful simulation platform built on NVIDIA Omniverse that provides photorealistic rendering, advanced physics simulation, and seamless integration with ROS for developing and testing robot applications."
+  },
+  {
+    "question": "What does vSLAM stand for in the context of robotics?",
+    "options": [
+      "Very Smart Learning Algorithm Method",
+      "Visual Simultaneous Localization and Mapping",
+      "Virtual System Location Analysis Module",
+      "Vision Sensor Logical Architecture Model"
+    ],
+    "correctIndex": 1,
+    "explanation": "vSLAM (Visual SLAM) is a technique that enables robots to build maps of their environment while simultaneously determining their own position using visual input from cameras."
+  },
+  {
+    "question": "What is the primary advantage of Isaac ROS over standard ROS 2 for perception tasks?",
+    "options": [
+      "It is faster because it uses fewer nodes",
+      "It provides GPU-accelerated perception libraries optimized for NVIDIA hardware",
+      "It eliminates the need for sensor calibration",
+      "It can work without any sensors"
+    ],
+    "correctIndex": 1,
+    "explanation": "Isaac ROS provides GPU-accelerated perception libraries (GXF framework) that leverage NVIDIA hardware to process sensor data much faster than CPU-based ROS 2 nodes, critical for real-time robot perception."
+  },
+  {
+    "question": "Nav2 (Navigation 2) is a ROS 2 package specifically designed for indoor navigation only.",
+    "options": ["True", "False"],
+    "correctIndex": 1,
+    "explanation": "Nav2 is a flexible navigation framework that works for both indoor and outdoor environments. It provides path planning, collision avoidance, and costmap management for autonomous mobile robots."
+  },
+  {
+    "question": "What role does the costmap play in robot path planning with Nav2?",
+    "options": [
+      "It calculates the financial cost of robot operation",
+      "It represents the environment as a grid where each cell has a cost value based on obstacles and distance to obstacles",
+      "It measures CPU processing costs",
+      "It tracks the robot's energy consumption"
+    ],
+    "correctIndex": 1,
+    "explanation": "The costmap is a gridded representation of the robot's environment where each cell has a cost indicating how favorable that location is for navigation. Higher costs near obstacles guide the planner away from collisions."
+  },
+  {
+    "question": "How does Isaac Sim accelerate robot development compared to traditional Gazebo simulation?",
+    "options": [
+      "It eliminates the need for ROS integration",
+      "It provides photorealistic rendering, faster physics, and better sensor simulation fidelity",
+      "It requires less computational power",
+      "It cannot be used with real robots"
+    ],
+    "correctIndex": 1,
+    "explanation": "Isaac Sim offers superior physics accuracy, photorealistic visuals for camera simulation, GPU acceleration, and advanced sensor simulation, enabling faster iteration and more realistic testing compared to traditional simulators."
+  },
+  {
+    "question": "In Isaac ROS, what is the GXF framework used for?",
+    "options": [
+      "General XML Framework for robotics",
+      "A middleware for composing GPU-accelerated perception pipelines",
+      "A graphical user interface for Isaac Sim",
+      "A file format for storing robot configurations"
+    ],
+    "correctIndex": 1,
+    "explanation": "GXF (Graph Execution Framework) is NVIDIA's middleware for building modular, GPU-accelerated perception applications. It enables efficient data flow between perception nodes on NVIDIA hardware."
+  },
+  {
+    "question": "A humanoid robot can use vSLAM to simultaneously build a map and localize itself without pre-existing map data.",
+    "options": ["True", "False"],
+    "correctIndex": 0,
+    "explanation": "Yes, this is one of the key advantages of SLAM. A robot equipped with cameras can enter an unknown environment and incrementally build a map while tracking its own position using visual features."
+  },
+  {
+    "question": "What must be done before deploying Nav2 path planning on a real humanoid robot?",
+    "options": [
+      "Replace it with a custom algorithm",
+      "Create a detailed costmap of the environment and tune planner parameters based on robot dynamics",
+      "Use only pre-computed paths",
+      "Disable obstacle avoidance"
+    ],
+    "correctIndex": 1,
+    "explanation": "Successful deployment requires creating accurate environmental representations (costmaps), tuning planner parameters (inflation radius, planning time, etc.) for the specific robot's dynamics, and thorough testing."
+  },
+  {
+    "question": "Isaac Sim can directly replace physical hardware testing completely; no real robots are needed for development.",
+    "options": ["True", "False"],
+    "correctIndex": 1,
+    "explanation": "While Isaac Sim is extremely valuable for development, testing, and validation, sim-to-real transfer issues mean physical testing on real robots is still necessary to validate algorithms before deployment."
+  }
+]

@@ -3,17 +3,19 @@ Chat API Endpoint
 Main endpoint for RAG-powered textbook chatbot
 """
 
+import json
 import time
 from datetime import datetime, timedelta
 from typing import Optional
-from uuid import UUID
+from uuid import UUID, uuid4
 import logging
+
+import httpx
 
 from fastapi import APIRouter, HTTPException, Request, Depends
 from fastapi.responses import JSONResponse
 
 from ...models.chat import ChatRequest, ChatResponse, OptimisticLockError
-from ...models.conversation import Conversation
 from ...models.message import Message, Citation
 from ...agents.router import get_router_agent
 from ...agents.retrieval import get_retrieval_agent
@@ -113,7 +115,6 @@ async def chat(
                 user_id=user_id,
                 is_authenticated=is_authenticated,
                 book_id=request.book_id,
-                chapter_id=request.chapter_id,
                 mode=request.mode,
                 tone=request.tone,
             )
@@ -153,14 +154,14 @@ async def chat(
 
         if retrieval_result["status"] == "no_results":
             # No relevant content found
-            refusal_message = _generate_refusal_message(
+            refusal_text = _generate_refusal_message(
                 query=request.message,
                 mode=request.mode,
                 refusal_reason=retrieval_result.get("refusal_reason"),
             )
 
             # Save user message and refusal
-            user_message_id = _save_message(
+            _save_message(
                 db=db,
                 conversation_id=conversation_id,
                 role="user",
@@ -174,38 +175,29 @@ async def chat(
                 db=db,
                 conversation_id=conversation_id,
                 role="assistant",
-                content=refusal_message,
+                content=refusal_text,
                 mode=request.mode,
                 tone=request.tone,
                 citations=[],
                 confidence_score=0.0,
-            )
-
-            # Update conversation timestamp
-            updated_conversation = _update_conversation_timestamp(
-                db, conversation_id
             )
 
             latency_ms = int((time.time() - start_time) * 1000)
 
             return ChatResponse(
                 conversation_id=conversation_id,
-                message_id=assistant_message_id,
-                response=refusal_message,
-                citations=[],
-                confidence_score=0.0,
-                tokens_used=0,
-                mode=request.mode,
-                tone=request.tone,
-                has_external_knowledge=False,
-                conversation_updated_at=updated_conversation["updated_at"],
-                metadata={
-                    "latency_ms": latency_ms,
-                    "refusal_reason": retrieval_result.get("refusal_reason"),
-                    "retrieval_candidates": retrieval_result["metadata"][
-                        "candidates_found"
-                    ],
-                },
+                message=Message(
+                    id=assistant_message_id,
+                    conversation_id=conversation_id,
+                    role="assistant",
+                    content=refusal_text,
+                    mode=request.mode,
+                    tone=request.tone,
+                    citations=[],
+                    confidence_score=0.0,
+                    metadata={"latency_ms": latency_ms},
+                ),
+                should_create_new_conversation=not bool(request.conversation_id),
             )
 
         # Step 5: Generate response
@@ -257,7 +249,7 @@ async def chat(
         ]
 
         # Step 8: Save messages to database
-        user_message_id = _save_message(
+        _save_message(
             db=db,
             conversation_id=conversation_id,
             role="user",
@@ -276,11 +268,7 @@ async def chat(
             tone=request.tone,
             citations=citation_models,
             confidence_score=response_result["confidence_score"],
-            tokens_used=500,  # TODO: Calculate actual tokens
         )
-
-        # Update conversation timestamp
-        updated_conversation = _update_conversation_timestamp(db, conversation_id)
 
         # Calculate latency
         latency_ms = int((time.time() - start_time) * 1000)
@@ -291,22 +279,18 @@ async def chat(
 
         return ChatResponse(
             conversation_id=conversation_id,
-            message_id=assistant_message_id,
-            response=response_result["answer"],
-            citations=citation_models,
-            confidence_score=response_result["confidence_score"],
-            tokens_used=500,
-            mode=request.mode,
-            tone=request.tone,
-            has_external_knowledge=(request.mode == "general"),
-            conversation_updated_at=updated_conversation["updated_at"],
-            metadata={
-                "latency_ms": latency_ms,
-                "model": "gemini-2.0-flash-exp",
-                "embedding_model": "embed-english-v3.0",
-                "retrieval_count": len(retrieval_result["chunks"]),
-                "citation_validation": citation_validation,
-            },
+            message=Message(
+                id=assistant_message_id,
+                conversation_id=conversation_id,
+                role="assistant",
+                content=response_result["answer"],
+                mode=request.mode,
+                tone=request.tone,
+                citations=citation_models,
+                confidence_score=response_result["confidence_score"],
+                metadata={"latency_ms": latency_ms, "model": "gemini-2.0-flash-exp"},
+            ),
+            should_create_new_conversation=not bool(request.conversation_id),
         )
 
     except HTTPException:
@@ -323,7 +307,7 @@ async def chat(
             status_code=504,
             detail="The request took too long to process. Please try again with a simpler question or check your connection.",
         )
-    except ConnectionError as e:
+    except (ConnectionError, httpx.ConnectError, httpx.TimeoutException) as e:
         logger.error(f"Connection error: {e}", exc_info=True)
         raise HTTPException(
             status_code=503,
@@ -365,7 +349,7 @@ def _get_conversation(
         with conn.cursor() as cur:
             cur.execute(
                 """
-                SELECT id, user_id, book_id, chapter_id, mode, created_at, updated_at, status
+                SELECT id, user_id, book_id, mode, tone, created_at, updated_at
                 FROM conversations
                 WHERE id = %s
                 """,
@@ -383,15 +367,14 @@ def _get_conversation(
                 "id": row[0],
                 "user_id": row[1],
                 "book_id": row[2],
-                "chapter_id": row[3],
-                "mode": row[4],
+                "mode": row[3],
+                "tone": row[4],
                 "created_at": row[5],
                 "updated_at": row[6],
-                "status": row[7],
             }
 
             # Validate ownership (if user_id provided)
-            if user_id and conversation["user_id"] != user_id:
+            if user_id and str(conversation["user_id"]) != user_id:
                 raise HTTPException(
                     status_code=403,
                     detail="You do not have access to this conversation",
@@ -405,7 +388,6 @@ def _create_conversation(
     user_id: Optional[str],
     is_authenticated: bool,
     book_id: str,
-    chapter_id: Optional[int],
     mode: str,
     tone: str,
 ) -> dict:
@@ -417,7 +399,6 @@ def _create_conversation(
         user_id: User ID or session ID
         is_authenticated: Whether user is authenticated
         book_id: Book identifier
-        chapter_id: Chapter identifier
         mode: Answering mode
         tone: Response tone
 
@@ -429,21 +410,24 @@ def _create_conversation(
     if not is_authenticated:
         expires_at = datetime.utcnow() + timedelta(hours=24)
 
+    # user_id column is UUID type; use fixed UUID for anonymous users
+    ANONYMOUS_UUID = "00000000-0000-0000-0000-000000000000"
+    effective_user_id = user_id or ANONYMOUS_UUID
+
     with db.get_connection() as conn:
         with conn.cursor() as cur:
             cur.execute(
                 """
-                INSERT INTO conversations (user_id, book_id, chapter_id, mode, expires_at, metadata)
-                VALUES (%s, %s, %s, %s, %s, %s)
-                RETURNING id, user_id, book_id, chapter_id, mode, created_at, updated_at, status
+                INSERT INTO conversations (user_id, book_id, mode, tone, expires_at)
+                VALUES (%s, %s, %s, %s, %s)
+                RETURNING id, user_id, book_id, mode, tone, created_at, updated_at
                 """,
                 (
-                    user_id or "anonymous",
+                    effective_user_id,
                     book_id,
-                    chapter_id,
                     mode,
+                    tone,
                     expires_at,
-                    {"tone": tone, "is_authenticated": is_authenticated},
                 ),
             )
 
@@ -453,11 +437,10 @@ def _create_conversation(
                 "id": row[0],
                 "user_id": row[1],
                 "book_id": row[2],
-                "chapter_id": row[3],
-                "mode": row[4],
+                "mode": row[3],
+                "tone": row[4],
                 "created_at": row[5],
                 "updated_at": row[6],
-                "status": row[7],
             }
 
 
@@ -500,7 +483,7 @@ def _save_message(
     mode: str,
     tone: Optional[str] = None,
     action: Optional[str] = None,
-    citations: list = None,
+    citations: Optional[list] = None,
     confidence_score: Optional[float] = None,
     tokens_used: Optional[int] = None,
 ) -> UUID:
@@ -517,21 +500,22 @@ def _save_message(
         action: Action type
         citations: List of Citation models
         confidence_score: Confidence score
-        tokens_used: Token count
+        tokens_used: Token count (stored in metadata)
 
     Returns:
         Created message UUID
     """
-    citations_json = (
+    citations_json = json.dumps(
         [c.model_dump() for c in citations] if citations else []
     )
+    metadata_json = json.dumps({"tokens_used": tokens_used} if tokens_used else {})
 
     with db.get_connection() as conn:
         with conn.cursor() as cur:
             cur.execute(
                 """
-                INSERT INTO messages (conversation_id, role, content, mode, tone, action, citations, confidence_score, tokens_used)
-                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+                INSERT INTO messages (conversation_id, role, content, mode, tone, action, citations, confidence_score, metadata)
+                VALUES (%s, %s, %s, %s, %s, %s, %s::jsonb, %s, %s::jsonb)
                 RETURNING id
                 """,
                 (
@@ -543,7 +527,7 @@ def _save_message(
                     action,
                     citations_json,
                     confidence_score,
-                    tokens_used,
+                    metadata_json,
                 ),
             )
 

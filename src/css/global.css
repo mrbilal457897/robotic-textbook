@@ -25,14 +25,24 @@ html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: #0c0c0c;
 }
 
 body {
-  background-color: var(--bg-primary);
+  background: #0c0c0c;
   color: var(--text-primary);
   margin: 0;
   padding: 0;
+  padding-top: 72px; /* Account for fixed navbar height */
   overflow-x: hidden;
+}
+
+/* Ensure all wrapper elements have consistent background */
+main,
+article,
+.main-wrapper,
+#__docusaurus {
+  background: #0c0c0c;
 }
 
 /* ===========================
@@ -107,7 +117,7 @@ a {
 }
 
 a:hover {
-  color: var(--ifm-color-primary-light);
+  color: #29abb7;
   text-decoration: underline;
 }
 
@@ -155,7 +165,7 @@ pre {
   padding: var(--space-md);
   overflow-x: auto;
   margin-bottom: var(--space-md);
-  border: 1px solid rgba(167, 139, 250, 0.1);
+  border: 1px solid rgba(41, 171, 183, 0.1);
 }
 
 /* ===========================
@@ -193,9 +203,9 @@ pre {
 }
 
 .btn-secondary:hover {
-  background-color: rgba(167, 139, 250, 0.1);
+  background-color: rgba(41, 171, 183, 0.1);
   transform: translateY(-2px);
-  box-shadow: var(--shadow-glow-primary);
+  box-shadow: 0 0 20px rgba(41, 171, 183, 0.3);
 }
 
 .btn-ghost {
@@ -211,8 +221,8 @@ pre {
 }
 
 .btn-ghost:hover {
-  background-color: rgba(255, 255, 255, 0.05);
-  color: var(--primary);
+  background-color: rgba(41, 171, 183, 0.1);
+  color: #29abb7;
 }
 
 .btn-danger {
@@ -228,9 +238,9 @@ pre {
 }
 
 .btn-danger:hover {
-  background-color: #ff6b6b;
+  background-color: #29abb7;
   transform: translateY(-2px);
-  box-shadow: 0 0 20px rgba(255, 82, 82, 0.4);
+  box-shadow: 0 0 20px rgba(41, 171, 183, 0.4);
 }
 
 /* Button Sizes */
@@ -272,7 +282,7 @@ button:disabled,
   border-radius: var(--radius-xl);
   padding: var(--space-lg);
   transition: all var(--transition-normal);
-  border: 1px solid rgba(167, 139, 250, 0.12);
+  border: 1px solid rgba(41, 171, 183, 0.12);
 }
 
 .card:hover {
@@ -286,14 +296,14 @@ button:disabled,
   -webkit-backdrop-filter: blur(10px);
   border-radius: var(--radius-xl);
   padding: var(--space-lg);
-  border: 1px solid rgba(167, 139, 250, 0.2);
+  border: 1px solid rgba(41, 171, 183, 0.2);
   transition: all var(--transition-normal);
 }
 
 .card-glass:hover {
   transform: translateY(-4px);
-  box-shadow: var(--shadow-glow-primary);
-  border-color: rgba(167, 139, 250, 0.4);
+  box-shadow: 0 0 20px rgba(41, 171, 183, 0.3);
+  border-color: #29abb7;
 }
 
 .card-elevated {
@@ -302,7 +312,7 @@ button:disabled,
   -webkit-backdrop-filter: blur(14px);
   border-radius: var(--radius-xl);
   padding: var(--space-lg);
-  border: 1px solid rgba(167, 139, 250, 0.15);
+  border: 1px solid rgba(41, 171, 183, 0.15);
   box-shadow: var(--shadow-lg);
   transition: all var(--transition-normal);
 }
@@ -320,12 +330,12 @@ button:disabled,
   padding: var(--space-lg);
   cursor: pointer;
   transition: all var(--transition-normal);
-  border: 2px solid rgba(167, 139, 250, 0.08);
+  border: 2px solid rgba(41, 171, 183, 0.08);
 }
 
 .card-interactive:hover {
-  border-color: var(--primary);
-  box-shadow: var(--shadow-glow-primary);
+  border-color: #29abb7;
+  box-shadow: 0 0 20px rgba(41, 171, 183, 0.3);
   transform: translateY(-4px);
 }
 
@@ -348,7 +358,7 @@ select {
   font-family: var(--font-body);
   background-color: var(--bg-card);
   color: var(--text-primary);
-  border: 1px solid rgba(167, 139, 250, 0.2);
+  border: 1px solid rgba(41, 171, 183, 0.2);
   border-radius: var(--radius-md);
   padding: var(--space-sm) var(--space-md);
   transition: all var(--transition-fast);
@@ -360,7 +370,7 @@ textarea:focus,
 select:focus {
   outline: none;
   border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.15);
+  box-shadow: 0 0 0 3px rgba(41, 171, 183, 0.15);
 }
 
 /* Checkboxes and Radio Buttons */
@@ -376,7 +386,7 @@ input[type='checkbox'].toggle {
   width: 44px;
   height: 24px;
   background-color: var(--bg-card);
-  border: 2px solid rgba(167, 139, 250, 0.2);
+  border: 2px solid rgba(41, 171, 183, 0.2);
   border-radius: var(--radius-full);
   position: relative;
   cursor: pointer;
@@ -426,7 +436,7 @@ input[type='checkbox'].toggle:checked::before {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background-color: rgba(167, 139, 250, 0.3);
+  background-color: rgba(41, 171, 183, 0.3);
 }
 
 /* Firefox */
@@ -465,6 +475,10 @@ input[type='checkbox'].toggle:checked::before {
     font-size: 14px;
   }
 
+  body {
+    padding-top: 64px; /* Adjust for smaller navbar on mobile */
+  }
+
   h1 {
     font-size: var(--font-size-4xl);
   }
@@ -497,6 +511,10 @@ input[type='checkbox'].toggle:checked::before {
 @media screen and (max-width: 480px) {
   html {
     font-size: 13px;
+  }
+
+  body {
+    padding-top: 60px; /* Adjust for compact navbar on small mobile */
   }
 }
 
@@ -587,21 +605,32 @@ html.no-theme-transition * {
    Ensures all markdown/doc content reads cleanly in light mode
    =========================== */
 
+[data-theme='light'] html {
+  background: #f8f7ff !important;
+}
+
 [data-theme='light'] body {
-  background-color: var(--bg-primary);
+  background: #f8f7ff !important;
   color: var(--text-primary);
+}
+
+[data-theme='light'] main,
+[data-theme='light'] article,
+[data-theme='light'] .main-wrapper,
+[data-theme='light'] #__docusaurus {
+  background: #f8f7ff !important;
 }
 
 [data-theme='light'] a {
   color: var(--ifm-link-color);
   text-decoration: underline;
-  text-decoration-color: rgba(109, 40, 217, 0.4);
+  text-decoration-color: rgba(41, 171, 183, 0.4);
   text-underline-offset: 2px;
 }
 
 [data-theme='light'] a:hover {
-  color: var(--ifm-link-hover-color);
-  text-decoration-color: var(--ifm-link-hover-color);
+  color: #29abb7;
+  text-decoration-color: #29abb7;
 }
 
 [data-theme='light'] code {
@@ -611,35 +640,88 @@ html.no-theme-transition * {
 
 [data-theme='light'] pre {
   background-color: #ede9f8 !important;
-  border: 1px solid rgba(109, 40, 217, 0.15);
+  border: 1px solid rgba(41, 171, 183, 0.15);
 }
 
 [data-theme='light'] blockquote {
   border-left-color: var(--ifm-blockquote-border-color);
   color: var(--ifm-blockquote-color);
-  background: rgba(109, 40, 217, 0.04);
+  background: rgba(41, 171, 183, 0.04);
 }
 
 [data-theme='light'] table {
-  border-color: rgba(109, 40, 217, 0.15);
+  border-color: rgba(41, 171, 183, 0.15);
 }
 
 [data-theme='light'] th {
-  background-color: rgba(109, 40, 217, 0.08);
+  background-color: rgba(41, 171, 183, 0.08);
   color: var(--text-primary);
 }
 
 [data-theme='light'] tr:nth-child(even) {
-  background-color: rgba(109, 40, 217, 0.03);
+  background-color: rgba(41, 171, 183, 0.03);
+}
+
+/* Light Mode - Homepage Sections */
+[data-theme='light'] .hero,
+[data-theme='light'] .courseModules,
+[data-theme='light'] .whyPhysicalAI,
+[data-theme='light'] .timeline,
+[data-theme='light'] .guidance,
+[data-theme='light'] .hardware {
+  background: #f8f7ff !important;
+}
+
+/* Light Mode - Module Cards */
+[data-theme='light'] .moduleCard {
+  background: #ffffff !important;
+  border-color: rgba(41, 171, 183, 0.15) !important;
+}
+
+[data-theme='light'] .moduleCard:hover {
+  border-color: #29abb7 !important;
+}
+
+/* Light Mode - Buttons */
+[data-theme='light'] .btn-primary,
+[data-theme='light'] .heroPrimaryButton {
+  background: linear-gradient(135deg, #29abb7, #c2410c) !important;
+  color: #ffffff !important;
+}
+
+[data-theme='light'] .btn-secondary,
+[data-theme='light'] .heroSecondaryButton {
+  background: transparent !important;
+  color: #29abb7 !important;
+  border-color: #29abb7 !important;
+}
+
+/* Light Mode - Cards and Content Containers */
+[data-theme='light'] .card,
+[data-theme='light'] .card-glass,
+[data-theme='light'] .card-elevated {
+  background: #ffffff !important;
+  border-color: rgba(41, 171, 183, 0.15) !important;
 }
 
 /* ===========================
    Sepia Mode — Textbook Content Overrides
    =========================== */
 
+[data-color-theme='sepia'] html {
+  background: #f4ecd6 !important;
+}
+
 [data-color-theme='sepia'] body {
-  background-color: var(--bg-primary);
+  background: #f4ecd6 !important;
   color: var(--text-primary);
+}
+
+[data-color-theme='sepia'] main,
+[data-color-theme='sepia'] article,
+[data-color-theme='sepia'] .main-wrapper,
+[data-color-theme='sepia'] #__docusaurus {
+  background: #f4ecd6 !important;
 }
 
 [data-color-theme='sepia'] .navbar,
@@ -676,13 +758,112 @@ html.no-theme-transition * {
   background-color: #e8d8b8 !important;
 }
 
+/* Sepia Mode - Homepage Sections */
+[data-color-theme='sepia'] .hero {
+  background: #f4ecd6 !important;
+}
+
+[data-color-theme='sepia'] .courseModules {
+  background: #f4ecd6 !important;
+}
+
+[data-color-theme='sepia'] .whyPhysicalAI {
+  background: #f4ecd6 !important;
+}
+
+[data-color-theme='sepia'] .timeline {
+  background: #f4ecd6 !important;
+}
+
+[data-color-theme='sepia'] .guidance {
+  background: #f4ecd6 !important;
+}
+
+[data-color-theme='sepia'] .hardware {
+  background: #f4ecd6 !important;
+}
+
+/* Sepia Mode - Module Cards */
+[data-color-theme='sepia'] .moduleCard {
+  background: #faf3e0 !important;
+  border-color: rgba(124, 58, 16, 0.2) !important;
+}
+
+[data-color-theme='sepia'] .moduleCard:hover {
+  border-color: #29abb7 !important;
+}
+
+/* Sepia Mode - Buttons and Interactive Elements */
+[data-color-theme='sepia'] .btn-primary,
+[data-color-theme='sepia'] .heroPrimaryButton {
+  background: linear-gradient(135deg, #7c3a10, #b8860b) !important;
+  color: #f4ecd6 !important;
+}
+
+[data-color-theme='sepia'] .btn-secondary,
+[data-color-theme='sepia'] .heroSecondaryButton {
+  background: transparent !important;
+  color: #7c3a10 !important;
+  border-color: #7c3a10 !important;
+}
+
+[data-color-theme='sepia'] .btn-secondary:hover,
+[data-color-theme='sepia'] .heroSecondaryButton:hover {
+  background-color: rgba(41, 171, 183, 0.1) !important;
+}
+
+/* Sepia Mode - Cards and Content Containers */
+[data-color-theme='sepia'] .card,
+[data-color-theme='sepia'] .card-glass,
+[data-color-theme='sepia'] .card-elevated,
+[data-color-theme='sepia'] .card-interactive {
+  background: #faf3e0 !important;
+  border-color: rgba(124, 58, 16, 0.2) !important;
+}
+
+/* Sepia Mode - Tab Buttons */
+[data-color-theme='sepia'] .tabButton {
+  background: rgba(244, 236, 214, 0.5) !important;
+  border-color: rgba(124, 58, 16, 0.2) !important;
+  color: var(--text-secondary) !important;
+}
+
+[data-color-theme='sepia'] .tabButtonActive {
+  background: rgba(124, 58, 16, 0.15) !important;
+  border-color: #7c3a10 !important;
+  color: #7c3a10 !important;
+}
+
+/* Sepia Mode - Spec Rows and Tables */
+[data-color-theme='sepia'] .specRow {
+  background: #faf3e0 !important;
+  border-color: rgba(124, 58, 16, 0.15) !important;
+  border-left-color: rgba(124, 58, 16, 0.3) !important;
+}
+
+[data-color-theme='sepia'] .specRow:hover {
+  background: rgba(41, 171, 183, 0.08) !important;
+  border-left-color: #29abb7 !important;
+}
+
 /* ===========================
    High-Contrast Mode — Textbook Content Overrides
    =========================== */
 
+[data-color-theme='high-contrast'] html {
+  background: #000000 !important;
+}
+
 [data-color-theme='high-contrast'] body {
-  background-color: #000000;
+  background: #000000 !important;
   color: #ffffff;
+}
+
+[data-color-theme='high-contrast'] main,
+[data-color-theme='high-contrast'] article,
+[data-color-theme='high-contrast'] .main-wrapper,
+[data-color-theme='high-contrast'] #__docusaurus {
+  background: #000000 !important;
 }
 
 [data-color-theme='high-contrast'] .navbar,
@@ -697,7 +878,7 @@ html.no-theme-transition * {
 }
 
 [data-color-theme='high-contrast'] a:hover {
-  color: #fffb66 !important;
+  color: #29abb7 !important;
 }
 
 [data-color-theme='high-contrast'] code {
@@ -735,4 +916,609 @@ html.no-theme-transition * {
 
 [data-color-theme='high-contrast'] tr {
   border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* High-Contrast Mode - Homepage Sections */
+[data-color-theme='high-contrast'] .hero,
+[data-color-theme='high-contrast'] .courseModules,
+[data-color-theme='high-contrast'] .whyPhysicalAI,
+[data-color-theme='high-contrast'] .timeline,
+[data-color-theme='high-contrast'] .guidance,
+[data-color-theme='high-contrast'] .hardware {
+  background: #000000 !important;
+}
+
+/* High-Contrast Mode - Cards and Interactive Elements */
+[data-color-theme='high-contrast'] .moduleCard,
+[data-color-theme='high-contrast'] .card,
+[data-color-theme='high-contrast'] .card-glass,
+[data-color-theme='high-contrast'] .card-elevated {
+  background: #0a0a0a !important;
+  border: 2px solid #ffffff !important;
+}
+
+[data-color-theme='high-contrast'] .btn-primary,
+[data-color-theme='high-contrast'] .heroPrimaryButton {
+  background: #ffff00 !important;
+  color: #000000 !important;
+  border: 2px solid #ffff00 !important;
+}
+
+[data-color-theme='high-contrast'] .btn-secondary,
+[data-color-theme='high-contrast'] .heroSecondaryButton {
+  background: transparent !important;
+  color: #ffff00 !important;
+  border: 2px solid #ffff00 !important;
+}
+
+/* ===========================
+   Focus Mode Styles
+   =========================== */
+
+/* When focus mode is active, dim everything except the main content */
+body.focus-mode-active {
+  /* Allow scrolling in focus mode */
+  overflow-y: auto;
+  overflow-x: hidden;
+  /* Remove navbar padding since navbar is hidden in focus mode */
+  padding-top: 0 !important;
+}
+
+/* Create overlay to dim other content */
+body.focus-mode-active::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 9998;
+  pointer-events: none;
+  animation: fadeIn 0.3s ease;
+}
+
+/* Hide navbar and footer in focus mode */
+body.focus-mode-active nav.navbar,
+body.focus-mode-active footer {
+  display: none;
+}
+
+/* Hide sidebar in focus mode */
+body.focus-mode-active aside.theme-doc-sidebar-container,
+body.focus-mode-active .theme-doc-sidebar-container {
+  display: none;
+}
+
+/* ================================================================
+   LEFT SIDEBAR NAVIGATION STYLES
+   ================================================================ */
+
+/* Reduce sidebar menu font size */
+.theme-doc-sidebar-container .menu__link,
+.theme-doc-sidebar-container .menu__list-item-collapsible,
+aside[class*='docSidebar'] a,
+.thin-scrollbar a {
+  font-size: 0.85rem !important;
+}
+
+/* ================================================================
+   INTERACTIVE TABLE OF CONTENTS STYLES
+   ================================================================ */
+
+/* TOC Container - Modern card design */
+.theme-doc-toc-desktop {
+  background: var(--bg-overlay);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(41, 171, 183, 0.15);
+  padding: var(--space-lg);
+  backdrop-filter: blur(8px);
+  transition: border-color 0.2s ease;
+  position: sticky;
+  top: calc(var(--ifm-navbar-height) + 1rem);
+}
+
+.theme-doc-toc-desktop:hover {
+  border-color: rgba(41, 171, 183, 0.25);
+}
+
+/* TOC Heading */
+.theme-doc-toc-desktop .table-of-contents__left-border::before {
+  content: '📑';
+  margin-right: var(--space-xs);
+  font-size: 1.1em;
+}
+
+.table-of-contents {
+  font-size: 0.8rem;
+  padding-left: 0;
+}
+
+.table-of-contents__left-border {
+  border-left: 2px solid rgba(41, 171, 183, 0.2);
+  padding-left: var(--space-md);
+}
+
+/* TOC Links - Simple and attractive hover effects */
+.table-of-contents li {
+  margin: var(--space-xs) 0;
+  position: relative;
+}
+
+.table-of-contents a {
+  display: block;
+  color: var(--text-secondary);
+  padding: var(--space-xs) var(--space-sm);
+  transition: color 0.2s ease;
+  font-weight: var(--font-weight-medium);
+  position: relative;
+  text-decoration: none;
+}
+
+.table-of-contents a:hover {
+  color: #29abb7;
+}
+
+/* Active link - clean highlight */
+.table-of-contents a.table-of-contents__link--active {
+  color: #29abb7;
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Nested levels - indentation with style */
+.table-of-contents ul {
+  padding-left: var(--space-md);
+  margin-top: var(--space-xs);
+  border-left: 1px solid rgba(41, 171, 183, 0.1);
+  margin-left: var(--space-sm);
+}
+
+.table-of-contents ul li a {
+  font-size: 0.95em;
+  opacity: 0.9;
+}
+
+.table-of-contents ul ul {
+  border-left-color: rgba(41, 171, 183, 0.05);
+}
+
+/* Progress indicator - simple version */
+.table-of-contents__left-border::after {
+  content: '';
+  position: absolute;
+  left: -2px;
+  top: 0;
+  width: 2px;
+  height: var(--reading-progress, 0%);
+  background: var(--primary);
+  transition: height 0.3s ease;
+}
+
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Mobile TOC - make it collapsible and styled */
+.theme-doc-toc-mobile {
+  background: var(--bg-overlay);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(41, 171, 183, 0.15);
+  margin-bottom: var(--space-lg);
+  backdrop-filter: blur(10px);
+}
+
+.theme-doc-toc-mobile button {
+  width: 100%;
+  padding: var(--space-md);
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  font-weight: var(--font-weight-semibold);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.theme-doc-toc-mobile button:hover {
+  background: rgba(41, 171, 183, 0.08);
+}
+
+.theme-doc-toc-mobile button::before {
+  content: '📑';
+  margin-right: var(--space-sm);
+}
+
+/* ================================================================
+   ENHANCED MODULE STRUCTURE SECTIONS
+   ================================================================ */
+
+/* Module Structure Section Heading */
+.markdown h3:has(+ h4[id*='topic']),
+.markdown h3:has(~ h4[id*='topic']) {
+  font-size: var(--font-size-3xl);
+  margin-top: var(--space-3xl);
+  margin-bottom: var(--space-xl);
+  padding-bottom: var(--space-md);
+  border-bottom: 2px solid rgba(41, 171, 183, 0.3);
+  position: relative;
+}
+
+.markdown h3:has(+ h4[id*='topic'])::before,
+.markdown h3:has(~ h4[id*='topic'])::before {
+  content: '📚';
+  margin-right: var(--space-sm);
+  font-size: 1.3em;
+}
+
+/* Topic Listings - Individual Topics */
+.markdown h4[id*='topic'] {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  margin-top: var(--space-2xl);
+  margin-bottom: var(--space-md);
+  padding: var(--space-lg);
+  background: var(--bg-overlay);
+  border-left: 4px solid var(--primary);
+  border-radius: var(--radius-lg);
+  position: relative;
+  transition: all var(--transition-normal);
+  cursor: default;
+}
+
+.markdown h4[id*='topic']:hover {
+  background: rgba(41, 171, 183, 0.08);
+  border-left-width: 6px;
+  padding-left: calc(var(--space-lg) + 2px);
+  box-shadow: 0 4px 12px rgba(41, 171, 183, 0.15);
+}
+
+/* Topic Number Badge */
+.markdown h4[id*='topic']::before {
+  content: attr(id);
+  position: absolute;
+  left: -16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 32px;
+  height: 32px;
+  background: var(--primary);
+  color: #0c0c0c;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(41, 171, 183, 0.4);
+}
+
+/* Extract just the number from topic-1-... */
+.markdown h4[id^='topic-1']::before {
+  content: '1';
+}
+.markdown h4[id^='topic-2']::before {
+  content: '2';
+}
+.markdown h4[id^='topic-3']::before {
+  content: '3';
+}
+.markdown h4[id^='topic-4']::before {
+  content: '4';
+}
+.markdown h4[id^='topic-5']::before {
+  content: '5';
+}
+
+/* Topic Description (paragraph after h4) */
+.markdown h4[id*='topic'] + p {
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-relaxed);
+  color: var(--text-secondary);
+  margin-top: var(--space-md);
+  margin-bottom: var(--space-md);
+  padding-left: var(--space-md);
+  border-left: 2px solid rgba(41, 171, 183, 0.1);
+}
+
+/* Key Concepts Section */
+.markdown h4[id*='topic'] + p + p strong:first-child {
+  display: inline-block;
+  background: rgba(41, 171, 183, 0.15);
+  color: var(--primary);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
+  margin-right: var(--space-xs);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Divider Lines Between Topics */
+.markdown h4[id*='topic'] {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding-bottom: var(--space-lg);
+  margin-bottom: var(--space-xl);
+}
+
+/* Light theme adjustments */
+[data-theme='light'] .markdown h4[id*='topic'] {
+  background: rgba(41, 171, 183, 0.03);
+  border-bottom-color: rgba(41, 171, 183, 0.1);
+}
+
+[data-theme='light'] .markdown h4[id*='topic']:hover {
+  background: rgba(41, 171, 183, 0.08);
+}
+
+/* Interactive Hover Effect for Entire Topic Block */
+.markdown h4[id*='topic']::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(41, 171, 183, 0.05), transparent);
+  transition: left 0.5s ease;
+  pointer-events: none;
+  border-radius: var(--radius-lg);
+}
+
+.markdown h4[id*='topic']:hover::after {
+  left: 100%;
+}
+
+/* Prerequisites List Enhancement */
+.markdown h3:has(+ ul) {
+  margin-bottom: var(--space-lg);
+}
+
+.markdown h3 + ul {
+  list-style: none;
+  padding: 0;
+  margin: var(--space-lg) 0;
+}
+
+.markdown h3 + ul li {
+  position: relative;
+  padding: var(--space-md) var(--space-md) var(--space-md) var(--space-2xl);
+  margin-bottom: var(--space-sm);
+  background: var(--bg-overlay);
+  border-radius: var(--radius-md);
+  border-left: 3px solid rgba(41, 171, 183, 0.3);
+  transition: all var(--transition-fast);
+}
+
+.markdown h3 + ul li:hover {
+  background: rgba(41, 171, 183, 0.05);
+  border-left-color: var(--primary);
+  transform: translateX(4px);
+}
+
+.markdown h3 + ul li::before {
+  content: '✓';
+  position: absolute;
+  left: var(--space-md);
+  color: var(--success);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-lg);
+}
+
+.markdown h3 + ul li strong {
+  color: var(--primary);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Learning Objectives List */
+.markdown h3[id*='learning'] + ul li::before {
+  content: '🎯';
+  font-size: var(--font-size-base);
+}
+
+/* System Requirements List */
+.markdown h3[id*='system'] + ul li::before,
+.markdown h3[id*='requirement'] + ul li::before {
+  content: '⚙️';
+  font-size: var(--font-size-base);
+}
+
+/* Quiz Section Enhancement */
+.markdown h3[id*='quiz'] {
+  background: linear-gradient(135deg, rgba(41, 171, 183, 0.1), rgba(139, 92, 246, 0.1));
+  padding: var(--space-lg);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(41, 171, 183, 0.2);
+  margin-top: var(--space-3xl);
+}
+
+.markdown h3[id*='quiz'] + ul {
+  background: var(--bg-overlay);
+  padding: var(--space-lg);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(41, 171, 183, 0.15);
+}
+
+/* Module Overview Cards (for sub-chapters) */
+.markdown > ul:has(li > strong:first-child) {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-lg);
+  list-style: none;
+  padding: 0;
+  margin: var(--space-2xl) 0;
+}
+
+.markdown > ul:has(li > strong:first-child) li {
+  background: var(--bg-overlay);
+  padding: var(--space-lg);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(41, 171, 183, 0.15);
+  transition: all var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+}
+
+.markdown > ul:has(li > strong:first-child) li:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-glow-primary);
+  border-color: rgba(41, 171, 183, 0.4);
+}
+
+.markdown > ul:has(li > strong:first-child) li::before {
+  display: none;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .markdown h4[id*='topic'] {
+    font-size: var(--font-size-lg);
+    padding: var(--space-md);
+    padding-left: calc(var(--space-md) + 24px);
+  }
+
+  .markdown h4[id*='topic']::before {
+    left: var(--space-sm);
+    width: 24px;
+    height: 24px;
+    font-size: var(--font-size-xs);
+  }
+
+  .markdown > ul:has(li > strong:first-child) {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Hide table of contents in focus mode */
+body.focus-mode-active .theme-doc-toc-desktop,
+body.focus-mode-active .table-of-contents {
+  display: none;
+}
+
+/* Expand main content container when sidebars are hidden */
+body.focus-mode-active .docMainContainer,
+body.focus-mode-active .main-wrapper > .container,
+body.focus-mode-active .row {
+  max-width: 100% !important;
+  margin: 0 auto !important;
+  padding-left: 2rem !important;
+  padding-right: 2rem !important;
+}
+
+/* Make the main content area full width */
+body.focus-mode-active .col {
+  max-width: 100% !important;
+  flex: 0 0 100% !important;
+}
+
+/* Center and limit width of focused content */
+body.focus-mode-active .docMainContainer {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+/* Focused doc content styling */
+body.focus-mode-active [data-module-content='true'].focus-mode,
+body.focus-mode-active .theme-doc-markdown.focus-mode,
+body.focus-mode-active article.focus-mode,
+body.focus-mode-active section[aria-labelledby='course-modules-title'].focus-mode {
+  position: relative;
+  z-index: 9999;
+  opacity: 1 !important;
+  filter: none !important;
+  pointer-events: auto !important;
+  box-shadow: 0 0 100px rgba(147, 51, 234, 0.3);
+  animation: focusIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 3rem;
+  border-radius: 16px;
+  background: rgba(12, 12, 12, 0.95);
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* Keep the main doc wrapper at high z-index */
+body.focus-mode-active .theme-doc-markdown,
+body.focus-mode-active article,
+body.focus-mode-active section[aria-labelledby='course-modules-title'] {
+  position: relative;
+  z-index: 9999;
+}
+
+/* Dark mode focus mode adjustments */
+[data-theme='dark'] body.focus-mode-active::before {
+  background: rgba(0, 0, 0, 0.9);
+}
+
+[data-theme='dark'] body.focus-mode-active [data-module-content='true'].focus-mode,
+[data-theme='dark'] body.focus-mode-active .theme-doc-markdown.focus-mode,
+[data-theme='dark'] body.focus-mode-active article.focus-mode,
+[data-theme='dark']
+  body.focus-mode-active
+  section[aria-labelledby='course-modules-title'].focus-mode {
+  box-shadow: 0 0 120px rgba(168, 85, 247, 0.4);
+  background: rgba(12, 12, 12, 0.98);
+}
+
+/* Fade in animation for overlay */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Focus in animation for modules section */
+@keyframes focusIn {
+  from {
+    transform: scale(0.98);
+    opacity: 0.8;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  body.focus-mode-active::before {
+    animation: none;
+  }
+
+  body.focus-mode-active [aria-labelledby='course-modules-title'].focus-mode {
+    animation: none;
+  }
+
+  body.focus-mode-active main > *:not([aria-labelledby='course-modules-title']),
+  body.focus-mode-active nav.navbar,
+  body.focus-mode-active footer {
+    transition: none;
+  }
+}
+
+/* ================================================================
+   HIDE DEFAULT DOCUSAURUS BACK-TO-TOP BUTTON
+   ================================================================ */
+
+/* Hide Docusaurus default back-to-top button - we use our custom one */
+button[class*='backToTop'],
+button[class*='BackToTop'],
+.theme-back-to-top-button,
+[class*='backToTopButton'] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
 }

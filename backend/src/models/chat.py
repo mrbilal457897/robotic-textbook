@@ -8,7 +8,7 @@ from typing import Optional
 from uuid import UUID
 from pydantic import BaseModel, Field, field_validator
 
-from .message import Citation
+from .message import Citation, Message
 
 
 class ChatRequest(BaseModel):
@@ -30,7 +30,7 @@ class ChatRequest(BaseModel):
     )
     tone: str = Field(
         default="academic",
-        description="Response tone: academic, beginner, concise",
+        description="Response tone: academic, beginner-friendly, concise",
     )
     book_id: str = Field(..., description="Textbook book ID")
     chapter_id: Optional[int] = Field(
@@ -54,7 +54,7 @@ class ChatRequest(BaseModel):
     @classmethod
     def validate_mode(cls, v: str) -> str:
         """Validate answering mode"""
-        allowed_modes = {"book-only", "selected-text", "general"}
+        allowed_modes = {"book-only", "selected-text-only", "general-knowledge"}
         if v not in allowed_modes:
             raise ValueError(f"Mode must be one of: {allowed_modes}")
         return v
@@ -63,7 +63,7 @@ class ChatRequest(BaseModel):
     @classmethod
     def validate_tone(cls, v: str) -> str:
         """Validate response tone"""
-        allowed_tones = {"academic", "beginner", "concise"}
+        allowed_tones = {"academic", "beginner-friendly", "concise"}
         if v not in allowed_tones:
             raise ValueError(f"Tone must be one of: {allowed_tones}")
         return v
@@ -96,32 +96,12 @@ class ChatRequest(BaseModel):
 
 
 class ChatResponse(BaseModel):
-    """Response model for POST /api/v1/chat"""
+    """Response model for POST /api/v1/chat — matches shared/types ChatResponse"""
 
     conversation_id: UUID = Field(..., description="Conversation ID")
-    message_id: UUID = Field(..., description="Generated message ID")
-    response: str = Field(..., description="Bot's response text")
-    citations: list[Citation] = Field(
-        default_factory=list, description="Citations for the response"
-    )
-    confidence_score: Optional[float] = Field(
-        default=None, description="Overall confidence score (0-1)"
-    )
-    tokens_used: int = Field(..., description="Number of tokens used")
-    mode: str = Field(..., description="Answering mode used")
-    tone: str = Field(..., description="Response tone used")
-    has_external_knowledge: bool = Field(
-        default=False,
-        description="Whether response includes external knowledge (general mode)",
-    )
-    timestamp: datetime = Field(
-        default_factory=datetime.utcnow, description="Response timestamp"
-    )
-    conversation_updated_at: datetime = Field(
-        ..., description="Conversation's updated_at for optimistic locking"
-    )
-    metadata: dict = Field(
-        default_factory=dict, description="Additional metadata (latency, model, etc.)"
+    message: Message = Field(..., description="Assistant message object")
+    should_create_new_conversation: bool = Field(
+        default=False, description="Whether a new conversation was created"
     )
 
     class Config:

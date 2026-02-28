@@ -7,7 +7,7 @@ import rehypeKatex from 'rehype-katex';
 const config: Config = {
   title: 'Physical AI & Humanoid Robotics',
   tagline: 'Bridging the gap between digital minds and physical bodies',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/human.png',
 
   // GitHub Pages deployment configuration
   url: 'https://YOUR_GITHUB_USERNAME.github.io',
@@ -86,6 +86,20 @@ const config: Config = {
         explicitSearchResultPath: true,
       },
     ],
+    function webpackPlugin() {
+      return {
+        name: 'custom-webpack-config',
+        configureWebpack() {
+          return {
+            plugins: [
+              new (require('webpack').DefinePlugin)({
+                API_URL: JSON.stringify(process.env.REACT_APP_API_URL || 'http://localhost:8000'),
+              }),
+            ],
+          };
+        },
+      };
+    },
   ],
 
   markdown: {
