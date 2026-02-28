@@ -68,7 +68,7 @@ Successfully integrated **Cohere** for text embeddings while keeping **Gemini** 
 
 ```bash
 # Cohere Embeddings
-COHERE_API_KEY=REMOVED_API_KEY
+COHERE_API_KEY=your-api-key-here
 COHERE_EMBEDDING_MODEL=embed-english-v3.0
 COHERE_INPUT_TYPE=search_document
 
