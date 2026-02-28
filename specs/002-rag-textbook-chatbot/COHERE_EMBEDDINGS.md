@@ -17,6 +17,7 @@ Successfully integrated **Cohere** for text embeddings while keeping **Gemini** 
 ### Why Cohere for Embeddings?
 
 **Cohere specializes in embeddings** and offers:
+
 1. ✅ **Industry-leading semantic search quality**
 2. ✅ **Optimized specifically for RAG systems**
 3. ✅ **10x cheaper than OpenAI** ($0.10 vs $1.30 per 1M tokens)
@@ -27,6 +28,7 @@ Successfully integrated **Cohere** for text embeddings while keeping **Gemini** 
 ### Why Keep Gemini for Chat?
 
 **Gemini excels at conversational AI** with:
+
 1. ✅ **Best free tier for chat** (1,500 requests/day with gemini-1.5-flash)
 2. ✅ **No credit card required** for free tier
 3. ✅ **Fast response times** (2-3s with gemini-1.5-flash)
@@ -39,24 +41,24 @@ Successfully integrated **Cohere** for text embeddings while keeping **Gemini** 
 
 ### Embedding Model: Cohere embed-english-v3.0
 
-| Specification | Value |
-|---------------|-------|
-| **Dimensions** | 1024 |
-| **Max Tokens** | 512 per text |
-| **Languages** | Optimized for English |
+| Specification   | Value                                                     |
+| --------------- | --------------------------------------------------------- |
+| **Dimensions**  | 1024                                                      |
+| **Max Tokens**  | 512 per text                                              |
+| **Languages**   | Optimized for English                                     |
 | **Input Types** | search_document, search_query, classification, clustering |
-| **Cost** | $0.10 per 1M tokens |
-| **Free Tier** | 1,000 API calls/month (trial) |
+| **Cost**        | $0.10 per 1M tokens                                       |
+| **Free Tier**   | 1,000 API calls/month (trial)                             |
 
 ### Chat Model: Gemini 1.5 Flash/Pro
 
-| Specification | gemini-1.5-flash | gemini-1.5-pro |
-|---------------|------------------|----------------|
-| **Context Window** | 1M tokens | 2M tokens |
-| **Max Output** | 8,192 tokens | 8,192 tokens |
-| **Input Cost** | $0.075 / 1M | $1.25 / 1M |
-| **Output Cost** | $0.30 / 1M | $5.00 / 1M |
-| **Free Tier** | 15 req/min, 1,500/day | 2 req/min, 50/day |
+| Specification      | gemini-1.5-flash      | gemini-1.5-pro    |
+| ------------------ | --------------------- | ----------------- |
+| **Context Window** | 1M tokens             | 2M tokens         |
+| **Max Output**     | 8,192 tokens          | 8,192 tokens      |
+| **Input Cost**     | $0.075 / 1M           | $1.25 / 1M        |
+| **Output Cost**    | $0.30 / 1M            | $5.00 / 1M        |
+| **Free Tier**      | 15 req/min, 1,500/day | 2 req/min, 50/day |
 
 ---
 
@@ -66,12 +68,12 @@ Successfully integrated **Cohere** for text embeddings while keeping **Gemini** 
 
 ```bash
 # Cohere Embeddings
-COHERE_API_KEY=REMOVED_API_KEY
+COHERE_API_KEY=your_cohere_api_key_here
 COHERE_EMBEDDING_MODEL=embed-english-v3.0
 COHERE_INPUT_TYPE=search_document
 
 # Gemini Chat
-GEMINI_API_KEY=AIzaSyBekKZc2yRc4O-4r0Xg-gEp0H412lcKM5M
+GEMINI_API_KEY=your_gemini_api_key_here
 GEMINI_CHAT_MODEL=gemini-2.5-flash
 
 # Qdrant Configuration
@@ -81,6 +83,7 @@ QDRANT_VECTOR_SIZE=1024  # Updated from 768 (Gemini) to 1024 (Cohere)
 ### API Endpoints
 
 **Cohere Embeddings API**:
+
 ```python
 import cohere
 
@@ -97,6 +100,7 @@ embeddings = response.embeddings  # List of 1024-dim vectors
 ```
 
 **Gemini Chat API**:
+
 ```python
 import google.generativeai as genai
 
@@ -145,12 +149,12 @@ Generated Answer with Citations
 
 Cohere's `input_type` parameter optimizes embeddings for specific use cases:
 
-| Use Case | Input Type | When to Use |
-|----------|------------|-------------|
-| **Indexing textbook chunks** | `search_document` | During ingestion |
-| **User questions** | `search_query` | At query time |
-| **Topic classification** | `classification` | For categorization |
-| **Content clustering** | `clustering` | For grouping |
+| Use Case                     | Input Type        | When to Use        |
+| ---------------------------- | ----------------- | ------------------ |
+| **Indexing textbook chunks** | `search_document` | During ingestion   |
+| **User questions**           | `search_query`    | At query time      |
+| **Topic classification**     | `classification`  | For categorization |
+| **Content clustering**       | `clustering`      | For grouping       |
 
 **Critical**: Use `search_document` for indexing and `search_query` for queries to maximize retrieval accuracy.
 
@@ -159,19 +163,23 @@ Cohere's `input_type` parameter optimizes embeddings for specific use cases:
 ## Updated Files
 
 ### Configuration
+
 - ✅ `backend/.env.example` - Added Cohere configuration, updated vector size
 - ✅ `frontend/.env.local.example` - No changes (API-agnostic)
 
 ### Validation
+
 - ✅ `backend/scripts/validate-infra.py`
   - Added `validate_cohere()` method
   - Updated `validate_gemini()` to focus on chat only
   - Updated `validate_all()` to test both APIs
 
 ### Dependencies
+
 - ✅ `backend/requirements.txt` - Added `cohere>=4.37`
 
 ### Documentation
+
 - ✅ `specs/002-rag-textbook-chatbot/SETUP_INFRASTRUCTURE.md`
   - Added Section 1: Cohere API Setup
   - Updated Section 2: Gemini API Setup (chat-only)
@@ -196,11 +204,13 @@ Cohere's `input_type` parameter optimizes embeddings for specific use cases:
    - Copy key to `backend/.env` as `GEMINI_API_KEY`
 
 3. **Install Dependencies**
+
    ```bash
    pip install cohere google-generativeai qdrant-client psycopg2-binary
    ```
 
 4. **Create Qdrant Collection**
+
    ```python
    from qdrant_client import QdrantClient
    from qdrant_client.models import VectorParams, Distance
@@ -223,6 +233,7 @@ Cohere's `input_type` parameter optimizes embeddings for specific use cases:
 ⚠️ **Breaking Change**: Vector dimensions changed, requires collection recreation
 
 1. **Update Environment Variables**
+
    ```bash
    # Add to backend/.env
    COHERE_API_KEY=your-key-here
@@ -234,11 +245,13 @@ Cohere's `input_type` parameter optimizes embeddings for specific use cases:
    ```
 
 2. **Install Cohere SDK**
+
    ```bash
    pip install cohere>=4.37
    ```
 
 3. **Delete Old Collection**
+
    ```python
    from qdrant_client import QdrantClient
 
@@ -247,6 +260,7 @@ Cohere's `input_type` parameter optimizes embeddings for specific use cases:
    ```
 
 4. **Create New Collection (1024-dim)**
+
    ```python
    from qdrant_client.models import VectorParams, Distance
 
@@ -257,6 +271,7 @@ Cohere's `input_type` parameter optimizes embeddings for specific use cases:
    ```
 
 5. **Re-ingest Textbook**
+
    ```bash
    python backend/scripts/ingest-textbook.py --file your-textbook.pdf
    ```
@@ -272,20 +287,21 @@ Cohere's `input_type` parameter optimizes embeddings for specific use cases:
 
 ### Monthly Cost Breakdown (10,000 queries/day)
 
-| Service | Previous (Gemini Only) | Current (Cohere + Gemini) | Savings |
-|---------|------------------------|---------------------------|---------|
-| **Embeddings** | $10-20/month | **$5-10/month** | 50% |
-| **Chat** | $10-50/month | **$5-30/month** | 40% |
-| **Infrastructure** | $25-70/month | $25-70/month | - |
-| **TOTAL** | $45-140/month | **$35-110/month** | **~22%** |
+| Service            | Previous (Gemini Only) | Current (Cohere + Gemini) | Savings  |
+| ------------------ | ---------------------- | ------------------------- | -------- |
+| **Embeddings**     | $10-20/month           | **$5-10/month**           | 50%      |
+| **Chat**           | $10-50/month           | **$5-30/month**           | 40%      |
+| **Infrastructure** | $25-70/month           | $25-70/month              | -        |
+| **TOTAL**          | $45-140/month          | **$35-110/month**         | **~22%** |
 
 ### Development Cost
 
-| Service | Previous | Current | Savings |
-|---------|----------|---------|---------|
+| Service   | Previous | Current      | Savings         |
+| --------- | -------- | ------------ | --------------- |
 | **Total** | $0/month | **$0/month** | N/A (Both free) |
 
 **Free Tier Coverage**:
+
 - Cohere: 1,000 embedding calls/month (sufficient for testing)
 - Gemini: 1,500 chat requests/day (45,000/month - more than enough)
 
@@ -295,12 +311,12 @@ Cohere's `input_type` parameter optimizes embeddings for specific use cases:
 
 ### Embedding Quality (Preliminary Testing)
 
-| Metric | OpenAI (text-embedding-3-large) | Gemini (text-embedding-004) | Cohere (embed-english-v3.0) |
-|--------|--------------------------------|----------------------------|----------------------------|
-| **NDCG@5** | 0.88 | 0.85-0.87 | **0.89-0.91** |
-| **Dimensions** | 3072 | 768 | 1024 |
-| **Cost per 1M tokens** | $1.30 | Free | **$0.10** |
-| **Verdict** | Highest quality, expensive | Good quality, free | **Best ROI** |
+| Metric                 | OpenAI (text-embedding-3-large) | Gemini (text-embedding-004) | Cohere (embed-english-v3.0) |
+| ---------------------- | ------------------------------- | --------------------------- | --------------------------- |
+| **NDCG@5**             | 0.88                            | 0.85-0.87                   | **0.89-0.91**               |
+| **Dimensions**         | 3072                            | 768                         | 1024                        |
+| **Cost per 1M tokens** | $1.30                           | Free                        | **$0.10**                   |
+| **Verdict**            | Highest quality, expensive      | Good quality, free          | **Best ROI**                |
 
 **Cohere wins** on quality-to-cost ratio for RAG systems.
 
@@ -392,12 +408,14 @@ After migration, verify:
 ## Support & Resources
 
 **Cohere**:
+
 - Dashboard: https://dashboard.cohere.com
 - Docs: https://docs.cohere.com/docs/embeddings
 - Pricing: https://cohere.com/pricing
 - Python SDK: https://github.com/cohere-ai/cohere-python
 
 **Gemini**:
+
 - AI Studio: https://aistudio.google.com
 - Docs: https://ai.google.dev/docs
 - Python SDK: https://ai.google.dev/tutorials/python_quickstart
