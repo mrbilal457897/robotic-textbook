@@ -42,8 +42,6 @@ If you don't want to use Gemini, switch to Cohere embeddings:
 # Use Cohere for embeddings (already configured)
 USE_COHERE_EMBEDDINGS=true
 
-# Your Cohere key (already set)
-COHERE_API_KEY=YOUR_NEW_KEY_HER
 
 # Use Gemini only for chat (not embeddings)
 GEMINI_API_KEY=YOUR_NEW_KEY_HERE
