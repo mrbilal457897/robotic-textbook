@@ -771,7 +771,7 @@ This lesson covered the foundations of physics simulation with Gazebo for humano
 
 ## Next Steps
 
-1. **Hands-On Exercise**: Create a custom Gazebo world with obstacles and test a simple balance controller ([Module 1: ROS 2 Control](../module-1-ros2/ros2-control-framework.md))
+1. **Hands-On Exercise**: Create a custom Gazebo world with obstacles and test a simple balance controller ([Module 1: ROS 2 Python](../module-1-ros2/python-rclpy.md))
 2. **Advanced Topic**: Explore [Sensor Simulation and Validation](./sensor-simulation.md) to inject realistic noise models
 3. **Integration**: Connect Gazebo to Isaac Sim for GPU-accelerated rendering ([Module 3: Isaac Ecosystem](../module-3-isaac/isaac-sim-platform.md))
 4. **Community Resources**:

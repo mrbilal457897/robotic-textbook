@@ -524,8 +524,8 @@ CBook/
 
 ## Support & Resources
 
-- **Project Documentation**: [README.md](../README.md)
-- **Contributing Guidelines**: [CONTRIBUTING.md](../CONTRIBUTING.md)
+- **Project Documentation**: [README.md](https://github.com/YOUR_GITHUB_USERNAME/physical-ai-textbook/blob/main/README.md)
+- **Contributing Guidelines**: [CONTRIBUTING.md](https://github.com/YOUR_GITHUB_USERNAME/physical-ai-textbook/blob/main/CONTRIBUTING.md)
 - **Docusaurus Docs**: [docusaurus.io](https://docusaurus.io/)
 - **React Docs**: [react.dev](https://react.dev/)
 - **TypeScript Handbook**: [typescriptlang.org](https://www.typescriptlang.org/docs/)

@@ -9,9 +9,9 @@ const config: Config = {
   tagline: 'Bridging the gap between digital minds and physical bodies',
   favicon: 'img/human.png',
 
-  // GitHub Pages deployment configuration
-  url: 'https://YOUR_GITHUB_USERNAME.github.io',
-  baseUrl: '/physical-ai-textbook/',
+  // Vercel deployment configuration
+  url: 'https://robotic-textbook-a.vercel.app',
+  baseUrl: '/',
   organizationName: 'YOUR_GITHUB_USERNAME',
   projectName: 'physical-ai-textbook',
   deploymentBranch: 'gh-pages',
