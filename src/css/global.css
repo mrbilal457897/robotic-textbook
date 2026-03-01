@@ -1568,11 +1568,11 @@ button[title*='Switch between dark and light mode'] {
     margin-right: 0.5rem;
   }
 
-  /* THEME TOGGLE - Mobile */
-  button[class*='colorModeToggle'],
-  button[class*='toggleButton'],
-  .navbar__item.theme-toggle,
-  button[title*='Switch between dark and light mode'] {
+  /* THEME TOGGLE - Mobile Top Navbar */
+  .navbar__items--right button[class*='colorModeToggle'],
+  .navbar__items--right button[class*='toggleButton'],
+  .navbar__items--right .navbar__item.theme-toggle,
+  .navbar__items--right button[title*='Switch between dark and light mode'] {
     display: flex !important;
     opacity: 1 !important;
     visibility: visible !important;
@@ -1586,15 +1586,41 @@ button[title*='Switch between dark and light mode'] {
     gap: 0.5rem;
   }
 
-  /* Show both in mobile sidebar menu */
-  .navbar-sidebar__items .navbar__search,
+  /* ===== HAMBURGER MENU (SIDEBAR) - CRITICAL FIX ===== */
+
+  /* Force show theme toggle INSIDE hamburger menu */
+  .navbar-sidebar button[class*='colorModeToggle'],
   .navbar-sidebar__items button[class*='colorModeToggle'],
-  .navbar-sidebar__items .navbar__item.theme-toggle,
-  .menu__list-item button[class*='colorModeToggle'],
+  .navbar-sidebar .navbar__item button[class*='colorModeToggle'],
+  .navbar-sidebar__item button[class*='toggleButton'],
+  .navbar-sidebar [title*='Switch between dark and light mode'],
+  .menu .navbar__item button[class*='colorModeToggle'] {
+    display: flex !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    width: 100% !important;
+    padding: 0.75rem 1rem !important;
+    justify-content: flex-start !important;
+    border-radius: 0.375rem;
+    margin: 0.25rem 0;
+  }
+
+  /* Force theme toggle to appear as menu item in hamburger */
+  .navbar-sidebar__items .navbar__item:has(button[class*='colorModeToggle']),
+  .navbar-sidebar .navbar__item.navbar__link:has(button[class*='colorModeToggle']) {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  /* Show search in mobile sidebar menu */
+  .navbar-sidebar__items .navbar__search,
+  .navbar-sidebar .navbar__search,
   .menu__list-item .navbar__search {
     display: flex !important;
     width: 100%;
-    padding: var(--ifm-menu-link-padding-vertical) var(--ifm-menu-link-padding-horizontal);
+    padding: 0.75rem 1rem;
+    margin: 0.25rem 0;
   }
 
   /* Fix mobile navbar top bar alignment */
@@ -1604,9 +1630,14 @@ button[title*='Switch between dark and light mode'] {
     justify-content: space-between;
   }
 
-  /* Ensure search and theme toggle stay in navbar top (not hidden) */
+  /* Ensure items are visible */
   .navbar__items {
     display: flex;
     align-items: center;
+  }
+
+  /* Hamburger menu backdrop */
+  .navbar-sidebar__backdrop {
+    opacity: 1 !important;
   }
 }
