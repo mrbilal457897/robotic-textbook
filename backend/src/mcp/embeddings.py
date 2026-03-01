@@ -123,9 +123,24 @@ class EmbeddingsMCP:
 _embeddings_mcp = None
 
 
-def get_embeddings_mcp() -> EmbeddingsMCP:
-    """Get or create global Embeddings MCP instance"""
+def get_embeddings_mcp():
+    """
+    Get or create global Embeddings MCP instance
+
+    Returns Cohere embeddings if USE_COHERE_EMBEDDINGS=true in .env
+    Otherwise returns Gemini embeddings (default)
+    """
     global _embeddings_mcp
     if _embeddings_mcp is None:
-        _embeddings_mcp = EmbeddingsMCP()
+        # Check if we should use Cohere instead of Gemini
+        use_cohere = os.getenv("USE_COHERE_EMBEDDINGS", "false").lower() == "true"
+
+        if use_cohere:
+            logger.info("Using Cohere embeddings (USE_COHERE_EMBEDDINGS=true)")
+            from .embeddings_cohere import CohereEmbeddingsMCP
+            _embeddings_mcp = CohereEmbeddingsMCP()
+        else:
+            logger.info("Using Gemini embeddings (default)")
+            _embeddings_mcp = EmbeddingsMCP()
+
     return _embeddings_mcp

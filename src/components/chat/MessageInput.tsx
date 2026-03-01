@@ -70,13 +70,12 @@ export function MessageInput({
     <form
       onSubmit={handleSubmit}
       className={cn(
-        'flex flex-col gap-2 rounded-lg border bg-white p-3 shadow-sm transition-shadow dark:bg-gray-900',
-        isFocused && 'ring-2 ring-blue-500 ring-offset-2',
+        'flex flex-col gap-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-white p-3 shadow-sm dark:bg-gray-900',
         disabled && 'opacity-50',
         className
       )}
     >
-      <div className="flex items-end gap-2">
+      <div className="flex items-center gap-2">
         <textarea
           ref={textareaRef}
           value={message}
@@ -98,9 +97,15 @@ export function MessageInput({
         <button
           type="submit"
           disabled={!message.trim() || isLoading || disabled}
-          className="shrink-0 rounded-md bg-blue-600 px-3 py-2 text-white hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="shrink-0 rounded-md bg-blue-600 p-2 text-white hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center"
         >
-          {isLoading ? '⏳' : '📤'}
+          {isLoading ? (
+            <span className="inline-block animate-spin text-base">⏳</span>
+          ) : (
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
+              <path d="M3.478 2.405a.75.75 0 00-.926.94l2.432 7.905H13.5a.75.75 0 010 1.5H4.984l-2.432 7.905a.75.75 0 00.926.94 60.519 60.519 0 0018.445-8.986.75.75 0 000-1.218A60.517 60.517 0 003.478 2.405z" />
+            </svg>
+          )}
         </button>
       </div>
 
@@ -120,12 +125,6 @@ export function MessageInput({
             : `${remainingChars} characters remaining`}
         </div>
       )}
-
-      <div className="text-xs text-gray-500">
-        Press <kbd className="rounded bg-gray-100 px-1 py-0.5 dark:bg-gray-800">Enter</kbd> to send,{' '}
-        <kbd className="rounded bg-gray-100 px-1 py-0.5 dark:bg-gray-800">Shift+Enter</kbd> for new
-        line
-      </div>
     </form>
   );
 }

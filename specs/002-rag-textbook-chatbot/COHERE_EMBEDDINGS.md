@@ -73,7 +73,7 @@ COHERE_EMBEDDING_MODEL=embed-english-v3.0
 COHERE_INPUT_TYPE=search_document
 
 # Gemini Chat
-GEMINI_API_KEY=AIzaSyBekKZc2yRc4O-4r0Xg-gEp0H412lcKM5M
+GEMINI_API_KEY=your-api-key-here
 GEMINI_CHAT_MODEL=gemini-2.5-flash
 
 # Qdrant Configuration

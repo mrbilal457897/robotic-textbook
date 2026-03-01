@@ -14,6 +14,7 @@ import type { Message, Citation, KeyTerm } from '../../../shared/types';
 
 export interface MessageListProps {
   messages: Message[];
+  isLoading?: boolean;
   onCitationClick?: (citation: Citation) => void;
   className?: string;
 }
@@ -39,21 +40,21 @@ const getConfidenceColor = (score: number): string => {
   return 'text-red-600';
 };
 
-export function MessageList({ messages, onCitationClick, className }: MessageListProps) {
+export function MessageList({ messages, isLoading = false, onCitationClick, className }: MessageListProps) {
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages]);
+  }, [messages, isLoading]);
 
-  if (messages.length === 0) {
+  if (messages.length === 0 && !isLoading) {
     return (
       <div
         className={cn('flex flex-col items-center justify-center gap-4 p-8 text-center', className)}
       >
-        <div className="text-6xl">🤖</div>
+        <div className="text-5xl">🤖</div>
         <div>
-          <h3 className="text-lg font-semibold text-gray-700 dark:text-gray-300">
+          <h3 className="text-base font-medium text-gray-700 dark:text-gray-300">
             No messages yet
           </h3>
           <p className="text-sm text-gray-500 dark:text-gray-400">
@@ -69,6 +70,22 @@ export function MessageList({ messages, onCitationClick, className }: MessageLis
       {messages.map(message => (
         <MessageBubble key={message.id} message={message} onCitationClick={onCitationClick} />
       ))}
+
+      {/* Loading Indicator */}
+      {isLoading && (
+        <div className="flex gap-3">
+          <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-300 text-lg">
+            🤖
+          </div>
+          <div className="flex max-w-[80%] items-center gap-2 rounded-lg bg-gray-100 px-4 py-3 dark:bg-gray-800">
+            <span className="inline-block animate-spin text-lg">⏳</span>
+            <span className="text-sm text-gray-600 dark:text-gray-400">
+              Generating response...
+            </span>
+          </div>
+        </div>
+      )}
+
       <div ref={messagesEndRef} />
     </div>
   );

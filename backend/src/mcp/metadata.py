@@ -72,8 +72,15 @@ class MetadataMCP:
             chunk = self.get_chunk_metadata(chunk_id)
 
             if chunk:
-                # Parse chunk index from ID (format: book_id_chunk_00123)
+                # Try to parse chunk index from ID (format: book_id_chunk_00123)
+                # If chunk_id is a UUID or different format, skip context retrieval
                 try:
+                    # Check if chunk_id follows expected format (ends with _chunk_NNNNN)
+                    if "_chunk_" not in chunk_id:
+                        # UUID or unknown format - return chunk without context
+                        results.append({"main_chunk": chunk, "context_before": [], "context_after": []})
+                        continue
+
                     chunk_index = int(chunk_id.rsplit("_", 1)[-1])
                     book_id_prefix = chunk_id.rsplit("_chunk_", 1)[0]
 
@@ -109,6 +116,10 @@ class MetadataMCP:
                         }
                     )
 
+                except ValueError as e:
+                    # int() parsing failed - chunk_id doesn't follow expected numeric pattern
+                    logger.debug(f"Chunk {chunk_id} uses non-numeric ID format, skipping context retrieval")
+                    results.append({"main_chunk": chunk, "context_before": [], "context_after": []})
                 except Exception as e:
                     logger.warning(f"Failed to extract context for {chunk_id}: {e}")
                     results.append({"main_chunk": chunk, "context_before": [], "context_after": []})

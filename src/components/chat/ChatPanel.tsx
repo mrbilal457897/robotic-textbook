@@ -145,7 +145,7 @@ export function ChatPanel({
             <img
               src={bookIconSrc}
               alt="Textbook"
-              className="h-6 w-6 object-contain drop-shadow-sm"
+              className="h-8 w-8 object-contain drop-shadow-sm"
             />
             <h2 className={styles.chatTitle}>Textbook Assistant</h2>
           </div>
@@ -203,6 +203,7 @@ export function ChatPanel({
         <div className="flex-1 overflow-hidden">
           <MessageList
             messages={messages}
+            isLoading={isLoading}
             onCitationClick={handleCitationClick}
             className="h-full"
           />

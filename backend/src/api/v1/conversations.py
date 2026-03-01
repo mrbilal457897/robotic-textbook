@@ -300,7 +300,7 @@ def _fetch_messages(
         with conn.cursor() as cur:
             cur.execute(
                 """
-                SELECT id, conversation_id, role, content, mode, tone, action, citations, confidence_score, tokens_used, created_at
+                SELECT id, conversation_id, role, content, mode, tone, action, citations, confidence_score, metadata, created_at
                 FROM messages
                 WHERE conversation_id = %s
                 ORDER BY created_at ASC
@@ -320,6 +320,10 @@ def _fetch_messages(
                     for c in citations_data
                 ]
 
+                # Extract tokens_used from metadata JSONB
+                metadata = row[9] or {}
+                tokens_used = metadata.get("tokens_used", 0) if isinstance(metadata, dict) else 0
+
                 messages.append(
                     MessageResponse(
                         id=row[0],
@@ -331,7 +335,7 @@ def _fetch_messages(
                         action=row[6],
                         citations=citations,
                         confidence_score=row[8],
-                        tokens_used=row[9],
+                        tokens_used=tokens_used,
                         created_at=row[10],
                         has_external_knowledge=(row[4] == "general"),
                     )

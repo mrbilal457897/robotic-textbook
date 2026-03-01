@@ -7,7 +7,7 @@ import * as React from "react";
 import { useEffect, useRef, useMemo } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { User, Bot, AlertCircle } from "lucide-react";
+import { User, Bot, AlertCircle, Loader2 } from "lucide-react";
 import {
   cn,
   formatRelativeTime,
@@ -20,23 +20,25 @@ import type { Message, Citation, KeyTerm } from "../../../../shared/types";
 
 export interface MessageListProps {
   messages: Message[];
+  isLoading?: boolean;
   onCitationClick?: (citation: Citation) => void;
   className?: string;
 }
 
 export function MessageList({
   messages,
+  isLoading = false,
   onCitationClick,
   className,
 }: MessageListProps) {
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  // Auto-scroll to bottom when new messages arrive
+  // Auto-scroll to bottom when new messages arrive or loading state changes
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
+  }, [messages, isLoading]);
 
-  if (messages.length === 0) {
+  if (messages.length === 0 && !isLoading) {
     return (
       <div
         className={cn(
@@ -44,9 +46,9 @@ export function MessageList({
           className
         )}
       >
-        <Bot className="h-16 w-16 text-gray-400" />
+        <Bot className="h-12 w-12 text-gray-400" />
         <div>
-          <h3 className="text-lg font-semibold text-gray-700 dark:text-gray-300">
+          <h3 className="text-base font-medium text-gray-700 dark:text-gray-300">
             No messages yet
           </h3>
           <p className="text-sm text-gray-500 dark:text-gray-400">
@@ -66,6 +68,22 @@ export function MessageList({
           onCitationClick={onCitationClick}
         />
       ))}
+
+      {/* Loading Indicator */}
+      {isLoading && (
+        <div className="flex gap-3">
+          <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-300">
+            <Bot className="h-4 w-4" />
+          </div>
+          <div className="flex max-w-[80%] items-center gap-2 rounded-lg bg-gray-100 px-4 py-3 dark:bg-gray-800">
+            <Loader2 className="h-4 w-4 animate-spin text-[#00F0FF]" />
+            <span className="text-sm text-gray-600 dark:text-gray-400">
+              Generating response...
+            </span>
+          </div>
+        </div>
+      )}
+
       <div ref={messagesEndRef} />
     </div>
   );

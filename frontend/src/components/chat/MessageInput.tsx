@@ -131,13 +131,6 @@ export function MessageInput({
             : `${remainingChars} characters remaining`}
         </div>
       )}
-
-      {/* Hint */}
-      <div className="text-xs text-gray-500">
-        Press <kbd className="rounded bg-gray-100 px-1 py-0.5 dark:bg-gray-800">Enter</kbd> to
-        send, <kbd className="rounded bg-gray-100 px-1 py-0.5 dark:bg-gray-800">Shift+Enter</kbd>{" "}
-        for new line
-      </div>
     </form>
   );
 }

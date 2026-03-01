@@ -86,38 +86,38 @@ export function ChatPanel({
   return (
     <div
       className={cn(
-        "fixed bottom-0 right-0 z-40 flex h-[450px] w-full flex-col bg-white shadow-2xl dark:bg-[#1A2230] sm:bottom-6 sm:right-6 sm:h-[500px] sm:w-96 sm:rounded-lg",
+        "fixed bottom-0 right-0 z-40 flex h-[450px] w-full flex-col bg-white/95 backdrop-blur-md shadow-2xl dark:bg-[#1A2230]/95 sm:bottom-6 sm:right-6 sm:h-[500px] sm:w-96 sm:rounded-lg",
         className
       )}
     >
       {/* Header */}
       <div className="flex items-center justify-between border-b border-gray-200 px-4 py-3 dark:border-gray-800">
         <div className="flex items-center gap-2">
-          <MessageCircle className="h-5 w-5 text-[#00F0FF] dark:text-[#00F0FF]" />
-          <h2 className="font-semibold text-gray-900 dark:text-[#E8EDF3]">
+          <BookOpen className="h-6 w-6 text-[#00F0FF] dark:text-[#00F0FF]" />
+          <h2 className="text-sm font-medium text-gray-900 dark:text-[#E8EDF3]">
             Textbook Assistant
           </h2>
         </div>
 
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-2">
           <button
             onClick={() => setShowSettings(!showSettings)}
             className={cn(
-              "rounded-md p-2 transition-all hover:bg-gray-100 hover:shadow-[0_0_10px_rgba(0,240,255,0.3)] dark:hover:bg-gray-800",
-              showSettings && "bg-gray-100 dark:bg-gray-800"
+              "rounded-full p-1.5 transition-all duration-200 hover:bg-[#00F0FF]/10 hover:scale-110",
+              showSettings && "bg-[#00F0FF]/20 scale-110"
             )}
             aria-label="Settings"
           >
-            <Settings className="h-5 w-5 text-gray-600 hover:text-[#00F0FF] dark:text-[#9AABB8]" />
+            <Settings className="h-4 w-4 text-gray-600 hover:text-[#00F0FF] dark:text-[#9AABB8] transition-colors" />
           </button>
 
           <button
             onClick={() => setIsOpen(false)}
-            className="rounded-md p-2 transition-all hover:bg-gray-100 hover:shadow-[0_0_10px_rgba(0,240,255,0.3)] dark:hover:bg-gray-800"
+            className="rounded-full p-1.5 transition-all duration-200 hover:bg-[#00F0FF]/10 hover:scale-110"
             aria-label="Close chat"
             title="Close chat"
           >
-            <X className="h-5 w-5 text-gray-600 hover:text-[#00F0FF] dark:text-[#9AABB8]" />
+            <X className="h-4 w-4 text-gray-600 hover:text-[#00F0FF] dark:text-[#9AABB8] transition-colors" />
           </button>
         </div>
       </div>
@@ -156,6 +156,7 @@ export function ChatPanel({
       <div className="flex-1 overflow-hidden">
         <MessageList
           messages={messages}
+          isLoading={isLoading}
           onCitationClick={handleCitationClick}
           className="h-full"
         />

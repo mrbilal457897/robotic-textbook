@@ -1,31 +1,31 @@
 /* ChatPanel Styles */
 
 .backdrop {
-  @apply fixed inset-0 z-30 bg-black/30 backdrop-blur-sm;
+  @apply fixed inset-0 z-30 bg-transparent backdrop-blur-none;
 }
 
 .chatPanel {
-  @apply bg-white/95 backdrop-blur-xl border border-white/30 dark:bg-gray-900/95 dark:border-gray-700/50;
+  @apply bg-white/70 backdrop-blur-2xl border border-white/40 dark:bg-gray-900/70 dark:border-gray-700/60;
 }
 
 .chatHeader {
-  @apply bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-700 dark:to-purple-700 border-b border-white/20;
+  @apply bg-transparent border-b border-white/20 dark:border-gray-700/50;
 }
 
 .chatTitle {
-  @apply text-sm font-semibold text-white;
+  @apply text-base font-medium text-gray-900 dark:text-white;
 }
 
 .settingsButton {
-  @apply rounded-md p-1.5 text-white/80 transition-colors hover:bg-white/20 hover:text-white;
+  @apply rounded-md p-1.5 bg-transparent border-none text-gray-600 dark:text-gray-400 transition-all duration-200 hover:bg-transparent hover:text-gray-900 dark:hover:text-white;
 }
 
 .settingsButton.active {
-  @apply bg-white/30 text-white;
+  @apply bg-transparent border-none text-gray-900 dark:text-white;
 }
 
 .closeButton {
-  @apply rounded-md p-1.5 text-white/80 transition-colors hover:bg-white/20 hover:text-white;
+  @apply rounded-md p-1.5 bg-transparent border-none text-gray-600 dark:text-gray-400 transition-all duration-200 hover:bg-transparent hover:text-gray-900 dark:hover:text-white;
 }
 
 .settingsPanel {
