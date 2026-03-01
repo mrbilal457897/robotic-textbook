@@ -11,7 +11,7 @@ Your Gemini API key was leaked and blocked by Google. Here's the fastest fix:
 ### 1. Create New Gemini API Key
 
 1. Go to: https://aistudio.google.com/app/apikey
-2. **Delete old key**: `AIzaSyBekKZc2yRc4O-4r0Xg-gEp0H412lcKM5M` (it's blocked)
+2. **Delete old key**:  (it's blocked)
 3. Click "**Create API Key**"
 4. **Copy the new key**
 
@@ -21,7 +21,7 @@ Open `backend/.env` and replace line 28:
 
 **OLD (BLOCKED):**
 ```env
-GEMINI_API_KEY=AIzaSyBekKZc2yRc4O-4r0Xg-gEp0H412lcKM5M
+GEMINI_API_KEY=YOUR_NEW_KEY_HER
 ```
 
 **NEW:**
@@ -102,7 +102,7 @@ If you're having issues with Gemini embeddings (not chat), switch to Cohere:
 USE_COHERE_EMBEDDINGS=true
 
 # Your Cohere key (already set)
-COHERE_API_KEY=touNI4aA96IpoaJKHLOGsNW6KN4YVBKm0YayOtqb
+COHERE_API_KEY=tYOUR_NEW_KEY_HER
 
 # Gemini still used for chat (use NEW key)
 GEMINI_API_KEY=YOUR_NEW_KEY_HERE

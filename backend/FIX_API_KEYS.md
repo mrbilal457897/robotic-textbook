@@ -11,7 +11,7 @@ Google has blocked your API key because it was exposed publicly (likely in GitHu
 ## Step 1: Get NEW Gemini API Key
 
 1. **Go to**: https://aistudio.google.com/app/apikey
-2. **Delete old key**: `AIzaSyBekKZc2yRc4O-4r0Xg-gEp0H412lcKM5M`
+2. **Delete old key**: 
 3. **Create new key**: Click "Create API Key"
 4. **Copy new key**: Save it somewhere safe
 
@@ -23,7 +23,7 @@ Open `backend/.env` and replace line 28:
 
 **OLD (BLOCKED):**
 ```env
-GEMINI_API_KEY=AIzaSyBekKZc2yRc4O-4r0Xg-gEp0H412lcKM5M
+GEMINI_API_KEY=YOUR_NEW_KEY_HER
 ```
 
 **NEW:**
@@ -43,7 +43,7 @@ If you don't want to use Gemini, switch to Cohere embeddings:
 USE_COHERE_EMBEDDINGS=true
 
 # Your Cohere key (already set)
-COHERE_API_KEY=touNI4aA96IpoaJKHLOGsNW6KN4YVBKm0YayOtqb
+COHERE_API_KEY=YOUR_NEW_KEY_HER
 
 # Use Gemini only for chat (not embeddings)
 GEMINI_API_KEY=YOUR_NEW_KEY_HERE
