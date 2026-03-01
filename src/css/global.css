@@ -1522,3 +1522,48 @@ button[class*='BackToTop'],
   opacity: 0 !important;
   pointer-events: none !important;
 }
+
+/* ================================================================
+   MOBILE RESPONSIVE - THEME TOGGLE BUTTON FIX
+   ================================================================ */
+
+/* Ensure Docusaurus default theme toggle is always visible */
+button[class*='colorModeToggle'],
+button[class*='toggleButton'],
+.navbar__item.theme-toggle,
+[class*='toggle'][class*='Button'][title*='theme'],
+[class*='toggle'][class*='Button'][title*='mode'] {
+  display: flex !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Mobile-specific theme toggle visibility (max-width: 996px is Docusaurus's mobile breakpoint) */
+@media screen and (max-width: 996px) {
+  /* Ensure theme toggle appears in mobile navbar */
+  button[class*='colorModeToggle'],
+  button[class*='toggleButton'],
+  .navbar__item.theme-toggle {
+    display: flex !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  /* Show in mobile sidebar menu */
+  .navbar-sidebar__items button[class*='colorModeToggle'],
+  .navbar-sidebar__items .navbar__item.theme-toggle,
+  .menu__list-item button[class*='colorModeToggle'] {
+    display: flex !important;
+    width: 100%;
+    padding: var(--ifm-menu-link-padding-vertical) var(--ifm-menu-link-padding-horizontal);
+  }
+
+  /* Fix mobile navbar items alignment */
+  .navbar-sidebar__items {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}

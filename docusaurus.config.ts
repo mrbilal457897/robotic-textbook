@@ -142,6 +142,7 @@ const config: Config = {
           position: 'right',
         },
       ],
+      hideOnScroll: false,
     },
     footer: {
       style: 'dark',
