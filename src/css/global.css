@@ -1524,15 +1524,28 @@ button[class*='BackToTop'],
 }
 
 /* ================================================================
-   MOBILE RESPONSIVE - THEME TOGGLE BUTTON FIX
+   MOBILE RESPONSIVE - SEARCH & THEME TOGGLE FIX
    ================================================================ */
 
-/* Ensure Docusaurus default theme toggle is always visible */
+/* Force show search bar on all screen sizes */
+.navbar__search,
+.navbar__item.navbar__search-input,
+[class*='searchBox'],
+.DocSearch-Button,
+button[class*='searchButton'],
+.navbar__search-input {
+  display: flex !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Force show theme toggle on all screen sizes */
 button[class*='colorModeToggle'],
 button[class*='toggleButton'],
 .navbar__item.theme-toggle,
 [class*='toggle'][class*='Button'][title*='theme'],
-[class*='toggle'][class*='Button'][title*='mode'] {
+[class*='toggle'][class*='Button'][title*='mode'],
+button[title*='Switch between dark and light mode'] {
   display: flex !important;
   opacity: 1 !important;
   visibility: visible !important;
@@ -1540,30 +1553,60 @@ button[class*='toggleButton'],
   justify-content: center;
 }
 
-/* Mobile-specific theme toggle visibility (max-width: 996px is Docusaurus's mobile breakpoint) */
+/* Mobile-specific fixes (max-width: 996px is Docusaurus mobile breakpoint) */
 @media screen and (max-width: 996px) {
-  /* Ensure theme toggle appears in mobile navbar */
-  button[class*='colorModeToggle'],
-  button[class*='toggleButton'],
-  .navbar__item.theme-toggle {
+
+  /* SEARCH BAR - Mobile */
+  .navbar__search,
+  .navbar__items--right .navbar__search,
+  .DocSearch-Button,
+  button[class*='searchButton'],
+  [class*='searchBox'] {
     display: flex !important;
     opacity: 1 !important;
     visibility: visible !important;
+    margin-right: 0.5rem;
   }
 
-  /* Show in mobile sidebar menu */
+  /* THEME TOGGLE - Mobile */
+  button[class*='colorModeToggle'],
+  button[class*='toggleButton'],
+  .navbar__item.theme-toggle,
+  button[title*='Switch between dark and light mode'] {
+    display: flex !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    margin-left: 0.5rem;
+  }
+
+  /* Mobile navbar right section - ensure items show */
+  .navbar__items--right {
+    display: flex !important;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  /* Show both in mobile sidebar menu */
+  .navbar-sidebar__items .navbar__search,
   .navbar-sidebar__items button[class*='colorModeToggle'],
   .navbar-sidebar__items .navbar__item.theme-toggle,
-  .menu__list-item button[class*='colorModeToggle'] {
+  .menu__list-item button[class*='colorModeToggle'],
+  .menu__list-item .navbar__search {
     display: flex !important;
     width: 100%;
     padding: var(--ifm-menu-link-padding-vertical) var(--ifm-menu-link-padding-horizontal);
   }
 
-  /* Fix mobile navbar items alignment */
-  .navbar-sidebar__items {
+  /* Fix mobile navbar top bar alignment */
+  .navbar__inner {
     display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  /* Ensure search and theme toggle stay in navbar top (not hidden) */
+  .navbar__items {
+    display: flex;
+    align-items: center;
   }
 }
