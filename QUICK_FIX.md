@@ -102,7 +102,7 @@ If you're having issues with Gemini embeddings (not chat), switch to Cohere:
 USE_COHERE_EMBEDDINGS=true
 
 # Your Cohere key (already set)
-COHERE_API_KEY=tYOUR_NEW_KEY_HER
+COHERE_API_KEY=YOUR_NEW_KEY_HER
 
 # Gemini still used for chat (use NEW key)
 GEMINI_API_KEY=YOUR_NEW_KEY_HERE
