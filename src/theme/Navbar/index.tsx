@@ -430,6 +430,11 @@ export default function Navbar(): JSX.Element {
           ))}
         </div>
 
+        {/* Mobile Utilities: Theme Toggle */}
+        <div className={styles.mobileMenuUtilities}>
+          <ThemeToggle />
+        </div>
+
         <div className={styles.mobileMenuActions}>
           {isLoading ? (
             <div className={styles.loadingSpinner} aria-label="Loading authentication status">

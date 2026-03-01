@@ -596,9 +596,19 @@
   background-color: rgba(0, 240, 255, 0.1);
 }
 
-.mobileMenuActions {
+/* Mobile Menu Utilities (Theme Toggle Only) */
+.mobileMenuUtilities {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
   padding: var(--space-lg);
   border-top: 1px solid rgba(0, 240, 255, 0.1);
+  border-bottom: 1px solid rgba(0, 240, 255, 0.1);
+}
+
+.mobileMenuActions {
+  padding: var(--space-lg);
 }
 
 .mobileActionButton {

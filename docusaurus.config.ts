@@ -136,11 +136,7 @@ const config: Config = {
           type: 'localeDropdown',
           position: 'right',
         },
-        {
-          href: 'https://github.com/YOUR_GITHUB_USERNAME/physical-ai-textbook',
-          label: 'GitHub',
-          position: 'right',
-        },
+        // GitHub icon now handled by custom navbar component (mobile utilities)
       ],
       hideOnScroll: false,
     },

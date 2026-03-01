@@ -1640,4 +1640,61 @@ button[title*='Switch between dark and light mode'] {
   .navbar-sidebar__backdrop {
     opacity: 1 !important;
   }
+
+  /* Hide Docusaurus default navbar items in mobile sidebar (we have custom mobile menu) */
+  .navbar-sidebar,
+  .navbar-sidebar__brand,
+  .navbar-sidebar__items {
+    display: none !important;
+  }
+}
+
+/* ===========================
+   Mobile Theme Toggle - Icon Only Mode
+   =========================== */
+
+@media (max-width: 768px) {
+  /* When ThemeToggle is inside mobile menu, hide all text and show only icons */
+  [class*='mobileMenuUtilities'] [class*='popoverHeader'],
+  [class*='mobileMenuUtilities'] [class*='menuItemText'],
+  [class*='mobileMenuUtilities'] [class*='menuItemDesc'],
+  [class*='mobileMenuUtilities'] [class*='menuItemLabel'],
+  [class*='mobileMenuUtilities'] [class*='menuItemCheck'] {
+    display: none !important;
+  }
+
+  /* Adjust popover width for icon-only mode */
+  [class*='mobileMenuUtilities'] [class*='popover'] {
+    min-width: 60px !important;
+    width: auto !important;
+    left: 50% !important;
+    right: auto !important;
+    transform: translateX(-50%) !important;
+  }
+
+  /* Center icons in theme menu items */
+  [class*='mobileMenuUtilities'] [class*='menuItem'] {
+    justify-content: center !important;
+    padding: 12px 16px !important;
+    min-width: 50px;
+  }
+
+  /* Icon container */
+  [class*='mobileMenuUtilities'] [class*='menuItemIcon'] {
+    margin: 0 !important;
+  }
+
+  /* Adjust popover positioning to prevent off-screen */
+  [class*='mobileMenuUtilities'] [class*='wrapper'] {
+    position: static !important;
+  }
+
+  [class*='mobileMenuUtilities'] [class*='popover'] {
+    position: fixed !important;
+    top: auto !important;
+    bottom: 120px !important;
+    left: 50% !important;
+    right: auto !important;
+    transform: translateX(-50%) !important;
+  }
 }
