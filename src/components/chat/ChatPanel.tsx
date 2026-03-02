@@ -111,15 +111,17 @@ export function ChatPanel({
       <button
         onClick={() => setIsOpen(true)}
         className={cn(
-          'fixed bottom-6 right-6 z-30 flex h-14 w-14 items-center justify-center rounded-full bg-white/10 backdrop-blur-md border border-white/25 shadow-lg shadow-black/30 transition-transform hover:scale-110 hover:bg-white/15 hover:border-[#A78BFA]/60',
+          'fixed bottom-4 right-4 flex h-12 w-12 items-center justify-center rounded-full bg-white/10 backdrop-blur-md border border-white/25 shadow-lg shadow-black/30 transition-transform hover:scale-110 hover:bg-white/15 hover:border-[#A78BFA]/60',
+          'sm:bottom-6 sm:right-6 sm:h-14 sm:w-14',
           className
         )}
+        style={{ zIndex: 9997 }}
         aria-label="Open chat"
       >
         <img
           src={bookIconSrc}
           alt="Textbook Assistant"
-          className="h-22 w-22 object-contain drop-shadow-sm"
+          className="h-8 w-8 sm:h-10 sm:w-10 object-contain drop-shadow-sm"
         />
       </button>
     );
@@ -134,7 +136,13 @@ export function ChatPanel({
       <div
         className={cn(
           styles.chatPanel,
-          'fixed bottom-0 right-0 z-40 flex h-[500px] w-full flex-col shadow-2xl shadow-black/60 sm:bottom-6 sm:right-6 sm:h-[540px] sm:w-[22rem] sm:rounded-2xl',
+          // Mobile: full width with margins
+          'fixed bottom-4 right-4 left-4 z-40 flex flex-col shadow-2xl shadow-black/60',
+          'h-[85vh] max-h-[600px] rounded-2xl',
+          // Desktop: fixed width, no left positioning
+          'sm:left-auto sm:bottom-6 sm:right-6 sm:h-[480px] sm:w-[20rem]',
+          'md:h-[520px] md:w-[22rem]',
+          'lg:h-[550px] lg:w-[24rem]',
           className
         )}
         onClick={e => e.stopPropagation()}
@@ -145,14 +153,19 @@ export function ChatPanel({
             <img
               src={bookIconSrc}
               alt="Textbook"
-              className="h-8 w-8 object-contain drop-shadow-sm"
+              className="h-7 w-7 object-contain drop-shadow-sm"
             />
             <h2 className={styles.chatTitle}>Textbook Assistant</h2>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1">
             <button
-              onClick={() => setShowSettings(!showSettings)}
+              type="button"
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                setShowSettings(!showSettings);
+              }}
               className={cn(styles.settingsButton, showSettings && styles.active)}
               aria-label="Settings"
               title="Settings"
@@ -161,12 +174,17 @@ export function ChatPanel({
             </button>
 
             <button
-              onClick={() => handleClose()}
+              type="button"
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                handleClose();
+              }}
               className={styles.closeButton}
               aria-label="Close chat"
               title="Close chat"
             >
-              <X className="h-4 w-4" />
+              <X className="h-5 w-5" />
             </button>
           </div>
         </div>

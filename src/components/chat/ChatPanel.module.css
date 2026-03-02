@@ -1,15 +1,23 @@
 /* ChatPanel Styles */
 
 .backdrop {
-  @apply fixed inset-0 z-30 bg-transparent backdrop-blur-none;
+  @apply fixed inset-0 bg-black/50 backdrop-blur-md;
+  cursor: pointer;
+  z-index: 9998 !important;
 }
 
 .chatPanel {
-  @apply bg-white/70 backdrop-blur-2xl border border-white/40 dark:bg-gray-900/70 dark:border-gray-700/60;
+  @apply bg-white/95 backdrop-blur-2xl border-2 border-white/60 dark:bg-gray-900/95 dark:border-gray-700/80;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
+  z-index: 9999 !important;
+  position: fixed !important;
 }
 
 .chatHeader {
   @apply bg-transparent border-b border-white/20 dark:border-gray-700/50;
+  position: relative;
+  z-index: 5;
+  flex-shrink: 0;
 }
 
 .chatTitle {
@@ -17,15 +25,39 @@
 }
 
 .settingsButton {
-  @apply rounded-md p-1.5 bg-transparent border-none text-gray-600 dark:text-gray-400 transition-all duration-200 hover:bg-transparent hover:text-gray-900 dark:hover:text-white;
+  @apply rounded-lg p-2 bg-transparent border-none text-gray-600 dark:text-gray-400 transition-all duration-200 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-white;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  min-height: 36px;
+  position: relative;
+  z-index: 10;
+}
+
+.settingsButton:active {
+  @apply scale-95;
 }
 
 .settingsButton.active {
-  @apply bg-transparent border-none text-gray-900 dark:text-white;
+  @apply bg-gray-100 dark:bg-gray-800 border-none text-gray-900 dark:text-white;
 }
 
 .closeButton {
-  @apply rounded-md p-1.5 bg-transparent border-none text-gray-600 dark:text-gray-400 transition-all duration-200 hover:bg-transparent hover:text-gray-900 dark:hover:text-white;
+  @apply rounded-lg p-2 bg-transparent border-none text-gray-600 dark:text-gray-400 transition-all duration-200 hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-600 dark:hover:text-red-400;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  min-height: 36px;
+  position: relative;
+  z-index: 10;
+}
+
+.closeButton:active {
+  @apply scale-95;
 }
 
 .settingsPanel {
@@ -34,4 +66,137 @@
 
 .inputContainer {
   @apply border-t border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900;
+}
+
+/* Mobile Responsive Styles */
+@media screen and (max-width: 768px) {
+  .chatPanel {
+    /* Properly sized on mobile - not full screen */
+    @apply fixed;
+    bottom: 1rem !important;
+    right: 1rem !important;
+    left: 1rem !important;
+    width: auto !important;
+    height: 85vh !important;
+    max-height: 600px !important;
+    border-radius: 1rem !important;
+  }
+
+  .chatHeader {
+    @apply px-3 py-3;
+  }
+
+  .chatTitle {
+    @apply text-sm font-medium;
+  }
+
+  .settingsButton,
+  .closeButton {
+    @apply p-2;
+    width: 36px;
+    height: 36px;
+  }
+
+  .settingsButton svg,
+  .closeButton svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .settingsPanel {
+    @apply p-3;
+  }
+
+  .inputContainer {
+    @apply p-2.5;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .chatPanel {
+    /* Compact on very small devices */
+    @apply fixed;
+    bottom: 0.75rem !important;
+    right: 0.75rem !important;
+    left: 0.75rem !important;
+    height: 80vh !important;
+    max-height: 550px !important;
+    border-radius: 1rem !important;
+  }
+
+  .chatHeader {
+    @apply px-2.5 py-2.5;
+  }
+
+  .chatTitle {
+    @apply text-xs;
+  }
+
+  .chatHeader img {
+    @apply w-6 h-6;
+  }
+
+  .settingsButton,
+  .closeButton {
+    @apply p-1.5;
+    width: 32px;
+    height: 32px;
+  }
+
+  .settingsButton svg,
+  .closeButton svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .inputContainer {
+    @apply p-2;
+  }
+}
+
+/* Desktop/Window Mode Optimizations */
+@media screen and (min-width: 640px) {
+  .chatPanel {
+    /* Ensure visibility on desktop */
+    display: flex !important;
+    flex-direction: column !important;
+    position: fixed !important;
+    z-index: 9999 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  .backdrop {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  .chatHeader {
+    @apply px-4 py-3;
+  }
+
+  .settingsButton,
+  .closeButton {
+    min-width: 36px;
+    min-height: 36px;
+  }
+
+  .settingsButton svg,
+  .closeButton svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .closeButton svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .chatPanel {
+    /* Larger screens get slightly bigger panel */
+    max-width: 26rem;
+  }
 }

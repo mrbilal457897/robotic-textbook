@@ -237,3 +237,61 @@
   outline: 2px solid #ffff00;
   outline-offset: -2px;
 }
+
+/* ─── Mobile Responsive ───────────────────────────────── */
+@media screen and (max-width: 768px) {
+  .trigger {
+    padding: 8px;
+    width: 40px;
+    height: 40px;
+  }
+
+  .triggerIcon svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .popover {
+    position: fixed;
+    top: auto;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    right: auto;
+    min-width: 280px;
+    max-width: calc(100vw - 32px);
+    max-height: 60vh;
+    overflow-y: auto;
+  }
+
+  @keyframes popoverIn {
+    from {
+      opacity: 0;
+      transform: translateX(-50%) translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .trigger {
+    padding: 8px;
+    width: 36px;
+    height: 36px;
+  }
+
+  .triggerIcon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .popover {
+    bottom: 60px;
+    min-width: 260px;
+    max-width: calc(100vw - 24px);
+    max-height: 50vh;
+  }
+}
