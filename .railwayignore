@@ -1,0 +1,33 @@
+# Railway Ignore - Backend Deployment Only
+# Ignore all frontend/Node.js files to prevent Node detection
+
+# Frontend directories
+/frontend
+/node_modules
+/build
+/static
+/.docusaurus
+
+# Frontend configuration
+package.json
+package-lock.json
+tsconfig.json
+docusaurus.config.ts
+babel.config.js
+sidebars.ts
+
+# Source files (frontend only)
+/src
+
+# Documentation
+/docs
+/blog
+/i18n
+
+# Other non-backend files
+.eslintrc.js
+.prettierrc
+tailwind.config.js
+postcss.config.js
+jest.config.js
+cypress.config.ts
